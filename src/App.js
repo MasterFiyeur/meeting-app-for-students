@@ -49,5 +49,20 @@ class Titre extends React.Component {
 
 }
 
-
+class Profil extends React.Component {
+  profile(){
+    return(
+    <div className="wrapper">
+      <div className="form-wrapper"> 
+        <h1>NomDuMec</h1> //recup dans la bdd
+        <form onsubmit={this.handleSubmit} novalidate>
+          <div className="verif">
+            <button type="checkbox" novalidate/> 
+          </div>
+        </form>
+      </div>
+    </div>
+    );
+  }
+}
 export default App;
