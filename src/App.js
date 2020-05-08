@@ -10,6 +10,8 @@ class App extends React.Component {
           <img src={logo} className="App-logo" alt="logo" />
           <Titre test="oui" />
           <Titre test="oui" />
+          <NameForm />
+          <EssayForm />
           <p>
             Edit <code>src/App.js</code> and save to reload.
           </p>
@@ -49,19 +51,70 @@ class Titre extends React.Component {
 
 }
 
-class Profil extends React.Component {
-  profile(){
-    return(
-    <div className="wrapper">
-      <div className="form-wrapper"> 
-        <h1>NomDuMec</h1> //recup dans la bdd
-        <form onsubmit={this.handleSubmit} novalidate>
-          <div className="verif">
-            <button type="checkbox" novalidate/> 
-          </div>
-        </form>
-      </div>
-    </div>
+class NameForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('A name was submitted: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          Name:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Submit" />
+      </form>
+    );
+  }
+}
+class EssayForm extends React.Component {
+  constructor(props) {
+    super(props);
+ 
+    this.state = {
+      content: ""
+    };
+  }
+ 
+  handleSubmitForm(event) {
+    alert("Textarea Content: " + this.state.content);
+    event.preventDefault();
+  }
+ 
+  handleChange(event) {
+    var value = event.target.value;
+ 
+    this.setState({
+      content: value
+    });
+  }
+ 
+  render() {
+    return (
+      <form onSubmit={event => this.handleSubmitForm(event)}>
+        <label>Content</label>
+        <br />
+        <textarea cols="45" rows="5"
+          value={this.state.content}
+          onChange={event => this.handleChange(event)} />
+        <br />
+        <input type="submit" value="Submit" />
+        <p>{this.state.content}</p>
+      </form>
     );
   }
 }
