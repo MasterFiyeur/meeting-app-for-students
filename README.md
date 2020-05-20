@@ -1,5 +1,16 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+##Lancer le projet avec WAMP
+
+Dans package.json, ajouter la ligne : "homepage":"http://localhost/"+sous dossiers de www <br />
+Exemple : "homepage":"http://localhost/ProjetInfo" <br />
+Executer 'npm run build' <br />
+Déplacer le contenu du dossier 'build' créé dans wamp64/www/ProjetInfo <br />
+Lancer WAMP <br />
+Dans le navigateur, aller à l'URL : http://localhost/ProjetInfo/
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
