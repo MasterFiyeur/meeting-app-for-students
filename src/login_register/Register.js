@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import Alert from 'react-bootstrap/Alert'
 
-class Login extends Component{
+class Register extends Component{
     constructor(props) {
         super(props);
 
@@ -33,15 +32,8 @@ class Login extends Component{
     render(){
       return(
         <div>
-          {/* Alert affichée lorsque l'e-mail et le mdp ne sont pas trouvé dans la base de donnée */}
-          <Alert variant="danger" id="AlertIncorrect" show={this.state.show}>
-            Adresse mail ou mot de passe incorrect.
-          </Alert>
-
-          {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
-          <p>Tu n'as toujours pas de compte ? <a href="/register" >Je cours m'en faire un !</a></p>
-          <h2>Connexion</h2>
-          {/* Formulaire de connexion */}
+        <h2>Création du compte</h2>
+          {/* Formulaire d'enregistrement de la personne' */}
           <form onSubmit={event => this.sendLogin(event)}>
             <input
               name="email"
@@ -59,14 +51,15 @@ class Login extends Component{
               onChange={event => this.inputChange(event)} 
             />
             <br />
-            <button type="submit">Connexion</button>
+            <label htmlFor="Student_Card">Carte étudiante :</label>
+            <br/>
+            <input type="file" name="StudentCard" id="Student_Card"/>{/* Faire tuto https://www.youtube.com/watch?v=sp9r6hSWH_o */}
+            <br/>
+            <button type="submit">S'enregister</button>
           </form>
-
-          {/* Mot de passe oublié, redirection à définir accueil pour l'instant */}
-          <a href="/" >Mot de passe oublié ?</a>
         </div>
       );
     }
 }
 
-export default Login;
+export default Register;
