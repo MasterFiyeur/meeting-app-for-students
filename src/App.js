@@ -15,14 +15,6 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route path="/" exact component={Accueil} />
-            {/* Ici faut voir mais je pense que ça serait intéressant de mettre le Login
-            et le Register dans le composant Accueil. Genre dans Accueil on met un state 0,1,2 
-            0 -> Accueil avec boutons Login et Register
-            1 -> Accueil avec au milieu le composant Login
-            2 -> Accueil avec au milieu le composant Register 
-            Théo le fera la prochaine fois  */}
-            <Route path="/login" component={Login} />
-            <Route path="/register" component={Register} />
 
           </Switch>
           <NavBar />

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Alert from 'react-bootstrap/Alert'
+import { NavLink } from 'react-router-dom';
+import Alert from 'react-bootstrap/Alert';
 
 class Login extends Component{
     constructor(props) {
@@ -32,15 +33,12 @@ class Login extends Component{
 
     render(){
       return(
-        <div>
+        <>
           {/* Alert affichée lorsque l'e-mail et le mdp ne sont pas trouvé dans la base de donnée */}
           <Alert variant="danger" id="AlertIncorrect" show={this.state.show}>
             Adresse mail ou mot de passe incorrect.
           </Alert>
 
-          {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
-          <p>Tu n'as toujours pas de compte ? <a href="/register" >Je cours m'en faire un !</a></p>
-          <h2>Connexion</h2>
           {/* Formulaire de connexion */}
           <form onSubmit={event => this.sendLogin(event)}>
             <input
@@ -62,9 +60,9 @@ class Login extends Component{
             <button type="submit">Connexion</button>
           </form>
 
-          {/* Mot de passe oublié, redirection à définir accueil pour l'instant */}
-          <a href="/" >Mot de passe oublié ?</a>
-        </div>
+          {/* Mot de passe oublié, redirection à définir, accueil pour l'instant */}
+          <NavLink to="/" >Mot de passe oublié ?</NavLink>
+        </>
       );
     }
 }
