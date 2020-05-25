@@ -17,8 +17,16 @@ Changer la base de l'url des requêtes dans les fichiers par `http://localhost/"
 Vérifier que l'on a bien:<br/>
 - Une base de donnée : projetsiterencontre.
 - Une table : user.
-- Les bons identifiants de la BDD dans connexion.php
+- Les bons identifiants de la BDD dans connexion.php <br/>
 Lancer wamp et tout devrait fonctionner sinon -> Théo
+
+## npm install
+
+Paquets installés (j'en ai peut-être oublié):
+- npm install --save react-router-dom
+- npm install react-bootstrap bootstrap
+- npm install hash-anything
+- npm install bootstrap
 
 ## Available Scripts
 
