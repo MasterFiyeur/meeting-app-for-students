@@ -5,13 +5,12 @@ class Register extends Component{
         super(props);
 
         this.state = {
-          show: false, //Affichage ou non de l'alerte
-          email: null, //Valeur du input email
-          password : null, //Valeur du input password
-          prenom : null, //Valeur du input prenom
-          nom : null, //Valeur du input nom
+          email: "", //Valeur du input email
+          password : "", //Valeur du input password
+          prenom : "", //Valeur du input prenom
+          nom : "", //Valeur du input nom
           dateBirth : "", //Valeur du input date de naissance
-          ville : null //Valeur du input ville
+          ville : "" //Valeur du input ville
         };
       }
      

@@ -7,19 +7,37 @@ class Login extends Component{
         super(props);
 
         this.state = {
-          show: false, //Affichage ou non de l'alerte
-          email: null, //Valeur du input email
-          password : null //Valeur du input password
+          alertShow: false, alertMessage : "", alertVariant:"",//Affichage, message et type de l'alerte
+          email: "", password : "" //Input mail et password
         };
       }
      
       sendLogin(event) {
         event.preventDefault();
-        alert("email: " + this.state.email+'\n'+"mdp :"+this.state.password);
-        /* Affichage de l'alert */
-        this.setState({
-          show:true
+        const axios = require('axios');  //Requêtes HTTP
+        const sha256 = require('hash-anything').sha256; //Hash du mdp
+
+
+        let formData = new FormData();
+        formData.append("operation","getPrenom");
+        const url = 'http://localhost/Projet/projet-web/projet-web_bdd/api.php?mail='+this.state.email+'&password='+sha256(this.state.password);
+        //NB: export une constante dans App.js et la reprendre à chaque requete http pour faciliter le changement
+        axios.post(url,formData)
+        .then(res => {  
+          if(res.data>0){
+            //Se connecter
+            console.log("Mail et mdp bon ! Votre id est : ",res.data);
+          }else{
+            //Affichage en rouge du message de mdp incorrect
+            this.setState({alertShow:true,alertMessage:"Adresse mail ou mot de passe incorrect.",alertVariant:"danger"});
+          }
         })
+        .catch(err => {
+          console.log(err);
+          //Affichage en jaune qu'il y a une erreur dans la requête
+          this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
+        });
+
       }
      
       inputChange(event) {
@@ -33,10 +51,15 @@ class Login extends Component{
 
     render(){
       return(
-        <>
-          {/* Alert affichée lorsque l'e-mail et le mdp ne sont pas trouvé dans la base de donnée */}
-          <Alert variant="danger" id="AlertIncorrect" show={this.state.show}>
-            Adresse mail ou mot de passe incorrect.
+        <div>
+          {/* Alert affichée lorsque le couple (e-mail,mdp) n'est pas trouvé dans la base de donnée */}
+          <Alert 
+          variant={this.state.alertVariant} 
+          id="AlertIncorrect" 
+          show={this.state.alertShow} 
+          onClose={() => this.setState({alertShow:false})}
+          dismissible>
+            {this.state.alertMessage}
           </Alert>
 
           {/* Formulaire de connexion */}
@@ -62,7 +85,7 @@ class Login extends Component{
 
           {/* Mot de passe oublié, redirection à définir, accueil pour l'instant */}
           <NavLink to="/" >Mot de passe oublié ?</NavLink>
-        </>
+        </div>
       );
     }
 }
