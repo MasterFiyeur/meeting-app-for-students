@@ -7,6 +7,7 @@ import Accueil from './Accueil/Acceuil'
 import Login from './login_register/Login'
 import Register from './login_register/Register'
 
+//Ici il faut export le lien de la bdd
 
 class App extends React.Component {
   render() {

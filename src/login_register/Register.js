@@ -92,7 +92,7 @@ class Register extends Component{
             <input
               id="dateBirth"
               name="dateBirth"
-              type="text"
+              type="date"
               maxLength="10"
               placeholder="jj/mm/aaaa"
               value={this.state.dateBirth}
