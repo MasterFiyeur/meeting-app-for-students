@@ -4,7 +4,7 @@ import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
-
+import Preference from './Profil/Preference';
 //Ici il faut export le lien de la bdd
 
 class App extends React.Component {
@@ -14,7 +14,7 @@ class App extends React.Component {
         <div className="App">
           <Switch>
             <Route path="/" exact component={Accueil} />
-
+            <Preference/>
           </Switch>
           <NavBar />
         </div>
@@ -25,4 +25,4 @@ class App extends React.Component {
 
 
 export default App;
-export const URL_API = 'http://localhost/Projet/projet-web/projet-web_bdd/'
+export const URL_API = 'http://localhost/projet-web/projet-web_bdd/'
