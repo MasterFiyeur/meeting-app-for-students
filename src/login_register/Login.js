@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 
+import {URL_API} from '../App';
+
 class Login extends Component{
     constructor(props) {
         super(props);
@@ -20,10 +22,11 @@ class Login extends Component{
 
         let formData = new FormData();
         formData.append("operation","getPrenom");
-        const url = 'http://localhost/Projet/projet-web/projet-web_bdd/api.php?mail='+this.state.email+'&password='+sha256(this.state.password);
+        const url = URL_API+'api.php?mail='+this.state.email+'&password='+sha256(this.state.password);
         //NB: export une constante dans App.js et la reprendre à chaque requete http pour faciliter le changement
         axios.post(url,formData)
-        .then(res => {  
+        .then(res => {
+          console.log(res);
           if(res.data>0){
             //Se connecter
             console.log("Mail et mdp bon ! Votre id est : ",res.data);

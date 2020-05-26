@@ -17,7 +17,8 @@ Changer la base de l'url des requêtes dans les fichiers par `http://localhost/"
 Vérifier que l'on a bien:<br/>
 - Une base de donnée : projetsiterencontre.
 - Une table : user.
-- Les bons identifiants de la BDD dans connexion.php <br/>
+- Les bons identifiants de la BDD dans connexion.php 
+
 Lancer wamp et tout devrait fonctionner sinon -> Théo
 
 ## npm install

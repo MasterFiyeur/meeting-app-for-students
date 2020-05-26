@@ -2,10 +2,8 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NavBar from './NavBar/NavBar'
-import Accueil from './Accueil/Acceuil'
-import Login from './login_register/Login'
-import Register from './login_register/Register'
+import NavBar from './NavBar/NavBar';
+import Accueil from './Accueil/Acceuil';
 
 //Ici il faut export le lien de la bdd
 
@@ -27,3 +25,4 @@ class App extends React.Component {
 
 
 export default App;
+export const URL_API = 'http://localhost/Projet/projet-web/projet-web_bdd/'
