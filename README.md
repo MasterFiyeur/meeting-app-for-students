@@ -28,6 +28,8 @@ Paquets installés (j'en ai peut-être oublié):
 - npm install react-bootstrap bootstrap
 - npm install hash-anything
 - npm install bootstrap
+- npm install babel
+- npm install axios
 
 ## Available Scripts
 

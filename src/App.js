@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
@@ -25,4 +24,4 @@ class App extends React.Component {
 
 
 export default App;
-export const URL_API = 'http://localhost/Projet/projet-web/projet-web_bdd/'
+export const URL_API = 'http://localhost/Projet/projet-web/src/projet-web_bdd/'

@@ -16,17 +16,12 @@ class Login extends Component{
      
       sendLogin(event) {
         event.preventDefault();
-        const axios = require('axios');  //Requêtes HTTP
+        const axios = require('axios').default;  //Requêtes HTTP
         const sha256 = require('hash-anything').sha256; //Hash du mdp
 
-
-        let formData = new FormData();
-        formData.append("operation","getPrenom");
-        const url = URL_API+'api.php?mail='+this.state.email+'&password='+sha256(this.state.password);
-        //NB: export une constante dans App.js et la reprendre à chaque requete http pour faciliter le changement
-        axios.post(url,formData)
+        const url = URL_API+'api/getPrenom?mail='+this.state.email+'&password='+sha256(this.state.password);
+        axios.get(url)
         .then(res => {
-          console.log(res);
           if(res.data>0){
             //Se connecter
             console.log("Mail et mdp bon ! Votre id est : ",res.data);
@@ -56,7 +51,7 @@ class Login extends Component{
       return(
         <div>
           {/* Alert affichée lorsque le couple (e-mail,mdp) n'est pas trouvé dans la base de donnée */}
-          <Alert 
+          <Alert
           variant={this.state.alertVariant} 
           id="AlertIncorrect" 
           show={this.state.alertShow} 
