@@ -14,7 +14,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route path="/" exact component={Accueil} />
-            <Route path="/Preference" exact component={Preference} />
+            <Route path="/preference" exact component={Preference} />
           </Switch>
           
         </div>
