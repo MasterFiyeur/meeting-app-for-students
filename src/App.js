@@ -12,11 +12,12 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div className="App">
+          <NavBar />
           <Switch>
             <Route path="/" exact component={Accueil} />
 
           </Switch>
-          <NavBar />
+          
         </div>
       </BrowserRouter>
     );
@@ -25,4 +26,4 @@ class App extends React.Component {
 
 
 export default App;
-export const URL_API = 'http://localhost/Projet/projet-web/projet-web_bdd/'
+export const URL_API = 'http://localhost/projet-web/projet-web_bdd/'
