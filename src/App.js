@@ -14,7 +14,7 @@ class App extends React.Component {
           <NavBar />
           <Switch>
             <Route path="/" exact component={Accueil} />
-            <Preference/>
+            <Route path="/Preference" exact component={Preference} />
           </Switch>
           
         </div>
@@ -26,4 +26,4 @@ class App extends React.Component {
 
 export default App;
 
-export const URL_API = 'http://localhost/projet-web/projet-web_bdd/'
+export const URL_API = 'http://localhost/projet-web/src/projet-web_bdd/'
