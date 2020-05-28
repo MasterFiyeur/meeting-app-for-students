@@ -98,7 +98,6 @@ class Register extends Component{
                   this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue."});
               }
               this.setState({alertShow: true});
-              console.log(res.data);
             }else{
               console.error('Problème dans le retour de l\'API/newUser.');
             }
@@ -153,7 +152,6 @@ class Register extends Component{
                   this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue."});
               }
               this.setState({alertShow: true});
-              console.log(res.data);
             }else{
               this.setState({
               alertClass:"alert-warning",

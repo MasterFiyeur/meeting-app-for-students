@@ -1,9 +1,31 @@
 <?php
 include "connexionBDD.php";
 
+/**
+ * - Upload de la carte étudiante si elle a été envoyée
+ * - Conditions : 2Mo et au format jpg/jpeg/png
+ * - Entrée :
+ *  POST : 
+ *      email => adresse mail de l'utilisateur
+ *  FILES :
+ *      file => fichier envoyé
+ * - Sortie : 0, 1, 2, 3, error
+ *  0 => Aucune image n'a été envoyée
+ *  1 => Image envoyé/téléchargé avec succès et ajout de l'extension à la BDD
+ *  2 => La taille du fichier dépasse 2Mo
+ *  3 => L'extension du fichier n'est pas dans ceux acceptés
+ *  error => Problème durant la connexion à la BDD
+ *           ou lors de la requête SQL
+ *  Erreur... => Problème lors du téléchargement de l'image dans le dossier
+ *               (peut être fichier ou mail inexistant)
+ */
+
+ /* Déclaration CONSTANTES */
+ define('DOSSIER', '../imageCarteEtudiante/'); //Dossier dans lequel importer les images
+
 /* Upload de l'image */
 if(isset($_FILES['file'])){
-
+    // Connexion/Requête BDD - SELECT
     $cnx = connexionPDO();
     $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ?');
     $req -> execute((array($_POST["email"])));
@@ -15,19 +37,16 @@ if(isset($_FILES['file'])){
         }
     }
     $req -> closeCursor();
-    $dossier = '../imageCarteEtudiante/';
     $allowed_ext = array("jpg","png","jpeg","JPG","PNG","JPEG");//Extension d'image acceptée
-    $ext = substr(basename($_FILES['file']['name']), strrpos(basename($_FILES['file']['name']),".",-1)+1);
+    $ext = substr(basename($_FILES['file']['name']), strrpos(basename($_FILES['file']['name']),".",-1)+1); //Extension du fichier
     if(in_array($ext,$allowed_ext)){ //Extension comprise dans celles acceptée
         if($_FILES['file']['size']<4000000 && $_FILES['file']['tmp_name']!=NULL){
             //Taille inférieur à 2Mo je sais pas pk on peut pas faire +
             //Quand c'est + on a size =0 et tmp_name chelou
-            $name=$id.".".$ext;
-
-            //print $_FILES['file']['tmp_name'].' et '.$name;
-
-            if(move_uploaded_file($_FILES['file']['tmp_name'], $dossier . $name)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
+            $name=$id.".".$ext; //Nouveau nom du fichier
+            if(move_uploaded_file($_FILES['file']['tmp_name'], DOSSIER . $name)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
             {
+                // Connexion/Requête BDD - UPDATE
                 $cnx = connexionPDO();
                 $req = $cnx -> prepare('UPDATE user SET carte = ? WHERE mail = ?;');
                 $req -> execute((array($ext,$_POST["email"])));
@@ -39,11 +58,9 @@ if(isset($_FILES['file'])){
                 print 'Erreur lors de l\'upload de la carte';
             }
         }else{
-            //Taille trop grande
             print '2';
         }
     }else{
-        //Extension non acceptée
         print '3';
     }
 }else{

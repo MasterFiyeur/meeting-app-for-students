@@ -1,19 +1,28 @@
 <?php
 include "connexionBDD.php";
 
-/** Description du retour
- * 0 -> L'adresse mail existe déjà
- * Compte crée pour les retours suivants
- * 1 -> Upload de l'image effectué avec succès !
- * 2 -> Echec de l\'upload de l'image !
- * 3 -> Aucune image n'a été séléctionnée !
+/**
+ * - Ajout d'un nouveau compte dans la BDD en vérifiant l'unicité du mail
+ * - Entrée :
+ *  POST : 
+ *      email => adresse mail de l'utilisateur
+ *      password => mot de passe hashé avec sha256
+ *      nom => nom de famille de l'utilisateur
+ *      prenom => prénom de l'utilisateur
+ *      birthDate => date de naissance utilisateur (format: aaaa/mm/jj)
+ *      ville => ville où habite l'utilisateur
+ * - Sortie : 0, 1, error
+ *  0 => L'adresse mail existe déjà dans la BDD
+ *  1 => Compte ajouté avec succès
+ *  error => Problème durant la connexion à la BDD
+ *           ou lors de la requête SQL
  */
 
-/* Vérification unicité de l'adresse mail */
+/* Unicité de l'adresse mail */
 try {
-    $adressNotFound = false;
+    // Connexion/Requête BDD - SELECT
     $cnx = connexionPDO();
-    $req = $cnx -> prepare('select id from user where mail = ?');
+    $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ?');
     $req -> execute(array($_POST["email"]));
     if ($ligne = $req -> fetch()) {
         if ($ligne != NULL) {
@@ -29,8 +38,8 @@ try {
 }
 
 /* Création du compte */
-    try {
-    //Requête pour ajouter la ligne
+try {
+    // Connexion/Requête BDD - INSERT
     $cnx = connexionPDO();
     $req = $cnx -> prepare('INSERT INTO user(`mail`,`password`,`nom`,`prenom`,`birthDate`,`ville`) 
     VALUES (?,?,?,?,?,?)');

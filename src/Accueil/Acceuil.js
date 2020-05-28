@@ -29,6 +29,11 @@ class Accueil extends Component{
         })
     }
 
+    /**
+     * Retourne un l'affichage de la page d'accueil.
+     * - Deux boutons : Connexion & Création du compte
+     * - L'affichage dépend de this.state.show
+     */
     render(){
         return(
             <div>
