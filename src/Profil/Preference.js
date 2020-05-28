@@ -1,17 +1,23 @@
 import React, { Component } from 'react';
+import InputRange from 'react-input-range';
+
 
 class Preference extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-           Description : null,
+          Description : null,
           Taille : null,
           City : "Cergy", //Valeur du input City          
+          value1: {min: 18, max: 24,},
         };
       }
-     
-     
+    
+
+      
+       
+
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -34,34 +40,34 @@ class Preference extends Component{
             </div>
             <br/>
             {/*--------------------------Sexe--------------------------*/}
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="sexe">Je suis :</label>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="sexe">Je suis :</label>
               </div> 
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="homme">un homme</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="homme">un homme</label>
                 <input 
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="homme"
                   value="option1"
                 />
               </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="femme">une femme</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="femme">une femme</label>
                 <input 
-                  class="form-check-input" 
+                  className="form-check-input" 
                   type="radio" 
                   name="inlineRadioOptions" 
                   id="femme" 
                   value="option2"
                 />
               </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="vivant">vivant</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="vivant">vivant</label>
                 <input 
-                  class="form-check-input" 
+                  className="form-check-input" 
                   type="radio" 
                   name="inlineRadioOptions" 
                   id="vivant" 
@@ -71,34 +77,34 @@ class Preference extends Component{
             </div>
             <br/>
             {/*--------------------------Souhaite voir--------------------------*/}
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="lookingfor">Je souhaite rencontrer :</label>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="lookingfor">Je souhaite rencontrer :</label>
               </div> 
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="homme">des hommes</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="homme">des hommes</label>
                 <input 
-                  class="form-check-input"
+                  className="form-check-input"
                   type="radio"
                   name="inlineRadioOptions"
                   id="homme"
                   value="option1"
                 />
               </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="femme">des femmes</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="femme">des femmes</label>
                 <input 
-                  class="form-check-input" 
+                  className="form-check-input" 
                   type="radio" 
                   name="inlineRadioOptions" 
                   id="femme" 
                   value="option2"
                 />
               </div>
-              <div class="form-check form-check-inline">
-                <label class="form-check-label" for="both">les deux</label>
+              <div className="form-check form-check-inline">
+                <label className="form-check-label" for="both">les deux</label>
                 <input 
-                  class="form-check-input" 
+                  className="form-check-input" 
                   type="radio" 
                   name="inlineRadioOptions" 
                   id="both" 
@@ -108,9 +114,9 @@ class Preference extends Component{
             </div>
             <br/>
           {/*--------------------------Cherche-------------------------- */}
-            <div class="input-group ">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="purpose">Ce que je cherche :</label>
+            <div className="input-group ">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="purpose">Ce que je cherche :</label>
               </div>
               <select  id="purpose">
                 <option selected>A remplir</option>
@@ -124,18 +130,33 @@ class Preference extends Component{
               </select>
             </div>
             <br />
+           {/*--------------------------Tranche d age-------------------------- */}
+          
+                <label  for="Age">Tranche d'age :</label>
+             
+               <InputRange
+                  draggableTrack
+                  maxValue={35}
+                  minValue={18}
+                  onChange={value => this.setState({ value1: value })}
+                  onChangeComplete={value => console.log(value)}
+                  value={this.state.value5} 
+                />
+          
+            <br />
             {/*--------------------------Description--------------------------*/}
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="Description">A propos de vous :</label>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="Description">A propos de vous :</label>
               </div> 
                 <textarea
                   id="Description"
                   name="Description"
                   type="text"
                   placeholder="Vous avez 350 caractères pour nous en dire plus ;)"
-                  style={{ minWidth: 370}}
-                  rows="2"
+                  style={{resize: "none"}}
+                  rows="2"//hauteur
+                  cols="50" //largeur
                   maxlength="350"
                   value={this.state.Description}
                   onChange={event => this.inputChange(event)} 
@@ -143,9 +164,9 @@ class Preference extends Component{
             </div>
             <br/>
             {/*-------------------------- City--------------------------*/}
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="City">Habite à :</label>
+            <div className="input-group">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="City">Habite à :</label>
               </div>                <input
                   id="City"
                   name="City"
@@ -157,9 +178,9 @@ class Preference extends Component{
             </div>
             <br />
             {/*--------------------------Etudes-------------------------- */}
-            <div class="input-group ">
-              <div class="input-group-prepend">
-                <label class="input-group-text" for="Study">J'étudie au :</label>
+            <div className="input-group ">
+              <div className="input-group-prepend">
+                <label className="input-group-text" for="Study">J'étudie au :</label>
               </div>
               <select  id="Study">
                 <option selected>A remplir</option>
@@ -174,9 +195,9 @@ class Preference extends Component{
             </div>
             <br />
             {/*--------------------------Taille-------------------------- */}
-            <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Taille">Taille :</label>
+            <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Taille">Taille :</label>
             </div>
                  <input
                   id="Taille"
@@ -186,15 +207,15 @@ class Preference extends Component{
                   max="300"
                   onChange={event => this.inputChange(event)}
                 />
-              <div class="input-group-append">
-                <label class="input-group-text" for="Taille">cm</label>
+              <div className="input-group-append">
+                <label className="input-group-text" for="Taille">cm</label>
               </div>
             </div>
           <br />
         {/*--------------------------Yeux-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Yeux">Yeux :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Yeux">Yeux :</label>
             </div>
             <select  id="Yeux">
               <option selected>A remplir</option>
@@ -211,9 +232,9 @@ class Preference extends Component{
           </div>
           <br />
           {/*--------------------------Cheveux-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Hair">Cheveux :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Hair">Cheveux :</label>
             </div>
             <select  id="Hair">
               <option selected>A remplir</option>
@@ -228,9 +249,9 @@ class Preference extends Component{
           </div>
           <br />
           {/*--------------------------Sport-------------------------- */}
-          <div class="input-group ">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Sport">Activités physique :</label>
+          <div className="input-group ">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Sport">Activités physique :</label>
             </div>
             <select  id="Sport">
               <option selected>A remplir</option>
@@ -238,14 +259,14 @@ class Preference extends Component{
               <option value="2">Régulièrement</option>
               <option value="3">Parfois</option>
               <option value="4">une fois au chalet</option>
-              <option value="5">Quel horreur</option>
+              <option value="5">Quelle horreur</option>
             </select>
           </div>
           <br />
           {/*--------------------------Alcool-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Alcool">Alcool :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Alcool">Alcool :</label>
             </div>
             <select  id="Alcool">
               <option selected>A remplir</option>
@@ -257,9 +278,9 @@ class Preference extends Component{
             </div>
           <br />
           {/*--------------------------Tabac-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Tabac">Tabac :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Tabac">Tabac :</label>
             </div>
             <select  id="Tabac">
               <option selected>A remplir</option>
@@ -270,9 +291,9 @@ class Preference extends Component{
           </div>
           <br />
           {/*--------------------------Animaux Domestique-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Pet">Animaux de compagnie :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Pet">Animaux de compagnie :</label>
             </div>
             <select  id="Pet">
               <option selected>A remplir</option>
@@ -286,9 +307,9 @@ class Preference extends Component{
           </div>
           <br />
         {/*--------------------------Religion-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Religion">Religion :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Religion">Religion :</label>
             </div>
             <select  id="Religion">
               <option selected>A remplir</option>
@@ -308,9 +329,9 @@ class Preference extends Component{
           </div>
           <br />
           {/*--------------------------Signe Astro-------------------------- */}
-          <div class="input-group">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="Astro">Signe astrlogique :</label>
+          <div className="input-group">
+            <div className="input-group-prepend">
+              <label className="input-group-text" for="Astro">Signe astrlogique :</label>
             </div>
             <select  id="Asro">
               <option selected>A remplir</option>
