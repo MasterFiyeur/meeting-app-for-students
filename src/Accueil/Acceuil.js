@@ -32,12 +32,16 @@ class Accueil extends Component{
     render(){
         return(
             <div>
-                <p>Bonjour (page Accueil) ! </p>
+                <h1 className="text-blue">RENCONTRES, DISCUSSIONS,</h1>
+                <h2 className="text-purp">ET VOUS ? </h2>
+                <h2 className="text-blue">QUI ALLEZ-VOUS ETUDIER ?</h2>
+                
                 {/* show = 0 -> on affiche deux bouton Login et Register */}
                 {this.state.show === 0 && 
-                    <div>
-                        <button onClick={etat => this.changeShow(1)}>Se connecter</button>
-                        <button onClick={etat => this.changeShow(2)}>Se créer un compte</button>
+                    <div className="btn-group-vertical">
+                        <button className="btn btn-danger" onClick={etat => this.changeShow(1)}>Se connecter</button>
+                        <br/>
+                        <button className="btn btn-danger" onClick={etat => this.changeShow(2)}>Se créer un compte</button>
                     </div>
                 }
                 {/* show = 1 -> on affiche Login */}
@@ -48,11 +52,11 @@ class Accueil extends Component{
                             <span aria-hidden="true">&times;</span>
                         </button>
                         {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
-                        <p>Tu n'as toujours pas de compte ?&nbsp;
+                        <p className="text-danger">Tu n'as toujours pas de compte ?&nbsp;
                             {/* Utilisation du NavLink pour ses propriétés graphiques */}
-                            <NavLink to="/" onClick={etat => this.changeShow(2)}>Je cours m'en faire un !</NavLink>
+                            <NavLink className="text-pink" to="/" onClick={etat => this.changeShow(2)}>Je cours m'en faire un !</NavLink>
                         </p>
-                        <h2>Connexion</h2>
+                        <h2 className="text-success">Connexion</h2>
                         <Login />
                     </div>
                 }
@@ -63,7 +67,7 @@ class Accueil extends Component{
                         <button className="close" onClick={etat => this.changeShow(0)} aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                        <h2>Création du compte</h2>
+                        <h2 className="text-success">Création du compte</h2>
                         <Register />
                     </div>
                 }

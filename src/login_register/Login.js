@@ -62,7 +62,7 @@ class Login extends Component{
 
           {/* Formulaire de connexion */}
           <form onSubmit={event => this.sendLogin(event)}>
-            <input
+            <input className="input"
               name="email"
               type="text"
               placeholder="Ton adresse e-mail"
@@ -70,7 +70,8 @@ class Login extends Component{
               onChange={event => this.inputChange(event)} 
             />
             <br />
-            <input
+            <br />
+            <input className="input"
               name="password"
               type="password"
               placeholder="Ton mot de passe"
@@ -78,11 +79,11 @@ class Login extends Component{
               onChange={event => this.inputChange(event)} 
             />
             <br />
-            <button type="submit">Connexion</button>
+            <button className="btn btn-danger" type="submit">Connexion</button>
           </form>
 
           {/* Mot de passe oublié, redirection à définir, accueil pour l'instant */}
-          <NavLink to="/" >Mot de passe oublié ?</NavLink>
+          <NavLink className="text-pink" to="/" >Mot de passe oublié ?</NavLink>
         </div>
       );
     }

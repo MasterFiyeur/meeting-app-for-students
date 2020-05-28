@@ -44,3 +44,23 @@
 .bg-bw{
   background-image: radial-gradient(circle at center, rgba(238, 233, 223), rgba(242, 242, 242));
 }
+
+.text-blue{
+  color : rgb(000,000,180);
+}
+.text-purp{
+  color : rgb(096,000,096);
+}
+
+.text-pink{
+  color : rgb(185,000,255);
+}
+
+.input{
+  border: 1px solid;
+  border-color: rgb(000,000,180);
+  border-radius: 10px;
+  box-sizing: border-box;
+
+
+}

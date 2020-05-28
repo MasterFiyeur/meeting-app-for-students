@@ -127,7 +127,7 @@ class Register extends Component{
 
     render(){
       return(
-        <div>
+        <div className="text-blue">
           {this.state.alertShow &&
             <div className={this.state.alertClass} >
               {this.state.alertMessage}
@@ -135,8 +135,8 @@ class Register extends Component{
           }
           {/* Formulaire d'enregistrement de la personne' */}
           <form onSubmit={event => this.sendLogin(event)}>
-            <label htmlFor="email">E-mail :</label>
-            <input
+            <label  htmlFor="email">E-mail :</label>
+            <input className="input"
               id="email"
               name="email"
               type="text"
@@ -146,7 +146,7 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="password">Mot de passe :</label>
-            <input
+            <input className="input"
               id="password"
               name="password"
               type="password"
@@ -156,7 +156,7 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="nom">Nom :</label>
-            <input
+            <input className="input"
               id="nom"
               name="nom"
               type="text"
@@ -166,7 +166,7 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="prenom">Prénom :</label>
-            <input
+            <input className="input"
               id="prenom"
               name="prenom"
               type="text"
@@ -176,7 +176,7 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="ville">Ville :</label>
-            <input
+            <input className="input"
               id="ville"
               name="ville"
               type="text"
@@ -186,7 +186,7 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="dateBirth">Date de naissance :</label>
-            <input
+            <input className="input"
               id="dateBirth"
               name="dateBirth"
               type="date"
@@ -197,13 +197,14 @@ class Register extends Component{
             />
             <br />
             <label htmlFor="Student_Card">Carte étudiante :</label>
-            <input type="file" 
+            <input className="input"
+            type="file" 
             name="StudentCard" 
             id="Student_Card"
             onChange={event => this.inputChangeStudentCard(event)} 
             />{/* Faire tuto https://www.youtube.com/watch?v=sp9r6hSWH_o */}
             <br/>
-            <button type="submit">S'enregister</button>
+            <button className="btn btn-danger" type="submit">S'enregister</button>
           </form>
         </div>
       );
