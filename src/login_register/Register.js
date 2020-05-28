@@ -10,8 +10,15 @@ class Register extends Component{
           //Valeur des input email, password, prenom, nom, dateBirth, ville et StudentCard
           email: "", password : "", prenom : "", nom : "", dateBirth : "", ville : "",
           StudentCard: null,
-          alertShow:false, alertMessage:"", alertClass:"alert alert-danger alert-dismissible fade show" //Affichage, type et définition du message de l'alert
+          alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
+          etape: 0 //0 -> Creation du compte; 1 -> Upload carte étudiante; 2 -> Création du compte terminée
         };
+      }
+
+      fifteenYearsAgo(){
+        let curr = new Date();
+        curr.setDate(curr.getDate()-365*15);
+        return (curr.toISOString().substr(0,10));
       }
 
       verif(){ //Vérification de la véracité des données
@@ -48,7 +55,7 @@ class Register extends Component{
         return true;
       }
 
-      sendLogin(event) {
+      sendAccount(event) {
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
         const sha256 = require('hash-anything').sha256; //Hash du mdp
@@ -57,45 +64,38 @@ class Register extends Component{
           this.setState({alertShow:true});
         }else{
           let formData = new FormData();
-          formData.append('file',this.state.StudentCard);
           formData.append('email',this.state.email);
           formData.append('password',sha256(this.state.password));
           formData.append('prenom',this.state.prenom);
           formData.append('nom',this.state.nom);
           formData.append('dateBirth',this.state.dateBirth);
           formData.append('ville',this.state.ville);
-          const url = URL_API+'api/newUser';
+          const url = URL_API+'newUser';
           axios.post(url,formData)
           .then(res => {
-            console.log(res.data+"\nlength :"+res.data.length);
+            console.log("Réponse newUser: "+res.data);
             if(res.data>=0){
               switch(res.data){
                 case 0:
-                  this.setState({alertMessage: "L'adresse mail existe déjà"});
+                  this.setState({
+                    alertMessage: "L'adresse mail existe déjà.",
+                    alertClass:"alert-danger",
+                  });
                   break;
                 case 1:
                   this.setState({
-                    alertClass:"alert alert-primary alert-dismissible fade show",
-                    alertMessage: "Compte crée avec succès ! Carte étudiante transmise."
-                  });
-                  break;
-                case 2:
-                  this.setState({alertMessage: "Erreur lors du téléchargement de la carte étudiante"});
-                  break;
-                case 3:
-                  this.setState({
-                    alertClass:"alert alert-primary alert-dismissible fade show",
-                    alertMessage: "Compte crée avec succès ! Aucune carte étudiante transmise."
+                    alertClass:"alert-primary",
+                    alertMessage: "Compte crée avec succès !",
+                    etape:1
                   });
                   break;
                 default:
-                  this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue"});
+                  this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue."});
               }
               this.setState({alertShow: true});
-
               console.log(res.data);
             }else{
-              console.error('Problème dans le retour de l\'API/newUser');
+              console.error('Problème dans le retour de l\'API/newUser.');
             }
           })
           .catch(err => {
@@ -104,6 +104,70 @@ class Register extends Component{
         }
       }
       
+      sendCard(event){
+        event.preventDefault();
+        const axios = require('axios');  //Requêtes HTTP
+        
+        let formData = new FormData();
+        formData.append('file',this.state.StudentCard);
+        formData.append('email',this.state.email);
+
+        const url = URL_API+'setCarteEtudiante';
+          axios.post(url,formData)
+          .then(res => {
+            console.log("Réponse setCarteEtudiante: "+res.data);
+            if(res.data>=0){
+              switch(res.data){
+                case 0:
+                  this.setState({
+                    alertMessage: "Aucune carte étudiante n'a été envoyée.",
+                    alertClass:"alert-secondary",
+                    etape:2
+                  });
+                  break;
+                case 1:
+                  this.setState({
+                    alertClass:"alert-primary",
+                    alertMessage: "Carte étudiante envoyée avec succès !",
+                    etape:2
+                  });
+                  break;
+                case 2:
+                  this.setState({
+                    alertClass:"alert-danger",
+                    alertMessage: "Votre image dépasse 2Mo !",
+                  });
+                  break;
+                case 3:
+                  this.setState({
+                    alertClass:"alert-danger",
+                    alertMessage: "L'extension de votre image n'est pas acceptée !",
+                  });
+                  break;
+                default:
+                  this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue."});
+              }
+              this.setState({alertShow: true});
+              console.log(res.data);
+            }else{
+              this.setState({
+              alertClass:"alert-warning",
+              alertMessage: "L'image a rencontré un problème durant l'upload.",
+              alertShow: true
+              });
+              console.error('Problème dans le retour de l\'API/setCarteEtudiante.');
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            this.setState({
+              alertClass:"alert-warning",
+              alertMessage: "La requête/le serveur a rencontré un problème.",
+              alertShow: true
+            });
+          });
+        }
+
       inputChangeStudentCard(event){
         let files = event.target.files;
         let reader = new FileReader();
@@ -126,89 +190,124 @@ class Register extends Component{
       }
 
     render(){
+      /*Il faut que je sépare en deux form donc deux fonctions 
+      d'envoie et que finisse l'api setCarteEtudiant */
       return(
         <div className="text-blue">
           {this.state.alertShow &&
-            <div className={this.state.alertClass} >
+            <div className={"alert alert-dismissible fade show " + this.state.alertClass} >
               {this.state.alertMessage}
             </div>
           }
-          {/* Formulaire d'enregistrement de la personne' */}
-          <form onSubmit={event => this.sendLogin(event)}>
-            <label  htmlFor="email">E-mail :</label>
-            <input className="input"
-              id="email"
-              name="email"
-              type="text"
-              placeholder="Ton adresse e-mail"
-              value={this.state.email}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="password">Mot de passe :</label>
-            <input className="input"
-              id="password"
-              name="password"
-              type="password"
-              placeholder="Ton mot de passe"
-              value={this.state.password}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="nom">Nom :</label>
-            <input className="input"
-              id="nom"
-              name="nom"
-              type="text"
-              placeholder="Ton Nom"
-              value={this.state.nom}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="prenom">Prénom :</label>
-            <input className="input"
-              id="prenom"
-              name="prenom"
-              type="text"
-              placeholder="Ton prénom"
-              value={this.state.prenom}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="ville">Ville :</label>
-            <input className="input"
-              id="ville"
-              name="ville"
-              type="text"
-              placeholder="Ta ville"
-              value={this.state.ville}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="dateBirth">Date de naissance :</label>
-            <input className="input"
-              id="dateBirth"
-              name="dateBirth"
-              type="date"
-              maxLength="10"
-              placeholder="jj/mm/aaaa"
-              value={this.state.dateBirth}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <label htmlFor="Student_Card">Carte étudiante :</label>
-            <input className="input"
-            type="file" 
-            name="StudentCard" 
-            id="Student_Card"
-            onChange={event => this.inputChangeStudentCard(event)} 
-            />{/* Faire tuto https://www.youtube.com/watch?v=sp9r6hSWH_o */}
-            <br/>
-            <button className="btn btn-danger" type="submit">S'enregister</button>
-          </form>
+          {this.state.etape===0  &&
+            <form onSubmit={event => this.sendAccount(event)}>
+            {/* Formulaire d'enregistrement du compte' */}
+              <label htmlFor="email">E-mail :</label>
+              <input className="input"
+                id="email"
+                name="email"
+                type="text"
+                placeholder="Ton adresse e-mail"
+                value={this.state.email}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="password">Mot de passe :</label>
+              <input className="input" className="input"
+                id="password"
+                name="password"
+                type="password"
+                placeholder="Ton mot de passe"
+                value={this.state.password}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="nom">Nom :</label>
+              <input className="input"
+                id="nom"
+                name="nom"
+                type="text"
+                placeholder="Ton Nom"
+                value={this.state.nom}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="prenom">Prénom :</label>
+              <input className="input"
+                id="prenom"
+                name="prenom"
+                type="text"
+                placeholder="Ton prénom"
+                value={this.state.prenom}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="ville">Ville :</label>
+              <input className="input"
+                id="ville"
+                name="ville"
+                type="text"
+                placeholder="Ta ville"
+                value={this.state.ville}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="dateBirth">Date de naissance :</label>
+              <input className="input"
+                id="dateBirth"
+                name="dateBirth"
+                type="date"
+                maxLength="10"
+                placeholder="jj/mm/aaaa"
+                min="1960-01-01"
+                max={this.fifteenYearsAgo()}
+                value={this.state.dateBirth}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br/>
+              <button className="btn btn-danger" type="submit">S'enregister</button>
+            </form>
+          }
+          {this.state.etape===1  &&
+            <form onSubmit={event => this.sendCard(event)}>
+            {/* Formulaire pour upload la carte étudiante */}
+              <h4>Envoi de la carte étudiante</h4>
+              <p color="grey">Votre carte étudiante dois être au format .png/.jpg/.jpeg 
+              et ne doit pas dépasser 2Mo.</p>
+              <label htmlFor="Student_Card">Carte étudiante :</label>
+              <input className="input" 
+              type="file" 
+              name="StudentCard" 
+              id="Student_Card"
+              onChange={event => this.inputChangeStudentCard(event)} 
+              />
+              <br/>
+              <button type="submit">Upload</button>
+            </form>
+          }
+          {this.state.etape===2 &&
+            <div>
+              <h4 className="text-blue">Ton compte viens d'être créé</h4>
+              <p className="text-blue">Je t'invite à aller vite te connecter pour profiter de notre application :)</p>
+              <a href="/"><button className="btn btn-danger">Fermer</button></a>
+            </div>
+          }
+
         </div>
       );
     }
 }
 
 export default Register;
+
+
+
+
+
+
+
+
+
+
+
+
