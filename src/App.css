@@ -64,3 +64,11 @@
 
 
 }
+
+.bg-image{
+  background-image: url(./images/4.jpg);
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-attachment: scroll;
+
+}
