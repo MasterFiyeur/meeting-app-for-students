@@ -8,7 +8,7 @@ class Register extends Component{
 
         this.state = {
           //Valeur des input email, password, prenom, nom, dateBirth, ville et StudentCard
-          email: "", password : "", prenom : "", nom : "", dateBirth : "", ville : "",
+          email: "", password : "", verifPassword : "", prenom : "", nom : "", dateBirth : "", ville : "",
           StudentCard: null,
           alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
           etape: 0 //0 -> Creation du compte; 1 -> Upload carte étudiante; 2 -> Création du compte terminée
@@ -40,10 +40,15 @@ class Register extends Component{
         if(this.state.password.length < 6){ //Taille mdp inférieure à 6
           this.setState({alertMessage: "Votre mot de passe doit contenir plus de 6 caractère."});
           return false;
-        }if(this.state.nom.length < 2 || this.state.nom.length < 2){ //Taille nom et prenom => 2
+        }else if(this.state.password!==this.state.verifPassword){
+          this.setState({alertMessage: "Vos mots de passe ne correspondent pas."});
+          return false;
+        }
+        if(this.state.nom.length < 2 || this.state.nom.length < 2){ //Taille nom et prenom => 2
           this.setState({alertMessage: "Vous n'avez pas renseignez votre nom/prénom."});
           return false;
-        }if(this.state.ville.length < 2){ //Taille ville => 2
+        }
+        if(this.state.ville.length < 2){ //Taille ville => 2
           this.setState({alertMessage: "Vous n'avez pas renseignez votre ville."});
           return false;
         }
@@ -171,12 +176,18 @@ class Register extends Component{
       inputChangeStudentCard(event){
         let files = event.target.files;
         let reader = new FileReader();
-        reader.readAsDataURL(files[0]);
-        reader.onload=(e)=>{
+        if(files[0]!=null){
+          reader.readAsDataURL(files[0]);
+          reader.onload=(e)=>{
+            this.setState({
+              StudentCard:files[0]
+            })
+            console.log(this.state.StudentCard);
+          }
+        }else{
           this.setState({
-            StudentCard:files[0]
+            StudentCard:null
           })
-          console.log(this.state.StudentCard);
         }
       }
 
@@ -219,6 +230,16 @@ class Register extends Component{
                 type="password"
                 placeholder="Ton mot de passe"
                 value={this.state.password}
+                onChange={event => this.inputChange(event)} 
+              />
+              <br />
+              <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
+              <input className="input" className="input"
+                id="verifPassword"
+                name="verifPassword"
+                type="password"
+                placeholder="Ton mot de passe"
+                value={this.state.verifPassword}
                 onChange={event => this.inputChange(event)} 
               />
               <br />
