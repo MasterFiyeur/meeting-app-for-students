@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "babel": "^6.23.0",
     "bootstrap": "^4.5.0",
+    "cors": "^2.8.5",
     "hash-anything": "^1.2.2",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",

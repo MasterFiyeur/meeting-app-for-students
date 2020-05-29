@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
-//Ici il faut export le lien de la bdd
+import Position from './Position/Position';
 
 class App extends React.Component {
   render() {
@@ -15,6 +15,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
+            <Route path="/position" exact component={Position} />
           </Switch>
           
         </div>

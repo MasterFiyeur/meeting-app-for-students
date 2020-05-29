@@ -222,7 +222,7 @@ class Register extends Component{
               />
               <br />
               <label htmlFor="password">Mot de passe :</label>
-              <input className="input" className="input"
+              <input className="input"
                 id="password"
                 name="password"
                 type="password"
@@ -232,7 +232,7 @@ class Register extends Component{
               />
               <br />
               <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
-              <input className="input" className="input"
+              <input className="input"
                 id="verifPassword"
                 name="verifPassword"
                 type="password"
