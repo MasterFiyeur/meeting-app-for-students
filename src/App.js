@@ -28,4 +28,4 @@ class App extends React.Component {
 export default App;
 
 //J'ai enlevé le fichier projet-web_bdd et mis les fichiers dans /src/api
-export const URL_API = 'http://localhost/Projet/projet-web/src/api/';
+export const URL_API = 'https://projetwebeisti.000webhostapp.com/api/';
