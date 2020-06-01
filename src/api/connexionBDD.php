@@ -12,7 +12,7 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
  */
 function connexionPDO(){
     $login = "root";
-    $mdp = "";
+    $mdp = "Unsupermotdepasse!1";
     $bd = "projetsiterencontre";
     $serveur = "localhost";
     try{

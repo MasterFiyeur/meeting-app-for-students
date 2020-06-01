@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
@@ -9,7 +9,7 @@ import Position from './Position/Position';
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter basename="//">
         <div className="App">
           <NavBar />
           <Switch>
@@ -19,7 +19,7 @@ class App extends React.Component {
           </Switch>
           
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
