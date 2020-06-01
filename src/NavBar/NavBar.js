@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom';
 import logo from './images/logo.png';
 
 
@@ -24,9 +24,9 @@ class NavBar extends Component {
     return (
     <nav className = "navbar navbar-expand-md bg-grad navbar-dark sticky-top">
     <div className="container">
-      <a className="navbar-brand" href="/">
+    <Link to="/" className="navbar-brand">
     	<img src={logo} alt="logo" width="40px" height="40px"/>
-	  </a>
+    </Link>
       <button  onClick={this.toggleNavbar} className={`${classTwo}`} type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon" />
         </button>
@@ -34,15 +34,15 @@ class NavBar extends Component {
           <ul className="navbar-nav ml-auto">
             
             <li className="nav-item active">
-              <a className="collapsed nav-link" href="/">Home </a>
+              <Link className="collapsed nav-link" to="/">Home </Link>
             </li>
             
             <li className="nav-item active">
-              <a className="nav-link" href="/about">About </a>
+              <Link className="nav-link" to="/about">About </Link>
             </li>
             
             <li className="nav-item active">
-              <a className="nav-link" href="/contact">Contact </a>
+              <Link className="nav-link" to="/contact">Contact </Link>
             </li>
 
           </ul>

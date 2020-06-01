@@ -111,6 +111,7 @@ class Register extends Component{
         }
       }
       
+      
       sendCard(event){
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
