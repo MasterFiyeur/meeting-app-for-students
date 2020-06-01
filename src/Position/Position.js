@@ -79,9 +79,10 @@ class Position extends Component{
           {/* Formulaire de position */}
           <form onSubmit={event => this.sendLogin(event)}>
             <input className="input"
+              id="ville"
               name="ville"
               type="text"
-              placeholder="Ville"
+              placeholder="Ta ville"
               value={this.state.ville}
               onChange={event => this.inputChangeVille(event)} 
             /><label htmlFor="ville">
