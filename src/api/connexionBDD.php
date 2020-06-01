@@ -11,9 +11,9 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
  * - Encodage spécifié : utf8
  */
 function connexionPDO(){
-    $login = "root";
+    $login = "projqqkt_root";
     $mdp = "Unsupermotdepasse!1";
-    $bd = "projetsiterencontre";
+    $bd = "projqqkt_projetsitederencontre";
     $serveur = "localhost";
     try{
         $conn = new PDO("mysql:host=$serveur;dbname=$bd;charset=utf8", $login, $mdp);

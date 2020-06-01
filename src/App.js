@@ -9,7 +9,7 @@ import Position from './Position/Position';
 class App extends React.Component {
   render() {
     return (
-      <HashRouter basename="//">
+      <HashRouter basename="/projetwebEISTI">
         <div className="App">
           <NavBar />
           <Switch>
@@ -28,4 +28,4 @@ class App extends React.Component {
 export default App;
 
 //J'ai enlevé le fichier projet-web_bdd et mis les fichiers dans /src/api
-export const URL_API = 'https://projetwebeisti.000webhostapp.com/api/';
+export const URL_API = 'https://projetwebeisti.yj.fr/api/';

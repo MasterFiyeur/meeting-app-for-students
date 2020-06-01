@@ -75,7 +75,7 @@ class Register extends Component{
           formData.append('nom',this.state.nom);
           formData.append('dateBirth',this.state.dateBirth);
           formData.append('ville',this.state.ville);
-          const url = URL_API+'newUser';
+          const url = URL_API+'newUser.php';
           axios.post(url,formData)
           .then(res => {
             console.log("Réponse newUser: "+res.data);
