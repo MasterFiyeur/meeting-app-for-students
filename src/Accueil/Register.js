@@ -108,6 +108,7 @@ class Register extends Component{
         }
       }
       
+      
       sendCard(event){
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
@@ -116,7 +117,7 @@ class Register extends Component{
         formData.append('file',this.state.StudentCard);
         formData.append('email',this.state.email);
 
-        const url = URL_API+'setCarteEtudiante';
+        const url = URL_API+'setCarteEtudiante.php';
           axios.post(url,formData)
           .then(res => {
             console.log("Réponse setCarteEtudiante: "+res.data);

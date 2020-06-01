@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 
 import { NavLink } from 'react-router-dom';
 
-import Login from '../Login_register/Login'
-import Register from '../Login_register/Register'
+import Login from './Login'
+import Register from './Register'
 
 class Accueil extends Component{
     constructor(props) {

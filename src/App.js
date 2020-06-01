@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch, Link } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
@@ -9,7 +9,7 @@ import Position from './Position/Position';
 class App extends React.Component {
   render() {
     return (
-      <HashRouter basename="/projetwebEISTI">
+      <HashRouter basename={"/"}>
         <div className="App">
           <NavBar />
           <Switch>
