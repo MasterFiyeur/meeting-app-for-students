@@ -18,40 +18,13 @@ class Position extends Component{
         this.state = {
           alertShow: false, alertMessage : "", alertVariant:"",//Affichage, message et type de l'alerte
           ville: "", //Input avec la ville
-          name: "", lat: null, long: null //Res de l'API, ville et coordonnées GPS
+          name: "", context:null, lat: null, long: null //Res de l'API, ville et coordonnées GPS
           
         };
       }
      
       sendLogin(event) {
         event.preventDefault();
-        {/*const axios = require('axios').default;  //Requêtes HTTP
-
-        const url = "https://api-adresse.data.gouv.fr/search/?q="+this.state.ville+"&type=municipality&autocomplete=1"
-        axios.get(url)
-        .then(res => {
-          if(res.data>0){
-            //Se connecter
-            console.log("Mail et mdp bon ! Votre id est : ",res.data);
-          }else{
-            this.setState({
-                password:res.data
-            });
-            for(let i=0;i<10;i++){
-                if(res.data.features[i]!=null){
-                    console.log(res.data.features[i]);
-                }
-            }
-            //Affichage en rouge du message de mdp incorrect
-            this.setState({alertShow:true,alertMessage:"Adresse mail ou mot de passe incorrect.",alertVariant:"danger"});
-          }
-        })
-        .catch(err => {
-          console.log(err);
-          //Affichage en jaune qu'il y a une erreur dans la requête
-          this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
-        });*/}
-
       }
 
       inputChangeVille(event){
@@ -59,6 +32,7 @@ class Position extends Component{
         this.setState({
           ville: event.target.value
         })
+        //il faut que rien soit envoyé si le champ est vide
         const axios = require('axios').default;
         const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
         axios.get(url)
@@ -70,11 +44,13 @@ class Position extends Component{
                     this.setState({
                         name: res.data.features[0].properties.city,
                         lat: res.data.features[0].geometry.coordinates[1],
-                        long: res.data.features[0].geometry.coordinates[0]
+                        long: res.data.features[0].geometry.coordinates[0],
+                        context: res.data.features[0].properties.context
                     })
                     console.log("name : "+res.data.features[0].properties.city);
                     console.log("lat : "+res.data.features[0].geometry.coordinates[1]);
                     console.log("long : "+res.data.features[0].geometry.coordinates[0]);
+                    console.log("contexte : "+res.data.features[0].properties.context);
                     this.setState({alertShow:true,alertMessage:"Ville trouvée.",alertVariant:"secondary"});
                 }
             }
@@ -108,7 +84,10 @@ class Position extends Component{
               placeholder="Ville"
               value={this.state.ville}
               onChange={event => this.inputChangeVille(event)} 
-            /><label htmlFor="ville">{"Ville trouvée : "+this.state.name}</label>
+            /><label htmlFor="ville">
+              {this.state.name===""?
+              "":this.state.name+" - "+this.state.context}
+              </label>
             {/* Peut-être faire une liste déroulante si l'api met pas la ville en 1er */}
             <br />
             <button className="btn btn-danger" type="submit">Ne fais rien</button>
