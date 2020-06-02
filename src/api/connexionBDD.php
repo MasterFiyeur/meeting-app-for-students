@@ -24,11 +24,11 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 
 function connexionPDO(){
 
-    $login = "projqqkt_root";
+    $login = "projavrp_root";
 
-    $mdp = "Unsupermotdepasse!1";
+    $mdp = "Les 4 BG !$";
 
-    $bd = "projqqkt_projetsitederencontre";
+    $bd = "projavrp_projetsiterencontre";
 
     $serveur = "localhost";
 
