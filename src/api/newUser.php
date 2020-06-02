@@ -94,11 +94,11 @@ try {
 
     $cnx = connexionPDO();
 
-    $req = $cnx -> prepare('INSERT INTO user(`mail`,`password`,`nom`,`prenom`,`birthDate`,`ville`) 
+    $req = $cnx -> prepare('INSERT INTO user(`mail`,`password`,`nom`,`prenom`,`birthDate`,`ville`,`gps`) 
 
-    VALUES (?,?,?,?,?,?)');
+    VALUES (?,?,?,?,?,?,?)');
 
-    $req -> execute(array($_POST["email"],$_POST["password"],$_POST["nom"],$_POST["prenom"],$_POST["dateBirth"],$_POST["ville"]));
+    $req -> execute(array($_POST["email"],$_POST["password"],$_POST["nom"],$_POST["prenom"],$_POST["dateBirth"],$_POST["ville"],$_POST["coor"]));
 
     $req -> closeCursor();
 

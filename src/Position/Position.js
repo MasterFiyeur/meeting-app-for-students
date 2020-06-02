@@ -72,6 +72,7 @@ class Position extends Component{
           dismissible>
             {this.state.alertMessage}
           </Alert>
+          <h2>Page de Test #Théo hehe</h2>
           <img 
           src="https://projetwebeisti.yj.fr/imageCarteEtudiante/44.jpg"
           height="300px"

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
+import Cookies from 'js-cookie';
+import { Redirect } from "react-router-dom";
 
 import {URL_API} from '../App';
 
@@ -10,23 +12,29 @@ class Login extends Component{
 
         this.state = {
           alertShow: false, alertMessage : "", alertVariant:"",//Affichage, message et type de l'alerte
-          email: "", password : "" //Input mail et password
+          email: "", password : "", //Input mail et password
+          connected : false
         };
       }
-     
+
       sendLogin(event) {
         event.preventDefault();
         const axios = require('axios').default;  //Requêtes HTTP
         const sha256 = require('hash-anything').sha256; //Hash du mdp
-
         const url = URL_API+'getPrenom.php?mail='+this.state.email+'&password='+sha256(this.state.password);
         axios.get(url)
         .then(res => {
-          if(res.data>0){
+          if(res.data.id>0){
             //Se connecter
-            console.log("Mail et mdp bon ! Votre id est : ",res.data);
+            Cookies.set("ID",res.data.id);
+            Cookies.set("KEY",res.data.key);
+            console.log("Vous êtes connecté, redirection vers la page principale !");
+            this.setState({
+              connected:true
+            });
           }else{
             //Affichage en rouge du message de mdp incorrect
+            console.log(res);
             this.setState({alertShow:true,alertMessage:"Adresse mail ou mot de passe incorrect.",alertVariant:"danger"});
           }
         })
@@ -35,7 +43,6 @@ class Login extends Component{
           //Affichage en jaune qu'il y a une erreur dans la requête
           this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
         });
-
       }
      
       inputChange(event) {
@@ -48,6 +55,9 @@ class Login extends Component{
       }
 
     render(){
+        if(this.state.connected){
+          return(<Redirect to='/principale'/>);
+        }
       return(
         <div>
           {/* Alert affichée lorsque le couple (e-mail,mdp) n'est pas trouvé dans la base de donnée */}

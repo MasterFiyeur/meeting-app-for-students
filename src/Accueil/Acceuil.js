@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
+import Cookies from 'js-cookie';
+import { Redirect } from "react-router-dom";
 import { NavLink } from 'react-router-dom';
+import {URL_API} from '../App';
 
 import Login from './Login'
 import Register from './Register'
@@ -16,9 +18,32 @@ class Accueil extends Component{
             * 1 -> Accueil + Login
             * 2 -> Accueil + Register 
             */
+           connected : false
         };
     }
     
+    verifConnexion() {
+        const url = URL_API+'isConnected.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            if(res.data.connect){
+                this.setState({
+                    connected:true
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
     /**
      * Changement du state.show
      * @param {*} etat : attribut la valeur etat à state.show
@@ -35,6 +60,10 @@ class Accueil extends Component{
      * - L'affichage dépend de this.state.show
      */
     render(){
+        this.verifConnexion();
+        if(this.state.connected){
+            return <Redirect to='/principale'/>
+        }
         return(
             <div>
                 <h1 className="text-blue">RENCONTRES, DISCUSSIONS,</h1>

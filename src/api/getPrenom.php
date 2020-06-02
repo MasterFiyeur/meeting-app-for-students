@@ -51,8 +51,15 @@ try {
     if ($ligne = $req -> fetch()) {
 
         if ($ligne != NULL) {
-
-            print($ligne['id']);
+            $ObjectRes->id=$ligne['id'];
+            $token=str_rand();
+            $ObjectRes->key=$token;
+            $cnx2 = connexionPDO();
+            $req2 = $cnx2 -> prepare('UPDATE user SET connecttoken = ? WHERE mail = ?');
+            $req2 -> execute(array($token,$_GET["mail"]));
+            $req2 -> closeCursor();
+            $ObjectResEnc = json_encode($ObjectRes);
+            print ($ObjectResEnc);
 
         } else {
 

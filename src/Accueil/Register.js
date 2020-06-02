@@ -205,7 +205,6 @@ class Register extends Component{
           const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
           axios.get(url)
           .then(res => {
-            console.log(res);
             if(res.data!==null){
               if(res.data.features[0]!=null){
                 this.setState({
