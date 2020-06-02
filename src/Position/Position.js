@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 
 import Alert from 'react-bootstrap/Alert';
 
+import {URL_API} from '../App';
 /**
  * Composant de test (Théo)
  * J'utilise ce composant à l'adresse /position afin d'effectuer 
@@ -25,6 +26,7 @@ class Position extends Component{
      
       sendLogin(event) {
         event.preventDefault();
+
       }
 
       inputChangeVille(event){
@@ -33,35 +35,30 @@ class Position extends Component{
           ville: event.target.value
         })
         //il faut que rien soit envoyé si le champ est vide
-        const axios = require('axios').default;
-        const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
-        axios.get(url)
-        .then(res => {
+        console.log("Value = "+event.target.value);
+        if(event.target.value!==""){
+          const axios = require('axios').default;
+          const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
+          axios.get(url)
+          .then(res => {
             console.log(res);
             if(res.data!==null){
-            for(let i=0;i<10;i++){
-                if(res.data.features[0]!=null){
-                    this.setState({
-                        name: res.data.features[0].properties.city,
-                        lat: res.data.features[0].geometry.coordinates[1],
-                        long: res.data.features[0].geometry.coordinates[0],
-                        context: res.data.features[0].properties.context
-                    })
-                    console.log("name : "+res.data.features[0].properties.city);
-                    console.log("lat : "+res.data.features[0].geometry.coordinates[1]);
-                    console.log("long : "+res.data.features[0].geometry.coordinates[0]);
-                    console.log("contexte : "+res.data.features[0].properties.context);
-                    this.setState({alertShow:true,alertMessage:"Ville trouvée.",alertVariant:"secondary"});
-                }
+              if(res.data.features[0]!=null){
+                this.setState({
+                name: res.data.features[0].properties.city,
+                lat: res.data.features[0].geometry.coordinates[1],
+                long: res.data.features[0].geometry.coordinates[0],
+                context: res.data.features[0].properties.context
+                })
+              }
             }
+          })
+          .catch(err => {
+            console.log(err);
+            //Affichage en jaune qu'il y a une erreur dans la requête
+            this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
+          });
         }
-        })
-        .catch(err => {
-          console.log(err);
-          //Affichage en jaune qu'il y a une erreur dans la requête
-          this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
-        });
-
       }
 
     render(){
@@ -75,13 +72,20 @@ class Position extends Component{
           dismissible>
             {this.state.alertMessage}
           </Alert>
+          <img 
+          src="https://projetwebeisti.yj.fr/imageCarteEtudiante/44.jpg"
+          height="300px"
+          width="300px"
+          >
 
+          </img>
           {/* Formulaire de position */}
           <form onSubmit={event => this.sendLogin(event)}>
             <input className="input"
+              id="ville"
               name="ville"
               type="text"
-              placeholder="Ville"
+              placeholder="Ta ville"
               value={this.state.ville}
               onChange={event => this.inputChangeVille(event)} 
             /><label htmlFor="ville">

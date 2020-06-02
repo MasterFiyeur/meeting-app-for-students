@@ -11,6 +11,7 @@ class Register extends Component{
           email: "", password : "", verifPassword : "", prenom : "", nom : "", dateBirth : "", ville : "",
           StudentCard: null,
           alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
+          name: "", context:null, lat: null, long: null, //Resultat de l'API, ville et coordonnées GPS
           etape: 0 //0 -> Creation du compte; 1 -> Upload carte étudiante; 2 -> Création du compte terminée
         };
       }
@@ -48,7 +49,8 @@ class Register extends Component{
           this.setState({alertMessage: "Vous n'avez pas renseignez votre nom/prénom."});
           return false;
         }
-        if(this.state.ville.length < 2){ //Taille ville => 2
+        if(this.state.name===""){this.setState({name:this.state.ville});}
+        if(this.state.name.length < 2){ //Taille ville => 2
           this.setState({alertMessage: "Vous n'avez pas renseignez votre ville."});
           return false;
         }
@@ -74,7 +76,8 @@ class Register extends Component{
           formData.append('prenom',this.state.prenom);
           formData.append('nom',this.state.nom);
           formData.append('dateBirth',this.state.dateBirth);
-          formData.append('ville',this.state.ville);
+          formData.append('ville',this.state.name);
+          formData.append('coor',this.state.lat+";"+this.state.long);
           const url = URL_API+'newUser.php';
           axios.post(url,formData)
           .then(res => {
@@ -190,6 +193,38 @@ class Register extends Component{
         }
       }
 
+      inputChangeVille(event){
+        event.preventDefault();
+        this.setState({
+          ville: event.target.value
+        })
+        //il faut que rien soit envoyé si le champ est vide
+        console.log("Value = "+event.target.value);
+        if(event.target.value!==""){
+          const axios = require('axios').default;
+          const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
+          axios.get(url)
+          .then(res => {
+            console.log(res);
+            if(res.data!==null){
+              if(res.data.features[0]!=null){
+                this.setState({
+                name: res.data.features[0].properties.city,
+                lat: res.data.features[0].geometry.coordinates[1],
+                long: res.data.features[0].geometry.coordinates[0],
+                context: res.data.features[0].properties.context
+                })
+              }
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            //Affichage en jaune qu'il y a une erreur dans la requête
+            this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
+          });
+        }
+      }
+
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -261,7 +296,7 @@ class Register extends Component{
                 value={this.state.prenom}
                 onChange={event => this.inputChange(event)} 
               />
-              <br />
+              <br/>
               <label htmlFor="ville">Ville :</label>
               <input className="input"
                 id="ville"
@@ -269,8 +304,13 @@ class Register extends Component{
                 type="text"
                 placeholder="Ta ville"
                 value={this.state.ville}
-                onChange={event => this.inputChange(event)} 
+                onChange={event => this.inputChangeVille(event)} 
               />
+              {this.state.name!=="" &&
+                <label htmlFor="ville">
+                  {this.state.name+" - "+this.state.context}
+                </label>
+              }
               <br />
               <label htmlFor="dateBirth">Date de naissance :</label>
               <input className="input"

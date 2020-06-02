@@ -28,4 +28,5 @@ class App extends React.Component {
 export default App;
 
 //J'ai enlevé le fichier projet-web_bdd et mis les fichiers dans /src/api
-export const URL_API = 'https://projetwebeisti.yj.fr/api/';
+export const URL_API = 'https://projetsiteeisti.yj.fr/api/';
+
