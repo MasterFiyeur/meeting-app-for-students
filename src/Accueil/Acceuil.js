@@ -6,6 +6,7 @@ import {URL_API} from '../App';
 
 import Login from './Login'
 import Register from './Register'
+import NewMatch from '../messagerie/newMatch';
 
 class Accueil extends Component{
     constructor(props) {
@@ -76,6 +77,7 @@ class Accueil extends Component{
                         <button className="btn btn-danger" onClick={etat => this.changeShow(1)}>Se connecter</button>
                         <br/>
                         <button className="btn btn-danger" onClick={etat => this.changeShow(2)}>Se créer un compte</button>
+                        <NewMatch />
                     </div>
                 }
                 {/* show = 1 -> on affiche Login */}
