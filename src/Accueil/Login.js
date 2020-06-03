@@ -17,6 +17,11 @@ class Login extends Component{
         };
       }
 
+      /**
+       * Compare les identifiants avec la base de donnée
+       * Si les identifiants existent et sont bon, l'utilisateur est connecté
+       * @param {*} event Action du form par le bouton Submit
+       */
       sendLogin(event) {
         event.preventDefault();
         const axios = require('axios').default;  //Requêtes HTTP
@@ -45,6 +50,10 @@ class Login extends Component{
         });
       }
      
+      /**
+       * Met à jour la valeur du form dans lequel l'utilisateur écrit
+       * @param {*} event Appuie sur une touche
+       */
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -55,8 +64,9 @@ class Login extends Component{
       }
 
     render(){
+        /* Utilisateur redirigé si connecté */
         if(this.state.connected){
-          return(<Redirect to='/principale'/>);
+          return(<Redirect to='/principale'/>); //Redirection vers la page principale
         }
       return(
         <div>

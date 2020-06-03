@@ -17,26 +17,14 @@ include "connexionBDD.php";
 /**
 
  * - Vérification de la correspondance entre id et key
-
  * - Entrée :
-
- *  GET : 
-
+ *  Headers : 
  *      id => Valeur du cookie ID
-
  *      key => Valeur du cookie KEY
-
- * - Sortie : id, NULL, error
-
- *  id => nombre correspondant à l'identifiant de l'utilisateur
-
- *  NULL => Aucun id ne correspond au couple (mail/mdp)
-
- *  error => Problème durant la connexion à la BDD
-
- *           ou lors de la requête SQL
-
+ * - Sortie : Object :
+ *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
  */
+
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
 $ObjIdKey->connect=isLogged($id,$key);

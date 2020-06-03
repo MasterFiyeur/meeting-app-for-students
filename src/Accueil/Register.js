@@ -16,12 +16,20 @@ class Register extends Component{
         };
       }
 
+      /**
+       * Renvoi la date actuelle à laquelle on a retiré 15*365 jours
+       */
       fifteenYearsAgo(){
         let curr = new Date();
         curr.setDate(curr.getDate()-365*15);
         return (curr.toISOString().substr(0,10));
       }
 
+      /**
+       * Renvoie vrai si le formulaire est estimé complet et correct
+       * Renvoi faux si le formulaire est estimé incomplet ou incorrect
+       * Effectue une suite de vérification sur la valeur des inputs
+       */
       verif(){ //Vérification de la véracité des données
         let positionArobase= this.state.email.indexOf("@");
         if(this.state.email===""){ //Chaîne vide
@@ -58,10 +66,14 @@ class Register extends Component{
           this.setState({alertMessage: "Votre date de naissance n'est pas précisée."});
           return false;
         }
-
         return true;
       }
 
+      /**
+       * Envoie les données du 1er formulaire avec les coordonnées de la ville
+       * au serveur pour pouvoir creer un compte
+       * @param {*} event Action du 1er form par le bouton Submit
+       */
       sendAccount(event) {
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
@@ -111,7 +123,11 @@ class Register extends Component{
         }
       }
       
-      
+      /**
+       * Envoie de la valeur du champ file au serveur pour faire vérifier
+       * la carte étudiante par les modérateurs
+       * @param {*} event Action du 2nd form par le bouton Submit
+       */
       sendCard(event){
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
@@ -175,6 +191,10 @@ class Register extends Component{
           });
         }
 
+      /**
+       * Change la valeur de l'état StudentCard en fonction du fichier sélectionné
+       * @param {*} event Fichier sélectionné
+       */
       inputChangeStudentCard(event){
         let files = event.target.files;
         let reader = new FileReader();
@@ -193,13 +213,16 @@ class Register extends Component{
         }
       }
 
+      /**
+       * Propose une ville française selon la valeur du champs ville et mise à
+       * jour de ses coordonnées grâce à l'API Adresse du gouvernement
+       * @param {*} event Ajout/Suppression d'un caractère dans le champ ville
+       */
       inputChangeVille(event){
         event.preventDefault();
         this.setState({
           ville: event.target.value
         })
-        //il faut que rien soit envoyé si le champ est vide
-        console.log("Value = "+event.target.value);
         if(event.target.value!==""){
           const axios = require('axios').default;
           const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
@@ -224,6 +247,11 @@ class Register extends Component{
         }
       }
 
+      /**
+       * Mettre de lier l'écriture dans les champs aux valeurs correspondantes 
+       * dans l'état du composant
+       * @param {*} event Ajout/Suppression d'un caractère dans un champs 
+       */
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -234,8 +262,6 @@ class Register extends Component{
       }
 
     render(){
-      /*Il faut que je sépare en deux form donc deux fonctions 
-      d'envoie et que finisse l'api setCarteEtudiant */
       return(
         <div className="text-blue">
           {this.state.alertShow &&
@@ -243,9 +269,10 @@ class Register extends Component{
               {this.state.alertMessage}
             </div>
           }
-          {this.state.etape===0  &&
+          {this.state.etape===0  && //Etape initiale du composant
             <form onSubmit={event => this.sendAccount(event)}>
-            {/* Formulaire d'enregistrement du compte' */}
+            {/* 1er Formulaire d'enregistrement du compte' */}
+              {/* Input email */}
               <label htmlFor="email">E-mail :</label>
               <input className="input"
                 id="email"
@@ -256,6 +283,7 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br />
+              {/* Input password */}
               <label htmlFor="password">Mot de passe :</label>
               <input className="input"
                 id="password"
@@ -266,6 +294,7 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br />
+              {/* Input verifPassword */}
               <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
               <input className="input"
                 id="verifPassword"
@@ -276,6 +305,7 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br />
+              {/* Input nom */}
               <label htmlFor="nom">Nom :</label>
               <input className="input"
                 id="nom"
@@ -286,6 +316,7 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br />
+              {/* Input prenom */}
               <label htmlFor="prenom">Prénom :</label>
               <input className="input"
                 id="prenom"
@@ -296,6 +327,7 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br/>
+              {/* Input ville */}
               <label htmlFor="ville">Ville :</label>
               <input className="input"
                 id="ville"
@@ -305,12 +337,14 @@ class Register extends Component{
                 value={this.state.ville}
                 onChange={event => this.inputChangeVille(event)} 
               />
+              {/* Information sur la ville trouvée si le champs n'est pas vide */}
               {this.state.name!=="" &&
                 <label htmlFor="ville">
                   {this.state.name+" - "+this.state.context}
                 </label>
               }
               <br />
+              {/* Input dateBirth */}
               <label htmlFor="dateBirth">Date de naissance :</label>
               <input className="input"
                 id="dateBirth"
@@ -324,15 +358,17 @@ class Register extends Component{
                 onChange={event => this.inputChange(event)} 
               />
               <br/>
+              {/* Bouton Submit 1 */}
               <button className="btn btn-danger" type="submit">S'enregister</button>
             </form>
           }
-          {this.state.etape===1  &&
+          {this.state.etape===1  && //Etape création identifiant terminée
             <form onSubmit={event => this.sendCard(event)}>
-            {/* Formulaire pour upload la carte étudiante */}
+            {/* 2nd Formulaire pour upload la carte étudiante */}
               <h4>Envoi de la carte étudiante</h4>
               <p color="grey">Votre carte étudiante dois être au format .png/.jpg/.jpeg 
               et ne doit pas dépasser 2Mo.</p>
+              {/* Input StudentCard */}
               <label htmlFor="Student_Card">Carte étudiante :</label>
               <input className="input" 
               type="file" 
@@ -341,14 +377,15 @@ class Register extends Component{
               onChange={event => this.inputChangeStudentCard(event)} 
               />
               <br/>
+              {/* Bouton Submit 2 */}
               <button type="submit">Upload</button>
             </form>
           }
-          {this.state.etape===2 &&
+          {this.state.etape===2 && //Etape carte étudiante terminée
             <div>
               <h4 className="text-blue">Ton compte viens d'être créé</h4>
               <p className="text-blue">Je t'invite à aller vite te connecter pour profiter de notre application :)</p>
-              <a href="/"><button className="btn btn-danger">Fermer</button></a>
+              <a href="/"><button className="btn btn-danger">Fermer</button></a>{/* Il faudrait connecter directement */}
             </div>
           }
 

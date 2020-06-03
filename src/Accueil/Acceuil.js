@@ -22,7 +22,19 @@ class Accueil extends Component{
            connected : false
         };
     }
-    
+
+    /**
+     * Page initialisée
+     */
+    componentDidMount(){
+        /* Vérif des cookies ID et KEY */
+        this.verifConnexion();
+    }
+
+    /**
+     * Met à jour l'état connected selon la véracité 
+     * du couple (Cookie.get("ID"),Cookie.get("KEY"))
+     */
     verifConnexion() {
         const url = URL_API+'isConnected.php';
         const axios = require('axios').default;  //Requêtes HTTP
@@ -34,7 +46,7 @@ class Accueil extends Component{
         }
         axios.get(url,config)
         .then(res => {
-            if(res.data.connect){
+            if(res.data.connect){ //Mise à jour de connected si réponse positive 
                 this.setState({
                     connected:true
                 })
@@ -61,9 +73,9 @@ class Accueil extends Component{
      * - L'affichage dépend de this.state.show
      */
     render(){
-        this.verifConnexion();
+        /* Utilisateur redirigé si connecté */
         if(this.state.connected){
-            return <Redirect to='/principale'/>
+            return <Redirect to='/principale'/> //Renvoi à la page principale
         }
         return(
             <div>

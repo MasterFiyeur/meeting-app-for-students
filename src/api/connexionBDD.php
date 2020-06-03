@@ -47,6 +47,12 @@ function connexionPDO(){
     }
 
 }
+
+/**
+ * - Fonction de création d'une chaine de caractère de taille 50
+ * - caractères utilisés : abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+ */
+
 function str_rand(){
     $res = "";
     $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
@@ -58,6 +64,12 @@ function str_rand(){
     return $res;
 }
 
+
+/**
+ * - Fonction de vérification du couple id/connecttoken dans la BDD
+ * - Paramètre : id et clé
+ * - Sortie : booléen
+ */
 function isLogged($id, $key){
     $logged = false;
     $cnx = connexionPDO();

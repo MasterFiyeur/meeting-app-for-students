@@ -15,27 +15,18 @@ include "connexionBDD.php";
       
 
 /**
-
  * - Récupération de l'ID d'un utilisateur selon son mail et son mot de passe
-
  * - Entrée :
-
  *  GET : 
-
  *      mail => adresse mail de l'utilisateur
-
  *      password => mot de passe hashé avec sha256
-
- * - Sortie : id, NULL, error
-
- *  id => nombre correspondant à l'identifiant de l'utilisateur
-
+ * - Sortie : ObjectRes, NULL, error
+ *  ObjectRes :
+ *      id => nombre correspondant à l'identifiant de l'utilisateur
+ *      key => token correspondant à son id
  *  NULL => Aucun id ne correspond au couple (mail/mdp)
-
  *  error => Problème durant la connexion à la BDD
-
  *           ou lors de la requête SQL
-
  */
 
 try {

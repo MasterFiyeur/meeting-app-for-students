@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 
 import Alert from 'react-bootstrap/Alert';
 
-import {URL_API} from '../App';
 /**
  * Composant de test (Théo)
  * J'utilise ce composant à l'adresse /position afin d'effectuer 
  * des tests pour savoir si il est cohérent de le rajouter
  * lors de l'inscription afin de recup les coordonnées GPS 
  * pour pouvoir calculer la distance entre deux personnes
+ * ------------------------------------------------------
+ * Si tu veux tester un truc rapido, utilise cette page pour ne 
+ * pas tout casser ;)
  */
 
 class Position extends Component{
@@ -77,6 +79,7 @@ class Position extends Component{
           src="https://projetwebeisti.yj.fr/imageCarteEtudiante/44.jpg"
           height="300px"
           width="300px"
+          alt="Carte étudiante de l'id 44"
           >
 
           </img>
