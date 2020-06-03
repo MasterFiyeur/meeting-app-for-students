@@ -11,6 +11,10 @@ class Pageprincipale extends Component {
         }
       }
     
+    componentDidMount(){
+        this.verifConnexion();
+    }
+    
     verifConnexion() {
         /* A executer à chaque fois que l'on veut utiliser l'id :
             this.verifConnexion();
