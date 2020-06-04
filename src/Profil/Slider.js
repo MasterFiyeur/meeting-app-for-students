@@ -13,9 +13,9 @@ function valuetext(value) {
   return `${value}°C`;
 }
 
-export default function RangeSlider() {
+export default function RangeSlider(nbr) {
   const classes = useStyles();
-  const [value, setValue] = React.useState([20, 37]);
+  const [value, setValue] = React.useState(nbr);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -24,16 +24,18 @@ export default function RangeSlider() {
   return (
     <div className={classes.root}>
       <Typography id="range-slider" gutterBottom>
-        Temperature range
+        Tranche d'âge
       </Typography>
       <Slider
+        min={17}
+        max={37}
         value={value}
         onChange={handleChange}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
         getAriaValueText={valuetext}
       />
-    <div>{"min : "+value[0]+";max : "+value[1]}</div>
+    {/*<div>{"min : "+value[0]+";max : "+value[1]}</div>*/}
     </div>
   );
 }
