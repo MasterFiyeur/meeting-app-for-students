@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RangeSlider from './Slider';
 
 
-class Preference extends React.Component{
+class Preference extends Component{
     constructor(props) {
         super(props);
 
