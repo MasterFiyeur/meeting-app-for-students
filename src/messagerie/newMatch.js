@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Cookies from 'js-cookie';
 
 import {URL_API} from '../App';
 
@@ -10,12 +11,17 @@ class NewMatch extends Component{
 		event.preventDefault();
 		const axios = require('axios');  //Requêtes HTTP
 		let formdata = new FormData();
-		formdata.append("id1","41");
+		let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
 		formdata.append("id2","42");
         const url = URL_API+'newDisc.php';
-        axios.post(url,formdata)
+        axios.post(url,formdata,config)
         .then(res => {
-            console.log("Réponse newUser: "+res.data);
+            console.log("Réponse newMatch: "+res.data);
             if(res.data=='1'){
               this.setState({
                 alertClass:"alert-primary",
@@ -23,8 +29,11 @@ class NewMatch extends Component{
                 etape:1
               });
               this.setState({alertShow: true});
-            }else{
-              console.error('Problème dans le retour de l\'API/newUser.');
+            }else if(res.data == '2'){
+            	console.error("vous n'avez pas l'air d'etre connecté");
+            }else {
+            	console.error('Problème dans le retour de l\'API/newUser.');
+
             }
           })
         .catch(err => {
