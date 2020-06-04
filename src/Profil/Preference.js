@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import InputRange from 'react-input-range';
+import RangeSlider from './Slider';
 
 
-class Preference extends Component{
+class Preference extends React.Component{
     constructor(props) {
         super(props);
 
@@ -13,14 +13,10 @@ class Preference extends Component{
           Description : null,
           Taille : null,
           City : "Cergy", //Valeur du input City          
-          value1: {min: 18, max: 24,},
+          value : {min : 18,max:40},
         };
       }
     
-
-      
-       
-
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -134,17 +130,7 @@ class Preference extends Component{
             </div>
             <br />
            {/*--------------------------Tranche d age-------------------------- */}
-          
-                <label  for="Age">Tranche d'age :</label>
-             
-               <InputRange
-                  draggableTrack
-                  maxValue={35}
-                  minValue={18}
-                  onChange={value => this.setState({ value1: value })}
-                  onChangeComplete={value => console.log(value)}
-                  value={this.state.value5} 
-                />
+              <RangeSlider />
           
             <br />
             {/*--------------------------Description--------------------------*/}
@@ -170,7 +156,8 @@ class Preference extends Component{
             <div className="input-group">
               <div className="input-group-prepend">
                 <label className="input-group-text" for="City">J'habite à :</label>
-              </div>                <input
+              </div>                
+              <input
                   id="City"
                   name="City"
                   type="text"
