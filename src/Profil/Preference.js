@@ -216,13 +216,8 @@ class Preference extends Component{
               <div className="input-group-prepend">
                 <label className="input-group-text" for="Study">J'étudie au :</label>
               </div>
-<<<<<<< HEAD
-              <select  id="Study">
-                <option selected value="none">A remplir</option>
-=======
               <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
                 <option selected>A remplir</option>
->>>>>>> 30f908080855bf716b8fc35b2f66fa3dd878b6c3
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
                 <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
