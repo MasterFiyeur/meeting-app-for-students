@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
+import NewMatch from '../messagerie/newMatch';
 
 class Pageprincipale extends Component {
     constructor(props) {
@@ -100,6 +101,8 @@ class Pageprincipale extends Component {
             onClick={() => this.test()}
             >Tester (id,key)
             </button>
+            <NewMatch />
+
         </div>
       );
     }
