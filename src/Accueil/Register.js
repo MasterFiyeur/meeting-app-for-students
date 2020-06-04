@@ -72,7 +72,7 @@ class Register extends Component{
       /**
        * Envoie les données du 1er formulaire avec les coordonnées de la ville
        * au serveur pour pouvoir creer un compte
-       * @param {*} event Action du 1er form par le bouton Submit
+       * @param {event} event Action du 1er form par le bouton Submit
        */
       sendAccount(event) {
         event.preventDefault();
@@ -126,7 +126,7 @@ class Register extends Component{
       /**
        * Envoie de la valeur du champ file au serveur pour faire vérifier
        * la carte étudiante par les modérateurs
-       * @param {*} event Action du 2nd form par le bouton Submit
+       * @param {event} event Action du 2nd form par le bouton Submit
        */
       sendCard(event){
         event.preventDefault();
@@ -193,7 +193,7 @@ class Register extends Component{
 
       /**
        * Change la valeur de l'état StudentCard en fonction du fichier sélectionné
-       * @param {*} event Fichier sélectionné
+       * @param {event} event Fichier sélectionné
        */
       inputChangeStudentCard(event){
         let files = event.target.files;
@@ -216,7 +216,7 @@ class Register extends Component{
       /**
        * Propose une ville française selon la valeur du champs ville et mise à
        * jour de ses coordonnées grâce à l'API Adresse du gouvernement
-       * @param {*} event Ajout/Suppression d'un caractère dans le champ ville
+       * @param {event} event Ajout/Suppression d'un caractère dans le champ ville
        */
       inputChangeVille(event){
         event.preventDefault();
@@ -250,7 +250,7 @@ class Register extends Component{
       /**
        * Mettre de lier l'écriture dans les champs aux valeurs correspondantes 
        * dans l'état du composant
-       * @param {*} event Ajout/Suppression d'un caractère dans un champs 
+       * @param {event} event Ajout/Suppression d'un caractère dans un champs 
        */
       inputChange(event) {
         event.preventDefault();
@@ -395,15 +395,3 @@ class Register extends Component{
 }
 
 export default Register;
-
-
-
-
-
-
-
-
-
-
-
-

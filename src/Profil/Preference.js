@@ -8,6 +8,8 @@ class Preference extends Component{
 
         //Prochaine étape : pré-sélectionner les valeurs déjà renseignées 
         //Simulation retour de la requête avec une constante(tableau je pense)
+        //On peut mettre dans les select value={this.state} ce qui permet de 
+        //initialiser aux valeurs de la BDD
 
         this.state = {
           Description : null,
@@ -122,7 +124,7 @@ class Preference extends Component{
                 <label className="input-group-text" for="purpose">Ce que je cherche :</label>
               </div>
               <select  id="purpose">
-                <option selected>A remplir</option>
+                <option value="none">A remplir</option>
                 <option value="1">Du sérieux</option>
                 <option value="2">Aller boire un verre</option>
                 <option value="3">On verra</option>
@@ -186,7 +188,7 @@ class Preference extends Component{
                 <label className="input-group-text" for="Study">J'étudie au :</label>
               </div>
               <select  id="Study">
-                <option selected>A remplir</option>
+                <option selected value="none">A remplir</option>
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
                 <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>

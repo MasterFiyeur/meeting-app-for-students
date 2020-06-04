@@ -1,7 +1,8 @@
 //https://api-adresse.data.gouv.fr/search/?q=Cergy&type=municipality&autocomplete=1
 import React, { Component } from 'react';
-
-import Alert from 'react-bootstrap/Alert';
+import {Card, Carousel} from 'react-bootstrap';
+import ImageCrop from './CropImage';
+import {URL_API} from '../App';
 
 /**
  * Composant de test (Théo)
@@ -14,92 +15,157 @@ import Alert from 'react-bootstrap/Alert';
  * pas tout casser ;)
  */
 
+ //faire image crop
+
 class Position extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-          alertShow: false, alertMessage : "", alertVariant:"",//Affichage, message et type de l'alerte
-          ville: "", //Input avec la ville
-          name: "", context:null, lat: null, long: null //Res de l'API, ville et coordonnées GPS
-          
+          StudentCard: null,
+          userProfilePic: '',
+          editor: null,
+          scaleValue: 1,
+          imagefile:null
         };
       }
      
-      sendLogin(event) {
-        event.preventDefault();
+      setEditorRef = editor => this.setState({ editor })
 
+      /**
+       * Change la valeur de l'état StudentCard en fonction du fichier sélectionné
+       * @param {event} event Fichier sélectionné
+       */
+      inputChangeStudentCard(event){
+        let files = event.target.files;
+        let reader = new FileReader();
+        if(files[0]!=null){
+          console.log(files[0]);
+          reader.readAsDataURL(files[0]);
+          reader.onload=(e)=>{
+            this.setState({
+              StudentCard:files[0]
+            })
+            console.log(this.state.StudentCard);
+          }
+        }else{
+          this.setState({
+            StudentCard:null
+          })
+        }
       }
 
-      inputChangeVille(event){
+      DataURLtoFile = (dataurl, filename) => {
+        let arr = dataurl.split(','),
+          mime = arr[0].match(/:(.*?);/)[1],
+          bstr = atob(arr[1]),
+          n = bstr.length,
+          u8arr = new Uint8Array(n);
+        while (n--) {
+          u8arr[n] = bstr.charCodeAt(n);
+        }
+        return new File([u8arr], filename, { type: mime });
+      };
+
+      profileImageChange = (fileChangeEvent) => {
+        const file = fileChangeEvent.target.files[0];
+        const { type } = file;
+        if (!(type.endsWith('jpeg') || type.endsWith('png') || type.endsWith('jpg'))) {
+        } else {
+          this.setState({selectedImage: fileChangeEvent.target.files[0]});
+        }
+      }
+
+      onCrop = () => {
+        const {editor} = this.state;
+        if(editor !=null){
+          const url = editor.getImage().toDataURL();
+          this.setState({userProfilePic : url});
+          console.log(this.DataURLtoFile(url,"yo.png"));
+        }
+      }
+
+      onScaleChange = (scaleValueEvent) => {
+        const scaleValue = parseFloat(scaleValueEvent.target.value);
+        this.setState({ scaleValue });
+      }
+
+      /**
+       * Envoie de la valeur du champ file au serveur pour faire vérifier
+       * la carte étudiante par les modérateurs
+       * @param {event} event Action du 2nd form par le bouton Submit
+       */
+      sendCard(event){
         event.preventDefault();
-        this.setState({
-          ville: event.target.value
-        })
-        //il faut que rien soit envoyé si le champ est vide
-        console.log("Value = "+event.target.value);
-        if(event.target.value!==""){
-          const axios = require('axios').default;
-          const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
-          axios.get(url)
+        const axios = require('axios');  //Requêtes HTTP
+        console.log(event);
+        let formData = new FormData();
+        formData.append('file',this.DataURLtoFile(this.state.userProfilePic,"yo.png"));
+        formData.append('email',"julientheo@eisti.eu");
+
+        const url = URL_API+'setCarteEtudiante.php';
+          axios.post(url,formData)
           .then(res => {
-            console.log(res);
-            if(res.data!==null){
-              if(res.data.features[0]!=null){
-                this.setState({
-                name: res.data.features[0].properties.city,
-                lat: res.data.features[0].geometry.coordinates[1],
-                long: res.data.features[0].geometry.coordinates[0],
-                context: res.data.features[0].properties.context
-                })
-              }
-            }
+            console.log("Réponse setCarteEtudiante: "+res.data);
           })
           .catch(err => {
             console.log(err);
-            //Affichage en jaune qu'il y a une erreur dans la requête
-            this.setState({alertShow:true,alertMessage:"Une erreur s'est produite.",alertVariant:"warning"});
           });
         }
-      }
 
     render(){
       return(
         <div>
-          <Alert
-          variant={this.state.alertVariant} 
-          id="AlertIncorrect" 
-          show={this.state.alertShow} 
-          onClose={() => this.setState({alertShow:false})}
-          dismissible>
-            {this.state.alertMessage}
-          </Alert>
           <h2>Page de Test #Théo hehe</h2>
-          <img 
-          src="https://projetwebeisti.yj.fr/imageCarteEtudiante/44.jpg"
-          height="300px"
-          width="300px"
-          alt="Carte étudiante de l'id 44"
-          >
-
-          </img>
-          {/* Formulaire de position */}
-          <form onSubmit={event => this.sendLogin(event)}>
-            <input className="input"
-              id="ville"
-              name="ville"
-              type="text"
-              placeholder="Ta ville"
-              value={this.state.ville}
-              onChange={event => this.inputChangeVille(event)} 
-            /><label htmlFor="ville">
-              {this.state.name===""?
-              "":this.state.name+" - "+this.state.context}
-              </label>
-            {/* Peut-être faire une liste déroulante si l'api met pas la ville en 1er */}
-            <br />
-            <button className="btn btn-danger" type="submit">Ne fais rien</button>
-          </form>
+          <Card style={{width: "30%",borderTopRightRadius:"15px",borderTopLeftRadius:"15px",marginLeft:"30%"}}>
+          <Carousel>
+              <Carousel.Item>
+                <img
+                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
+                  className="d-block w-100"
+                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
+                  alt="First slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
+                  className="d-block w-100"
+                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
+                  alt="Second slide"
+                />
+              </Carousel.Item>
+              <Carousel.Item>
+                <img
+                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
+                  className="d-block w-100"
+                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
+                  alt="Third slide"
+                />
+              </Carousel.Item>
+            </Carousel>
+            <Card.Body style={{overflowY: "scroll",height:"25vh"}}>
+              <Card.Title>Card Title</Card.Title>
+              <Card.Text>
+              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+              </Card.Text>
+            </Card.Body>
+      </Card>
+  
+            {/*<input type="file" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
+            <br/>
+            <ImageCrop
+              imageSrc={this.state.selectedImage}
+              setEditorRef={this.setEditorRef}
+              onCrop={this.onCrop}
+              scaleValue={this.state.scaleValue}
+              onScaleChange={this.onScaleChange}
+              />
+            <img src={this.state.userProfilePic} />
+            <form onSubmit={event => this.sendCard(event)}>
+              {/* Bouton Submit 2 *//*}
+              <button type="submit">Upload</button>
+            </form>*/}
         </div>
       );
     }
