@@ -174,7 +174,7 @@ class Preference extends Component{
             </div>
             <br />
            {/*--------------------------Tranche d age-------------------------- */}
-            <RangeSlider  />
+            <RangeSlider intervalle={[18,22]} />
           
             <br />
             {/*--------------------------Description--------------------------*/}
