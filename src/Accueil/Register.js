@@ -439,12 +439,5 @@ class Register extends Component{
     }
 }
 
-<<<<<<< HEAD
 export default Register;
 
-
-
-
-=======
-export default Register;
->>>>>>> dc5cdcaec76e0116351e5be22bfaf07a41d8acf6

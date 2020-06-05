@@ -89,20 +89,26 @@ class Pageprincipale extends Component {
             return (<Redirect to='/'/>); //Renvoi à la page de connexion
         }
       return(
-        <div className="margetop18">
-            <button 
-            className="btn btn-danger" 
-            onClick={() => this.deconnect()}
-            >Déconnexion
-            </button>
-            <br/>
-            <button 
-            className="btn btn-danger" 
-            onClick={() => this.test()}
-            >Tester (id,key)
-            </button>
-            <NewMatch />
-
+        <div className="container-fluid margetop18">
+            <div className="row">
+                <div className="col-lg">
+                    <button 
+                    className="btn-accueil" 
+                    onClick={() => this.deconnect()}
+                    >Déconnexion
+                    </button>
+                </div>
+                <div className="col-lg">
+                    <button 
+                    className="btn-accueil" 
+                    onClick={() => this.test()}
+                    >Tester (id,key)
+                    </button>
+                </div>
+                 <div className="col-lg">
+                    <NewMatch />
+                </div>
+            </div>
         </div>
       );
     }

@@ -44,7 +44,7 @@ class NewMatch extends Component{
 	render(){
 		return(
 			<div>
-				<button className="btn btn-danger" onClick={event => this.createMatch(event)}></button>
+				<button className="btn-accueil" onClick={event => this.createMatch(event)}>NewMatch</button>
 			</div>
 		)
 	}
