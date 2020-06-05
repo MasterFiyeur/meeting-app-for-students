@@ -91,17 +91,25 @@ try {
 try {
 
     // Connexion/Requête BDD - INSERT
-
+    //Ajout du User
     $cnx = connexionPDO();
-
-    $req = $cnx -> prepare('INSERT INTO user(`mail`,`password`,`nom`,`prenom`,`birthDate`,`ville`,`gps`) 
-
-    VALUES (?,?,?,?,?,?,?)');
-
-    $req -> execute(array($_POST["email"],$_POST["password"],$_POST["nom"],$_POST["prenom"],$_POST["dateBirth"],$_POST["ville"],$_POST["coor"]));
-
+    $req = $cnx -> prepare('INSERT INTO user(`mail`,`password`,`nom`,`prenom`,`birthDate`) 
+    VALUES (?,?,?,?,?)');
+    $req -> execute(array($_POST["email"],$_POST["password"],$_POST["nom"],$_POST["prenom"],$_POST["dateBirth"]));
     $req -> closeCursor();
 
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ? AND password = ?');
+    $req -> execute(array($_POST["email"],$_POST["password"]));
+    if ($ligne = $req -> fetch()) {
+        $id=$ligne['id'];
+    }
+    $req -> closeCursor();
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('INSERT INTO preference(`prefId`,`ville`,`gps`) 
+    VALUES (?,?,?)');
+    $req -> execute(array($id,$_POST["ville"],$_POST["coor"]));
+    $req -> closeCursor();
     print '1';
 
 } catch (PDOException $e) {

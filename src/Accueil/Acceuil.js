@@ -59,7 +59,7 @@ class Accueil extends Component{
 
     /**
      * Changement du state.show
-     * @param {*} etat : attribut la valeur etat à state.show
+     * @param {number} etat : attribut la valeur etat à state.show
      */
     changeShow(etat){
         this.setState({

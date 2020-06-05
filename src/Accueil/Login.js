@@ -20,13 +20,13 @@ class Login extends Component{
       /**
        * Compare les identifiants avec la base de donnée
        * Si les identifiants existent et sont bon, l'utilisateur est connecté
-       * @param {*} event Action du form par le bouton Submit
+       * @param {event} event Action du form par le bouton Submit
        */
       sendLogin(event) {
         event.preventDefault();
         const axios = require('axios').default;  //Requêtes HTTP
         const sha256 = require('hash-anything').sha256; //Hash du mdp
-        const url = URL_API+'getPrenom.php?mail='+this.state.email+'&password='+sha256(this.state.password);
+        const url = URL_API+'getPrenom.php?mail='+this.state.email.toLowerCase()+'&password='+sha256(this.state.password);
         axios.get(url)
         .then(res => {
           if(res.data.id>0){
@@ -52,7 +52,7 @@ class Login extends Component{
      
       /**
        * Met à jour la valeur du form dans lequel l'utilisateur écrit
-       * @param {*} event Appuie sur une touche
+       * @param {event} event Appuie sur une touche
        */
       inputChange(event) {
         event.preventDefault();

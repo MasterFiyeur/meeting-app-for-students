@@ -94,10 +94,6 @@ if(isset($_FILES['file'])){
 
         if($_FILES['file']['size']<4000000 && $_FILES['file']['tmp_name']!=NULL){
 
-            //Taille inférieur à 2Mo je sais pas pk on peut pas faire +
-
-            //Quand c'est + on a size =0 et tmp_name chelou
-
             $name=$id.".".$ext; //Nouveau nom du fichier
 
             if(move_uploaded_file($_FILES['file']['tmp_name'], DOSSIER . $name)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
