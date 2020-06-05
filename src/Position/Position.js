@@ -1,9 +1,7 @@
 //https://api-adresse.data.gouv.fr/search/?q=Cergy&type=municipality&autocomplete=1
 import React, { Component } from 'react';
-import {Card, Carousel} from 'react-bootstrap';
-import ImageCrop from './CropImage';
 import {URL_API} from '../App';
-import PhotosProfil from './PhotosProfil';
+import CardId from './CardId';
 
 /**
  * Composant de test (Théo)
@@ -118,56 +116,7 @@ class Position extends Component{
       return(
         <div>
           <h2>Page de Test #Théo hehe</h2>
-          <PhotosProfil />
-          {/*<Card style={{width: "30%",borderTopRightRadius:"15px",borderTopLeftRadius:"15px",marginLeft:"30%"}}>
-          <Carousel>
-              <Carousel.Item>
-                <img
-                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
-                  className="d-block w-100"
-                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
-                  alt="First slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
-                  className="d-block w-100"
-                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
-                  alt="Second slide"
-                />
-              </Carousel.Item>
-              <Carousel.Item>
-                <img
-                  style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
-                  className="d-block w-100"
-                  src="https://projetsiteeisti.yj.fr/imageCarteEtudiante/38.png"
-                  alt="Third slide"
-                />
-              </Carousel.Item>
-            </Carousel>
-            <Card.Body style={{overflowY: "scroll",height:"25vh"}}>
-              <Card.Title>Card Title</Card.Title>
-              <Card.Text>
-              Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-              </Card.Text>
-            </Card.Body>
-      </Card>*}
-  
-            {/*<input type="file" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
-            <br/>
-            <ImageCrop
-              imageSrc={this.state.selectedImage}
-              setEditorRef={this.setEditorRef}
-              onCrop={this.onCrop}
-              scaleValue={this.state.scaleValue}
-              onScaleChange={this.onScaleChange}
-              />
-            <img src={this.state.userProfilePic} />
-            <form onSubmit={event => this.sendCard(event)}>
-              {/* Bouton Submit 2 *//*}
-              <button type="submit">Upload</button>
-            </form>*/}
+          <CardId id="38" />
         </div>
       );
     }

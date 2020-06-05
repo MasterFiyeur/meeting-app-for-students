@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ImageCrop from './CropImage';
 import {URL_API} from '../App';
+import Cookies from 'js-cookie';
+import { Redirect } from "react-router-dom";
 
 /**
  * Composant de test (Théo)
@@ -23,7 +25,8 @@ class PhotosProfil extends Component{
         this.state = {
           userProfilePic: '',
           editor: null,
-          scaleValue: 1
+          scaleValue: 1,
+          connected:true
         };
     }
     
@@ -55,22 +58,30 @@ class PhotosProfil extends Component{
         const {editor} = this.state;
         if(editor !=null){
             const url = editor.getImage().toDataURL();
-            this.setState({userProfilePic : this.DataURLtoFile(url,"yo.png")});
-            //console.log(this.DataURLtoFile(url,"yo.png"));
+            this.setState({userProfilePic : this.DataURLtoFile(url,"image.png")});
         }
     }
 
     sendCard(event){
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
+        let config = {
+          headers: {
+          logginid: Cookies.get("ID"),
+          logginkey: Cookies.get("KEY")
+          }
+        }
         let formData = new FormData();
         console.log(this.state.userProfilePic);
         formData.append('file',this.state.userProfilePic);
 
         const url = URL_API+'addProfileImage.php';
-          axios.post(url,formData)
+          axios.post(url,formData,config)
           .then(res => {
-            console.log("Réponse addProfileImage: "+res.data);
+            console.log(res.data);
+            if(!res.data.connect){
+              this.setState({connected:false});
+            }
           })
           .catch(err => {
             console.log(err);
@@ -83,8 +94,13 @@ class PhotosProfil extends Component{
     }
 
     render(){
+      if(!this.state.connected){
+        Cookies.remove("ID");
+        Cookies.remove("KEY");
+        return(<Redirect to='/'/>);
+      }//Ici on peut rajouter un state si c'est fini ca redirige vers edit profil
       return(
-        <div style={{width:"30%"}}>
+        <div>
             <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
             <br/>
             <ImageCrop
@@ -95,9 +111,9 @@ class PhotosProfil extends Component{
               onScaleChange={this.onScaleChange}
               />
               
+              {/* Submit */} 
             <form onSubmit={event => this.sendCard(event)}>
-              {/* Bouton Submit 2 */}
-              <button type="submit">Upload</button>
+              <button disabled={this.state.userProfilePic===""} type="submit">Upload</button>
             </form>
         </div>
       );
