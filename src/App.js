@@ -1,24 +1,27 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
-//Ici il faut export le lien de la bdd
+import Position from './Position/Position';
+import Pageprincipale from './Pageprincipale/Pageprincipale';
 
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
+      <HashRouter basename={"/"}>
         <div className="App">
           <NavBar />
           <Switch>
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
+            <Route path="/position" exact component={Position} />
+            <Route path="/principale" exact component={Pageprincipale} />
           </Switch>
           
         </div>
-      </BrowserRouter>
+      </HashRouter>
     );
   }
 }
@@ -27,4 +30,5 @@ class App extends React.Component {
 export default App;
 
 //J'ai enlevé le fichier projet-web_bdd et mis les fichiers dans /src/api
-export const URL_API = 'http://localhost/Projet/projet-web/src/api/';
+export const URL_API = 'https://projetsiteeisti.yj.fr/api/';
+

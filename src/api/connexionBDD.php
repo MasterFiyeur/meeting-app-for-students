@@ -1,26 +1,89 @@
 <?php 
 
+
+
 /* Header pour les permission */
+
 header('Access-Control-Allow-Origin: *');
+
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+
 header('Access-Control-Max-Age: 1000');
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
+
+
 
 /**
+
  * - Fonction de connexion à la bdd projetsiterencontre locale
+
  * - Encodage spécifié : utf8
+
  */
+
 function connexionPDO(){
-    $login = "root";
-    $mdp = "";
-    $bd = "projetsiterencontre";
+
+    $login = "projavrp_root";
+
+    $mdp = "Les 4 BG !$";
+
+    $bd = "projavrp_projetsiterencontre";
+
     $serveur = "localhost";
+
     try{
+
         $conn = new PDO("mysql:host=$serveur;dbname=$bd;charset=utf8", $login, $mdp);
+
         return $conn;
+
     }catch(PDOException $e){
+
         print "Erreur de connexion PDO";
+
         die();
+
     }
+
 }
+
+/**
+ * - Fonction de création d'une chaine de caractère de taille 50
+ * - caractères utilisés : abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890
+ */
+
+function str_rand(){
+    $res = "";
+    $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    $charArray = str_split($chars);
+    for($i = 0; $i < 50; $i++){
+        $randChar = array_rand($charArray);
+        $res .= $charArray[$randChar];
+    }
+    return $res;
+}
+
+
+/**
+ * - Fonction de vérification du couple id/connecttoken dans la BDD
+ * - Paramètre : id et clé
+ * - Sortie : booléen
+ */
+function isLogged($id, $key){
+    $logged = false;
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('SELECT connecttoken FROM user WHERE id = ?');
+    $req -> execute(array($id));
+    if ($ligne = $req -> fetch()) {
+        if ($ligne != NULL) {
+            if($ligne['connecttoken']===$key){
+                $logged = true;
+            }
+        }
+    }
+    return $logged;
+}
+
+
 ?>
