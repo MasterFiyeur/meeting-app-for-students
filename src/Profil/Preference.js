@@ -162,7 +162,7 @@ class Preference extends Component{
                 <label className="input-group-text" for="purpose">Ce que je cherche :</label>
               </div>
               <select  id="purpose" value={this.state.purpose} name="purpose" onChange={(event) => this.inputChange(event)}>
-                <option selected>A remplir</option>
+                <option selected value="0">A remplir</option>
                 <option value="1">Du sérieux</option>
                 <option value="2">Aller boire un verre</option>
                 <option value="3">On verra</option>
@@ -217,7 +217,7 @@ class Preference extends Component{
                 <label className="input-group-text" for="Study">J'étudie au :</label>
               </div>
               <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
-                <option selected>A remplir</option>
+                <option selected value="none">A remplir</option>
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
                 <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>

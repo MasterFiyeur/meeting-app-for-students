@@ -54,37 +54,13 @@ include "connexionBDD.php";
 
  /* Déclaration CONSTANTES */
 
- define('DOSSIER', '../imageCarteEtudiante/'); //Dossier dans lequel importer les images
+ define('DOSSIER', '../imageProfil/'); //Dossier dans lequel importer les images
 
 
 
 /* Upload de l'image */
 
 if(isset($_FILES['file'])){
-
-    // Connexion/Requête BDD - SELECT
-
-    $cnx = connexionPDO();
-
-    $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ?');
-
-    $req -> execute((array($_POST["email"])));
-
-    if ($ligne = $req -> fetch()) {
-
-        if ($ligne != NULL) {
-
-            $id= $ligne['id'];
-
-        } else {
-
-            $id = NULL;
-
-        }
-
-    }
-
-    $req -> closeCursor();
 
     $allowed_ext = array("jpg","png","jpeg","JPG","PNG","JPEG");//Extension d'image acceptée
 
@@ -94,24 +70,12 @@ if(isset($_FILES['file'])){
 
         if($_FILES['file']['size']<4000000 && $_FILES['file']['tmp_name']!=NULL){
 
-            $name=$id.".".$ext; //Nouveau nom du fichier
+            $name=/*$id.*/"test.".$ext; //Nouveau nom du fichier
 
             if(move_uploaded_file($_FILES['file']['tmp_name'], DOSSIER . $name)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
 
             {
-
-                // Connexion/Requête BDD - UPDATE
-
-                $cnx = connexionPDO();
-
-                $req = $cnx -> prepare('UPDATE user SET carte = ? WHERE mail = ?;');
-
-                $req -> execute((array($ext,$_POST["email"])));
-
-                $req -> closeCursor();
-
                 print '1';
-
             }
 
             else //Sinon (la fonction renvoie FALSE).

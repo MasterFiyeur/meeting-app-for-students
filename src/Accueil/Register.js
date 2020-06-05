@@ -83,7 +83,7 @@ class Register extends Component{
           this.setState({alertShow:true});
         }else{
           let formData = new FormData();
-          formData.append('email',this.state.email);
+          formData.append('email',this.state.email.toLowerCase());
           formData.append('password',sha256(this.state.password));
           formData.append('prenom',this.state.prenom);
           formData.append('nom',this.state.nom);
@@ -134,7 +134,7 @@ class Register extends Component{
         
         let formData = new FormData();
         formData.append('file',this.state.StudentCard);
-        formData.append('email',this.state.email);
+        formData.append('email',this.state.email.toLowerCase());
 
         const url = URL_API+'setCarteEtudiante.php';
           axios.post(url,formData)

@@ -26,7 +26,7 @@ class Login extends Component{
         event.preventDefault();
         const axios = require('axios').default;  //Requêtes HTTP
         const sha256 = require('hash-anything').sha256; //Hash du mdp
-        const url = URL_API+'getPrenom.php?mail='+this.state.email+'&password='+sha256(this.state.password);
+        const url = URL_API+'getPrenom.php?mail='+this.state.email.toLowerCase()+'&password='+sha256(this.state.password);
         axios.get(url)
         .then(res => {
           if(res.data.id>0){
