@@ -3,6 +3,7 @@ import ImageCrop from './CropImage';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
+import { ProgressBar } from 'react-bootstrap';
 
 /**
  * Composant qui demande à l'utilisateur de 
@@ -17,7 +18,8 @@ class PhotosProfil extends Component{
           userProfilePic: '',
           editor: null,
           scaleValue: 1,
-          connected:true
+          connected:true,
+          percentage: 0
         };
     }
     
@@ -60,6 +62,13 @@ class PhotosProfil extends Component{
           headers: {
           logginid: Cookies.get("ID"),
           logginkey: Cookies.get("KEY")
+          },
+          onUploadProgress: (ProgressEvent) => {
+            const {loaded, total} = ProgressEvent;
+            let percent = Math.floor( (loaded*100) /total -1);
+            if(percent < 100){
+              this.setState({percentage : percent});
+            }
           }
         }
         let formData = new FormData();
@@ -72,6 +81,9 @@ class PhotosProfil extends Component{
             console.log(res.data);
             if(!res.data.connect){
               this.setState({connected:false});
+            }else{
+              this.setState({percentage : 100});
+              this.props.isCropping(false);
             }
           })
           .catch(err => {
@@ -89,7 +101,8 @@ class PhotosProfil extends Component{
         Cookies.remove("ID");
         Cookies.remove("KEY");
         return(<Redirect to='/'/>);
-      }//Ici on peut rajouter un state si c'est fini ca redirige vers edit profil
+      }
+      const {percentage} = this.state;
       return(
         <div>
             <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
@@ -104,7 +117,10 @@ class PhotosProfil extends Component{
               
               {/* Submit */} 
             <form onSubmit={event => this.sendCard(event)}>
-              <button disabled={this.state.userProfilePic===""} type="submit">Upload</button>
+              {percentage === 0 ?
+                <button disabled={this.state.userProfilePic===""} type="submit">Upload</button>
+              : <ProgressBar animated now={percentage} label={`${percentage}%`} />
+              }
             </form>
         </div>
       );

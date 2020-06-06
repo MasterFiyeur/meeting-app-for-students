@@ -67,7 +67,7 @@ class CardId extends Component{//this.props.hisId
                     res.data.tabPref[11],
                     res.data.tabPref[12],
                     res.data.tabPref[13]
-                ],
+                ]
             });
           })
           .catch(err => {
