@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
 import NewMatch from '../messagerie/newMatch';
-
+import ListMatch from '../messagerie/listeMatch';
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -102,7 +102,7 @@ class Pageprincipale extends Component {
             >Tester (id,key)
             </button>
             <NewMatch />
-
+            <ListMatch />
         </div>
       );
     }

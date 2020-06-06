@@ -17,7 +17,7 @@ class NewMatch extends Component{
             logginkey: Cookies.get("KEY")
             }
         }
-		formdata.append("id2","42");
+		formdata.append("id2","43");
         const url = URL_API+'newDisc.php';
         axios.post(url,formdata,config)
         .then(res => {
@@ -44,7 +44,7 @@ class NewMatch extends Component{
 	render(){
 		return(
 			<div>
-				<button className="btn btn-danger" onClick={event => this.createMatch(event)}></button>
+				<button className="btn btn-danger" onClick={event => this.createMatch(event)}>creer un match</button>
 			</div>
 		)
 	}
