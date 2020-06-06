@@ -263,7 +263,7 @@ class Register extends Component{
 
     render(){
       return(
-        <div className="text-blue">
+        <div className="text-black">
           {this.state.alertShow &&
             <div className={"alert alert-dismissible fade show " + this.state.alertClass} >
               {this.state.alertMessage}
@@ -272,94 +272,139 @@ class Register extends Component{
           {this.state.etape===0  && //Etape initiale du composant
             <form onSubmit={event => this.sendAccount(event)}>
             {/* 1er Formulaire d'enregistrement du compte' */}
-              {/* Input email */}
-              <label htmlFor="email">E-mail :</label>
-              <input className="input"
-                id="email"
-                name="email"
-                type="text"
-                placeholder="Ton adresse e-mail"
-                value={this.state.email}
-                onChange={event => this.inputChange(event)} 
-              />
-              <br />
-              {/* Input password */}
-              <label htmlFor="password">Mot de passe :</label>
-              <input className="input"
-                id="password"
-                name="password"
-                type="password"
-                placeholder="Ton mot de passe"
-                value={this.state.password}
-                onChange={event => this.inputChange(event)} 
-              />
-              <br />
-              {/* Input verifPassword */}
-              <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
-              <input className="input"
-                id="verifPassword"
-                name="verifPassword"
-                type="password"
-                placeholder="Ton mot de passe"
-                value={this.state.verifPassword}
-                onChange={event => this.inputChange(event)} 
-              />
-              <br />
-              {/* Input nom */}
-              <label htmlFor="nom">Nom :</label>
-              <input className="input"
-                id="nom"
-                name="nom"
-                type="text"
-                placeholder="Ton Nom"
-                value={this.state.nom}
-                onChange={event => this.inputChange(event)} 
-              />
-              <br />
-              {/* Input prenom */}
-              <label htmlFor="prenom">Prénom :</label>
-              <input className="input"
-                id="prenom"
-                name="prenom"
-                type="text"
-                placeholder="Ton prénom"
-                value={this.state.prenom}
-                onChange={event => this.inputChange(event)} 
-              />
-              <br/>
-              {/* Input ville */}
-              <label htmlFor="ville">Ville :</label>
-              <input className="input"
-                id="ville"
-                name="ville"
-                type="text"
-                placeholder="Ta ville"
-                value={this.state.ville}
-                onChange={event => this.inputChangeVille(event)} 
-              />
-              {/* Information sur la ville trouvée si le champs n'est pas vide */}
-              {this.state.name!=="" &&
-                <label htmlFor="ville">
-                  {this.state.name+" - "+this.state.context}
-                </label>
-              }
-              <br />
-              {/* Input dateBirth */}
-              <label htmlFor="dateBirth">Date de naissance :</label>
-              <input className="input"
-                id="dateBirth"
-                name="dateBirth"
-                type="date"
-                maxLength="10"
-                placeholder="jj/mm/aaaa"
-                min="1960-01-01"
-                max={this.fifteenYearsAgo()}
-                value={this.state.dateBirth}
-                onChange={event => this.inputChange(event)} 
-              />
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-lg">
+                    {/* Input nom */}
+                    <label htmlFor="nom">Nom :</label>
+                    <br/>
+                    <input className="input"
+                      id="nom"
+                      name="nom"
+                      type="text"
+                      placeholder="Ton Nom"
+                      value={this.state.nom}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                  <div className="col-lg">
+                    {/* Input prenom */}
+                    <label htmlFor="prenom">Prénom :</label>
+                    <br/>
+                    <input className="input"
+                      id="prenom"
+                      name="prenom"
+                      type="text"
+                      placeholder="Ton prénom"
+                      value={this.state.prenom}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-lg">
+
+                  </div>
+                  <div className="col-lg">
+                    {/* Input ville */}
+                    <label htmlFor="ville">Ville :</label>
+                    {/* Information sur la ville trouvée si le champs n'est pas vide */}
+                    {this.state.name!=="" &&
+                      <label htmlFor="ville">
+                        {this.state.name+" - "+this.state.context}
+                      </label>
+                    }
+                  </div>
+                  <div className="col-lg">
+                    
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col-lg">
+
+                  </div>
+                  <div className="col-lg">
+                    <input className="input"
+                      id="ville"
+                      name="ville"
+                      type="text"
+                      placeholder="Ta ville"
+                      value={this.state.ville}
+                      onChange={event => this.inputChangeVille(event)} 
+                    />
+                  </div>
+                  <div className="col-lg">
+                    
+                  </div>
+                </div>
+
+
+                <div className="row">
+                  <div className="col-lg">
+                    {/* Input dateBirth */}
+                    <label htmlFor="dateBirth">Date de naissance :</label>
+                    <br/>
+                    <input className="input"
+                      id="dateBirth"
+                      name="dateBirth"
+                      type="date"
+                      maxLength="10"
+                      placeholder="jj/mm/aaaa"
+                      min="1960-01-01"
+                      max={this.fifteenYearsAgo()}
+                      value={this.state.dateBirth}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                  <div className="col-lg">
+                    {/* Input email */}
+                    <label htmlFor="email">E-mail :</label>
+                    <br/>
+                    <input className="input"
+                      id="email"
+                      name="email"
+                      type="text"
+                      placeholder="Ton adresse e-mail"
+                      value={this.state.email}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                </div>
+
+                <div className="row">
+                  <div className="col-lg">
+                    {/* Input password */}
+                    <label htmlFor="password">Mot de passe :</label>
+                    <br/>
+                    <input className="input"
+                      id="password"
+                      name="password"
+                      type="password"
+                      placeholder="Ton mot de passe"
+                      value={this.state.password}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                  <div className="col-lg">
+                    {/* Input verifPassword */}
+                    <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
+                    <br/>
+                    <input className="input"
+                      id="verifPassword"
+                      name="verifPassword"
+                      type="password"
+                      placeholder="Ton mot de passe"
+                      value={this.state.verifPassword}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                  </div>
+                </div>                
+              </div>
+              
               <br/>
               {/* Bouton Submit 1 */}
-              <button className="btn btn-danger" type="submit">S'enregister</button>
+              <button className=" btn-login" type="submit">S'enregister</button>
             </form>
           }
           {this.state.etape===1  && //Etape création identifiant terminée
@@ -395,3 +440,4 @@ class Register extends Component{
 }
 
 export default Register;
+

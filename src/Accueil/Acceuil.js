@@ -72,56 +72,126 @@ class Accueil extends Component{
      * - Deux boutons : Connexion & Création du compte
      * - L'affichage dépend de this.state.show
      */
+
+
+
     render(){
         /* Utilisateur redirigé si connecté */
         if(this.state.connected){
             return <Redirect to='/principale'/> //Renvoi à la page principale
         }
         return(
-            <div>
-                <h1 className="text-blue">RENCONTRES, DISCUSSIONS,</h1>
-                <h2 className="text-purp">ET VOUS ? </h2>
-                <h2 className="text-blue">QUI ALLEZ-VOUS ETUDIER ?</h2>
-                
-                {/* show = 0 -> on affiche deux bouton Login et Register */}
-                {this.state.show === 0 && 
-                    <div className="btn-group-vertical">
-                        <button className="btn btn-danger" onClick={etat => this.changeShow(1)}>Se connecter</button>
-                        <br/>
-                        <button className="btn btn-danger" onClick={etat => this.changeShow(2)}>Se créer un compte</button>
-                        <NewMatch />
-                    </div>
-                }
-                {/* show = 1 -> on affiche Login */}
-                {this.state.show === 1 && 
-                    <div>
-                        {/* Bouton de retour */}
-                        <button className="close" onClick={etat => this.changeShow(0)} aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
-                        <p className="text-danger">Tu n'as toujours pas de compte ?&nbsp;
-                            {/* Utilisation du NavLink pour ses propriétés graphiques */}
-                            <NavLink className="text-pink" to="/" onClick={etat => this.changeShow(2)}>Je cours m'en faire un !</NavLink>
-                        </p>
-                        <h2 className="text-success">Connexion</h2>
-                        <Login />
-                    </div>
-                }
-                {/* show = 2 -> on affiche Register */}
-                {this.state.show === 2 && 
-                    <div>
-                        {/* Bouton de retour */}
-                        <button className="close" onClick={etat => this.changeShow(0)} aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                        <h2 className="text-success">Création du compte</h2>
-                        <Register />
-                    </div>
-                }
+
+             <div className="container-fluid bg-image ">
+                <div className="margetop18">
+                    <h1 className="text-white">RENCONTRES, DISCUSSIONS,</h1>
+                    <h2 className="text-white">ET VOUS ? </h2>
+                    <h2 className="text-white">QUI ALLEZ-VOUS ETUDIER ?</h2>
+
+                    
+                    {/* show = 0 -> on affiche deux bouton Login et Register */}
+                    {this.state.show === 0 && 
+                        <div className="container-fluid">
+                            <div className="btn-group margetop18 width100">
+                                <div className="col ">
+                                    <button className=" btn-accueil" onClick={etat => this.changeShow(1)}>Se connecter</button>
+                                </div>
+                                <div className="col ">
+                                    <button className=" btn-accueil" onClick={etat => this.changeShow(2)}>Se créer un compte</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                    
+                    {/* show = 1 -> on affiche Login */}
+                    {this.state.show === 1 && 
+                        <div className="size-full padtop18 bg-transparentgrey">
+                            <div className="container ">
+                                <div className="row">
+                                    <div className="col-2">
+
+                                    </div>
+
+                                    <div className="col-8 bg-brokenwhite">
+                                        {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
+                                        <p className="text-black">Tu n'as toujours pas de compte ?&nbsp;
+                                            <br/>
+                                            {/* Utilisation du NavLink pour ses propriétés graphiques */}
+                                            <NavLink className="text-black" to="/" onClick={etat => this.changeShow(2)}>Je cours m'en faire un !</NavLink>
+                                        </p>
+
+                                        <h2 className="text-black">Connexion</h2>
+
+                                        <Login />
+                                    </div>
+
+                                    <div className="col-2">
+
+                                    </div>
+                                </div>                                                                                   
+                            </div>
+                            <div className="container ">
+                                <div className="row">
+                                
+                                    <div className="col margecross">
+                                        <button className="close" onClick={etat => this.changeShow(0)} aria-label="Close">
+                                            <span className=" bg-red" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div className="col">
+
+                                    </div>
+                                </div>                                                                                   
+                            </div>
+                        </div>
+                    }
+                    {/* show = 2 -> on affiche Register */}
+                    {this.state.show === 2 && 
+                        <div className="size-full padtop18 bg-transparentgrey">
+                            <div className="container ">
+                                <div className="row">
+                                    <div className="col-2">
+
+                                    </div>
+
+                                    <div className="col-8 bg-brokenwhite">
+                                        {/* Proposition de s'enregistrer s'il n'est pas encore dans la BDD */}
+                                        <h2 className="text-black">Création du compte</h2>
+                                        <Register />
+                                    </div>
+
+                                    <div className="col-2">
+
+                                    </div>
+                                </div>                                                                                   
+                            </div>
+                            <div className="container ">
+                                <div className="row">
+                                
+                                    <div className="col margecross">
+                                        <button className="close" onClick={etat => this.changeShow(0)} aria-label="Close">
+                                            <span className=" bg-red" aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+
+                                    <div className="col">
+
+                                    </div>
+                                </div>                                                                                   
+                            </div>
+                        </div>
+                    }   
             </div>
         );
     }
 }
 
 export default Accueil;
+
+
+
+
+
+

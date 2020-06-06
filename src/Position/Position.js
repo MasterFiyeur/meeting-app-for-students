@@ -14,7 +14,7 @@ import CardId from '../CardId/CardId';
  * pas tout casser ;)
  */
 
- //faire image crop
+ //Faire affichage des 5 images et pouvoir les supprimer
 
 class Position extends Component{
     constructor(props) {

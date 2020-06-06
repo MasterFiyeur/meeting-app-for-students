@@ -4,6 +4,7 @@ import logo from './images/logo.png';
 
 
 
+
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,7 @@ class NavBar extends Component {
     const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
     const classTwo = collapsed ? 'navbar-toggler navbar-toggler-right collapsed' : 'navbar-toggler navbar-toggler-right';
     return (
-    <nav className = "navbar navbar-expand-md bg-grad navbar-dark sticky-top">
+    <nav className = "navbar navbar-expand-md bg-grad navbar-dark fixed-top">
     <div className="container">
     <Link to="/" className="navbar-brand">
     	<img src={logo} alt="logo" width="40px" height="40px"/>
