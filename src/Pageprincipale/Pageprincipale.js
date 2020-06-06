@@ -3,6 +3,7 @@ import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
 import NewMatch from '../messagerie/newMatch';
+import CardId from '../CardId/CardId';
 
 class Pageprincipale extends Component {
     constructor(props) {
@@ -64,6 +65,22 @@ class Pageprincipale extends Component {
      * Déconnecte l'utilisateur en changeant l'état connected
      */
     deconnect(){
+        //Suppression du token dans la bdd
+        const url = URL_API+'delToken.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            console.log(res.data); //Réponse dans la console
+        })
+        .catch(err => {
+            console.log(err);
+        });
         this.setState({
             connected:false
         })
@@ -102,6 +119,7 @@ class Pageprincipale extends Component {
             >Tester (id,key)
             </button>
             <NewMatch />
+            <CardId hisId="38" />
 
         </div>
       );

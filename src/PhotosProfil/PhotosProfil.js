@@ -5,18 +5,9 @@ import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 
 /**
- * Composant de test (Théo)
- * J'utilise ce composant à l'adresse /position afin d'effectuer 
- * des tests pour savoir si il est cohérent de le rajouter
- * lors de l'inscription afin de recup les coordonnées GPS 
- * pour pouvoir calculer la distance entre deux personnes
- * ------------------------------------------------------
- * Si tu veux tester un truc rapido, utilise cette page pour ne 
- * pas tout casser ;)
+ * Composant qui demande à l'utilisateur de 
+ * upload une photo de profil
  */
-
- //faire image crop
-
 
 class PhotosProfil extends Component{
     constructor(props) {

@@ -1,7 +1,7 @@
 //https://api-adresse.data.gouv.fr/search/?q=Cergy&type=municipality&autocomplete=1
 import React, { Component } from 'react';
 import {URL_API} from '../App';
-import CardId from './CardId';
+import CardId from '../CardId/CardId';
 
 /**
  * Composant de test (Théo)
@@ -116,7 +116,7 @@ class Position extends Component{
       return(
         <div>
           <h2>Page de Test #Théo hehe</h2>
-          <CardId id="38" />
+          <CardId hisId="38" />
         </div>
       );
     }
