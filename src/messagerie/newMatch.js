@@ -45,6 +45,7 @@ class NewMatch extends Component{
 		return(
 			<div>
 				<button className="btn btn-danger" onClick={event => this.createMatch(event)}>creer un match</button>
+
 			</div>
 		)
 	}

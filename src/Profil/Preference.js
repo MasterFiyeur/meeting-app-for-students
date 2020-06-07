@@ -379,6 +379,7 @@ class Preference extends Component{
                   <option value="Scorpion">Scorpion</option>
                   <option value="Sagittaire">Sagittaire</option>
                   <option value="Capricorne">Capricorne</option>
+                  <option value="Balance">Balance</option>
                 </select>
               </div>
               <br />

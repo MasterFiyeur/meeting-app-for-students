@@ -81,29 +81,39 @@ class Login extends Component{
           </Alert>
 
           {/* Formulaire de connexion */}
-          <form onSubmit={event => this.sendLogin(event)}>
-            <input className="input"
-              name="email"
-              type="text"
-              placeholder="Ton adresse e-mail"
-              value={this.state.email}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <br />
-            <input className="input"
-              name="password"
-              type="password"
-              placeholder="Ton mot de passe"
-              value={this.state.password}
-              onChange={event => this.inputChange(event)} 
-            />
-            <br />
-            <button className="btn btn-danger" type="submit">Connexion</button>
-          </form>
+          <div className="container-fluid">
+            <form onSubmit={event => this.sendLogin(event)}>
+              <div className="row">
 
+                <div className="col-lg margetop5">
+                  <input className="input"
+                    name="email"
+                    type="text"
+                    placeholder="Ton adresse e-mail"
+                    value={this.state.email}
+                    onChange={event => this.inputChange(event)} 
+                  />
+                </div>
+
+
+                <div className="col-lg margetop5">
+                   <input className="input"
+                      name="password"
+                      type="password"
+                      placeholder="Ton mot de passe"
+                      value={this.state.password}
+                      onChange={event => this.inputChange(event)} 
+                    />
+                </div>
+
+              </div>
+              <br/>
+              <button className="btn-login" type="submit">Connexion</button>
+            </form>
+            <br/>
+          </div>
           {/* Mot de passe oublié, redirection à définir, accueil pour l'instant */}
-          <NavLink className="text-pink" to="/" >Mot de passe oublié ?</NavLink>
+          <NavLink className="text-black" to="/" >Mot de passe oublié ?</NavLink>
         </div>
       );
     }

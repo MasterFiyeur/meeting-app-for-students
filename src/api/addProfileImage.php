@@ -6,104 +6,97 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 
 header('Access-Control-Max-Age: 1000');
 
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
 
 
 include "connexionBDD.php";
 
+/* 
+ * Custom function to compress image size and 
+ * upload to the server using PHP 
+ */ 
+function compressImage($source, $destination, $quality) { 
+    // Get image info 
+    $imgInfo = getimagesize($source); 
+    $mime = $imgInfo['mime']; 
+     
+    // Create a new image from file 
+    switch($mime){ 
+        case 'image/jpeg': 
+            $image = imagecreatefromjpeg($source); 
+            break; 
+        case 'image/png': 
+            $image = imagecreatefrompng($source); 
+            break; 
+        case 'image/gif': 
+            $image = imagecreatefromgif($source); 
+            break; 
+        default: 
+            $image = imagecreatefromjpeg($source); 
+    } 
+     
+    // Save image 
+    imagejpeg($image, $destination, $quality); 
+     
+    // Return compressed image 
+    return $destination; 
+} 
+ 
 
+$id = $_SERVER['HTTP_LOGGINID'];
+$key = $_SERVER['HTTP_LOGGINKEY'];
+$ObjIdKey->connect=isLogged($id,$key);
+if($ObjIdKey->connect){
+    // File upload path 
+    $uploadPath = "../imageProfil/"; 
+    
+    // If file upload form is submitted 
+    $status = $ObjIdKey->MsgCompress = ''; 
+    $status = 'error'; 
+    if(!empty($_FILES["file"]["name"])) { 
+        // File info 
+        $fileName = basename($_FILES["file"]["name"]); 
 
-/**
-
- * - Upload de la carte étudiante si elle a été envoyée
-
- * - Conditions : 2Mo et au format jpg/jpeg/png
-
- * - Entrée :
-
- *  POST : 
-
- *      email => adresse mail de l'utilisateur
-
- *  FILES :
-
- *      file => fichier envoyé
-
- * - Sortie : 0, 1, 2, 3, error
-
- *  0 => Aucune image n'a été envoyée
-
- *  1 => Image envoyé/téléchargé avec succès et ajout de l'extension à la BDD
-
- *  2 => La taille du fichier dépasse 2Mo
-
- *  3 => L'extension du fichier n'est pas dans ceux acceptés
-
- *  error => Problème durant la connexion à la BDD
-
- *           ou lors de la requête SQL
-
- *  Erreur... => Problème lors du téléchargement de l'image dans le dossier
-
- *               (peut être fichier ou mail inexistant)
-
- */
-
-
-
- /* Déclaration CONSTANTES */
-
- define('DOSSIER', '../imageProfil/'); //Dossier dans lequel importer les images
-
-
-
-/* Upload de l'image */
-
-if(isset($_FILES['file'])){
-
-    $allowed_ext = array("jpg","png","jpeg","JPG","PNG","JPEG");//Extension d'image acceptée
-
-    $ext = strtolower(substr(basename($_FILES['file']['name']), strrpos(basename($_FILES['file']['name']),".",-1)+1)); //Extension du fichier
-
-    if(in_array($ext,$allowed_ext)){ //Extension comprise dans celles acceptée
-
-        if($_FILES['file']['size']<4000000 && $_FILES['file']['tmp_name']!=NULL){
-
-            $name=/*$id.*/"test.".$ext; //Nouveau nom du fichier
-
-            if(move_uploaded_file($_FILES['file']['tmp_name'], DOSSIER . $name)) //Si la fonction renvoie TRUE, c'est que ça a fonctionné...
-
-            {
-                print '1';
-            }
-
-            else //Sinon (la fonction renvoie FALSE).
-
-            {
-
-                print 'Erreur lors de l\'upload de la carte';
-
-            }
-
+        //Determination du nom du fichier
+        if(!file_exists($uploadPath.$id."-1.png")) {
+            $imageUploadPath = $uploadPath.$id."-1.png";
+        }elseif(!file_exists($uploadPath.$id."-2.png")){
+            $imageUploadPath = $uploadPath.$id."-2.png";
+        }elseif(!file_exists($uploadPath.$id."-3.png")){
+            $imageUploadPath = $uploadPath.$id."-3.png";
+        }elseif(!file_exists($uploadPath.$id."-4.png")){
+            $imageUploadPath = $uploadPath.$id."-4.png";
         }else{
-
-            print '2';
-
+            $imageUploadPath = $uploadPath.$id."-5.png";
         }
-
-    }else{
-
-        print '3';
-
-    }
-
-}else{
-
-    print '0';
-
+        $ObjIdKey->uploadPath = $imageUploadPath;
+        $fileType = pathinfo($imageUploadPath, PATHINFO_EXTENSION); 
+        
+        // Allow certain file formats 
+        $allowTypes = array('jpg','png','jpeg','gif'); 
+        if(in_array($fileType, $allowTypes)){ 
+        // Image temp source 
+        $imageTemp = $_FILES["file"]["tmp_name"]; 
+                
+            // Compress size and upload image 
+            $compressedImage = compressImage($imageTemp, $imageUploadPath, 75); 
+                
+            if($compressedImage){ 
+                //$status = 'success'; 
+                $ObjIdKey->MsgCompress = "Image compressée avec succès !"; 
+            }else{ 
+                $ObjIdKey->MsgCompress = "Compression de l'image echouée !"; 
+            } 
+        }else{ 
+            $ObjIdKey->MsgCompress = 'Désolé, il n\'y a que les JPG, JPEG et PNG qui sont autorisés.'; 
+        } 
+    }else{ 
+        $ObjIdKey->MsgCompress = 'Selectionnez une image à upload.'; 
+    } 
 }
-
-
-
+ 
+// Display status message 
+echo (json_encode($ObjIdKey));
+ 
 ?>

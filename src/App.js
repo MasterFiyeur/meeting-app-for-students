@@ -6,6 +6,8 @@ import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
 import Position from './Position/Position';
 import Pageprincipale from './Pageprincipale/Pageprincipale';
+import About from './About/About'
+import Contact from './Contact/Contact';
 
 class App extends React.Component {
   render() {
@@ -18,6 +20,8 @@ class App extends React.Component {
             <Route path="/preference" exact component={Preference} />
             <Route path="/position" exact component={Position} />
             <Route path="/principale" exact component={Pageprincipale} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
           </Switch>
           
         </div>

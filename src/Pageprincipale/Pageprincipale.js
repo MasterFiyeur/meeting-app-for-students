@@ -4,6 +4,7 @@ import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
 import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
+import CardId from '../CardId/CardId';
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -64,6 +65,22 @@ class Pageprincipale extends Component {
      * Déconnecte l'utilisateur en changeant l'état connected
      */
     deconnect(){
+        //Suppression du token dans la bdd
+        const url = URL_API+'delToken.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            console.log(res.data); //Réponse dans la console
+        })
+        .catch(err => {
+            console.log(err);
+        });
         this.setState({
             connected:false
         })
@@ -89,20 +106,29 @@ class Pageprincipale extends Component {
             return (<Redirect to='/'/>); //Renvoi à la page de connexion
         }
       return(
-        <div>
-            <button 
-            className="btn btn-danger" 
-            onClick={() => this.deconnect()}
-            >Déconnexion
-            </button>
-            <br/>
-            <button 
-            className="btn btn-danger" 
-            onClick={() => this.test()}
-            >Tester (id,key)
-            </button>
-            <NewMatch />
-            <ListMatch />
+
+        <div className="container-fluid margetop18">
+            <div className="row">
+                <div className="col-lg">
+                    <button 
+                    className="btn-accueil" 
+                    onClick={() => this.deconnect()}
+                    >Déconnexion
+                    </button>
+                </div>
+                <div className="col-lg">
+                    <button 
+                    className="btn-accueil" 
+                    onClick={() => this.test()}
+                    >Tester (id,key)
+                    </button>
+                </div>
+                 <div className="col-lg">
+                    <NewMatch />
+                    <ListMatch />
+                </div>
+                <CardId hisId="38" />
+            </div>
         </div>
       );
     }
