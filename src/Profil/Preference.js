@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import RangeSlider from './Slider';
+import EditProfilesPhoto from '../PhotosProfil/EditProfilePhoto';
+import {URL_API} from '../App';
+import Cookies from 'js-cookie';
+import { Redirect } from "react-router-dom";
 
 
 class Preference extends Component{
@@ -12,26 +16,161 @@ class Preference extends Component{
         //initialiser aux valeurs de la BDD
 
         this.state = {
-          JeSuis : "Homme", //Sexe
-          JeCherche : "Femmes", //souhaite voir
-          purpose : 1, //ce que je cherche
-          age : [18,28], //Tranche D'âge
-          Description : "Les maths m'ont saoulés ce soir je ferme mes cahiers c'est toi que j'ouvre ;)", //A propos de vous         
-          City : "Cergy", //Ville 
-          Study: "Ecole d'Ingénieur", //Etudes
-          Taille : 181, //Taille
-          Yeux: "Vert", //Couleur des Yeux
-          Hair: "Châtain",//Couleur des Cheveux
-          Sport: "Régulièrement",//Activités Physique 
-          Alcool: "A l'occasion", //Alcool
-          Tabac: "Jamais",//Fumeur
-          Pet: "Chiens",// Animaux de compagnie 
-          Religion: "Agnosticisme",//Croyance
-          Astro: "Scorpion",// Signe Astrologique
+          JeSuis : "", //Sexe
+          JeCherche : "", //souhaite voir
+          But : 0, //ce que je cherche
+          TrancheAge : [0,0], //Tranche D'âge
+          Description : "", //A propos de vous         
+          Ville : "", //Ville 
+          Latitude:"", Longitude:"", Contexte:"", NomVille:"",
+          Etudes: "", //Etudes
+          Taille : 100, //Taille
+          Yeux: "0", //Couleur des Yeux
+          Cheveux: "",//Couleur des Cheveux
+          Sport: "",//Activités Physique 
+          Alcool: "", //Alcool
+          Tabac: "",//Fumeur
+          Animaux: "",// Animaux de compagnie 
+          Religion: "",//Croyance
+          Astro: "",// Signe Astrologique
+          init:0,
+          connect:true
         };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleChange2 = this.handleChange2.bind(this);
+      this.handleChangeLookingFor = this.handleChangeLookingFor.bind(this);
+      this.handleChangeSexe = this.handleChangeSexe.bind(this);
+      }
 
+      componentDidMount(){
+        this.initPref();
+      }
+
+      initPref(){
+        const axios = require('axios');  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        const url = URL_API+'getPreferenceValues.php';
+          axios.get(url,config)
+          .then(res => {
+            const tabCoor = res.data.tabPref.gps.split(';');
+            const tabAge = res.data.tabPref.trancheAge.split('-');
+            this.setState({
+                connect : res.data.connect,
+                JeSuis : res.data.tabPref.jeSuis,
+                JeCherche : res.data.tabPref.jeCherche, 
+                But : res.data.tabPref.butRencontre, 
+                TrancheAge : [parseInt(tabAge[0],10),parseInt(tabAge[1],10)], 
+                Description : res.data.tabPref.bio,       
+                Ville : res.data.tabPref.ville,
+                Latitude:tabCoor[0], Longitude:tabCoor[1],
+                Etudes: res.data.tabPref.etude, 
+                Taille : res.data.tabPref.taille, 
+                Yeux: res.data.tabPref.yeux, 
+                Cheveux: res.data.tabPref.cheveux,
+                Sport: res.data.tabPref.sport,
+                Alcool: res.data.tabPref.alcool,
+                Tabac: res.data.tabPref.tabac,
+                Animaux: res.data.tabPref.animaux,
+                Religion: res.data.tabPref.religion,
+                Astro: res.data.tabPref.astro,
+                init:1
+            });
+            console.log(this.state);
+          })
+          .catch(err => {
+            console.log(err);
+          });
+      }
+
+      /**
+       * Envoie les données du 1er formulaire avec les coordonnées de la ville
+       * au serveur pour pouvoir creer un compte
+       * @param {event} event Action du 1er form par le bouton Submit
+       */
+      sendPref(event) {
+        event.preventDefault();
+        const axios = require('axios');  //Requêtes HTTP
+        let config = {
+          headers: {
+          logginid: Cookies.get("ID"),
+          logginkey: Cookies.get("KEY")
+          }
+      }
+        let formData = new FormData();
+        formData.append('jeSuis',this.state.JeSuis);
+        formData.append('jeCherche',this.state.JeCherche);
+        formData.append('But',this.state.But);
+        formData.append('TrancheAge',this.state.TrancheAge[0]+"-"+this.state.TrancheAge[1]);
+        formData.append('Description',this.state.Description);
+        formData.append('Ville',this.state.Ville);
+        formData.append('Coor',this.state.Latitude+";"+this.state.Longitude);
+        formData.append('Etudes',this.state.Etudes);
+        formData.append('Taille',this.state.Taille);
+        formData.append('Yeux',this.state.Yeux);
+        formData.append('Cheveux',this.state.Cheveux);
+        formData.append('Sport',this.state.Sport);
+        formData.append('Alcool',this.state.Alcool);
+        formData.append('Tabac',this.state.Tabac);
+        formData.append('Animaux',this.state.Animaux);
+        formData.append('Religion',this.state.Religion);
+        formData.append('Astro',this.state.Astro);
+        const url = URL_API+'setPreference.php';
+        axios.post(url,formData,config)
+        .then(res => {
+          if(res.data.status!=="failure"){
+            this.setState({
+              connect : res.data.connect
+            });
+            console.log(res.data);
+          }else{
+            console.log("Une erreur s'est produite");
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        });
+      }
+
+
+      onSliderAgeChange = (newValue) => {
+        this.setState({
+          TrancheAge : newValue
+        })
+      };
+
+      /**
+       * Propose une ville française selon la valeur du champs ville et mise à
+       * jour de ses coordonnées grâce à l'API Adresse du gouvernement
+       * @param {event} event Ajout/Suppression d'un caractère dans le champ ville
+       */
+      inputChangeVille(event){
+        event.preventDefault();
+        this.setState({
+          Ville: event.target.value
+        })
+        if(event.target.value!==""){
+          const axios = require('axios').default;
+          const url = "https://api-adresse.data.gouv.fr/search/?q="+event.target.value+"&type=municipality&autocomplete=1"
+          axios.get(url)
+          .then(res => {
+            if(res.data!==null){
+              if(res.data.features[0]!=null){
+                this.setState({
+                NomVille: res.data.features[0].properties.city,
+                Latitude: res.data.features[0].geometry.coordinates[1],
+                Longitude: res.data.features[0].geometry.coordinates[0],
+                Contexte: res.data.features[0].properties.context
+                })
+              }
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+        }
       }
    
       inputChange(event) {
@@ -42,29 +181,33 @@ class Preference extends Component{
           [name]: value
         })
       }
-      handleChange(event) {
+      handleChangeLookingFor(event) {
         this.setState({
           JeCherche: event.target.value
         });
-        }
-      handleChange2(event) {
+      }
+      handleChangeSexe(event) {
         this.setState({
           JeSuis: event.target.value
         });
-        }
+      }
 
     render(){
+      /* Utilisateur redirigé si non connecté */
+      if(!this.state.connect){
+          Cookies.remove("ID");//Supression du cookie
+          Cookies.remove("KEY");//Suppression du cookie
+          return (<Redirect to='/'/>); //Renvoi à la page de connexion
+      }
       return(
-        <div>
+        <div style={{marginTop:"5%"}}>
           {/* Formulaire du profil de la personne' */}
-         
-          <form onSubmit={event => this.sendLogin(event)}>
+          {this.state.init===1?
+          <div>
+            {/*--------------------------Photos--------------------------*/}
+            <EditProfilesPhoto />
             <br/>
-            <div>{/* Mettre les images de profils, la possibilité de les suppr ou les rajouter*/}
-              <label htmlFor="Photo">Vos photos :</label>
-              <input type="file" name="Photo" id="Photo"/>
-            </div>
-            <br/>
+          <form onSubmit={event => this.sendPref(event)}>
             {/*--------------------------Sexe--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
@@ -75,25 +218,25 @@ class Preference extends Component{
                 <input 
                   className="form-check-input"
                   type="radio"
-                  name="Male"
-                  id="JeSuis" 
+                  name="JeSuis"
+                  id="Male"
                   value="Homme"
                   checked={this.state.JeSuis==="Homme"}
-                  onChange={this.handleChange2}
+                  onChange={this.handleChangeSexe}
 
 
                 />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="female">Une femme</label>
+                <label className="form-check-label" htmlFor="Female">Une femme</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
-                  name="female" 
-                  id="JeSuis"
+                  name="JeSuis" 
+                  id="Female"
                   value="Femme"
                   checked={this.state.JeSuis==="Femme"}
-                  onChange={this.handleChange2}
+                  onChange={this.handleChangeSexe}
 
 
                 />
@@ -103,11 +246,11 @@ class Preference extends Component{
                 <input 
                   className="form-check-input" 
                   type="radio" 
-                  name="Alive" 
-                  id="JeSuis"
+                  name="JeSuis" 
+                  id="Alive"
                   value="Vivant"
                   checked={this.state.JeSuis==="Vivant"}
-                  onChange={this.handleChange2}
+                  onChange={this.handleChangeSexe}
  
                 />
               </div>
@@ -119,39 +262,39 @@ class Preference extends Component{
                 <label className="input-group-text" htmlFor="lookingfor">Je souhaite rencontrer :</label>
               </div> 
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Des hommes</label>
+                <label className="form-check-label" htmlFor="Hommes">Des hommes</label>
                 <input 
                   className="form-check-input"
                   type="radio"
                   name="lookingfor"
-                  id="JeCherche"
+                  id="Hommes"
                   value="Hommes"
                   checked={this.state.JeCherche==='Hommes'}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeLookingFor}
                   />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Des femmes</label>
+                <label className="form-check-label" htmlFor="Femmes">Des femmes</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
                   name="lookingfor" 
-                  id="JeCherche" 
+                  id="Femmes" 
                   value="Femmes"
                   checked={this.state.JeCherche==='Femmes'}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeLookingFor}
                   />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Les deux</label>
+                <label className="form-check-label" htmlFor="Les deux">Les deux</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
                   name="lookingfor" 
-                  id="JeCherche" 
+                  id="Les deux" 
                   value="Les deux" 
                   checked={this.state.JeCherche==='Les deux'}
-                  onChange={this.handleChange}
+                  onChange={this.handleChangeLookingFor}
                 />
               </div>
             </div>
@@ -159,9 +302,9 @@ class Preference extends Component{
           {/*--------------------------Cherche-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="purpose">Ce que je cherche :</label>
+                <label className="input-group-text" htmlFor="But">Ce que je cherche :</label>
               </div>
-              <select  id="purpose" value={this.state.purpose} name="purpose" onChange={(event) => this.inputChange(event)}>
+              <select  id="But" value={this.state.But} name="But" onChange={(event) => this.inputChange(event)}>
                 <option  value="0">A remplir</option>
                 <option value="1">Du sérieux</option>
                 <option value="2">Aller boire un verre</option>
@@ -174,8 +317,7 @@ class Preference extends Component{
             </div>
             <br />
            {/*--------------------------Tranche d age-------------------------- */}
-            <RangeSlider intervalle={this.state.age}  />
-            <label value={this.state.age} >Vous ne verrez que des profils dans cette tranche d'âge  </label>
+            <RangeSlider intervalle={this.state.TrancheAge} onSliderAgeChange={this.onSliderAgeChange}/>
             <br />
             {/*--------------------------Description--------------------------*/}
             <div className="input-group">
@@ -196,27 +338,32 @@ class Preference extends Component{
                 />
             </div>
             <br/>
-            {/*-------------------------- City--------------------------*/}
+            {/*-------------------------- Ville--------------------------*/}
+            {this.state.NomVille!=="" &&
+              <label>
+                {this.state.NomVille+" - "+this.state.Contexte}
+              </label>
+            }
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="City">J'habite à :</label>
+                <label className="input-group-text" htmlFor="Ville">J'habite à :</label>
               </div>                
               <input
-                  id="City"
-                  name="City"
+                  id="Ville"
+                  name="Ville"
                   type="text"
                   placeholder="Paris"
-                  value={this.state.City}
-                  onChange={event => this.inputChange(event)} 
+                  value={this.state.Ville}
+                  onChange={event => this.inputChangeVille(event)} 
                 />
             </div>
             <br />
             {/*--------------------------Etudes-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Study">J'étudie au :</label>
+                <label className="input-group-text" htmlFor="Etudes">J'étudie au :</label>
               </div>
-              <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
+              <select  id="Etudes" value={this.state.Etudes} name="Etudes" onChange={(event) => this.inputChange(event)}>
                 <option  value="none">A remplir</option>
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
@@ -266,9 +413,9 @@ class Preference extends Component{
               {/*--------------------------Cheveux-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Hair">Mes cheveux sont :</label>
+                  <label className="input-group-text" htmlFor="Cheveux">Mes cheveux sont :</label>
                 </div>
-                <select  id="Hair" value={this.state.Hair} name="Hair" onChange={(event) => this.inputChange(event)}>
+                <select  id="Cheveux" value={this.state.Cheveux} name="Cheveux" onChange={(event) => this.inputChange(event)}>
                 <option  value="none">A remplir</option>
                   <option value="Noir">Noir</option>
                   <option value="Brun">Brun</option>
@@ -326,9 +473,9 @@ class Preference extends Component{
               {/*--------------------------Animaux Domestique-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Pet">Mes animaux de compagnie :</label>
+                  <label className="input-group-text" htmlFor="Animaux">Mes animaux de compagnie :</label>
                 </div>
-                <select  id="Pet" value={this.state.Pet} name="Pet" onChange={(event) => this.inputChange(event)}>
+                <select  id="Animaux" value={this.state.Animaux} name="Animaux" onChange={(event) => this.inputChange(event)}>
                   <option  value="none">A remplir</option>
                   <option value="Chiens">Chiens</option>
                   <option value="Chats">Chats</option>
@@ -386,6 +533,10 @@ class Preference extends Component{
               {/*--------------------------SAVE-------------------------- */}
                 <button type="submit">Sauvegarder</button>
               </form>
+              </div>
+              :
+              <div>Chargement...</div>
+              }
             </div>
           );
     }

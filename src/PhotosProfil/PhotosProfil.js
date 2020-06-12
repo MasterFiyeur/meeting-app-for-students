@@ -83,6 +83,7 @@ class PhotosProfil extends Component{
               this.setState({connected:false});
             }else{
               this.setState({percentage : 100});
+              console.log("L'actualisation de ton image peut mettre du temps, contacte le support si ça n'a pas changé après 3min");
               this.props.isCropping(false);
             }
           })

@@ -82,31 +82,31 @@ class EditProfilePhoto extends Component{
             }
             {(this.state.tabImage[0]) &&
             <div>
-                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-1.png"} />
+                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-1.png"} alt="Profile 1" />
                 <br/>
                 <button onClick={() => this.supprImage(1)}>Supprimer</button>
             </div>
             }{(this.state.tabImage[1]) &&
             <div>
-                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-2.png"} />
+                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-2.png"} alt="Profile 2" />
                 <br/>
                 <button onClick={() => this.supprImage(2)}>Supprimer</button>
             </div>
             }{(this.state.tabImage[2]) &&
             <div>
-                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-3.png"} />
+                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-3.png"} alt="Profile 3" />
                 <br/>
                 <button onClick={() => this.supprImage(3)}>Supprimer</button>
             </div>
             }{(this.state.tabImage[3]) &&
             <div>
-                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-4.png"} />
+                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-4.png"} alt="Profile 4" />
                 <br/>
                 <button onClick={() => this.supprImage(4)}>Supprimer</button>
             </div>
             }{(this.state.tabImage[4]) &&
             <div>
-                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-5.png"} />
+                <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-5.png"} alt="Profile 5" />
                 <br/>
                 <button onClick={() => this.supprImage(5)}>Supprimer</button>
             </div>

@@ -1,14 +1,6 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
-
-const useStyles = makeStyles({
-  root: {
-    width: 300,
-  },
-});
-
 
 class RangeSlider extends React.Component {
   constructor(props) {
@@ -17,7 +9,9 @@ class RangeSlider extends React.Component {
       intervalles : this.props.intervalle
     }
   }
+
   handleChange(event, newValue){
+    this.props.onSliderAgeChange(newValue);
     this.setState({
       intervalles : newValue
     })
@@ -28,7 +22,7 @@ class RangeSlider extends React.Component {
   return (
     <div style={{width:"25%", marginLeft:"2em"}}>
       <Typography id="range-slider" gutterBottom>
-        Tranche d'âge
+        Tranche d'âge : {this.state.intervalles[0]+"-"+this.state.intervalles[1]+" ans"}
       </Typography>
       <Slider
         min={17}
@@ -38,7 +32,6 @@ class RangeSlider extends React.Component {
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
       />
-    {/*<div>{"min : "+value[0]+";max : "+value[1]}</div>*/}
     </div>
   );
   }
