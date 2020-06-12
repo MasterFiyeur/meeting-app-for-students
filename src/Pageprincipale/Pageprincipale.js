@@ -5,11 +5,13 @@ import {URL_API} from '../App';
 import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
+import { useHistory } from "react-router-dom";
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            connected: true //true : utilisateur connecté; false : utilisateur non connecté
+            connected: true, //true : utilisateur connecté; false : utilisateur non connecté
+            pref:false //Passe à true lorsque l'utilisateur clique sur preference
         }
       }
     
@@ -104,6 +106,8 @@ class Pageprincipale extends Component {
             Cookies.remove("ID");//Supression du cookie
             Cookies.remove("KEY");//Suppression du cookie
             return (<Redirect to='/'/>); //Renvoi à la page de connexion
+        }else if(this.state.pref){
+            return (<Redirect to='/preference'/>);//Renvoi à la page des preferences
         }
       return(
 
@@ -128,6 +132,11 @@ class Pageprincipale extends Component {
                     <ListMatch />
                 </div>
                 <CardId hisId="38" />
+                <button 
+                    className="btn-accueil" 
+                    onClick={() => this.setState({pref:true})}>
+                        Preferences
+                </button>
             </div>
         </div>
       );
