@@ -9,9 +9,6 @@ const useStyles = makeStyles({
   },
 });
 
-function valuetext(value) {
-  return `${value}°C`;
-}
 
 class RangeSlider extends React.Component {
   constructor(props) {
@@ -40,7 +37,6 @@ class RangeSlider extends React.Component {
         onChange={(event,newValue) => this.handleChange(event,newValue)}
         valueLabelDisplay="auto"
         aria-labelledby="range-slider"
-        getAriaValueText={valuetext}
       />
     {/*<div>{"min : "+value[0]+";max : "+value[1]}</div>*/}
     </div>

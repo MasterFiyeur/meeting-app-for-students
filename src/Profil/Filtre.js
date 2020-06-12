@@ -15,7 +15,7 @@ class Preference extends Component{
           JeSuis : "Homme", //Sexe
           JeCherche : "Femmes", //souhaite voir
           purpose : 1, //ce que je cherche
-          age : [18,28], //Tranche D'âge
+          value : [18,28], //Tranche D'âge
           Description : "Les maths m'ont saoulés ce soir je ferme mes cahiers c'est toi que j'ouvre ;)", //A propos de vous         
           City : "Cergy", //Ville 
           Study: "Ecole d'Ingénieur", //Etudes
@@ -68,10 +68,10 @@ class Preference extends Component{
             {/*--------------------------Sexe--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="sexe">Je suis :</label>
+                <label className="input-group-text" for="sexe">Je suis :</label>
               </div> 
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Male">Un homme</label>
+                <label className="form-check-label" for="Male">Un homme</label>
                 <input 
                   className="form-check-input"
                   type="radio"
@@ -85,7 +85,7 @@ class Preference extends Component{
                 />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="female">Une femme</label>
+                <label className="form-check-label" for="female">Une femme</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
@@ -99,7 +99,7 @@ class Preference extends Component{
                 />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Alive">Vivant</label>
+                <label className="form-check-label" for="Alive">Vivant</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
@@ -116,10 +116,10 @@ class Preference extends Component{
             {/*--------------------------Souhaite voir--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="lookingfor">Je souhaite rencontrer :</label>
+                <label className="input-group-text" for="lookingfor">Je souhaite rencontrer :</label>
               </div> 
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Des hommes</label>
+                <label className="form-check-label" for="lookingfor">Des hommes</label>
                 <input 
                   className="form-check-input"
                   type="radio"
@@ -131,7 +131,7 @@ class Preference extends Component{
                   />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Des femmes</label>
+                <label className="form-check-label" for="lookingfor">Des femmes</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
@@ -143,7 +143,7 @@ class Preference extends Component{
                   />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="lookingfor">Les deux</label>
+                <label className="form-check-label" for="lookingfor">Les deux</label>
                 <input 
                   className="form-check-input" 
                   type="radio" 
@@ -159,10 +159,10 @@ class Preference extends Component{
           {/*--------------------------Cherche-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="purpose">Ce que je cherche :</label>
+                <label className="input-group-text" for="purpose">Ce que je cherche :</label>
               </div>
               <select  id="purpose" value={this.state.purpose} name="purpose" onChange={(event) => this.inputChange(event)}>
-                <option  value="0">A remplir</option>
+                <option selected value="0">A remplir</option>
                 <option value="1">Du sérieux</option>
                 <option value="2">Aller boire un verre</option>
                 <option value="3">On verra</option>
@@ -174,13 +174,13 @@ class Preference extends Component{
             </div>
             <br />
            {/*--------------------------Tranche d age-------------------------- */}
-            <RangeSlider intervalle={this.state.age}  />
-            <label value={this.state.age} >Vous ne verrez que des profils dans cette tranche d'âge  </label>
+            <RangeSlider intervalle={this.state.value} />
+          
             <br />
             {/*--------------------------Description--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Description">A propos de vous :</label>
+                <label className="input-group-text" for="Description">A propos de vous :</label>
               </div> 
                 <textarea
                   id="Description"
@@ -199,7 +199,7 @@ class Preference extends Component{
             {/*-------------------------- City--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="City">J'habite à :</label>
+                <label className="input-group-text" for="City">J'habite à :</label>
               </div>                
               <input
                   id="City"
@@ -214,10 +214,10 @@ class Preference extends Component{
             {/*--------------------------Etudes-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Study">J'étudie au :</label>
+                <label className="input-group-text" for="Study">J'étudie au :</label>
               </div>
               <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
-                <option  value="none">A remplir</option>
+                <option selected value="none">A remplir</option>
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
                 <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
@@ -231,7 +231,7 @@ class Preference extends Component{
             {/*--------------------------Taille-------------------------- */}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Taille">Je mesure :</label>
+                <label className="input-group-text" for="Taille">Je mesure :</label>
               </div>
                    <input
                     id="Taille"
@@ -243,17 +243,17 @@ class Preference extends Component{
                     onChange={event => this.inputChange(event)}
                   />
                 <div className="input-group-append">
-                  <label className="input-group-text" htmlFor="Taille">cm</label>
+                  <label className="input-group-text" for="Taille">cm</label>
                 </div>
             </div>
             <br />
             {/*--------------------------Yeux-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Yeux">Mes yeux sont :</label>
+                  <label className="input-group-text" for="Yeux">Mes yeux sont :</label>
                 </div>
                 <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Noir">Noir</option>
                   <option value="Marron">Marron</option>
                   <option value="Vert">Vert</option>
@@ -266,10 +266,10 @@ class Preference extends Component{
               {/*--------------------------Cheveux-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Hair">Mes cheveux sont :</label>
+                  <label className="input-group-text" for="Hair">Mes cheveux sont :</label>
                 </div>
                 <select  id="Hair" value={this.state.Hair} name="Hair" onChange={(event) => this.inputChange(event)}>
-                <option  value="none">A remplir</option>
+                <option selected value="none">A remplir</option>
                   <option value="Noir">Noir</option>
                   <option value="Brun">Brun</option>
                   <option value="Auburn">Auburn</option>
@@ -284,10 +284,10 @@ class Preference extends Component{
               {/*--------------------------Sport-------------------------- */}
               <div className="input-group ">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Sport">Les activités physique :</label>
+                  <label className="input-group-text" for="Sport">Les activités physique :</label>
                 </div>
                 <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Passioné">Passioné(e)</option>
                   <option value="Régulièrement">Régulièrement</option>
                   <option value="Parfois">Parfois</option>
@@ -299,10 +299,10 @@ class Preference extends Component{
               {/*--------------------------Alcool-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Alcool">L'alcool :</label>
+                  <label className="input-group-text" for="Alcool">L'alcool :</label>
                 </div>
                 <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Tous les jours">Tous les jours</option>
                   <option value="Régulièrement">Régulièrement</option>
                   <option value="A l'occasion">A l'occasion</option>
@@ -313,10 +313,10 @@ class Preference extends Component{
               {/*--------------------------Tabac-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Tabac">Le tabac :</label>
+                  <label className="input-group-text" for="Tabac">Le tabac :</label>
                 </div>
                 <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Fréquemment">Fréquemment</option>
                   <option value="A l'occasion">A l'occasion</option>
                   <option value="Jamais">Jamais</option>
@@ -326,10 +326,10 @@ class Preference extends Component{
               {/*--------------------------Animaux Domestique-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Pet">Mes animaux de compagnie :</label>
+                  <label className="input-group-text" for="Pet">Mes animaux de compagnie :</label>
                 </div>
                 <select  id="Pet" value={this.state.Pet} name="Pet" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Chiens">Chiens</option>
                   <option value="Chats">Chats</option>
                   <option value="Beaucoup">Beaucoup :)</option>
@@ -342,10 +342,10 @@ class Preference extends Component{
               {/*--------------------------Religion-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Religion">Ma religion :</label>
+                  <label className="input-group-text" for="Religion">Ma religion :</label>
                 </div>
                 <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Agnosticisme">Agnosticisme</option>
                   <option value="Athéisme">Athéisme</option>
                   <option value="Bouddhisme">Bouddhisme</option>
@@ -364,10 +364,10 @@ class Preference extends Component{
               {/*--------------------------Signe Astro-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Astro">Mon signe astrologique :</label>
+                  <label className="input-group-text" for="Astro">Mon signe astrologique :</label>
                 </div>
                 <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option selected value="none">A remplir</option>
                   <option value="Verseau">Verseau</option>
                   <option value="Poissons">Poissons</option>
                   <option value="Bélier">Bélier</option>
