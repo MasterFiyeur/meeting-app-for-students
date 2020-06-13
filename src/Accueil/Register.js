@@ -10,6 +10,7 @@ class Register extends Component{
           //Valeur des input email, password, prenom, nom, dateBirth, ville et StudentCard
           email: "", password : "", verifPassword : "", prenom : "", nom : "", dateBirth : "", ville : "",
           StudentCard: null,
+          comptStrenghMdp:0,
           alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
           name: "", context:null, lat: null, long: null, //Resultat de l'API, ville et coordonnées GPS
           etape: 0 //0 -> Creation du compte; 1 -> Upload carte étudiante; 2 -> Création du compte terminée
@@ -23,6 +24,28 @@ class Register extends Component{
         let curr = new Date();
         curr.setDate(curr.getDate()-365*15);
         return (curr.toISOString().substr(0,10));
+      }
+
+      verifStrength(mdp){
+        const LETTRE_MIN="abcdefghijklmnopqrstuvwxyz";
+        const LETTRE_MAJ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const CHIFFRE="0123456789";
+        let maj=0,min=0,chi=0,spe=0;
+        for(let i=0 ; i<mdp.length ; i++){
+          if(LETTRE_MIN.indexOf(mdp[i]) !== -1){
+            min=1;
+          }else if(LETTRE_MAJ.indexOf(mdp[i]) !== -1){
+            maj=1;
+          }else if(CHIFFRE.indexOf(mdp[i]) !== -1){
+            chi=1;
+          }else{
+            spe=1;
+          }
+        }
+        console.log(maj+min+chi+spe);
+        this.setState({
+          comptStrenghMdp:maj+min+chi+spe
+        });
       }
 
       /**
@@ -47,7 +70,7 @@ class Register extends Component{
           return false;
         }
         if(this.state.password.length < 6){ //Taille mdp inférieure à 6
-          this.setState({alertMessage: "Votre mot de passe doit contenir plus de 6 caractère."});
+          this.setState({alertMessage: "Votre mot de passe doit contenir au moins 6 caractères."});
           return false;
         }else if(this.state.password!==this.state.verifPassword){
           this.setState({alertMessage: "Vos mots de passe ne correspondent pas."});
@@ -252,6 +275,26 @@ class Register extends Component{
        * dans l'état du composant
        * @param {event} event Ajout/Suppression d'un caractère dans un champs 
        */
+      inputChangePassword(event) {
+        event.preventDefault();
+        /* Mise à jour des valeurs des inputs */
+        this.setState({
+          password: event.target.value
+        })
+        if(event.target.value.length>5){
+          this.verifStrength(event.target.value);
+        }else{
+          this.setState({
+            comptStrenghMdp:1
+          });
+        }
+      }
+
+      /**
+       * Mettre de lier l'écriture dans les champs aux valeurs correspondantes 
+       * dans l'état du composant
+       * @param {event} event Ajout/Suppression d'un caractère dans un champs 
+       */
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -383,8 +426,15 @@ class Register extends Component{
                       type="password"
                       placeholder="Ton mot de passe"
                       value={this.state.password}
-                      onChange={event => this.inputChange(event)} 
+                      onChange={event => this.inputChangePassword(event)} 
                     />
+                    <br/>
+                    <div style={{display:"flex",marginLeft:"25%",marginTop:"5px"}}>
+                      <div style={{width:"40px",height:"10px",borderTopLeftRadius:"30px",borderBottomLeftRadius:"30px",background:"linear-gradient(to right,#FF3737, #FFAD37)"}}></div>
+                      <div style={{width:"40px",height:"10px",background:(this.state.comptStrenghMdp>1?"linear-gradient(to right,#FFAD37, #54FF48)":"#C7C3BD")}}></div>
+                      <div style={{width:"40px",height:"10px",background:(this.state.comptStrenghMdp>2?"linear-gradient(to right,#54FF48,#48BCFF)":"#C7C3BD")}}></div>
+                      <div style={{width:"40px",height:"10px",background:(this.state.comptStrenghMdp>3?"linear-gradient(to right,#48BCFF,#4872FF)":"#C7C3BD"),borderTopRightRadius:"30px",borderBottomRightRadius:"30px"}}></div>
+                    </div>
                   </div>
                   <div className="col-lg">
                     {/* Input verifPassword */}
