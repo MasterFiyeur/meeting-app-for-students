@@ -31,14 +31,22 @@ class CardId extends Component{//this.props.hisId
             "none",//12 Religion
             "none"//13 Signe Astro
           ],
-          certif:"0"
+          certif:"0",
+          oldId:"0"
         };
       }
 
     componentDidMount(){
+        console.log(this.props.hisId);
         this.initTabsState();
     }
 
+    componentDidUpdate(props){
+        if(this.state.oldId!==this.props.hisId){//Si l'id a changé
+        console.log(this.props.hisId);
+        this.initTabsState();
+        }
+    }
 
     initTabsState(){
         const axios = require('axios');  //Requêtes HTTP
@@ -69,7 +77,8 @@ class CardId extends Component{//this.props.hisId
                     res.data.tabPref[12],
                     res.data.tabPref[13]
                 ],
-                certif:res.data.certif
+                certif:res.data.certif,
+                oldId:this.props.hisId
             });
           })
           .catch(err => {
@@ -102,7 +111,7 @@ class CardId extends Component{//this.props.hisId
         <div>
             {/* width obligatoire pour réguler la taille des images */}
           <Card style={{width: "350px",borderRadius:"15px"}}>
-          <Carousel>
+          <Carousel key={this.props.hisId}>
                 {(!this.state.tabImage[0] && 
                 !this.state.tabImage[1] && 
                 !this.state.tabImage[2] &&
@@ -121,7 +130,7 @@ class CardId extends Component{//this.props.hisId
                         <img
                         style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
                         className="d-block w-100"
-                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.props.hisId+"-1.png"}
+                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.state.oldId+"-1.png"}
                         alt="Profile 1"
                         />
                     </Carousel.Item>
@@ -130,7 +139,7 @@ class CardId extends Component{//this.props.hisId
                         <img
                         style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
                         className="d-block w-100"
-                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.props.hisId+"-2.png"}
+                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.state.oldId+"-2.png"}
                         alt="Profile 2"
                         />
                     </Carousel.Item>
@@ -139,7 +148,7 @@ class CardId extends Component{//this.props.hisId
                         <img
                         style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
                         className="d-block w-100"
-                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.props.hisId+"-3.png"}
+                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.state.oldId+"-3.png"}
                         alt="Profile 3"
                         />
                     </Carousel.Item>
@@ -148,7 +157,7 @@ class CardId extends Component{//this.props.hisId
                         <img
                         style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
                         className="d-block w-100"
-                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.props.hisId+"-4.png"}
+                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.state.oldId+"-4.png"}
                         alt="Profile 4"
                         />
                     </Carousel.Item>
@@ -157,7 +166,7 @@ class CardId extends Component{//this.props.hisId
                         <img
                         style={{borderTopRightRadius:"15px",borderTopLeftRadius:"15px"}}
                         className="d-block w-100"
-                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.props.hisId+"-5.png"}
+                        src={"https://projetsiteeisti.yj.fr/imageProfil/"+this.state.oldId+"-5.png"}
                         alt="Profile 5"
                         />
                     </Carousel.Item>
@@ -167,8 +176,8 @@ class CardId extends Component{//this.props.hisId
                 {/* Ici mettre bio et certaines caractéristiques */}
                 <Card.Title>{this.state.tabInfo[0]+", "+this.state.tabInfo[1]+"ans "}
                 {this.state.certif==="1" &&
-                    <svg class="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                    <svg className="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
                     </svg>
                 }
                 </Card.Title>

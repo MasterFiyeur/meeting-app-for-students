@@ -10,7 +10,10 @@ class Pageprincipale extends Component {
         super(props);
         this.state = {
             connected: true, //true : utilisateur connecté; false : utilisateur non connecté
-            pref:false //Passe à true lorsque l'utilisateur clique sur preference
+            pref:false, //Passe à true lorsque l'utilisateur clique sur preference
+            tabPersonne:null,
+            currentIndex:0,
+            loaded:false
         }
       }
     
@@ -19,10 +22,89 @@ class Pageprincipale extends Component {
      */
     componentDidMount(){
         /* Vérif des cookies ID et KEY */
+        this.loadTableauPersonne();
         this.verifConnexion();
-        //Il est plus judicieux de faire cette vérif dans PHP
-        //lors de chaque requêtes avec une variable renvoyé pour
-        //pouvoir rediriger si le couple n'est pas bon
+    }
+
+    dislike(){
+        const url = URL_API+'addDislike.php?id='+this.state.tabPersonne[this.state.currentIndex].id;
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            if(res.data.connected){ //Mise à jour de connected si réponse négative
+                if(res.data.dislikes!=="echec"){
+                    alert("Disliked !");
+                }
+                console.log(res.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        if(this.state.tabPersonne.length-1 > this.state.currentIndex){
+            this.setState({
+                currentIndex:this.state.currentIndex+1
+            });
+        }
+    }
+
+    like(){
+        const url = URL_API+'addLike.php?id='+this.state.tabPersonne[this.state.currentIndex].id;
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            if(res.data.connected){ //Mise à jour de connected si réponse négative
+                if(res.data.likes!=="echec"){
+                    alert("Liked !");
+                }
+                console.log(res.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+        if(this.state.tabPersonne.length-1 > this.state.currentIndex){
+            this.setState({
+                currentIndex:this.state.currentIndex+1
+            });
+        }
+    }
+
+    loadTableauPersonne(){
+        const url = URL_API+'getTabPersonne.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            if(res.data.connected){ //Mise à jour de connected si réponse négative
+                this.setState({
+                    tabPersonne:res.data.tab,
+                    currentIndex:0,
+                    loaded:true
+                });
+                console.log(res.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
     
     /**
@@ -130,7 +212,23 @@ class Pageprincipale extends Component {
                     <NewMatch />
                     <ListMatch />
                 </div>
-                <CardId hisId="38" />
+                <button 
+                    className="btn-accueil" 
+                    style={{backgroundColor:"#48FF5B",height:"50%"}}
+                    onClick={() => this.like()}>
+                        Like
+                </button>
+                {(this.state.currentIndex!==null && this.state.loaded) &&
+                <>
+                    <CardId hisId={this.state.tabPersonne[this.state.currentIndex].id}/>
+                    </>
+                }
+                <button 
+                    className="btn-accueil" 
+                    style={{backgroundColor:"#FF5B48",height:"50%"}}
+                    onClick={() => this.dislike()}>
+                        Dislike
+                </button>
                 <button 
                     className="btn-accueil" 
                     onClick={() => this.setState({pref:true})}>
