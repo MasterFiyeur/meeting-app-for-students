@@ -52,7 +52,7 @@ class Preference extends Component{
             logginkey: Cookies.get("KEY")
             }
         }
-        const url = URL_API+'getPreferenceValues.php';
+        const url = URL_API+'getPreferenceValues.php?img=yes';
           axios.get(url,config)
           .then(res => {
             const tabCoor = res.data.tabPref.gps.split(';');
@@ -76,7 +76,8 @@ class Preference extends Component{
                 Animaux: res.data.tabPref.animaux,
                 Religion: res.data.tabPref.religion,
                 Astro: res.data.tabPref.astro,
-                init:1
+                init:1,
+                certif:res.data.certif
             });
             console.log(this.state);
           })
@@ -105,7 +106,7 @@ class Preference extends Component{
         formData.append('But',this.state.But);
         formData.append('TrancheAge',this.state.TrancheAge[0]+"-"+this.state.TrancheAge[1]);
         formData.append('Description',this.state.Description);
-        formData.append('Ville',this.state.Ville);
+        formData.append('Ville',(this.state.NomVille===""?this.state.Ville:this.state.NomVille));
         formData.append('Coor',this.state.Latitude+";"+this.state.Longitude);
         formData.append('Etudes',this.state.Etudes);
         formData.append('Taille',this.state.Taille);
@@ -200,7 +201,7 @@ class Preference extends Component{
           return (<Redirect to='/'/>); //Renvoi à la page de connexion
       }
       return(
-        <div style={{marginTop:"5%"}}>
+        <div style={{marginTop:"10%"}}>
           {/* Formulaire du profil de la personne' */}
           {this.state.init===1?
           <div>
@@ -208,6 +209,12 @@ class Preference extends Component{
             <EditProfilesPhoto />
             <br/>
           <form onSubmit={event => this.sendPref(event)}>
+            {this.state.certif==="1"?
+              <div>T'es certifié !</div>
+              :this.state.certif==="0"?
+                <div>Veuillez envoyer votre carte étudiante.</div>
+                :<div>Votre carte étudiante est en attente de validation...</div>
+            }
             {/*--------------------------Sexe--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">

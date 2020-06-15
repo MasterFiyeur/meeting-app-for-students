@@ -31,6 +31,7 @@ class CardId extends Component{//this.props.hisId
             "none",//12 Religion
             "none"//13 Signe Astro
           ],
+          certif:"0"
         };
       }
 
@@ -41,7 +42,7 @@ class CardId extends Component{//this.props.hisId
 
     initTabsState(){
         const axios = require('axios');  //Requêtes HTTP
-        const url = URL_API+'getPreferenceCard.php?id='+this.props.hisId+'&info=yes&myId='+Cookies.get('ID');
+        const url = URL_API+'getPreferenceCard.php?id='+this.props.hisId+'&info=yes&certif=yes&myId='+Cookies.get('ID');
           axios.get(url)
           .then(res => {
             this.setState({
@@ -67,7 +68,8 @@ class CardId extends Component{//this.props.hisId
                     res.data.tabPref[11],
                     res.data.tabPref[12],
                     res.data.tabPref[13]
-                ]
+                ],
+                certif:res.data.certif
             });
           })
           .catch(err => {
@@ -163,7 +165,13 @@ class CardId extends Component{//this.props.hisId
             </Carousel>
             <Card.Body style={{overflowY: "scroll",height:"25vh"}}>
                 {/* Ici mettre bio et certaines caractéristiques */}
-                <Card.Title>{this.state.tabInfo[0]+", "+this.state.tabInfo[1]+"ans"}</Card.Title>
+                <Card.Title>{this.state.tabInfo[0]+", "+this.state.tabInfo[1]+"ans "}
+                {this.state.certif==="1" &&
+                    <svg class="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                    </svg>
+                }
+                </Card.Title>
                 <Card.Subtitle>à {this.state.tabInfo[2]} km</Card.Subtitle>
                 <Card.Text>{this.state.tabInfo[3]}</Card.Text>
                 {/* Peut-être faire fiche technique que pour premium */}
