@@ -24,6 +24,15 @@ class EditProfilePhoto extends Component{
       this.initTabImage();
     }
 
+    trashIcon = () => {
+      return(
+      <svg className="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+        <path fillRule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+      </svg>
+      );
+    }
+
     initTabImage(){
       const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getPreferenceCard.php?id='+Cookies.get('ID');
@@ -84,31 +93,41 @@ class EditProfilePhoto extends Component{
             <div>
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-1.png"} alt="Profile 1" />
                 <br/>
-                <button onClick={() => this.supprImage(1)}>Supprimer</button>
+                <button onClick={() => this.supprImage(1)}>Supprimer 
+                  {this.trashIcon()}
+                </button>
             </div>
             }{(this.state.tabImage[1]) &&
             <div>
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-2.png"} alt="Profile 2" />
                 <br/>
-                <button onClick={() => this.supprImage(2)}>Supprimer</button>
+                <button onClick={() => this.supprImage(2)}>Supprimer
+                  {this.trashIcon()}
+                </button>
             </div>
             }{(this.state.tabImage[2]) &&
             <div>
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-3.png"} alt="Profile 3" />
                 <br/>
-                <button onClick={() => this.supprImage(3)}>Supprimer</button>
+                <button onClick={() => this.supprImage(3)}>Supprimer
+                  {this.trashIcon()}
+                </button>
             </div>
             }{(this.state.tabImage[3]) &&
             <div>
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-4.png"} alt="Profile 4" />
                 <br/>
-                <button onClick={() => this.supprImage(4)}>Supprimer</button>
+                <button onClick={() => this.supprImage(4)}>Supprimer
+                  {this.trashIcon()}
+                </button>
             </div>
             }{(this.state.tabImage[4]) &&
             <div>
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-5.png"} alt="Profile 5" />
                 <br/>
-                <button onClick={() => this.supprImage(5)}>Supprimer</button>
+                <button onClick={() => this.supprImage(5)}>Supprimer
+                  {this.trashIcon()}
+                </button>
             </div>
             }
             {(!(this.state.tabImage[0] && this.state.tabImage[1] && this.state.tabImage[2] && this.state.tabImage[3] && this.state.tabImage[4]) && (!this.state.crop)) &&

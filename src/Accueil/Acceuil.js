@@ -37,7 +37,7 @@ class Accueil extends Component{
      */
     verifConnexion() {
         const url = URL_API+'isConnected.php';
-        const axios = require('axios').default;  //Requêtes HTTP
+        const axios = require('axios');  //Requêtes HTTP
         let config = {
             headers: {
             logginid: Cookies.get("ID"),

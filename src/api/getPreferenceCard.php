@@ -79,6 +79,18 @@ $ObjIdKey->issetGetmyId=false;
         }
         $req -> closeCursor();
     }
+    if(isset($_GET['certif'])){
+        $ObjIdKey->issetCertif=$_GET['certif'];
+        $cnx = connexionPDO();
+        $req = $cnx -> prepare('SELECT carte FROM user WHERE id = ?');
+        $req -> execute(array($id));
+        if ($ligne = $req -> fetch()) {
+            if ($ligne != NULL) {
+                $ObjIdKey->certif=$ligne['carte'];
+            }
+        }
+        $req -> closeCursor();
+    }
 }
 
 echo (json_encode($ObjIdKey));
