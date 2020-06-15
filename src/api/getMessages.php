@@ -9,25 +9,22 @@ header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
 
-
-
-
-include "connexionBDD.php";
-
-try {
-	$cnx = connexionPDO();
+$cnx = connexionPDO();
 	$id = $_SERVER['HTTP_LOGGINID'];
+	$id2 = $_POST["id2"];
 	$sql = "SELECT * FROM listeMatch";
-    $match = $cnx-> prepare($sql);
-    $match -> execute();
-    foreach ($match as $row) {
-        	if ($row["id"]==$id or $row["id2"]==$id) {
-        		print $row["id"] . "-" . $row["id2"].";";
-        	}
+    $messages = $cnx-> prepare($sql);
+    $messages -> execute();
+    foreach ($messages as $row) {
+        	print $row["id"] . "-" . $row["message"].";";
     }
-	$match -> closeCursor();
+	$messages -> closeCursor();
 }
 catch (PDOException $e){
 	print "Erreur !".$e -> getMessage();
     die();
+
+
+
+
 ?>

@@ -79,8 +79,7 @@ class Accueil extends Component{
         /* Utilisateur redirigé si connecté */
         if(this.state.connected){
             return <Redirect to='/principale'/> //Renvoi à la page principale
-        }
-        return(
+        } else {return(
 
              <div className="container-fluid bg-image ">
                 <div className="margetop18">
@@ -185,6 +184,7 @@ class Accueil extends Component{
                     }   
             </div>
         );
+        }
     }
 }
 
