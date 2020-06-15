@@ -5,6 +5,7 @@ import {URL_API} from '../App';
 import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
+import {Card} from 'react-bootstrap';
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -47,11 +48,9 @@ class Pageprincipale extends Component {
         .catch(err => {
             console.log(err);
         });
-        if(this.state.tabPersonne.length-1 > this.state.currentIndex){
             this.setState({
                 currentIndex:this.state.currentIndex+1
             });
-        }
     }
 
     like(){
@@ -75,11 +74,9 @@ class Pageprincipale extends Component {
         .catch(err => {
             console.log(err);
         });
-        if(this.state.tabPersonne.length-1 > this.state.currentIndex){
             this.setState({
                 currentIndex:this.state.currentIndex+1
             });
-        }
     }
 
     loadTableauPersonne(){
@@ -212,23 +209,55 @@ class Pageprincipale extends Component {
                     <NewMatch />
                     <ListMatch />
                 </div>
-                <button 
-                    className="btn-accueil" 
-                    style={{backgroundColor:"#48FF5B",height:"50%"}}
-                    onClick={() => this.like()}>
-                        Like
-                </button>
-                {(this.state.currentIndex!==null && this.state.loaded) &&
-                <>
-                    <CardId hisId={this.state.tabPersonne[this.state.currentIndex].id}/>
+                {(this.state.tabPersonne!==null && this.state.tabPersonne.length > this.state.currentIndex) && 
+                    <>
+                    <button 
+                        className="btn-accueil" 
+                        style={{backgroundColor:"#48FF5B",height:"50%"}}
+                        onClick={() => this.like()}>
+                            Like
+                    </button>
+                    {(this.state.currentIndex!==null && this.state.loaded) &&
+                        <>
+                        <CardId hisId={this.state.tabPersonne[this.state.currentIndex].id}/>
+                        </>
+                    }
+                    <button 
+                        className="btn-accueil" 
+                        style={{backgroundColor:"#FF5B48",height:"50%"}}
+                        onClick={() => this.dislike()}>
+                            Dislike
+                    </button>
                     </>
                 }
-                <button 
-                    className="btn-accueil" 
-                    style={{backgroundColor:"#FF5B48",height:"50%"}}
-                    onClick={() => this.dislike()}>
-                        Dislike
-                </button>
+                {(this.state.tabPersonne!==null && this.state.tabPersonne.length <= this.state.currentIndex) && 
+                    <>
+                    <button 
+                        className="btn-accueil" 
+                        style={{backgroundColor:"#48FF5B",height:"50%"}}
+                        disabled>
+                            Like
+                    </button>
+                    <Card>
+                        <Card.Title>Wow quelle énergie !</Card.Title>
+                        <Card.Text>Vous avez épuisé tout notre stock de partenaire</Card.Text>
+                        <Card.Text>Revenez plus tard </Card.Text>
+                        <Card.Text>
+                            <svg className="bi bi-emoji-smile-upside-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fillRule="evenodd" d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0-1a8 8 0 1 1 0 16A8 8 0 0 1 8 0z"/>
+                                <path fillRule="evenodd" d="M4.285 6.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 4.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 3.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683z"/>
+                                <path d="M7 9.5C7 8.672 6.552 8 6 8s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5z"/>
+                            </svg>
+                        </Card.Text>
+                    </Card>
+                    <button 
+                        className="btn-accueil" 
+                        style={{backgroundColor:"#FF5B48",height:"50%"}}
+                        disabled>
+                            Dislike
+                    </button>
+                    </>
+                }
                 <button 
                     className="btn-accueil" 
                     onClick={() => this.setState({pref:true})}>

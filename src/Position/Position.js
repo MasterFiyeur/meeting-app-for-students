@@ -93,7 +93,7 @@ class Position extends Component{
               />
             </div>
           </form>
-          <AdminCarte />
+          {/*<AdminCarte />*/}
         </div>
       );
     }
