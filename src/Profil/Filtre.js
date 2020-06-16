@@ -1,40 +1,44 @@
 import React, { Component } from 'react';
 import RangeSlider from './Slider';
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
+import ReactDOM from 'react-dom';
+import ReactModal from 'react-modal';
 
-
-class Preference extends Component{
+class Filtre extends Component{
     constructor(props) {
         super(props);
-
-        //Prochaine étape : pré-sélectionner les valeurs déjà renseignées 
-        //Simulation retour de la requête avec une constante(tableau je pense)
-        //On peut mettre dans les select value={this.state} ce qui permet de 
-        //initialiser aux valeurs de la BDD
-
         this.state = {
-          JeSuis : "Homme", //Sexe
-          JeCherche : "Femmes", //souhaite voir
-          purpose : 1, //ce que je cherche
-          value : [18,28], //Tranche D'âge
-          Description : "Les maths m'ont saoulés ce soir je ferme mes cahiers c'est toi que j'ouvre ;)", //A propos de vous         
-          City : "Cergy", //Ville 
-          Study: "Ecole d'Ingénieur", //Etudes
-          Taille : 181, //Taille
-          Yeux: "Vert", //Couleur des Yeux
-          Hair: "Châtain",//Couleur des Cheveux
-          Sport: "Régulièrement",//Activités Physique 
-          Alcool: "A l'occasion", //Alcool
-          Tabac: "Jamais",//Fumeur
-          Pet: "Chiens",// Animaux de compagnie 
-          Religion: "Agnosticisme",//Croyance
-          Astro: "Scorpion",// Signe Astrologique
+            checkedA: true,
+            showModal: false,
+            TabEtudes: [
+                {name: "Lycée" , value: 1},
+                {name: "Université", value: 1},
+                {name: "Ecole d'Ingénieur", value: 1},
+                {name: "Ecole de commerce", value: 1},
+                {name: "Ecole supérieur", value: 1},
+                {name: "Reconversion", value: 1},
+                {name: "Sabatique", value: 1},
+            ],
+            Taille : 100, //Taille
+            Yeux: "0", //Couleur des Yeux
+            Cheveux: "",//Couleur des Cheveux
+            Sport: "",//Activités Physique 
+            Alcool: "", //Alcool
+            Tabac: "",//Fumeur
+            Animaux: "",// Animaux de compagnie 
+            Religion: "",//Croyance
+            Astro: "",// Signe Astrologique
+            init:0,
+            connect:true
         };
-      this.handleChange = this.handleChange.bind(this);
-      this.handleChange2 = this.handleChange2.bind(this);
+this.handleOpenModal = this.handleOpenModal.bind(this);
+this.handleCloseModal = this.handleCloseModal.bind(this);
+this.handleChangeEtude = this.handleChangeEtude.bind(this);
 
-      }
-   
-      inputChange(event) {
+   }
+    inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
         const { name, value } = event.target;
@@ -42,347 +46,122 @@ class Preference extends Component{
           [name]: value
         })
       }
-      handleChange(event) {
-        this.setState({
-          JeCherche: event.target.value
-        });
-        }
-      handleChange2(event) {
-        this.setState({
-          JeSuis: event.target.value
-        });
-        }
+    handleChange(event){
+      this.setState({
+        [event.target.name]: event.target.checked 
+     })
+    }
+    handleOpenModal () {
+      this.setState({ showModal: true });
+    }
+    
+    handleCloseModal () {
+      this.setState({ showModal: false });
+    }
+    handleChangeEtude(event) {
+      this.setState({isChecked: !this.state.isChecked});
+      const num = event.target.value
+       if (this.state.TabEtudes[num].value===1){this.state.TabEtudes[num].value=0;}
+       else if (this.state.TabEtudes[num].value===0){this.state.TabEtudes[num].value=1;}
+       console.log(this.state.TabEtudes)
+       }
+
 
     render(){
       return(
         <div>
-          {/* Formulaire du profil de la personne' */}
-         
-          <form onSubmit={event => this.sendLogin(event)}>
+          {/* Formulaire des Filtres de la personne' */}
+          <form >
             <br/>
-            <div>{/* Mettre les images de profils, la possibilité de les suppr ou les rajouter*/}
-              <label htmlFor="Photo">Vos photos :</label>
-              <input type="file" name="Photo" id="Photo"/>
-            </div>
             <br/>
-            {/*--------------------------Sexe--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="sexe">Je suis :</label>
-              </div> 
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="Male">Un homme</label>
-                <input 
-                  className="form-check-input"
-                  type="radio"
-                  name="Male"
-                  id="JeSuis" 
-                  value="Homme"
-                  checked={this.state.JeSuis==="Homme"}
-                  onChange={this.handleChange2}
-
-
-                />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="female">Une femme</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="female" 
-                  id="JeSuis"
-                  value="Femme"
-                  checked={this.state.JeSuis==="Femme"}
-                  onChange={this.handleChange2}
-
-
-                />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="Alive">Vivant</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="Alive" 
-                  id="JeSuis"
-                  value="Vivant"
-                  checked={this.state.JeSuis==="Vivant"}
-                  onChange={this.handleChange2}
- 
-                />
-              </div>
-            </div>
             <br/>
-            {/*--------------------------Souhaite voir--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="lookingfor">Je souhaite rencontrer :</label>
-              </div> 
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="lookingfor">Des hommes</label>
-                <input 
-                  className="form-check-input"
-                  type="radio"
-                  name="lookingfor"
-                  id="JeCherche"
-                  value="Hommes"
-                  checked={this.state.JeCherche==='Hommes'}
-                  onChange={this.handleChange}
+                {/* Voir Uniquement des personnes vérifier */}
+                <div>
+                <FormGroup row>
+                  <FormControlLabel
+                  labelPlacement ='start'
+                  label ="Voir seulement des profils vérifié :"
+                  control={<Switch checked={this.state.checkedA} onChange={event => this.handleChange(event)} name="checkedA" />}
                   />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="lookingfor">Des femmes</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="lookingfor" 
-                  id="JeCherche" 
-                  value="Femmes"
-                  checked={this.state.JeCherche==='Femmes'}
-                  onChange={this.handleChange}
-                  />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" for="lookingfor">Les deux</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="lookingfor" 
-                  id="JeCherche" 
-                  value="Les deux" 
-                  checked={this.state.JeCherche==='Les deux'}
-                  onChange={this.handleChange}
-                />
-              </div>
-            </div>
-            <br/>
-          {/*--------------------------Cherche-------------------------- */}
-            <div className="input-group ">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="purpose">Ce que je cherche :</label>
-              </div>
-              <select  id="purpose" value={this.state.purpose} name="purpose" onChange={(event) => this.inputChange(event)}>
-                <option selected value="0">A remplir</option>
-                <option value="1">Du sérieux</option>
-                <option value="2">Aller boire un verre</option>
-                <option value="3">On verra</option>
-                <option value="4">Pas de prise de tête</option>
-                <option value="5">Occuper ma soirée </option>
-                <option value="6">Amitié </option>
-                <option value="7">Seulement tchatter </option>
-              </select>
-            </div>
-            <br />
-           {/*--------------------------Tranche d age-------------------------- */}
-            <RangeSlider intervalle={this.state.value} />
-          
-            <br />
-            {/*--------------------------Description--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="Description">A propos de vous :</label>
-              </div> 
-                <textarea
-                  id="Description"
-                  name="Description"
-                  type="text"
-                  placeholder="Vous avez 350 caractères pour nous en dire plus ;)"
-                  style={{resize: "none"}}
-                  rows="2"//hauteur
-                  cols="50" //largeur
-                  maxLength="350"
-                  value={this.state.Description}
-                  onChange={event => this.inputChange(event)} 
-                />
-            </div>
-            <br/>
-            {/*-------------------------- City--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="City">J'habite à :</label>
-              </div>                
-              <input
-                  id="City"
-                  name="City"
-                  type="text"
-                  placeholder="Paris"
-                  value={this.state.City}
-                  onChange={event => this.inputChange(event)} 
-                />
-            </div>
-            <br />
-            {/*--------------------------Etudes-------------------------- */}
-            <div className="input-group ">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="Study">J'étudie au :</label>
-              </div>
-              <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
-                <option selected value="none">A remplir</option>
-                <option value="Lycée">Lycée</option>
-                <option value="Université">Université</option>
-                <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
-                <option value="Ecole de commerce">Ecole de commerce</option>
-                <option value="Ecole supérieur">Ecole supérieur</option>
-                <option value="Reconversion">Reconversion </option>
-                <option value="Année sabatique">Année sabatique</option>
-              </select>
-            </div>
-            <br />
-            {/*--------------------------Taille-------------------------- */}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" for="Taille">Je mesure :</label>
-              </div>
-                   <input
-                    id="Taille"
-                    name="Taille"
-                    type="number"
-                    min="100"
-                    max="300"
-                    value={this.state.Taille}
-                    onChange={event => this.inputChange(event)}
-                  />
-                <div className="input-group-append">
-                  <label className="input-group-text" for="Taille">cm</label>
-                </div>
-            </div>
-            <br />
-            {/*--------------------------Yeux-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Yeux">Mes yeux sont :</label>
-                </div>
-                <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Noir">Noir</option>
-                  <option value="Marron">Marron</option>
-                  <option value="Vert">Vert</option>
-                  <option value="Bleu">Bleu</option>
-                  <option value="Verron">Verron</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Cheveux-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Hair">Mes cheveux sont :</label>
-                </div>
-                <select  id="Hair" value={this.state.Hair} name="Hair" onChange={(event) => this.inputChange(event)}>
-                <option selected value="none">A remplir</option>
-                  <option value="Noir">Noir</option>
-                  <option value="Brun">Brun</option>
-                  <option value="Auburn">Auburn</option>
-                  <option value="Châtain">Châtain</option>
-                  <option value="Roux">Roux</option>
-                  <option value="Blond">Blond</option>
-                  <option value="Blanc">Blanc</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Sport-------------------------- */}
-              <div className="input-group ">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Sport">Les activités physique :</label>
-                </div>
-                <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Passioné">Passioné(e)</option>
-                  <option value="Régulièrement">Régulièrement</option>
-                  <option value="Parfois">Parfois</option>
-                  <option value="Une fois au chalet">Une fois au chalet</option>
-                  <option value="Quelle horreur">Quelle horreur</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Alcool-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Alcool">L'alcool :</label>
-                </div>
-                <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Tous les jours">Tous les jours</option>
-                  <option value="Régulièrement">Régulièrement</option>
-                  <option value="A l'occasion">A l'occasion</option>
-                  <option value="Jamais">Jamais</option>
-                </select>
-                </div>
-              <br />
-              {/*--------------------------Tabac-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Tabac">Le tabac :</label>
-                </div>
-                <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Fréquemment">Fréquemment</option>
-                  <option value="A l'occasion">A l'occasion</option>
-                  <option value="Jamais">Jamais</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Animaux Domestique-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Pet">Mes animaux de compagnie :</label>
-                </div>
-                <select  id="Pet" value={this.state.Pet} name="Pet" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Chiens">Chiens</option>
-                  <option value="Chats">Chats</option>
-                  <option value="Beaucoup">Beaucoup :)</option>
-                  <option value="Autres">Autres</option>
-                  <option value="Aucun">Aucun</option>
-                  <option value="Allergique">Allergique :'(</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Religion-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Religion">Ma religion :</label>
-                </div>
-                <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Agnosticisme">Agnosticisme</option>
-                  <option value="Athéisme">Athéisme</option>
-                  <option value="Bouddhisme">Bouddhisme</option>
-                  <option value="Christianisme">Christianisme</option>
-                  <option value="Hindouisme">Hindouisme</option>
-                  <option value="Jaïnisme">Jaïnisme</option>
-                  <option value="Judaïsme">Judaïsme</option>
-                  <option value="Islam">Islam</option>
-                  <option value="Zoroastrisme">Zoroastrisme</option>
-                  <option value="Sikhisme">Sikhisme</option>
-                  <option value="Spiritualité">Spiritualité</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Signe Astro-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" for="Astro">Mon signe astrologique :</label>
-                </div>
-                <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
-                  <option selected value="none">A remplir</option>
-                  <option value="Verseau">Verseau</option>
-                  <option value="Poissons">Poissons</option>
-                  <option value="Bélier">Bélier</option>
-                  <option value="Taureau">Taureau</option>
-                  <option value="Gémeaux">Gémeaux</option>
-                  <option value="Cancer">Cancer</option>
-                  <option value="Lion">Lion</option>
-                  <option value="Vierge">Vierge</option>
-                  <option value="Scorpion">Scorpion</option>
-                  <option value="Sagittaire">Sagittaire</option>
-                  <option value="Capricorne">Capricorne</option>
-                  <option value="Balance">Balance</option>
-                </select>
-              </div>
-              <br />
+                  </FormGroup>
+                  </div>
+
+                {/* Filtre Etude */}
+                  <div>
+                    <label htmlFor="Etude">Etudes</label>
+                    <button id="Etude" onClick={this.handleOpenModal}>Ajouter ce filtre</button>
+                    <ReactModal isOpen={this.state.showModal} contentLabel="Modal Etude" >
+                      <div >
+                        <br/>
+                        <label htmlFor="lycée">Lycée</label>
+                        <input type="checkbox"
+                               id="lycée" 
+                               name="lycée"
+                               value="0"
+                               checked={this.state.TabEtudes[0].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                               key={this.state.TabEtudes}
+                        />
+                        <br/>
+                        <label htmlFor="Université">Université</label>
+                        <input type="checkbox"
+                               id="Université" 
+                               name="Université"
+                               value="1"
+                               checked={this.state.TabEtudes[1].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+
+                        />
+                        <br/>
+                        <label htmlFor="ing">Ecole d'Igénieur</label>
+                        <input type="checkbox"
+                               id="ing" 
+                               name="Ecole d'Ingénieur"
+                               value="2"
+                               checked={this.state.TabEtudes[2].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                        />
+                        <br/>                       
+                        <label htmlFor="eco">Ecole de commerce</label>
+                        <input type="checkbox"
+                               id="eco" 
+                               name="Ecole de commerce"
+                               value="3"
+                               checked={this.state.TabEtudes[3].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                        />
+                        <br/>
+                        <label htmlFor="sup">Ecole supérieur</label>
+                        <input type="checkbox"
+                               id="sup" 
+                               name="Ecole supérieur"
+                               value="4"
+                               checked={this.state.TabEtudes[4].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                        />
+                        <br/>
+                        <label htmlFor="Reconversion">Reconversion</label>
+                        <input type="checkbox"
+                               id="Reconversion" 
+                               name="Reconversion"
+                               value="5"
+                               checked={this.state.TabEtudes[5].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                        />
+                        <br/>
+                        <label htmlFor="saba">Année sabatique</label>
+                        <input type="checkbox"
+                               id="saba" 
+                               name="Sabatique"
+                               value="6"
+                               checked={this.state.TabEtudes[6].value===1?true:false}
+                               onChange={this.handleChangeEtude}
+                        />                                                                    
+                      </div>
+                      <br/>
+                      <button onClick={this.handleCloseModal}>Fermer</button>
+                    </ReactModal>
+                  </div>
               {/*--------------------------SAVE-------------------------- */}
                 <button type="submit">Sauvegarder</button>
               </form>
@@ -391,4 +170,4 @@ class Preference extends Component{
     }
 }
 
-export default Preference;
+export default Filtre;

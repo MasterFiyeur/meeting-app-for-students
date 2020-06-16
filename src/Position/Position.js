@@ -1,6 +1,6 @@
 //https://api-adresse.data.gouv.fr/search/?q=Cergy&type=municipality&autocomplete=1
 import React, { Component } from 'react';
-import AdminCarte from '../AdminCarte/AdminCarte';
+//import AdminCarte from '../AdminCarte/AdminCarte';
 //import {URL_API} from '../App';
 //import EditProfilePhoto from '../PhotosProfil/EditProfilePhoto';
 

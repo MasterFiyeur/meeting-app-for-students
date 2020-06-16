@@ -21,24 +21,53 @@ include "connexionBDD.php";
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
 $ObjIdKey->connected=isLogged($id,$key);
-if($ObjIdKey->connected){
-    $cnx = connexionPDO();
-    $req = $cnx -> prepare('SELECT likes FROM user WHERE id = ?');
-    $req -> execute(array($id));
-    if ($ligne = $req -> fetch()) {
-        if ($ligne != NULL) {
-            $ObjIdKey->likes=$ligne["likes"];
-        } else {
-            $ObjIdKey->likes="echec";
-        }
-    }
-    $req -> closeCursor();
-    if($ObjIdKey->likes!=="echec" && $_GET["id"]){
-        $ObjIdKey->likes .=$_GET["id"].";";
+if($ObjIdKey->connected){//l'utilisateur a un bon couple(id,key)
+    if(decNbLike($id)){
+        $ObjIdKey->acceptedLike=true;
+        //Verif si lui nous a pas dislike
         $cnx = connexionPDO();
-        $req = $cnx -> prepare('UPDATE user set likes=? WHERE id = ?');
-        $req -> execute(array($ObjIdKey->likes,$id));
+        $req = $cnx -> prepare('SELECT dislikes FROM user WHERE id = ?');
+        $req -> execute(array($_GET["id"]));
+        if ($ligne = $req -> fetch()) {
+            if ($ligne != NULL) {
+                $dislikeAutre=$ligne["dislikes"];
+            }
+        }
         $req -> closeCursor();
+        $arrayDislikeAutre=explode(";",$dislikeAutre);
+        if(in_array($id,$arrayDislikeAutre)){//Tu l'as like et il t'as dislike alors ca enleve
+            $nouveauDislike="";
+            foreach ($arrayDislikeAutre as &$value) {
+                if($value!==$id && $value!=""){
+                    $nouveauDislike .= $value.";";
+                }
+            }
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('UPDATE user set dislikes=? WHERE id = ?');
+            $req -> execute(array($nouveauDislike,$_GET["id"]));
+            $req -> closeCursor();
+        }else{//Tu le like en premier
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('SELECT likes FROM user WHERE id = ?');
+            $req -> execute(array($id));
+            if ($ligne = $req -> fetch()) {
+                if ($ligne != NULL) {
+                    $ObjIdKey->likes=$ligne["likes"];
+                } else {
+                    $ObjIdKey->likes="echec";
+                }
+            }
+            $req -> closeCursor();
+            if($ObjIdKey->likes!=="echec" && $_GET["id"]){
+                $ObjIdKey->likes .=$_GET["id"].";";
+                $cnx = connexionPDO();
+                $req = $cnx -> prepare('UPDATE user set likes=? WHERE id = ?');
+                $req -> execute(array($ObjIdKey->likes,$id));
+                $req -> closeCursor();
+            }
+        }
+    }else{
+        $ObjIdKey->acceptedLike=false;
     }
     echo (json_encode($ObjIdKey));
 }else{
