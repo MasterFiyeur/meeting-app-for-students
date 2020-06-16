@@ -20,7 +20,7 @@ class RangeSlider extends React.Component {
     
     
   return (
-    <div style={{width:"25%", marginLeft:"2em"}}>
+    <div className=" " style={{width:"33%", marginLeft:"33%"}}>
       <Typography id="range-slider" gutterBottom>
         Tranche d'âge : {this.state.intervalles[0]+"-"+this.state.intervalles[1]+" ans"}
       </Typography>

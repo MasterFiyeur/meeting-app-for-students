@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
-import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
 import {Card} from 'react-bootstrap';
@@ -17,7 +16,8 @@ class Pageprincipale extends Component {
             tabPersonne:null,
             currentIndex:0,
             loaded:false,
-            panel:false
+            panel:false,
+            grade:""
         }
       }
     
@@ -29,6 +29,41 @@ class Pageprincipale extends Component {
         this.loadTableauPersonne();
         this.verifConnexion();
     }
+
+    createMatch(idAutre){
+		const axios = require('axios');  //Requêtes HTTP
+		let formdata = new FormData();
+		let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+		formdata.append("id2",idAutre);
+        const url = URL_API+'newDisc.php';
+        axios.post(url,formdata,config)
+        .then(res => {
+            console.log("Réponse newMatch: "+res.data);
+            if(res.data=='1'){
+              /**Faire une animation de MATTTTCHH IIICIII 
+               * kiss kiss Juliente (avec accent espagnol pour le Juliente)
+               */
+                alert("Match");
+                this.setState({
+                    currentIndex:this.state.currentIndex+1
+                });
+              this.setState({alertShow: true});
+            }else if(res.data == '2'){
+            	console.error("vous n'avez pas l'air d'etre connecté");
+            }else{
+            	console.error('Problème dans le retour de l\'API/newUser.');
+
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+	}
 
     dislike(){
         const url = URL_API+'addDislike.php?id='+this.state.tabPersonne[this.state.currentIndex].id;
@@ -68,9 +103,13 @@ class Pageprincipale extends Component {
             if(res.data.connected){ //Mise à jour de connected si réponse négative
                 if(res.data.likes!=="echec"){
                     if(res.data.acceptedLike){
-                        this.setState({
-                            currentIndex:this.state.currentIndex+1
-                        });
+                        if(res.data.match){
+                            this.createMatch(this.state.tabPersonne[this.state.currentIndex].id);
+                        }else{
+                            this.setState({
+                                currentIndex:this.state.currentIndex+1
+                            });
+                        }
                     }else{
                         alert("Tu n'as plus de like, abonnez-vous ou revenez demain :)");
                     }
@@ -129,8 +168,12 @@ class Pageprincipale extends Component {
             console.log("Connecté ? "+res.data.connect); //Réponse dans la console
             if(!res.data.connect){ //Mise à jour de connected si réponse négative
                 this.setState({
-                    connected:false
-                })
+                    connected:false,
+                });
+            }else{
+                this.setState({
+                    grade:res.data.grade
+                });
             }
         })
         .catch(err => {
@@ -147,25 +190,11 @@ class Pageprincipale extends Component {
      * Déconnecte l'utilisateur en changeant l'état connected
      */
     deconnect(){
-        //Suppression du token dans la bdd
-        const url = URL_API+'delToken.php';
-        const axios = require('axios').default;  //Requêtes HTTP
-        let config = {
-            headers: {
-            logginid: Cookies.get("ID"),
-            logginkey: Cookies.get("KEY")
-            }
-        }
-        axios.get(url,config)
-        .then(res => {
-            console.log(res.data); //Réponse dans la console
-        })
-        .catch(err => {
-            console.log(err);
-        });
+        Cookies.remove("ID");//Supression du cookie
+        Cookies.remove("KEY");//Suppression du cookie
         this.setState({
             connected:false
-        })
+        });
     }
 
     /**
@@ -202,11 +231,15 @@ class Pageprincipale extends Component {
                     >Déconnexion
                     </button>
                 </div>
+                {this.state.grade ==="administrateur" &&
                 <button 
                     className="btn-accueil" 
                     onClick={() => this.setState({panel:true})}>
-                        Panel administrateur
+                    Panel administrateur
                 </button>
+                }
+                
+
                 <div className="col-lg">
                     <button 
                     className="btn-accueil" 
@@ -215,7 +248,6 @@ class Pageprincipale extends Component {
                     </button>
                 </div>
                  <div className="col-lg">
-                    <NewMatch />
                     <div>
                         <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
                     </div>

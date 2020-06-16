@@ -21,6 +21,7 @@ include "connexionBDD.php";
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
 $ObjIdKey->connected=isLogged($id,$key);
+$ObjIdKey->match=false;
 if($ObjIdKey->connected){//l'utilisateur a un bon couple(id,key)
     if(decNbLike($id)){
         $ObjIdKey->acceptedLike=true;
@@ -47,6 +48,20 @@ if($ObjIdKey->connected){//l'utilisateur a un bon couple(id,key)
             $req -> execute(array($nouveauDislike,$_GET["id"]));
             $req -> closeCursor();
         }else{//Tu le like en premier
+            //Regarde si c'est dans le like de l'autre
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('SELECT likes FROM user WHERE id = ?');
+            $req -> execute(array($_GET["id"]));
+            if ($ligne = $req -> fetch()) {
+                if ($ligne != NULL) {
+                    $LikeAutre=$ligne["likes"];
+                }
+            }
+            $req -> closeCursor();
+            $arrayLikeAutre=explode(";",$LikeAutre);
+            if(in_array($id,$arrayLikeAutre)){//Tu l'as dislike et il t'as like alors ca enleve    
+                $ObjIdKey->match=true;
+            }
             $cnx = connexionPDO();
             $req = $cnx -> prepare('SELECT likes FROM user WHERE id = ?');
             $req -> execute(array($id));

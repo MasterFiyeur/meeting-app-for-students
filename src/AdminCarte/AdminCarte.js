@@ -19,7 +19,6 @@ class AdminCarte extends Component{
 
     componentDidMount(){
       this.setPropsTableau();
-      this.verifPermission();
     }
 
     updateTab = (newArray) => {
@@ -39,7 +38,7 @@ class AdminCarte extends Component{
       }
       axios.get(url,config)
       .then(res => {
-          if(!(res.data.connected && res.data.grade==="administrateur")){ //Mise à jour de connected si réponse positive 
+          if(!(res.data.connect && res.data.grade==="administrateur")){ //Mise à jour de connected si réponse positive 
             this.setState({allowed:false});
           }
       })
@@ -64,7 +63,8 @@ class AdminCarte extends Component{
             this.setState({
               array:res.data.tab,
               loaded:true
-            });
+            });       
+            this.verifPermission();
           }
       })
       .catch(err => {

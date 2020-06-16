@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import {URL_API} from '../App';
 
-
+import Draggable from './draggableMessagerie'
 
 class ListMessages extends Component {
 	constructor(props) {
@@ -11,11 +11,14 @@ class ListMessages extends Component {
         	list : "",
         	message : "",
         	messages :"",
+        	x: 0,
+        	y: 0,
         }
         this.handleChange = this.handleChange.bind(this);
     	this.sendMessage = this.sendMessage.bind(this);
     }
 
+    _move = (x, y) => this.setState({x, y});
 
 	getMessage(){
 		const axios = require('axios');  //Requêtes HTTP
@@ -59,7 +62,11 @@ class ListMessages extends Component {
   	    this.setState({message: event.target.value});
 	}
 
-	sendMessage(){
+	componentWillUnmount() {
+  		clearInterval(this.interval);
+	}
+	sendMessage(event){
+		event.preventDefault();
 		const axios = require('axios');  //Requêtes HTTP
 		let config = {
             headers: {
@@ -70,6 +77,7 @@ class ListMessages extends Component {
         formdata.append('id',this.props.id);
         formdata.append('id2',this.props.id2);
         formdata.append('message',this.state.message)
+        this.setState({message : ""})
 		const url = URL_API+'sendMessage.php';
         axios.post(url,formdata,config)
         .then(res => {
@@ -81,20 +89,22 @@ class ListMessages extends Component {
 	}
 
 	render() {
+        const {x, y} = this.state;
+
 		return(
 
-		<div>
-			 <table>
-			 <tbody>
-				{this.state.messages}	
-			</tbody>
+		<Draggable x={x} y={y} onMove={this._move}>
+			<table>
+				<tbody>
+					{this.state.messages}	
+				</tbody>
 			</table>	
-			<form>
+			<form onSubmit={event => this.sendMessage(event)}>
 					<input type="text" value={this.state.message} name="message" onChange={this.handleChange} />
+					<input type="submit" />
 			</form>
-					<button onClick={() => this.sendMessage()}>envoyer</button>
 
-		</div>
+		</Draggable>
 
 
 

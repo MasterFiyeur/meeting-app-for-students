@@ -105,10 +105,19 @@ class PhotosProfil extends Component{
       }
       const {percentage} = this.state;
       return(
-        <div>
-            <input type="file" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
+        <div className="align-center">
+          <div className="input-group">
+            <div className="custom-file">
+              <input type="file" className="custom-file-input" accept="image/png, image/jpeg, image/jpg" onChange={this.profileImageChange} />
+              <label className="custom_file_label" for="inputGroupFile04">Choisir une photo</label>
+            </div>
+            <div className="input-group-append">
+              <button className="btn-simple" type="button" id="inputGroupFile04">valider</button>
+            </div>
+          </div>
+            
             <br/>
-            <ImageCrop
+            <ImageCrop 
               imageSrc={this.state.selectedImage}
               setEditorRef={this.setEditorRef}
               onCrop={this.onCrop}
@@ -119,7 +128,7 @@ class PhotosProfil extends Component{
               {/* Submit */} 
             <form onSubmit={event => this.sendCard(event)}>
               {percentage === 0 ?
-                <button disabled={this.state.userProfilePic===""} type="submit">Upload</button>
+                <button className="btn-simple" disabled={this.state.userProfilePic===""} type="submit">Upload</button>
               : <ProgressBar animated now={percentage} label={`${percentage}%`} />
               }
             </form>
