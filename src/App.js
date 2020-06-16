@@ -4,10 +4,14 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
+import Filtre from './Profil/Filtre';
 import Position from './Position/Position';
 import Pageprincipale from './Pageprincipale/Pageprincipale';
 import About from './About/About'
 import Contact from './Contact/Contact';
+import AdminCarte from './AdminCarte/AdminCarte';
+import ListMatch from './messagerie/listeMatch';
+
 
 class App extends React.Component {
   render() {
@@ -18,10 +22,14 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
+            <Route path="/panel" exact component={AdminCarte} />
+            <Route path="/filtre" exact component={Filtre} />
             <Route path="/position" exact component={Position} />
             <Route path="/principale" exact component={Pageprincipale} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path="/mesmatch" component={ListMatch} />
+
           </Switch>
           
         </div>

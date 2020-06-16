@@ -24,12 +24,21 @@ include "connexionBDD.php";
 
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
-if(isLogged($id,$key)){
+$ObjIdKey->connected=isLogged($id,$key);
+if($ObjIdKey->connected){
     $cnx = connexionPDO();
-    $req = $cnx -> prepare('UPDATE user SET connecttoken = "" WHERE id = ? AND connecttoken = ?');
-    $req -> execute(array($id,$key));
+    if(isset($_GET["account"])){
+        $req = $cnx -> prepare('SELECT * FROM user ORDER BY user.id ASC');
+    }else{
+        $req = $cnx -> prepare('SELECT * FROM user WHERE carte!=1 AND carte!="0" ORDER BY user.id ASC');
+    }
+    $req -> execute();
+    $ObjIdKey->tab= array();
+    foreach ($req as $row) {
+        $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"]];
+    }
     $req -> closeCursor();
-    print("Token supprimé !");
+    echo (json_encode($ObjIdKey));
 }else{
     print("Couple (id,key) factice.");
 }

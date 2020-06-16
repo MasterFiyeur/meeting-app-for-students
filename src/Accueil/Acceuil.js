@@ -6,8 +6,6 @@ import {URL_API} from '../App';
 
 import Login from './Login'
 import Register from './Register'
-import NewMatch from '../messagerie/newMatch';
-
 class Accueil extends Component{
     constructor(props) {
         super(props);

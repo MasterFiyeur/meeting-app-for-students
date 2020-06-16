@@ -9,10 +9,7 @@ header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
 
-
 include "connexionBDD.php";
-
-      
 
 /**
 
@@ -27,9 +24,20 @@ include "connexionBDD.php";
 
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
-$ObjIdKey->connect=isLogged($id,$key);
-$ObjIdKey->grade="";
-if($ObjIdKey->connect){$ObjIdKey->grade=getGrade($id);}
-echo (json_encode($ObjIdKey));
+$ObjIdKey->connected=isLogged($id,$key);
+if($ObjIdKey->connected){
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('UPDATE user SET carte="1" WHERE id = ?');
+    $req -> execute(array($_GET["id"]));
+    if(!(unlink("../imageCarteEtudiante/".$_GET["id"].".".$_GET["img"]))){
+        $ObjIdKey->imageSuppr="failure";
+    }else{
+        $ObjIdKey->imageSuppr="success";
+        $req -> closeCursor();
+        echo (json_encode($ObjIdKey));
+    }
+}else{
+    print("Couple (id,key) factice.");
+}
 
 ?>
