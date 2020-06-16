@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
-import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
 import {Card} from 'react-bootstrap';
@@ -249,7 +248,6 @@ class Pageprincipale extends Component {
                     </button>
                 </div>
                  <div className="col-lg">
-                    <NewMatch />
                     <div>
                         <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
                     </div>
