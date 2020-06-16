@@ -5,13 +5,23 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import ReactDOM from 'react-dom';
 import ReactModal from 'react-modal';
+function FiltrEtude(props) {
+  if (!props.warn) {
+    return null;
+  }
 
+  return (
+    <div className="warning">
+      Warning!
+    </div>
+  );
+}
 class Filtre extends Component{
     constructor(props) {
         super(props);
         this.state = {
             checkedA: true,
-            showModal: false,
+            showFiltreEtude: false,
             TabEtudes: [
                 {name: "Lycée" , value: 1},
                 {name: "Université", value: 1},
@@ -33,10 +43,10 @@ class Filtre extends Component{
             init:0,
             connect:true
         };
-this.handleOpenModal = this.handleOpenModal.bind(this);
-this.handleCloseModal = this.handleCloseModal.bind(this);
-this.handleChangeEtude = this.handleChangeEtude.bind(this);
 
+this.handleChangeEtude = this.handleChangeEtude.bind(this);
+this.handleClickIn = this.handleClickIn.bind(this);
+this.handleClickOut = this.handleClickOut.bind(this);
    }
     inputChange(event) {
         event.preventDefault();
@@ -51,12 +61,12 @@ this.handleChangeEtude = this.handleChangeEtude.bind(this);
         [event.target.name]: event.target.checked 
      })
     }
-    handleOpenModal () {
-      this.setState({ showModal: true });
+    handleClickIn(event) {
+      this.setState({showFiltreEtude: true});
     }
-    
-    handleCloseModal () {
-      this.setState({ showModal: false });
+
+    handleClickOut(event) {
+      this.setState({showFiltreEtude: false});
     }
     handleChangeEtude(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -87,10 +97,9 @@ this.handleChangeEtude = this.handleChangeEtude.bind(this);
                   </div>
 
                 {/* Filtre Etude */}
-                  <div>
-                    <label htmlFor="Etude">Etudes</label>
-                    <button id="Etude" onClick={this.handleOpenModal}>Ajouter ce filtre</button>
-                    <ReactModal isOpen={this.state.showModal} contentLabel="Modal Etude" >
+                {this.state.showFiltreEtude===false && <button onClick={() => this.handleClickIn()}>Ajouter ce filtre</button>}
+                {this.state.showFiltreEtude===true && <div >
+                      <label htmlFor="Etude">Etudes</label>
                       <div >
                         <br/>
                         <label htmlFor="lycée">Lycée</label>
@@ -156,13 +165,14 @@ this.handleChangeEtude = this.handleChangeEtude.bind(this);
                                value="6"
                                checked={this.state.TabEtudes[6].value===1?true:false}
                                onChange={this.handleChangeEtude}
-                        />                                                                    
+                        />                                                                
                       </div>
                       <br/>
-                      <button onClick={this.handleCloseModal}>Fermer</button>
-                    </ReactModal>
-                  </div>
+                      <button onClick={() => this.handleClickOut()}>Fermer</button>
+                  </div>}
+
               {/*--------------------------SAVE-------------------------- */}
+                <br/>
                 <button type="submit">Sauvegarder</button>
               </form>
             </div>
