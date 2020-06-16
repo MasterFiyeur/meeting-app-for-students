@@ -248,7 +248,6 @@ class Pageprincipale extends Component {
                     </button>
                 </div>
                  <div className="col-lg">
-                    <NewMatch />
                     <div>
                         <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
                     </div>
