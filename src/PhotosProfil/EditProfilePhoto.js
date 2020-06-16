@@ -85,57 +85,65 @@ class EditProfilePhoto extends Component{
 
     render(){
       return(
-        <div style={{display:"flex"}}>
+        <div className="">
+          <div className="row ">
             {!(this.state.tabImage[0] || this.state.tabImage[1] || this.state.tabImage[2] || this.state.tabImage[3] || this.state.tabImage[4]) &&
               <div>Vous n'avez pas d'image de profile</div>
             }
             {(this.state.tabImage[0]) &&
-            <div>
+            <div className="col-md"> 
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-1.png"} alt="Profile 1" />
                 <br/>
-                <button onClick={() => this.supprImage(1)}>Supprimer 
+                <button className="btn-simple" onClick={() => this.supprImage(1)}>Supprimer 
                   {this.trashIcon()}
                 </button>
             </div>
             }{(this.state.tabImage[1]) &&
-            <div>
+            <div className="col-md">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-2.png"} alt="Profile 2" />
                 <br/>
-                <button onClick={() => this.supprImage(2)}>Supprimer
+                <button className="btn-simple" onClick={() => this.supprImage(2)}>Supprimer
                   {this.trashIcon()}
                 </button>
-            </div>
+            </div >
             }{(this.state.tabImage[2]) &&
-            <div>
+            <div className="col-md">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-3.png"} alt="Profile 3" />
                 <br/>
-                <button onClick={() => this.supprImage(3)}>Supprimer
+                <button className="btn-simple" onClick={() => this.supprImage(3)}>Supprimer
                   {this.trashIcon()}
                 </button>
             </div>
             }{(this.state.tabImage[3]) &&
-            <div>
+            <div className="col-md">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-4.png"} alt="Profile 4" />
                 <br/>
-                <button onClick={() => this.supprImage(4)}>Supprimer
+                <button className="btn-simple" onClick={() => this.supprImage(4)}>Supprimer
                   {this.trashIcon()}
                 </button>
             </div>
             }{(this.state.tabImage[4]) &&
-            <div>
+            <div className="col-md">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-5.png"} alt="Profile 5" />
                 <br/>
-                <button onClick={() => this.supprImage(5)}>Supprimer
+                <button className="btn-simple" onClick={() => this.supprImage(5)}>Supprimer
                   {this.trashIcon()}
                 </button>
             </div>
             }
+          </div>
+          <div className="row ">
             {(!(this.state.tabImage[0] && this.state.tabImage[1] && this.state.tabImage[2] && this.state.tabImage[3] && this.state.tabImage[4]) && (!this.state.crop)) &&
-              <button onClick={() => this.setState({crop:true})}>Ajouter une photo !</button>
+              <div className="align-center">
+                <button className="btn-simple " onClick={() => this.setState({crop:true})}>Ajouter une photo !</button>
+              </div>            
             }
+          </div>
+          <div className="row">
             {this.state.crop &&
-            <PhotosProfil isCropping={this.isCropping}/>
+              <PhotosProfil isCropping={this.isCropping}/>
             }
+          </div>   
         </div>
       );
     }

@@ -201,350 +201,437 @@ class Preference extends Component{
           return (<Redirect to='/'/>); //Renvoi à la page de connexion
       }
       return(
-        <div style={{marginTop:"10%"}}>
+
+
+        <div className="margetop18 padbot5" >
           {/* Formulaire du profil de la personne' */}
           {this.state.init===1?
           <div>
             {/*--------------------------Photos--------------------------*/}
-            <EditProfilesPhoto />
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-sm">
+                  <EditProfilesPhoto />
+                </div>
+              </div>
+              
+            </div>
+              
             <br/>
-          <form onSubmit={event => this.sendPref(event)}>
-            {this.state.certif==="1"?
-              <div>T'es certifié !</div>
-              :this.state.certif==="0"?
-                <div>Veuillez envoyer votre carte étudiante.</div>
-                :<div>Votre carte étudiante est en attente de validation...</div>
-            }
-            {/*--------------------------Sexe--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="sexe">Je suis :</label>
-              </div> 
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Male">Un homme</label>
-                <input 
-                  className="form-check-input"
-                  type="radio"
-                  name="JeSuis"
-                  id="Male"
-                  value="Homme"
-                  checked={this.state.JeSuis==="Homme"}
-                  onChange={this.handleChangeSexe}
+            <form onSubmit={event => this.sendPref(event)}>
+              <div className="container-fluid">
+                
+                
+                <div className="row">
+                  <div className="col-lg">
+                  </div>
+                  <div className="col-lg">
+                    {this.state.certif==="1"?
+                      <div>T'es certifié !</div>
+                      :this.state.certif==="0"?
+                        <div>Veuillez envoyer votre carte étudiante.</div>
+                        :<div>Votre carte étudiante est en attente de validation...</div>
+                    }
+                  </div>
+                  <div className="col-lg">
+                  </div>
+                </div>
+                <br/>
+
+                  
+                <div className="row">
+                  <div className="col-lg">
+                    {/*--------------------------Sexe--------------------------*/}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="sexe">Je suis :</label>
+                      </div> 
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Male">Un homme</label>
+                        <input 
+                          className="form-check-input"
+                          type="radio"
+                          name="JeSuis"
+                          id="Male"
+                          value="Homme"
+                          checked={this.state.JeSuis==="Homme"}
+                          onChange={this.handleChangeSexe}
 
 
-                />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Female">Une femme</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="JeSuis" 
-                  id="Female"
-                  value="Femme"
-                  checked={this.state.JeSuis==="Femme"}
-                  onChange={this.handleChangeSexe}
+                        />
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Female">Une femme</label>
+                        <input 
+                          className="form-check-input" 
+                          type="radio" 
+                          name="JeSuis" 
+                          id="Female"
+                          value="Femme"
+                          checked={this.state.JeSuis==="Femme"}
+                          onChange={this.handleChangeSexe}
 
 
-                />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Alive">Vivant</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="JeSuis" 
-                  id="Alive"
-                  value="Vivant"
-                  checked={this.state.JeSuis==="Vivant"}
-                  onChange={this.handleChangeSexe}
- 
-                />
-              </div>
-            </div>
-            <br/>
-            {/*--------------------------Souhaite voir--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="lookingfor">Je souhaite rencontrer :</label>
-              </div> 
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Hommes">Des hommes</label>
-                <input 
-                  className="form-check-input"
-                  type="radio"
-                  name="lookingfor"
-                  id="Hommes"
-                  value="Hommes"
-                  checked={this.state.JeCherche==='Hommes'}
-                  onChange={this.handleChangeLookingFor}
-                  />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Femmes">Des femmes</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="lookingfor" 
-                  id="Femmes" 
-                  value="Femmes"
-                  checked={this.state.JeCherche==='Femmes'}
-                  onChange={this.handleChangeLookingFor}
-                  />
-              </div>
-              <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="Les deux">Les deux</label>
-                <input 
-                  className="form-check-input" 
-                  type="radio" 
-                  name="lookingfor" 
-                  id="Les deux" 
-                  value="Les deux" 
-                  checked={this.state.JeCherche==='Les deux'}
-                  onChange={this.handleChangeLookingFor}
-                />
-              </div>
-            </div>
-            <br/>
-          {/*--------------------------Cherche-------------------------- */}
-            <div className="input-group ">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="But">Ce que je cherche :</label>
-              </div>
-              <select  id="But" value={this.state.But} name="But" onChange={(event) => this.inputChange(event)}>
-                <option  value="0">A remplir</option>
-                <option value="1">Du sérieux</option>
-                <option value="2">Aller boire un verre</option>
-                <option value="3">On verra</option>
-                <option value="4">Pas de prise de tête</option>
-                <option value="5">Occuper ma soirée </option>
-                <option value="6">Amitié </option>
-                <option value="7">Seulement tchatter </option>
-              </select>
-            </div>
-            <br />
-           {/*--------------------------Tranche d age-------------------------- */}
-            <RangeSlider intervalle={this.state.TrancheAge} onSliderAgeChange={this.onSliderAgeChange}/>
-            <br />
-            {/*--------------------------Description--------------------------*/}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Description">A propos de vous :</label>
-              </div> 
-                <textarea
-                  id="Description"
-                  name="Description"
-                  type="text"
-                  placeholder="Vous avez 350 caractères pour nous en dire plus ;)"
-                  style={{resize: "none"}}
-                  rows="2"//hauteur
-                  cols="50" //largeur
-                  maxLength="350"
-                  value={this.state.Description}
-                  onChange={event => this.inputChange(event)} 
-                />
-            </div>
-            <br/>
-            {/*-------------------------- Ville--------------------------*/}
-            {this.state.NomVille!=="" &&
-              <label>
-                {this.state.NomVille+" - "+this.state.Contexte}
-              </label>
-            }
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Ville">J'habite à :</label>
-              </div>                
-              <input
-                  id="Ville"
-                  name="Ville"
-                  type="text"
-                  placeholder="Paris"
-                  value={this.state.Ville}
-                  onChange={event => this.inputChangeVille(event)} 
-                />
-            </div>
-            <br />
-            {/*--------------------------Etudes-------------------------- */}
-            <div className="input-group ">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Etudes">J'étudie au :</label>
-              </div>
-              <select  id="Etudes" value={this.state.Etudes} name="Etudes" onChange={(event) => this.inputChange(event)}>
-                <option  value="none">A remplir</option>
-                <option value="Lycée">Lycée</option>
-                <option value="Université">Université</option>
-                <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
-                <option value="Ecole de commerce">Ecole de commerce</option>
-                <option value="Ecole supérieur">Ecole supérieur</option>
-                <option value="Reconversion">Reconversion </option>
-                <option value="Année sabatique">Année sabatique</option>
-              </select>
-            </div>
-            <br />
-            {/*--------------------------Taille-------------------------- */}
-            <div className="input-group">
-              <div className="input-group-prepend">
-                <label className="input-group-text" htmlFor="Taille">Je mesure :</label>
-              </div>
-                   <input
-                    id="Taille"
-                    name="Taille"
-                    type="number"
-                    min="100"
-                    max="300"
-                    value={this.state.Taille}
-                    onChange={event => this.inputChange(event)}
-                  />
-                <div className="input-group-append">
-                  <label className="input-group-text" htmlFor="Taille">cm</label>
+                        />
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Alive">Vivant</label>
+                        <input 
+                          className="form-check-input" 
+                          type="radio" 
+                          name="JeSuis" 
+                          id="Alive"
+                          value="Vivant"
+                          checked={this.state.JeSuis==="Vivant"}
+                          onChange={this.handleChangeSexe}
+        
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div><br/>
+
+                <div className="row">
+                  <div className="col-lg">
+                    {/*--------------------------Souhaite voir--------------------------*/}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="lookingfor">Je souhaite rencontrer :</label>
+                      </div> 
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Hommes">Des hommes</label>
+                        <input 
+                          className="form-check-input"
+                          type="radio"
+                          name="lookingfor"
+                          id="Hommes"
+                          value="Hommes"
+                          checked={this.state.JeCherche==='Hommes'}
+                          onChange={this.handleChangeLookingFor}
+                          />
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Femmes">Des femmes</label>
+                        <input 
+                          className="form-check-input" 
+                          type="radio" 
+                          name="lookingfor" 
+                          id="Femmes" 
+                          value="Femmes"
+                          checked={this.state.JeCherche==='Femmes'}
+                          onChange={this.handleChangeLookingFor}
+                          />
+                      </div>
+                      <div className="form-check form-check-inline">
+                        <label className="form-check-label" htmlFor="Les deux">Les deux</label>
+                        <input 
+                          className="form-check-input" 
+                          type="radio" 
+                          name="lookingfor" 
+                          id="Les deux" 
+                          value="Les deux" 
+                          checked={this.state.JeCherche==='Les deux'}
+                          onChange={this.handleChangeLookingFor}
+                        />
+                      </div>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Cherche-------------------------- */}
+                    <div className="input_group ">
+                        <div className="input_group_prepend">
+                          <label className="input_group_text" htmlFor="But">Ce que je cherche :</label>
+                        </div>
+                        <select  id="But" value={this.state.But} name="But" onChange={(event) => this.inputChange(event)}>
+                          <option  value="0">A remplir</option>
+                          <option value="1">Du sérieux</option>
+                          <option value="2">Aller boire un verre</option>
+                          <option value="3">On verra</option>
+                          <option value="4">Pas de prise de tête</option>
+                          <option value="5">Occuper ma soirée </option>
+                          <option value="6">Amitié </option>
+                          <option value="7">Seulement tchatter </option>
+                        </select>
+                      </div>
+                  </div>
+                  <div className="col-lg ">
+                    {/*--------------------------Tranche d age-------------------------- */}
+                    <RangeSlider intervalle={this.state.TrancheAge} onSliderAgeChange={this.onSliderAgeChange}/>
+                  </div>
                 </div>
-            </div>
-            <br />
-            {/*--------------------------Yeux-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Yeux">Mes yeux sont :</label>
-                </div>
-                <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Noir">Noir</option>
-                  <option value="Marron">Marron</option>
-                  <option value="Vert">Vert</option>
-                  <option value="Bleu">Bleu</option>
-                  <option value="Verron">Verron</option>
-                  <option value="Autre">Autre</option>
-                </select>
+                
+                  
+                <div className="row">
+                  
+                  
+                  <div className="col-lg">
+                    {/*--------------------------Description--------------------------*/}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Description">A propos de vous :</label>
+                      </div> 
+                        <textarea
+                          id="Description"
+                          name="Description"
+                          type="text"
+                          placeholder="Vous avez 350 caractères pour nous en dire plus ;)"
+                          style={{resize: "none"}}
+                          rows="2"//hauteur
+                          cols="50" //largeur
+                          maxLength="350"
+                          value={this.state.Description}
+                          onChange={event => this.inputChange(event)} 
+                        />
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*-------------------------- Ville--------------------------*/}
+                    {this.state.NomVille!=="" &&
+                      <label>
+                        {this.state.NomVille+" - "+this.state.Contexte}
+                      </label>
+                    }
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Ville">J'habite à :</label>
+                      </div>                
+                      <input
+                          id="Ville"
+                          name="Ville"
+                          type="text"
+                          placeholder="Paris"
+                          value={this.state.Ville}
+                          onChange={event => this.inputChangeVille(event)} 
+                        />
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Etudes-------------------------- */}
+                    <div className="input_group ">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Etudes">J'étudie au :</label>
+                      </div>
+                      <select  id="Etudes" value={this.state.Etudes} name="Etudes" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Lycée">Lycée</option>
+                        <option value="Université">Université</option>
+                        <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
+                        <option value="Ecole de commerce">Ecole de commerce</option>
+                        <option value="Ecole supérieur">Ecole supérieur</option>
+                        <option value="Reconversion">Reconversion </option>
+                        <option value="Année sabatique">Année sabatique</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                </div><br/>
+               
+                <div className="row">
+                  
+                  <div className="col-lg">
+                    {/*--------------------------Taille-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Taille">Je mesure :</label>
+                      </div>
+                          <input
+                            id="Taille"
+                            name="Taille"
+                            type="number"
+                            min="100"
+                            max="300"
+                            value={this.state.Taille}
+                            onChange={event => this.inputChange(event)}
+                          />
+                          <label className="input_cm" htmlFor="Taille">cm</label>
+                          
+
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Yeux-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Yeux">Mes yeux sont :</label>
+                      </div>
+                      <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Noir">Noir</option>
+                        <option value="Marron">Marron</option>
+                        <option value="Vert">Vert</option>
+                        <option value="Bleu">Bleu</option>
+                        <option value="Verron">Verron</option>
+                        <option value="Autre">Autre</option>
+                      </select>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Cheveux-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Cheveux">Mes cheveux sont :</label>
+                      </div>
+                      <select  id="Cheveux" value={this.state.Cheveux} name="Cheveux" onChange={(event) => this.inputChange(event)}>
+                      <option  value="none">A remplir</option>
+                        <option value="Noir">Noir</option>
+                        <option value="Brun">Brun</option>
+                        <option value="Auburn">Auburn</option>
+                        <option value="Châtain">Châtain</option>
+                        <option value="Roux">Roux</option>
+                        <option value="Blond">Blond</option>
+                        <option value="Blanc">Blanc</option>
+                        <option value="Autre">Autre</option>
+                      </select>
+                    </div>
+                  </div>
+                </div><br/>
+                
+
+                <div className="row">
+                  
+                  
+                  <div className="col-lg">
+                    {/*--------------------------Sport-------------------------- */}
+                    <div className="input_group ">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Sport">Les activités physique :</label>
+                      </div>
+                      <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Passioné">Passioné(e)</option>
+                        <option value="Régulièrement">Régulièrement</option>
+                        <option value="Parfois">Parfois</option>
+                        <option value="Une fois au chalet">Une fois au chalet</option>
+                        <option value="Quelle horreur">Quelle horreur</option>
+                      </select>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Alcool-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Alcool">L'alcool :</label>
+                      </div>
+                      <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Tous les jours">Tous les jours</option>
+                        <option value="Régulièrement">Régulièrement</option>
+                        <option value="A l'occasion">A l'occasion</option>
+                        <option value="Jamais">Jamais</option>
+                      </select>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Tabac-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Tabac">Le tabac :</label>
+                      </div>
+                      <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Fréquemment">Fréquemment</option>
+                        <option value="A l'occasion">A l'occasion</option>
+                        <option value="Jamais">Jamais</option>
+                      </select>
+                    </div>
+                  </div>
+                  
+                </div><br/>
+               
+
+                <div className="row">
+                  
+                  <div className="col-lg">
+                    {/*--------------------------Animaux Domestique-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Animaux">Mes animaux de compagnie :</label>
+                      </div>
+                      <select  id="Animaux" value={this.state.Animaux} name="Animaux" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Chiens">Chiens</option>
+                        <option value="Chats">Chats</option>
+                        <option value="Beaucoup">Beaucoup :)</option>
+                        <option value="Autres">Autres</option>
+                        <option value="Aucun">Aucun</option>
+                        <option value="Allergique">Allergique :'(</option>
+                      </select>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Religion-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Religion">Ma religion :</label>
+                      </div>
+                      <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Agnosticisme">Agnosticisme</option>
+                        <option value="Athéisme">Athéisme</option>
+                        <option value="Bouddhisme">Bouddhisme</option>
+                        <option value="Christianisme">Christianisme</option>
+                        <option value="Hindouisme">Hindouisme</option>
+                        <option value="Jaïnisme">Jaïnisme</option>
+                        <option value="Judaïsme">Judaïsme</option>
+                        <option value="Islam">Islam</option>
+                        <option value="Zoroastrisme">Zoroastrisme</option>
+                        <option value="Sikhisme">Sikhisme</option>
+                        <option value="Spiritualité">Spiritualité</option>
+                        <option value="Autre">Autre</option>
+                      </select>
+                    </div>
+                    <br/>
+                  </div>
+                  <div className="col-lg">
+                    {/*--------------------------Signe Astro-------------------------- */}
+                    <div className="input_group">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="Astro">Mon signe astrologique :</label>
+                      </div>
+                      <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
+                        <option  value="none">A remplir</option>
+                        <option value="Verseau">Verseau</option>
+                        <option value="Poissons">Poissons</option>
+                        <option value="Bélier">Bélier</option>
+                        <option value="Taureau">Taureau</option>
+                        <option value="Gémeaux">Gémeaux</option>
+                        <option value="Cancer">Cancer</option>
+                        <option value="Lion">Lion</option>
+                        <option value="Vierge">Vierge</option>
+                        <option value="Scorpion">Scorpion</option>
+                        <option value="Sagittaire">Sagittaire</option>
+                        <option value="Capricorne">Capricorne</option>
+                        <option value="Balance">Balance</option>
+                      </select>
+                    </div>
+                  </div>
+                </div><br/>
+                
+
+                <div className="row">
+                  
+                  
+                </div><br/>
+                
               </div>
-              <br />
-              {/*--------------------------Cheveux-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Cheveux">Mes cheveux sont :</label>
-                </div>
-                <select  id="Cheveux" value={this.state.Cheveux} name="Cheveux" onChange={(event) => this.inputChange(event)}>
-                <option  value="none">A remplir</option>
-                  <option value="Noir">Noir</option>
-                  <option value="Brun">Brun</option>
-                  <option value="Auburn">Auburn</option>
-                  <option value="Châtain">Châtain</option>
-                  <option value="Roux">Roux</option>
-                  <option value="Blond">Blond</option>
-                  <option value="Blanc">Blanc</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Sport-------------------------- */}
-              <div className="input-group ">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Sport">Les activités physique :</label>
-                </div>
-                <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Passioné">Passioné(e)</option>
-                  <option value="Régulièrement">Régulièrement</option>
-                  <option value="Parfois">Parfois</option>
-                  <option value="Une fois au chalet">Une fois au chalet</option>
-                  <option value="Quelle horreur">Quelle horreur</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Alcool-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Alcool">L'alcool :</label>
-                </div>
-                <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Tous les jours">Tous les jours</option>
-                  <option value="Régulièrement">Régulièrement</option>
-                  <option value="A l'occasion">A l'occasion</option>
-                  <option value="Jamais">Jamais</option>
-                </select>
-                </div>
-              <br />
-              {/*--------------------------Tabac-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Tabac">Le tabac :</label>
-                </div>
-                <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Fréquemment">Fréquemment</option>
-                  <option value="A l'occasion">A l'occasion</option>
-                  <option value="Jamais">Jamais</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Animaux Domestique-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Animaux">Mes animaux de compagnie :</label>
-                </div>
-                <select  id="Animaux" value={this.state.Animaux} name="Animaux" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Chiens">Chiens</option>
-                  <option value="Chats">Chats</option>
-                  <option value="Beaucoup">Beaucoup :)</option>
-                  <option value="Autres">Autres</option>
-                  <option value="Aucun">Aucun</option>
-                  <option value="Allergique">Allergique :'(</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Religion-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Religion">Ma religion :</label>
-                </div>
-                <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Agnosticisme">Agnosticisme</option>
-                  <option value="Athéisme">Athéisme</option>
-                  <option value="Bouddhisme">Bouddhisme</option>
-                  <option value="Christianisme">Christianisme</option>
-                  <option value="Hindouisme">Hindouisme</option>
-                  <option value="Jaïnisme">Jaïnisme</option>
-                  <option value="Judaïsme">Judaïsme</option>
-                  <option value="Islam">Islam</option>
-                  <option value="Zoroastrisme">Zoroastrisme</option>
-                  <option value="Sikhisme">Sikhisme</option>
-                  <option value="Spiritualité">Spiritualité</option>
-                  <option value="Autre">Autre</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------Signe Astro-------------------------- */}
-              <div className="input-group">
-                <div className="input-group-prepend">
-                  <label className="input-group-text" htmlFor="Astro">Mon signe astrologique :</label>
-                </div>
-                <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
-                  <option value="Verseau">Verseau</option>
-                  <option value="Poissons">Poissons</option>
-                  <option value="Bélier">Bélier</option>
-                  <option value="Taureau">Taureau</option>
-                  <option value="Gémeaux">Gémeaux</option>
-                  <option value="Cancer">Cancer</option>
-                  <option value="Lion">Lion</option>
-                  <option value="Vierge">Vierge</option>
-                  <option value="Scorpion">Scorpion</option>
-                  <option value="Sagittaire">Sagittaire</option>
-                  <option value="Capricorne">Capricorne</option>
-                  <option value="Balance">Balance</option>
-                </select>
-              </div>
-              <br />
-              {/*--------------------------SAVE-------------------------- */}
-                <button type="submit">Sauvegarder</button>
-              </form>
-              </div>
+
+                {/*--------------------------SAVE-------------------------- */}
+              <button className="btn-login" type="submit">Sauvegarder</button>
+            </form>
+          </div>
               :
               <div>Chargement...</div>
               }
-            </div>
+        </div>
           );
     }
 }

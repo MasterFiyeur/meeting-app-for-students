@@ -68,7 +68,7 @@ class Preference extends Component{
             {/*--------------------------Sexe--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="sexe">Je suis :</label>
+                <label className="input-group_text" for="sexe">Je suis :</label>
               </div> 
               <div className="form-check form-check-inline">
                 <label className="form-check-label" for="Male">Un homme</label>
@@ -116,7 +116,7 @@ class Preference extends Component{
             {/*--------------------------Souhaite voir--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="lookingfor">Je souhaite rencontrer :</label>
+                <label className="input-group_text" for="lookingfor">Je souhaite rencontrer :</label>
               </div> 
               <div className="form-check form-check-inline">
                 <label className="form-check-label" for="lookingfor">Des hommes</label>
@@ -159,7 +159,7 @@ class Preference extends Component{
           {/*--------------------------Cherche-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="purpose">Ce que je cherche :</label>
+                <label className="input-group_text" for="purpose">Ce que je cherche :</label>
               </div>
               <select  id="purpose" value={this.state.purpose} name="purpose" onChange={(event) => this.inputChange(event)}>
                 <option selected value="0">A remplir</option>
@@ -180,7 +180,7 @@ class Preference extends Component{
             {/*--------------------------Description--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="Description">A propos de vous :</label>
+                <label className="input-group_text" for="Description">A propos de vous :</label>
               </div> 
                 <textarea
                   id="Description"
@@ -199,7 +199,7 @@ class Preference extends Component{
             {/*-------------------------- City--------------------------*/}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="City">J'habite à :</label>
+                <label className="input-group_text" for="City">J'habite à :</label>
               </div>                
               <input
                   id="City"
@@ -214,7 +214,7 @@ class Preference extends Component{
             {/*--------------------------Etudes-------------------------- */}
             <div className="input-group ">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="Study">J'étudie au :</label>
+                <label className="input-group_text" for="Study">J'étudie au :</label>
               </div>
               <select  id="Study" value={this.state.Study} name="Study" onChange={(event) => this.inputChange(event)}>
                 <option selected value="none">A remplir</option>
@@ -231,7 +231,7 @@ class Preference extends Component{
             {/*--------------------------Taille-------------------------- */}
             <div className="input-group">
               <div className="input-group-prepend">
-                <label className="input-group-text" for="Taille">Je mesure :</label>
+                <label className="input-group_text" for="Taille">Je mesure :</label>
               </div>
                    <input
                     id="Taille"
@@ -243,14 +243,14 @@ class Preference extends Component{
                     onChange={event => this.inputChange(event)}
                   />
                 <div className="input-group-append">
-                  <label className="input-group-text" for="Taille">cm</label>
+                  <label className="input-group_text" for="Taille">cm</label>
                 </div>
             </div>
             <br />
             {/*--------------------------Yeux-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Yeux">Mes yeux sont :</label>
+                  <label className="input-group_text" for="Yeux">Mes yeux sont :</label>
                 </div>
                 <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -266,7 +266,7 @@ class Preference extends Component{
               {/*--------------------------Cheveux-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Hair">Mes cheveux sont :</label>
+                  <label className="input-group_text" for="Hair">Mes cheveux sont :</label>
                 </div>
                 <select  id="Hair" value={this.state.Hair} name="Hair" onChange={(event) => this.inputChange(event)}>
                 <option selected value="none">A remplir</option>
@@ -284,7 +284,7 @@ class Preference extends Component{
               {/*--------------------------Sport-------------------------- */}
               <div className="input-group ">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Sport">Les activités physique :</label>
+                  <label className="input-group_text" for="Sport">Les activités physique :</label>
                 </div>
                 <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -299,7 +299,7 @@ class Preference extends Component{
               {/*--------------------------Alcool-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Alcool">L'alcool :</label>
+                  <label className="input-group_text" for="Alcool">L'alcool :</label>
                 </div>
                 <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -313,7 +313,7 @@ class Preference extends Component{
               {/*--------------------------Tabac-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Tabac">Le tabac :</label>
+                  <label className="input-group_text" for="Tabac">Le tabac :</label>
                 </div>
                 <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -326,7 +326,7 @@ class Preference extends Component{
               {/*--------------------------Animaux Domestique-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Pet">Mes animaux de compagnie :</label>
+                  <label className="input-group_text" for="Pet">Mes animaux de compagnie :</label>
                 </div>
                 <select  id="Pet" value={this.state.Pet} name="Pet" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -342,7 +342,7 @@ class Preference extends Component{
               {/*--------------------------Religion-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Religion">Ma religion :</label>
+                  <label className="input-group_text" for="Religion">Ma religion :</label>
                 </div>
                 <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
@@ -364,7 +364,7 @@ class Preference extends Component{
               {/*--------------------------Signe Astro-------------------------- */}
               <div className="input-group">
                 <div className="input-group-prepend">
-                  <label className="input-group-text" for="Astro">Mon signe astrologique :</label>
+                  <label className="input-group_text" for="Astro">Mon signe astrologique :</label>
                 </div>
                 <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
                   <option selected value="none">A remplir</option>
