@@ -371,7 +371,7 @@ class Preference extends Component{
                 <label className="input-group-text" htmlFor="Etudes">J'étudie au :</label>
               </div>
               <select  id="Etudes" value={this.state.Etudes} name="Etudes" onChange={(event) => this.inputChange(event)}>
-                <option  value="none">A remplir</option>
+                <option value="none">A remplir</option>
                 <option value="Lycée">Lycée</option>
                 <option value="Université">Université</option>
                 <option value="Ecole d'Ingénieur">Ecole d'Ingénieur</option>
@@ -499,7 +499,7 @@ class Preference extends Component{
                   <label className="input-group-text" htmlFor="Religion">Ma religion :</label>
                 </div>
                 <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
-                  <option  value="none">A remplir</option>
+                  <option value="none">A remplir</option>
                   <option value="Agnosticisme">Agnosticisme</option>
                   <option value="Athéisme">Athéisme</option>
                   <option value="Bouddhisme">Bouddhisme</option>
