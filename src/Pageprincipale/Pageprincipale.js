@@ -14,7 +14,8 @@ class Pageprincipale extends Component {
             pref:false, //Passe à true lorsque l'utilisateur clique sur preference
             tabPersonne:null,
             currentIndex:0,
-            loaded:false
+            loaded:false,
+            panel:false
         }
       }
     
@@ -185,6 +186,8 @@ class Pageprincipale extends Component {
             return (<Redirect to='/'/>); //Renvoi à la page de connexion
         }else if(this.state.pref){
             return (<Redirect to='/preference'/>);//Renvoi à la page des preferences
+        }else if(this.state.panel){
+            return (<Redirect to='/panel'/>);//Renvoi à la page du panel administrateur
         }
       return(
 
@@ -197,6 +200,11 @@ class Pageprincipale extends Component {
                     >Déconnexion
                     </button>
                 </div>
+                <button 
+                    className="btn-accueil" 
+                    onClick={() => this.setState({panel:true})}>
+                        Panel administrateur
+                </button>
                 <div className="col-lg">
                     <button 
                     className="btn-accueil" 

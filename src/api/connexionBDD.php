@@ -87,6 +87,25 @@ function isLogged($id, $key){
 }
 
 /**
+ * - Fonction de récupération du grade de la personne
+ * - Paramètre : id et clé
+ * - Sortie : booléen
+ */
+function getGrade($id){
+    $grade="";
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('SELECT grade FROM user WHERE id=?');
+    $req -> execute(array($id));
+    if ($ligne = $req -> fetch()) {
+        if ($ligne != NULL) {
+            $grade=$ligne["grade"];
+        }
+    }
+    $req -> closeCursor();
+    return($grade);
+}
+
+/**
  * - Fonction qui décrémente le nb de like autorisé par jour
  * et le met à jour si on est le lendemain
  * - Paramètre : id

@@ -28,6 +28,8 @@ include "connexionBDD.php";
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];
 $ObjIdKey->connect=isLogged($id,$key);
+$ObjIdKey->grade="";
+if($ObjIdKey->connect){$ObjIdKey->grade=getGrade($id);}
 echo (json_encode($ObjIdKey));
 
 ?>

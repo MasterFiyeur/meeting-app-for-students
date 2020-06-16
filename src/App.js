@@ -9,6 +9,7 @@ import Position from './Position/Position';
 import Pageprincipale from './Pageprincipale/Pageprincipale';
 import About from './About/About'
 import Contact from './Contact/Contact';
+import AdminCarte from './AdminCarte/AdminCarte';
 
 class App extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class App extends React.Component {
           <Switch>
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
+            <Route path="/panel" exact component={AdminCarte} />
             <Route path="/filtre" exact component={Filtre} />
 
             <Route path="/position" exact component={Position} />
