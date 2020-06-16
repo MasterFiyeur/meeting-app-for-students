@@ -82,8 +82,46 @@ function isLogged($id, $key){
             }
         }
     }
+    $req -> closeCursor();
     return $logged;
 }
 
+/**
+ * - Fonction qui décrémente le nb de like autorisé par jour
+ * et le met à jour si on est le lendemain
+ * - Paramètre : id
+ * - Sortie : booléen
+ */
+function decNbLike($id){
+    $res=false;
+    $cnx = connexionPDO();
+    $req = $cnx -> prepare('SELECT nbLike,actuLike FROM user WHERE id = ?');
+    $req -> execute(array($id));
+    if ($ligne = $req -> fetch()) {
+        if ($ligne != NULL) {
+            $actuLike=$ligne['actuLike'];
+            $nbLike=$ligne['nbLike'];
+        }
+    }
+    $req -> closeCursor();
+    if($actuLike===date("Ymd")){
+        if($nbLike>0){
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('UPDATE user set nbLike=? WHERE id = ?');
+            $req -> execute(array($nbLike-1,$id));
+            $req -> closeCursor();
+            $res=true;
+        }else{
+            $res=false;
+        }
+    }else{
+        $cnx = connexionPDO();
+        $req = $cnx -> prepare('UPDATE user set nbLike=?,actuLike=? WHERE id = ?');
+        $req -> execute(array(9,date("Ymd"),$id));
+        $req -> closeCursor();
+        $res=true;
+    }
+    return($res);
+}   
 
 ?>

@@ -37,13 +37,11 @@ class CardId extends Component{//this.props.hisId
       }
 
     componentDidMount(){
-        console.log(this.props.hisId);
         this.initTabsState();
     }
 
     componentDidUpdate(props){
         if(this.state.oldId!==this.props.hisId){//Si l'id a changé
-        console.log(this.props.hisId);
         this.initTabsState();
         }
     }

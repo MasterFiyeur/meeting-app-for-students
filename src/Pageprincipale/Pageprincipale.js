@@ -40,17 +40,15 @@ class Pageprincipale extends Component {
         .then(res => {
             if(res.data.connected){ //Mise à jour de connected si réponse négative
                 if(res.data.dislikes!=="echec"){
-                    alert("Disliked !");
+                    this.setState({
+                        currentIndex:this.state.currentIndex+1
+                    });
                 }
-                console.log(res.data);
             }
         })
         .catch(err => {
             console.log(err);
         });
-            this.setState({
-                currentIndex:this.state.currentIndex+1
-            });
     }
 
     like(){
@@ -66,17 +64,19 @@ class Pageprincipale extends Component {
         .then(res => {
             if(res.data.connected){ //Mise à jour de connected si réponse négative
                 if(res.data.likes!=="echec"){
-                    alert("Liked !");
+                    if(res.data.acceptedLike){
+                        this.setState({
+                            currentIndex:this.state.currentIndex+1
+                        });
+                    }else{
+                        alert("Tu n'as plus de like, abonnez-vous ou revenez demain :)");
+                    }
                 }
-                console.log(res.data);
             }
         })
         .catch(err => {
             console.log(err);
         });
-            this.setState({
-                currentIndex:this.state.currentIndex+1
-            });
     }
 
     loadTableauPersonne(){
@@ -96,7 +96,6 @@ class Pageprincipale extends Component {
                     currentIndex:0,
                     loaded:true
                 });
-                console.log(res.data);
             }
         })
         .catch(err => {
