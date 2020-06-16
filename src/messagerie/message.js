@@ -11,8 +11,8 @@ class ListMessages extends Component {
         	list : "",
         	message : "",
         	messages :"",
-        	x: 100,
-        	y: 200,
+        	x: 0,
+        	y: 0,
         }
         this.handleChange = this.handleChange.bind(this);
     	this.sendMessage = this.sendMessage.bind(this);
@@ -62,6 +62,9 @@ class ListMessages extends Component {
   	    this.setState({message: event.target.value});
 	}
 
+	componentWillUnmount() {
+  		clearInterval(this.interval);
+	}
 	sendMessage(event){
 		event.preventDefault();
 		const axios = require('axios');  //Requêtes HTTP
@@ -87,7 +90,7 @@ class ListMessages extends Component {
 
 	render() {
         const {x, y} = this.state;
-		
+
 		return(
 
 		<Draggable x={x} y={y} onMove={this._move}>
