@@ -12,7 +12,7 @@ class ListMatch extends Component {
         		list : "",
         		show : 0,
         		id : 0,
-        		id2: 0
+        		id2: 0,
         }
     }
 
@@ -55,30 +55,33 @@ class ListMatch extends Component {
 									<td>{el.split('-')[0]}</td>
 									<td>{el.split('-')[1]}</td>
 								</tr>);
-		return (ret)
+		return (
+				<table>
+					<tbody> 
+						{ret}
+					</tbody>
+				</table>
+				);
 	}
 
 	componentDidMount() {
 		this.loadMyMatch()
 	}
+  	
+
+
 	render(){
 		return(
 			
 			<div>
-				{this.state.show == 1 &&
-					<div className="messages">
-						<ListMessages id={this.state.id} id2={this.state.id2} />
-					</div> 
-				}
-				<div className="listeMatch" >						
-					<table>
-						<tbody> 
-							{this.affMatch()}	
-						</tbody>
-					</table>
-				</div>
 				
-
+				<div className="listeMatch" >
+					{this.affMatch()}	
+				</div>
+				{this.state.show == 1 &&
+					<ListMessages id={this.state.id} id2={this.state.id2} />
+				}
+				
 			</div>
 		)
 	}

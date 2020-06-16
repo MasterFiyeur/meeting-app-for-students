@@ -16,16 +16,16 @@ include "connexionBDD.php";
 try {
 
 	$cnx = connexionPDO();
+	$sendID = $_SERVER['HTTP_LOGGINID'];
 	$id = $_POST["id"];
 	$id2 = $_POST["id2"];
+	$message = $_POST["message"];
 	$match = "d".$id."_".$id2;
-	$sql = "SELECT * FROM `".$match."`";
-    $messages = $cnx-> prepare($sql);
-    $messages -> execute();
-    foreach ($messages as $row) {
-        	print $row["id"] . "-" . $row["message"].";";
-    }
-	$messages -> closeCursor();
+	$sql = "INSERT INTO `".$match."`(`id`,`message`) VALUE (?,?);";
+    $send = $cnx-> prepare($sql);
+    $send -> execute(array($sendID,$message));
+    print "1";
+	$send -> closeCursor();
 }
 catch (PDOException $e){
 	print "Erreur !".$e -> getMessage();

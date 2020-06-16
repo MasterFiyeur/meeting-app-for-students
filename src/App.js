@@ -10,6 +10,8 @@ import Pageprincipale from './Pageprincipale/Pageprincipale';
 import About from './About/About'
 import Contact from './Contact/Contact';
 import AdminCarte from './AdminCarte/AdminCarte';
+import ListMatch from './messagerie/listeMatch';
+
 
 class App extends React.Component {
   render() {
@@ -27,6 +29,8 @@ class App extends React.Component {
             <Route path="/principale" exact component={Pageprincipale} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
+            <Route path="/mesmatch" component={ListMatch} />
+
           </Switch>
           
         </div>

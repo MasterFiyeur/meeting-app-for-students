@@ -6,6 +6,8 @@ import NewMatch from '../messagerie/newMatch';
 import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
 import {Card} from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -214,7 +216,9 @@ class Pageprincipale extends Component {
                 </div>
                  <div className="col-lg">
                     <NewMatch />
-                    <ListMatch />
+                    <div>
+                        <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
+                    </div>
                 </div>
                 {(this.state.tabPersonne!==null && this.state.tabPersonne.length > this.state.currentIndex) && 
                     <>
