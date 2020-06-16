@@ -17,18 +17,13 @@ class NewMatch extends Component{
             logginkey: Cookies.get("KEY")
             }
         }
-		formdata.append("id2","43");
+		formdata.append("id2","38");
         const url = URL_API+'newDisc.php';
         axios.post(url,formdata,config)
         .then(res => {
             console.log("Réponse newMatch: "+res.data);
             if(res.data=='1'){
-              this.setState({
-                alertClass:"alert-primary",
-                alertMessage: "discution créé avec succès !",
-                etape:1
-              });
-              this.setState({alertShow: true});
+              console.log("match cree avec succès")
             }else if(res.data == '2'){
             	console.error("vous n'avez pas l'air d'etre connecté");
             }else {
