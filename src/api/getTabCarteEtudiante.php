@@ -35,7 +35,11 @@ if($ObjIdKey->connected){
     $req -> execute();
     $ObjIdKey->tab= array();
     foreach ($req as $row) {
-        $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"]];
+        if(isset($_GET["account"])){
+            $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"],'Mail' => $row["mail"],'DateNaissance' => $row["birthDate"],'Grade' => $row["grade"]];
+        }else{
+            $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"]];
+        }
     }
     $req -> closeCursor();
     echo (json_encode($ObjIdKey));

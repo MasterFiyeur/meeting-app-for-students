@@ -480,10 +480,8 @@ class Register extends Component{
             <div>
               <h4 className="text-blue">Ton compte viens d'être créé</h4>
               <p className="text-blue">Je t'invite à aller vite te connecter pour profiter de notre application :)</p>
-              <a href="/"><button className="btn btn-danger">Fermer</button></a>{/* Il faudrait connecter directement */}
             </div>
           }
-
         </div>
       );
     }

@@ -45,6 +45,8 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab[] = (object) ['id' => $row["id"]];
         }
     }
+    //Ici faut recuperer le tableau et appliquer les filtres
+    //Peut etre ce serait intelligent de récuperer 
     $req -> closeCursor();
     echo (json_encode($ObjIdKey));
 }else{

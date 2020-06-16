@@ -44,7 +44,7 @@ class Pageprincipale extends Component {
         axios.post(url,formdata,config)
         .then(res => {
             console.log("Réponse newMatch: "+res.data);
-            if(res.data=='1'){
+            if(res.data==='1'){
               /**Faire une animation de MATTTTCHH IIICIII 
                * kiss kiss Juliente (avec accent espagnol pour le Juliente)
                */
@@ -53,7 +53,7 @@ class Pageprincipale extends Component {
                     currentIndex:this.state.currentIndex+1
                 });
               this.setState({alertShow: true});
-            }else if(res.data == '2'){
+            }else if(res.data === '2'){
             	console.error("vous n'avez pas l'air d'etre connecté");
             }else{
             	console.error('Problème dans le retour de l\'API/newUser.');

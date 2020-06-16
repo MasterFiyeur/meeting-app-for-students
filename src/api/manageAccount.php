@@ -110,6 +110,25 @@ if($ObjIdKey->connected && isset($_POST['id'])){
         $req = $cnx -> prepare('UPDATE user SET carte="1" WHERE id = ?');
         $req -> execute(array($_POST['id']));
         $req -> closeCursor();
+    }elseif(isset($_POST["rank"])){
+        if($_POST["rank"]==="promote"){//On le met premium
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('UPDATE user SET grade="premium" WHERE id = ?');
+            $req -> execute(array($_POST['id']));
+            $req -> closeCursor();
+            $ObjIdKey->newGrade="premium";
+        }else{//On le met nouveau
+            $cnx = connexionPDO();
+            $req = $cnx -> prepare('UPDATE user SET grade="nouveau" WHERE id = ?');
+            $req -> execute(array($_POST['id']));
+            $req -> closeCursor();
+            $ObjIdKey->newGrade="nouveau";
+        }
+    }elseif(isset($_POST["action"]) && $_POST["action"]==="resetLike"){
+        $cnx = connexionPDO();
+        $req = $cnx -> prepare('UPDATE user SET actuLike="20200615" WHERE id = ?');
+        $req -> execute(array($_POST['id']));
+        $req -> closeCursor();
     }//elseif(){}
     echo (json_encode($ObjIdKey));
 }else{

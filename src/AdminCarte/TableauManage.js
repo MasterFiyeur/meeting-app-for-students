@@ -8,7 +8,8 @@ class TableauManage extends Component{
 
       this.state = {
           tabID: this.props.Tableau,
-          Actuel:{Prenom:"",Nom:"",Id:""}
+          Actuel:{Prenom:"",Nom:"",Id:""},
+          ActuelPerso:{Mail:"",DateNaissance:"",Grade:""}
       };
     }
 
@@ -34,29 +35,17 @@ class TableauManage extends Component{
     }
 
     alertId(el){
-        const axios = require('axios');  //Requêtes HTTP
-        const url = URL_API+'getExtensionCarte.php?id='+el.Id;
-        let config = {
-            headers: {
-            logginid: Cookies.get("ID"),
-            logginkey: Cookies.get("KEY")
+        this.setState({
+            Actuel:{
+                Prenom:el.Prenom,
+                Nom:el.Nom,
+                Id:el.Id
+            },
+            ActuelPerso:{
+                Mail:el.Mail,
+                DateNaissance:el.DateNaissance,
+                Grade:el.Grade
             }
-        }
-        axios.get(url,config)
-        .then(res => {
-            if(res.data.connected){ //Mise à jour de connected si réponse positive 
-                this.setState({
-                    Actuel:{
-                        Prenom:el.Prenom,
-                        Nom:el.Nom,
-                        Id:el.Id
-                    }
-                });
-                console.log(el.Prenom+" "+el.Nom+" sélectionné !");
-            }
-        })
-        .catch(err => {
-            console.log(err);
         });
     }
 
@@ -119,6 +108,53 @@ class TableauManage extends Component{
         });
     }
 
+    rank(action){
+        const axios = require('axios');  //Requêtes HTTP
+        const url = URL_API+'manageAccount.php';
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        let formData = new FormData();
+        formData.append('id',this.state.Actuel.Id);
+        formData.append('rank',action);
+        axios.post(url,formData,config)
+        .then(res => {
+            if(res.data.connected){
+
+                this.reset();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
+    management(action){
+        const axios = require('axios');  //Requêtes HTTP
+        const url = URL_API+'manageAccount.php';
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        let formData = new FormData();
+        formData.append('id',this.state.Actuel.Id);
+        formData.append('action',action);
+        axios.post(url,formData,config)
+        .then(res => {
+            if(res.data.connected){
+                this.reset();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+    }
+
     render(){
       return(
         <div style={{marginTop:"20px"}}>
@@ -137,6 +173,18 @@ class TableauManage extends Component{
             </table>
             {this.state.Actuel.Prenom!=="" &&
             <>
+            <ul>
+                <li>{this.state.ActuelPerso.Mail}</li>
+                <li>{this.state.ActuelPerso.DateNaissance}</li>
+                <li>{this.state.ActuelPerso.Grade}</li>
+            </ul>
+            {this.state.ActuelPerso.Grade==="nouveau" &&
+                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.rank("promote")}>Promouvoir</button>
+            }
+            {this.state.ActuelPerso.Grade==="premium" &&
+                <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.rank("demote")}>Rétrograder</button>
+            }
+            <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.management("resetLike")}>Réinitialiser les likes</button>
             <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
             <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteAccount()}>Supprimer le compte</button>
             </>
