@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import {URL_API} from '../App';
-
 const throttle = (f) => {
     let token = null, lastArgs = null;
     const invoke = () => {
@@ -18,8 +17,8 @@ const throttle = (f) => {
     return result;
 };
 
-class Draggable extends React.Component {
- _relX = 0;
+class Draggable extends React.PureComponent {
+    _relX = 0;
     _relY = 0;
     _ref = React.createRef();
     
@@ -33,8 +32,17 @@ class Draggable extends React.Component {
         // the laggiest part of the code right now. Luckily it's called only
         // once per click.
         const {left, top} = this._ref.current.getBoundingClientRect();
+
         this._relX = event.pageX - (left + scrollLeft - clientLeft);
         this._relY = event.pageY - (top + scrollTop - clientTop);
+        console.log(left);
+        console.log(top);
+        console.log(event.pageX);
+        console.log(event.pageY);
+        console.log(this._relX);
+        console.log(this._relY);
+
+
         document.addEventListener('mousemove', this._onMouseMove);
         document.addEventListener('mouseup', this._onMouseUp);
         event.preventDefault();
@@ -47,6 +55,8 @@ class Draggable extends React.Component {
     };
     
     _onMouseMove = (event) => {
+    	console.log(event.pageX - this._relX);
+    	console.log(event.pageY - this._relY);
         this.props.onMove(
             event.pageX - this._relX,
             event.pageY - this._relY,
@@ -80,7 +90,7 @@ class Draggable extends React.Component {
             </div>
         );
     }
-
 }
+
 
 export default Draggable
