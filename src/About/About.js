@@ -12,13 +12,16 @@ class About extends Component{
 
     render(){
       return(
-      <div  >
+      <div className="About" >
       <br/>
       <br/>
       <br/>
       <br/>
+      <span className="title-About">A propos de nous</span>
       <br/>
+
         <div className="box-About">
+
         {/* Pour Théo */}
           <div className="card-About">
             <div className="imgBx-About">
