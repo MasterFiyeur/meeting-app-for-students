@@ -8,14 +8,14 @@ body{
     background: #212121;
     font-family: sans-serif;
   }
-  .box{
+  .box-About{
     width: 1000px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
     margin: 0 auto;
   }
-  .card{
+  .card-About{
     position: relative;
     width: 300px;
     height: 350px;
@@ -24,8 +24,8 @@ body{
     border-radius: 4px;
     box-shadow:0 2px 10px rgba(0,0,0,.2);
   }
-  .card:before,
-  .card:after
+  .card-About:before,
+  .card-About:after
   {
     content:"";
     position: absolute;
@@ -38,15 +38,15 @@ body{
     transition: 1s;
     z-index:-1;
   }
-  .card:hover:before{
+  .card-About:hover:before{
   transform: rotate(22deg);
   box-shadow: 0 2px 20px rgba(0,0,0,.2);
   }
-  .card:hover:after{
+  .card-About:hover:after{
   transform: rotate(12deg);
   box-shadow: 0 2px 20px rgba(0,0,0,.2);
   }
-  .card .imgBx{
+  .card-About .imgBx-About{
   position: absolute;
   top: 10px;
   left: 10px;
@@ -57,12 +57,12 @@ body{
   z-index: 1;
   }
   
-  .card:hover .imgBx
+  .card-About:hover .imgBx-About
   {
     bottom: 1000px;
   }
 
-  .card .imgBx img{
+  .card-About .imgBx-About img{
       position: absolute;
       top: 0;
       left: 0;
@@ -71,7 +71,7 @@ body{
       object-fit: cover;
   }
 
-  .card .details{
+  .card-About .details-About{
       position: absolute;
       left: 10px;
       right: 10px;
@@ -80,7 +80,7 @@ body{
       text-align: center;
   }
 
-  .card .details h2{
+  .card-About .details-About h2{
    margin: 0;
    padding: 0;
    font-weight: 600;
@@ -89,14 +89,14 @@ body{
    text-transform: uppercase;
   } 
 
-  .card .details h2 span{
+  .card-About .details-About h2 span{
   font-weight: 500;
   font-size: 18px;
   color: #f38695;
   display: block;
   margin-top: 5px;
    } 
-  .card .details .description{
+  .card-About .details-About .description{
   font-weight: 500;
   font-size: 14px;
   color: #00d4ff;
