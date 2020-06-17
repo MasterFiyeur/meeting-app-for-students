@@ -86,7 +86,7 @@ class Login extends Component{
               <div className="row">
 
                 <div className="col-lg margetop5">
-                  <input className="input"
+                  <input className="input align-input"
                     name="email"
                     type="text"
                     placeholder="Ton adresse e-mail"
@@ -97,7 +97,7 @@ class Login extends Component{
 
 
                 <div className="col-lg margetop5">
-                   <input className="input"
+                   <input className="input align-input"
                       name="password"
                       type="password"
                       placeholder="Ton mot de passe"
