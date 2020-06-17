@@ -86,7 +86,7 @@ class EditProfilePhoto extends Component{
     render(){
       return(
         <div>
-          <div className="row ">
+          <div className="row">
             {!(this.state.tabImage[0] || this.state.tabImage[1] || this.state.tabImage[2] || this.state.tabImage[3] || this.state.tabImage[4]) &&
               <div>Vous n'avez pas d'image de profile</div>
             }
