@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import RangeSlider from './Slider';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import ReactDOM from 'react-dom';
-import ReactModal from 'react-modal';
 
 class Filtre extends Component{
     constructor(props) {
@@ -107,46 +104,55 @@ class Filtre extends Component{
             init:0,
             connect:true
         };
-{/* Fonction pour filtre ETUDE */}
+/* Fonction pour filtre ETUDE */
 this.handleChangeEtude = this.handleChangeEtude.bind(this);
 this.handleClickInEtude = this.handleClickInEtude.bind(this);
 this.handleClickOutEtude = this.handleClickOutEtude.bind(this);
-{/* Fonction pour filtre Sport */}
+/* Fonction pour filtre Sport */
 this.handleChangeSport = this.handleChangeSport.bind(this);
 this.handleClickInSport = this.handleClickInSport.bind(this);
 this.handleClickOutSport = this.handleClickOutSport.bind(this);
-{/* Fonction pour filtre Yeux */}
+/* Fonction pour filtre Yeux */
 this.handleChangeYeux = this.handleChangeYeux.bind(this);
 this.handleClickInYeux = this.handleClickInYeux.bind(this);
 this.handleClickOutYeux = this.handleClickOutYeux.bind(this);
-{/* Fonction pour filtre Cheveux */}
+/* Fonction pour filtre Cheveux */
 this.handleChangeCheveux = this.handleChangeCheveux.bind(this);
 this.handleClickInCheveux = this.handleClickInCheveux.bind(this);
 this.handleClickOutCheveux = this.handleClickOutCheveux.bind(this);
-{/* Fonction pour filtre Alcool */}
+/* Fonction pour filtre Alcool */
 this.handleChangeAlcool = this.handleChangeAlcool.bind(this);
 this.handleClickInAlcool = this.handleClickInAlcool.bind(this);
 this.handleClickOutAlcool = this.handleClickOutAlcool.bind(this);
-{/* Fonction pour filtre Tabac */}
+/* Fonction pour filtre Tabac */
 this.handleChangeTabac = this.handleChangeTabac.bind(this);
 this.handleClickInTabac = this.handleClickInTabac.bind(this);
 this.handleClickOutTabac = this.handleClickOutTabac.bind(this);
-{/* Fonction pour filtre Religion */}
+/* Fonction pour filtre Religion */
 this.handleChangeReligion = this.handleChangeReligion.bind(this);
 this.handleClickInReligion = this.handleClickInReligion.bind(this);
 this.handleClickOutReligion = this.handleClickOutReligion.bind(this);
-{/* Fonction pour filtre Astrologie */}
+/* Fonction pour filtre Astrologie */
 this.handleChangeAstrologie = this.handleChangeAstrologie.bind(this);
 this.handleClickInAstrologie = this.handleClickInAstrologie.bind(this);
 this.handleClickOutAstrologie = this.handleClickOutAstrologie.bind(this);
-{/* Fonction pour filtre Animaux */}
+/* Fonction pour filtre Animaux */
 this.handleChangeAnimaux = this.handleChangeAnimaux.bind(this);
 this.handleClickInAnimaux = this.handleClickInAnimaux.bind(this);
 this.handleClickOutAnimaux = this.handleClickOutAnimaux.bind(this);
-{/* Fonction pour filtre Actif */}
+/* Fonction pour filtre Actif */
 this.handleChangeActif = this.handleChangeActif.bind(this);
+}
+     /**
+     * Reset le tableau de la page principale
+     * @param {event} event Action du form par le bouton Submit
+     */
+    sendPref(event) {
+      event.preventDefault();
+      const axios = require('axios').default;  //Requêtes HTTP
+      console.log(this.state);
+    }
 
-   }
     inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -305,7 +311,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
       return(
         <div>
           {/* Formulaire des Filtres de la personne' */}
-          <form >
+          <form onSubmit={event => this.sendPref(event)}>
             <br/>
             <br/>
             <br/>
