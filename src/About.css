@@ -1,12 +1,10 @@
-body{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content:center;
-    align-items: center;
-    min-height: 100vh;
-    background: #212121;
-    font-family: sans-serif;
+
+  .title-About{
+     font-weight: 700;
+     font-size: 80px;
+     color: #777;
+     text-shadow: 4px 4px px black;
+     text-transform: uppercase;
   }
   .box-About{
     width: 1000px;
@@ -83,22 +81,22 @@ body{
   .card-About .details-About h2{
    margin: 0;
    padding: 0;
-   font-weight: 600;
-   font-size: 20px;
+   font-weight: 650;
+   font-size: 24px;
    color: #777;
    text-transform: uppercase;
   } 
 
   .card-About .details-About h2 span{
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
   color: #f38695;
   display: block;
   margin-top: 5px;
    } 
   .card-About .details-About .description{
   font-weight: 500;
-  font-size: 14px;
+  font-size: 16px;
   color: #00d4ff;
   display: block;
   margin-top: 5px;
