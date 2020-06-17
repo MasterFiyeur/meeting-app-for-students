@@ -18,7 +18,8 @@ class Pageprincipale extends Component {
             currentIndex:0,
             loaded:false,
             panel:false,
-            grade:""
+            grade:"",
+            showFiltre:false
         }
       }
     
@@ -231,6 +232,12 @@ class Pageprincipale extends Component {
                     >Déconnexion
                     </button>
                 </div>
+                <div style={{border:"thin solid black",borderRadius:"15px",height:"50px",cursor:"pointer"}} onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>
+                    <svg style={{padding:"3px"}} className="bi bi-toggles" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M11.5 1h-7a2.5 2.5 0 0 0 0 5h7a2.5 2.5 0 0 0 0-5zm-7-1a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm0 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        <path fillRule="evenodd" d="M8 3.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM4.5 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                    </svg>
+                </div>
                 {this.state.grade ==="administrateur" &&
                 <button 
                     className="btn-accueil" 
@@ -297,7 +304,7 @@ class Pageprincipale extends Component {
                     onClick={() => this.setState({pref:true})}>
                         Preferences
                 </button>
-                {(this.state.grade !=="nouveau" && this.state.grade !=="")&& 
+                {(this.state.grade !=="nouveau" && this.state.grade !=="" && this.state.showFiltre)&& 
                     <div width="20%">
                         <Filtre onChangeTabPersonne={this.onChangeTabPersonne}/>
                     </div>
