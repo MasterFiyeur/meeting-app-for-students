@@ -106,7 +106,7 @@ class ListMessages extends Component {
 			</div>
 			<div className="message_footer">
 				<form onSubmit={event => this.sendMessage(event)}>
-						<input type="text" autocomplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
+						<input type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
 						<input type="submit" />
 				</form>
 			</div>
