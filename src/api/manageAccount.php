@@ -86,9 +86,27 @@ if($ObjIdKey->connected && isset($_POST['id'])){
             $ObjIdKey->PhotoProfile[4]="Photo 5 doesn't exist";
         }
         $cnx = connexionPDO();
-        $req = $cnx -> prepare('DELETE FROM user WHERE user.id = ?;DELETE FROM preference WHERE preference.prefId = ?');
+        $req = $cnx -> prepare('DELETE FROM user WHERE id = ?;DELETE FROM preference WHERE prefId = ?');
         $req -> execute(array($_POST['id'],$_POST['id']));
         $ObjIdKey->supprCompte="success";
+        $req -> closeCursor();
+
+        $req = $cnx -> prepare('SELECT id,id2 FROM listeMatch WHERE id=? OR id2=?');
+        $req -> execute(array($_POST['id'],$_POST['id']));
+        $ObjIdKey->match=array();
+        foreach ($req as $row) {
+            $ObjIdKey->match[] = "d".$row["id"]."_".$row["id2"];
+        }
+        $req -> closeCursor();
+
+        $req = $cnx -> prepare('DELETE FROM listeMatch WHERE id=? OR id2=?');
+        $req -> execute(array($_POST['id'],$_POST['id']));
+        $req -> closeCursor();
+
+        foreach ($ObjIdKey->match as &$value) {
+            $req = $cnx -> prepare('DROP TABLE ?');
+            $req -> execute(array($value));
+        }
         $req -> closeCursor();
     }elseif (isset($_POST["operation"]) && $_POST["operation"]==="certif") {
         $cnx = connexionPDO();
