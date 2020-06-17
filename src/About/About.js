@@ -55,7 +55,7 @@ class About extends Component{
               <img src=""/>
            </div>
            <div className="details-About">
-              <h2>Julien Richard<br/><span>Graphiste du goulag</span><span className="description">L'adopté du groupe, le vilan petit canrd, la cinquième roue du carrosse. Après des multiples tentatives de la part du disciple de l'enfermer au goulag ce jeune Twittos arrive toujours à s'échapper. </span></h2>
+              <h2>Julien Richard<br/><span>Designer</span><span className="description">L'adopté du groupe, le vilan petit canrd, la cinquième roue du carrosse. Après des multiples tentatives de la part du disciple de l'enfermer au goulag ce jeune Twittos arrive toujours à s'échapper. </span></h2>
             </div>
          </div>
         </div>
