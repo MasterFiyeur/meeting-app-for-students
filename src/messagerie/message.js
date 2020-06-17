@@ -44,7 +44,7 @@ class ListMessages extends Component {
 		let messages = this.state.list;
 		messages = messages.slice(0,-1);
 		let lmessages = messages.split(';');
-		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
+		ret = lmessages.map(el => <div className={el.split('-')[0] === Cookies.get("ID") ? "message-me" : "message"}>
 									<div className="left-m"><strong>{el.split('-')[0]}</strong></div>
 									<div className="right-m">{el.split('-')[1]}</div>
 								  </div>);
