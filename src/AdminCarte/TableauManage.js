@@ -159,36 +159,40 @@ class TableauManage extends Component{
       return(
         <div style={{marginTop:"20px"}}>
             <h2>Gestion des comptes</h2>
-            <table style={{border:"thin solid black"}}>
-                <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.PropsToTabHTML()}
-                </tbody>
-            </table>
-            {this.state.Actuel.Prenom!=="" &&
-            <>
-            <ul>
-                <li>{this.state.ActuelPerso.Mail}</li>
-                <li>{this.state.ActuelPerso.DateNaissance}</li>
-                <li>{this.state.ActuelPerso.Grade}</li>
-            </ul>
-            {this.state.ActuelPerso.Grade==="nouveau" &&
-                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.rank("promote")}>Promouvoir</button>
-            }
-            {this.state.ActuelPerso.Grade==="premium" &&
-                <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.rank("demote")}>Rétrograder</button>
-            }
-            <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.management("resetLike")}>Réinitialiser les likes</button>
-            <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
-            <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteAccount()}>Supprimer le compte</button>
-            </>
-            }
+            <div style={{display:"flex",justifyContent:"center",marginTop:"3%"}}>
+                <div>
+                    <table style={{border:"thin solid black"}}>
+                        <thead>
+                            <tr>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>ID</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {this.PropsToTabHTML()}
+                        </tbody>
+                    </table>
+                </div>
+                {this.state.Actuel.Prenom!=="" &&
+                <div style={{margin:"50px"}}>
+                <ul>
+                    <li>{this.state.ActuelPerso.Mail}</li>
+                    <li>{this.state.ActuelPerso.DateNaissance}</li>
+                    <li>{this.state.ActuelPerso.Grade}</li>
+                </ul>
+                {this.state.ActuelPerso.Grade==="nouveau" &&
+                    <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.rank("promote")}>Promouvoir</button>
+                }
+                {this.state.ActuelPerso.Grade==="premium" &&
+                    <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.rank("demote")}>Rétrograder</button>
+                }
+                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.management("resetLike")}>Réinitialiser les likes</button>
+                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
+                <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteAccount()}>Supprimer le compte</button>
+                </div>
+                }
+            </div>
         </div>
       );
     }

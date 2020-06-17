@@ -128,25 +128,29 @@ class TableauCarteId extends Component{
       return(
         <div style={{marginTop:"20px"}}>
             <h2>Gestion des cartes étudiantes</h2>
-            <table style={{border:"thin solid black"}}>
-                <thead>
-                    <tr>
-                        <th>Prénom</th>
-                        <th>Nom</th>
-                        <th>ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {this.PropsToTabHTML()}
-                </tbody>
-            </table>
-            {this.state.Actuel.Prenom!=="" &&
-            <>
-            <button onClick={() => this.openCarte()}>Voir carte étudiante</button>
-            <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
-            <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteCarte()}>Re-demander</button>
-            </>
-            }
+            <div style={{display:"flex",justifyContent:"center",marginTop:"3%"}}>
+                <div>
+                <table style={{border:"thin solid black"}}>
+                    <thead>
+                        <tr>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.PropsToTabHTML()}
+                    </tbody>
+                </table>
+                </div>
+                {this.state.Actuel.Prenom!=="" &&
+                <div style={{margin:"50px"}}>
+                <button onClick={() => this.openCarte()}>Voir carte étudiante</button>
+                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
+                <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteCarte()}>Re-demander</button>
+                </div>
+                }
+            </div>
         </div>
       );
     }

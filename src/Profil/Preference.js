@@ -35,6 +35,8 @@ class Preference extends Component{
           Astro: "",// Signe Astrologique
           init:0,
           certif:"",
+          mail:"",
+          errorPass:"",OldMDP:"",NewMDP:"",NewMDPVerif:"",
           connect:true,
           StudentCard:null,alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
         };
@@ -79,14 +81,48 @@ class Preference extends Component{
                 Religion: res.data.tabPref.religion,
                 Astro: res.data.tabPref.astro,
                 init:1,
-                certif:res.data.certif
+                certif:res.data.certif,
+                mail:res.data.mail
             });
-            console.log(this.state);
           })
           .catch(err => {
             console.log(err);
           });
       }
+
+      changePassword(){
+        if(this.state.NewMDP===this.state.NewMDPVerif){
+          const axios = require('axios');  //Requêtes HTTP
+          const sha256 = require('hash-anything').sha256; //Hash du mdp
+          let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+          }
+          let formData = new FormData();
+          formData.append('OldMDP',sha256(this.state.OldMDP));
+          formData.append('NewMDP',sha256(this.state.NewMDP));
+          const url = URL_API+'setPassword.php';
+          axios.post(url,formData,config)
+          .then(res => {
+            if(res.data.connected){
+              this.setState({
+                errorPass:res.data.Message
+              });
+            }
+          })
+          .catch(err => {
+            console.log(err);
+          });
+
+        }else{
+          this.setState({
+            errorPass:"Les deux nouveaux mots de passe ne correspondent pas."
+          });
+        }
+      }
+
 
       /**
        * Change la valeur de l'état StudentCard en fonction du fichier sélectionné
@@ -304,6 +340,73 @@ class Preference extends Component{
           {/* Formulaire du profil de la personne' */}
           {this.state.init===1?
           <div>
+            <div className="container-fluid">
+              <div className="row">
+                <div className="col-sm">
+                  <div className="input_group_prepend">
+                    <label className="input_group_text">Votre mail : {this.state.mail}</label>
+                  </div>
+                  <br/>
+                  <div className="row">
+                    <div className="col-sm">
+                      <div className="input_group_prepend">
+                        <label className="input_group_text" htmlFor="OldMDP">Changer de mot de passe :<br/>{this.state.errorPass}</label>
+                      </div>
+                    </div>
+                    <div className="col-sm">
+                      <div className="input_group">
+                        <div className="input_group_prepend">
+                          <label className="input_group_text" htmlFor="OldMDP">Ancien :</label>
+                        </div>
+                        <input
+                          id="OldMDP"
+                          name="OldMDP"
+                          type="password"
+                          value={this.state.OldMDP}
+                          onChange={(event) => this.inputChange(event)}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm">
+                      <div className="input_group">
+                        <div className="input_group_prepend">
+                          <label className="input_group_text" htmlFor="NewMDP">Nouveau :</label>
+                        </div>
+                        <input
+                          id="NewMDP"
+                          name="NewMDP"
+                          type="password"
+                          value={this.state.NewMDP}
+                          onChange={(event) => this.inputChange(event)} 
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm">
+                      <div className="input_group">
+                        <div className="input_group_prepend">
+                          <label className="input_group_text" htmlFor="NewMDPVerif">Vérification :</label>
+                        </div>
+                        <input
+                          id="NewMDPVerif"
+                          name="NewMDPVerif"
+                          type="password"
+                          value={this.state.NewMDPVerif}
+                          onChange={(event) => this.inputChange(event)}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-sm">
+                      <button 
+                      className="btn-simple"
+                      onClick={() => this.changePassword()}>
+                        Changer <br/> de mot de passe
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <br/>
             {/*--------------------------Photos--------------------------*/}
             <div className="container-fluid">
               <div className="row">
