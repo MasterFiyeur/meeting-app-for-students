@@ -135,7 +135,7 @@ class EditProfilePhoto extends Component{
           <div className="row ">
             {(!(this.state.tabImage[0] && this.state.tabImage[1] && this.state.tabImage[2] && this.state.tabImage[3] && this.state.tabImage[4]) && (!this.state.crop)) &&
               <div className="align-center">
-                <button className="btn-simple " onClick={() => this.setState({crop:true})}>Ajouter une photo !</button>
+                <button className="btn-simple " onClick={() => this.setState({crop:true})}><i className="fas fa-camera"></i>Ajouter une photo !</button>
               </div>            
             }
           </div>
