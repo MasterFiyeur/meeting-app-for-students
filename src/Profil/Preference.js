@@ -344,13 +344,13 @@ class Preference extends Component{
               <div className="row">
                 <div className="col-lg">
                   <div className="input_group_prepend">
-                    <label className="input_group_text">Votre mail : {this.state.mail}</label>
+                    <label className="input_group_text"><i className="far fa-envelope"></i>Votre mail : {this.state.mail}</label>
                   </div>
                   <br/>
                   <div className="row">
                     <div className="col-lg">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="OldMDP">Changer de mot de passe :<br/>{this.state.errorPass}</label>
+                        <label className="input_group_text" htmlFor="OldMDP"><i className="fas fa-lock"></i>Changer de mot de passe :<br/>{this.state.errorPass}</label>
                       </div>
                     </div>
                     <div className="col-lg">
@@ -467,7 +467,7 @@ class Preference extends Component{
                     {/*--------------------------Sexe--------------------------*/}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="sexe">Je suis :</label>
+                        <label className="input_group_text" htmlFor="sexe"><i className="fas fa-restroom"></i>Je suis :</label>
                       </div> 
                       <div className="form-check form-check-inline">
                         <label className="form-check-label" htmlFor="Male">Un homme</label>
@@ -593,7 +593,7 @@ class Preference extends Component{
                     {/*--------------------------Description--------------------------*/}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Description">A propos de vous :</label>
+                        <label className="input_group_text" htmlFor="Description"><i className="fas fa-pencil-alt"></i>A propos de vous :</label>
                       </div> 
                         <textarea
                           id="Description"
@@ -619,7 +619,7 @@ class Preference extends Component{
                     }
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Ville">J'habite à :</label>
+                        <label className="input_group_text" htmlFor="Ville"><i className="fas fa-home"></i>J'habite à :</label>
                       </div>                
                       <input
                           id="Ville"
@@ -636,7 +636,7 @@ class Preference extends Component{
                     {/*--------------------------Etudes-------------------------- */}
                     <div className="input_group ">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Etudes">J'étudie au :</label>
+                        <label className="input_group_text" htmlFor="Etudes"><i className="fas fa-user-graduate"></i>J'étudie au :</label>
                       </div>
                       <select  id="Etudes" value={this.state.Etudes} name="Etudes" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -659,7 +659,7 @@ class Preference extends Component{
                     {/*--------------------------Taille-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Taille">Je mesure :</label>
+                        <label className="input_group_text" htmlFor="Taille"><i className="fas fa-ruler"></i>Je mesure :</label>
                       </div>
                           <input
                             id="Taille"
@@ -680,7 +680,7 @@ class Preference extends Component{
                     {/*--------------------------Yeux-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Yeux">Mes yeux sont :</label>
+                        <label className="input_group_text" htmlFor="Yeux"><i className="far fa-eye"></i>Mes yeux sont :</label>
                       </div>
                       <select  id="Yeux" value={this.state.Yeux} name="Yeux" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -698,7 +698,7 @@ class Preference extends Component{
                     {/*--------------------------Cheveux-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Cheveux">Mes cheveux sont :</label>
+                        <label className="input_group_text" htmlFor="Cheveux"><i className="fas fa-cut"></i>Mes cheveux sont :</label>
                       </div>
                       <select  id="Cheveux" value={this.state.Cheveux} name="Cheveux" onChange={(event) => this.inputChange(event)}>
                       <option  value="none">A remplir</option>
@@ -723,7 +723,7 @@ class Preference extends Component{
                     {/*--------------------------Sport-------------------------- */}
                     <div className="input_group ">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Sport">Les activités physique :</label>
+                        <label className="input_group_text" htmlFor="Sport"><i className="fas fa-dumbbell"></i>Les activités physique :</label>
                       </div>
                       <select  id="Sport" value={this.state.Sport} name="Sport" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -740,7 +740,7 @@ class Preference extends Component{
                     {/*--------------------------Alcool-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Alcool">L'alcool :</label>
+                        <label className="input_group_text" htmlFor="Alcool"><i className="fas fa-cocktail"></i>L'alcool :</label>
                       </div>
                       <select  id="Alcool" value={this.state.Alcool} name="Alcool" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -756,7 +756,7 @@ class Preference extends Component{
                     {/*--------------------------Tabac-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Tabac">Le tabac :</label>
+                        <label className="input_group_text" htmlFor="Tabac"><i className="fas fa-smoking"></i>Le tabac :</label>
                       </div>
                       <select  id="Tabac" value={this.state.Tabac} name="Tabac" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -776,7 +776,7 @@ class Preference extends Component{
                     {/*--------------------------Animaux Domestique-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Animaux">Mes animaux de compagnie :</label>
+                        <label className="input_group_text" htmlFor="Animaux"><i className="fas fa-paw"></i>Mes animaux de compagnie :</label>
                       </div>
                       <select  id="Animaux" value={this.state.Animaux} name="Animaux" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -794,7 +794,7 @@ class Preference extends Component{
                     {/*--------------------------Religion-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Religion">Ma religion :</label>
+                        <label className="input_group_text" htmlFor="Religion"><i className="fas fa-church"></i>Ma religion :</label>
                       </div>
                       <select  id="Religion" value={this.state.Religion} name="Religion" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
@@ -818,7 +818,7 @@ class Preference extends Component{
                     {/*--------------------------Signe Astro-------------------------- */}
                     <div className="input_group">
                       <div className="input_group_prepend">
-                        <label className="input_group_text" htmlFor="Astro">Mon signe astrologique :</label>
+                        <label className="input_group_text" htmlFor="Astro"><i className="far fa-star"></i>Mon signe astrologique :</label>
                       </div>
                       <select  id="Astro" value={this.state.Astro} name="Astro" onChange={(event) => this.inputChange(event)}>
                         <option  value="none">A remplir</option>
