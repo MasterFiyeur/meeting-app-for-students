@@ -178,12 +178,34 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         .then(res => {
             if(res.data.connected){ //Mise à jour de connected si réponse négative
                 console.log(res.data);
+                this.props.onChangeTabPersonne(res.data.tab);
             }
         })
         .catch(err => {
             console.log(err);
         });
       }
+    }
+
+
+    resetTab(){
+      const url = URL_API+'getTabPersonne.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.get(url,config)
+        .then(res => {
+            if(res.data.connected){
+              this.props.onChangeTabPersonne(res.data.tab);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
     }
 
     inputChange(event) {
@@ -1109,6 +1131,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                 <br/>
                 <button type="submit">Sauvegarder</button>
               </form>
+              <button onClick={() => this.resetTab()}>Annuler les filtres</button>
             </div>
           );
     }

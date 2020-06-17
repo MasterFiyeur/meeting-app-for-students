@@ -23,7 +23,6 @@ class App extends React.Component {
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
             <Route path="/panel" exact component={AdminCarte} />
-            <Route path="/filtre" exact component={Filtre} />
             <Route path="/position" exact component={Position} />
             <Route path="/principale" exact component={Pageprincipale} />
             <Route path="/about" component={About} />

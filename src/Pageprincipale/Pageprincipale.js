@@ -6,6 +6,7 @@ import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
+import Filtre from '../Profil/Filtre';
 
 class Pageprincipale extends Component {
     constructor(props) {
@@ -21,6 +22,13 @@ class Pageprincipale extends Component {
         }
       }
     
+    onChangeTabPersonne = (newTab) => {
+        this.setState({
+            tabPersonne:newTab,
+            currentIndex:0
+        })
+    };
+
     /**
      * Page mise à jour
      */
@@ -132,7 +140,7 @@ class Pageprincipale extends Component {
         }
         axios.get(url,config)
         .then(res => {
-            if(res.data.connected){ //Mise à jour de connected si réponse négative
+            if(res.data.connected){
                 this.setState({
                     tabPersonne:res.data.tab,
                     currentIndex:0,
@@ -199,15 +207,6 @@ class Pageprincipale extends Component {
     }
 
     /**
-     * Test le couple (ID,KEY) en 
-     * appelant la fonction verifConnexion()
-     */
-    test(){
-        this.verifConnexion();
-    }
-
-
-    /**
      * Rendu
      */
     render(){
@@ -239,15 +238,6 @@ class Pageprincipale extends Component {
                     Panel administrateur
                 </button>
                 }
-                
-
-                <div className="col-lg">
-                    <button 
-                    className="btn-accueil" 
-                    onClick={() => this.test()}
-                    >Tester (id,key)
-                    </button>
-                </div>
                  <div className="col-lg">
                     <div>
                         <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
@@ -307,6 +297,11 @@ class Pageprincipale extends Component {
                     onClick={() => this.setState({pref:true})}>
                         Preferences
                 </button>
+                {(this.state.grade !=="nouveau" && this.state.grade !=="")&& 
+                    <div width="20%">
+                        <Filtre onChangeTabPersonne={this.onChangeTabPersonne}/>
+                    </div>
+                }
             </div>
         </div>
       );
