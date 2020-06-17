@@ -342,18 +342,18 @@ class Preference extends Component{
           <div>
             <div className="container-fluid">
               <div className="row">
-                <div className="col-sm">
+                <div className="col-lg">
                   <div className="input_group_prepend">
                     <label className="input_group_text">Votre mail : {this.state.mail}</label>
                   </div>
                   <br/>
                   <div className="row">
-                    <div className="col-sm">
+                    <div className="col-lg">
                       <div className="input_group_prepend">
                         <label className="input_group_text" htmlFor="OldMDP">Changer de mot de passe :<br/>{this.state.errorPass}</label>
                       </div>
                     </div>
-                    <div className="col-sm">
+                    <div className="col-lg">
                       <div className="input_group">
                         <div className="input_group_prepend">
                           <label className="input_group_text" htmlFor="OldMDP">Ancien :</label>
@@ -367,7 +367,7 @@ class Preference extends Component{
                         />
                       </div>
                     </div>
-                    <div className="col-sm">
+                    <div className="col-lg">
                       <div className="input_group">
                         <div className="input_group_prepend">
                           <label className="input_group_text" htmlFor="NewMDP">Nouveau :</label>
@@ -381,7 +381,7 @@ class Preference extends Component{
                         />
                       </div>
                     </div>
-                    <div className="col-sm">
+                    <div className="col-lg">
                       <div className="input_group">
                         <div className="input_group_prepend">
                           <label className="input_group_text" htmlFor="NewMDPVerif">Vérification :</label>
@@ -395,7 +395,7 @@ class Preference extends Component{
                         />
                       </div>
                     </div>
-                    <div className="col-sm">
+                    <div className="col-lg">
                       <button 
                       className="btn-simple"
                       onClick={() => this.changePassword()}>

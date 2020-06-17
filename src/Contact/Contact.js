@@ -11,56 +11,60 @@ class Contact extends Component{
     render(){
       return(
         <div className="Contact">
-          <br/>
-          <br/>
-          <br/>
-          <br/>
+          <br />
+          <br />
+          <br />
+          <br />
           <span className="title-Contact">Nous contacter</span>
-           <div class="container">
-                <div class="row presentation">
-                    <div class="col">
-                            <img class="rounded-circle" src={TheoContact} alt="image" width="140" height="140" align="left"/>
-                            <div class="description-Contact">
-                            <span class="titre-Contact">Théo Julien étudiant de seconde année de cycle préparatoire</span><br/>
-                              Developpeur Chef <br/>
-                              <b><a href="mailto:theo.julien@eisti.fr" >Email</a></b>
-                            </div>
-                    </div>
+          <div className="container">
+            <div className="row presentation">
+              <div className="col">
+                <img className="rounded-circle" src={TheoContact} alt="Theo" width="140" height="140" align="left" />
+                <div className="description-Contact">
+                  <span className="titre-Contact">Théo Julien étudiant de seconde année de cycle préparatoire</span><br />
+                  Developpeur Chef <br />
+                  <b><a href="mailto:theo.julien@eisti.fr">Email</a></b>
                 </div>
-              
-                <div class="row presentation">
-                    <div class="col">
-                        <img class="rounded-circle" src={WilliamContact} alt="image" width="140" height="140" align="left"/>
-                        <div class="description-Contact">
-                        <span class="titre-Contact">William Kaczmarek étudiant de seconde année de cycle préparatoire</span><br/>
-                          Developpeur Profil <br/>
-                         <b><a href="mailto:william.kaczmarek@eisti.fr" >Email</a></b>
-                        </div>
-                    </div>
-                </div>
-                 
-                <div class="row presentation">
-                  <div class="col">
-                    <img class="rounded-circle" src={FlorentContact} alt="image" width="140" height="140" align="left"/>
-                    <div class="description-Contact">
-                    <span class="titre-Contact">Florent Bednarek étudiant de seconde année de cycle préparatoire</span><br/>
-                      Developpeur Messagerie <br/>
-                      <b><a href="mailto:florent.bednarek@eisti.fr" >Email</a></b>
-                    </div>
-                  </div>
-                </div>
-                <div class="row presentation">
-                  <div class="col">
-                    <img class="rounded-circle" src="images/canard_raph.jpg" alt="image" width="140" height="140" align="left"/>
-                    <div class="description-Contact">
-                    <span class="titre-Contact">Julien Richard étudiant de seconde année de cycle préparatoire</span><br/>
+              </div>
+            </div>
 
-                      Designer <br/>
-                      <b><a href="mailto:julien.richard@eisti.fr" >Email</a></b>
-                    </div>
-                  </div>
+            <div className="row presentation">
+              <div className="col">
+                <img className="rounded-circle" src={WilliamContact} alt="William" width="140" height="140" align="left" />
+                <div className="description-Contact">
+                  <span className="titre-Contact">William Kaczmarek étudiant de seconde année de cycle
+                    préparatoire</span><br />
+                  Developpeur Profil <br />
+                  <b><a href="mailto:william.kaczmarek@eisti.fr">Email</a></b>
                 </div>
-        </div>
+              </div>
+            </div>
+
+            <div className="row presentation">
+              <div className="col">
+                <img className="rounded-circle" src={FlorentContact} alt="Florent" width="140" height="140" align="left" />
+                <div className="description-Contact">
+                  <span className="titre-Contact">Florent Bednarek étudiant de seconde année de cycle
+                    préparatoire</span><br />
+                  Developpeur Messagerie <br />
+                  <b><a href="mailto:florent.bednarek@eisti.fr">Email</a></b>
+                </div>
+              </div>
+            </div>
+            <div className="row presentation">
+              <div className="col">
+                <img className="rounded-circle" src="images/canard_raph.jpg" alt="Julien" width="140" height="140"
+                  align="left" />
+                <div className="description-Contact">
+                  <span className="titre-Contact">Julien Richard étudiant de seconde année de cycle préparatoire</span>
+                  <br />
+                  Designer 
+                  <br />
+                  <b><a href="mailto:richardjul@eisti.fr">Email</a></b>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       );
     }

@@ -78,7 +78,7 @@ class ListMatch extends Component {
 				<div className="listeMatch" >
 					{this.affMatch()}	
 				</div>
-				{this.state.show == 1 &&
+				{this.state.show === 1 &&
 					<ListMessages id={this.state.id} id2={this.state.id2} />
 				}
 				
