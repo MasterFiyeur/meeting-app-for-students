@@ -11,8 +11,8 @@ class ListMessages extends Component {
         	list : "",
         	message : "",
         	messages :"",
-        	x: 0,
-        	y: 0,
+        	x: 100,
+        	y: 100,
         }
         this.handleChange = this.handleChange.bind(this);
     	this.sendMessage = this.sendMessage.bind(this);
@@ -44,10 +44,10 @@ class ListMessages extends Component {
 		let messages = this.state.list;
 		messages = messages.slice(0,-1);
 		let lmessages = messages.split(';');
-		ret = lmessages.map(el => <tr >
-									<td><strong>from {el.split('-')[0]} : </strong></td>
-									<td>{el.split('-')[1]}</td>
-								  </tr>);
+		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
+									<div className="left-m"><strong>{el.split('-')[0]}</strong></div>
+									<div className="right-m">{el.split('-')[1]}</div>
+								  </div>);
 		this.setState({messages : ret})
 	}
 
@@ -94,16 +94,22 @@ class ListMessages extends Component {
 		return(
 
 		<Draggable x={x} y={y} onMove={this._move}>
-			<table>
-				<tbody>
-					{this.state.messages}	
-				</tbody>
-			</table>	
-			<form onSubmit={event => this.sendMessage(event)}>
-					<input type="text" value={this.state.message} name="message" onChange={this.handleChange} />
-					<input type="submit" />
-			</form>
+			<div className="message_header">
+			salut
 
+			</div>
+			<div className="messages">
+				
+
+				
+						{this.state.messages}
+			</div>
+			<div className="message_footer">
+				<form onSubmit={event => this.sendMessage(event)}>
+						<input type="text" autocomplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
+						<input type="submit" />
+				</form>
+			</div>
 		</Draggable>
 
 

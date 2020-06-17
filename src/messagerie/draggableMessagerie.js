@@ -1,94 +1,119 @@
 import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import {URL_API} from '../App';
-const throttle = (f) => {
-    let token = null, lastArgs = null;
-    const invoke = () => {
-        f(...lastArgs);
-        token = null;
-    };
-    const result = (...args) => {
-        lastArgs = args;
-        if (!token) {
-            token = requestAnimationFrame(invoke);
-        }
-    };
-    result.cancel = () => token && cancelAnimationFrame(token);
-    return result;
-};
-
-class Draggable extends React.PureComponent {
-    _relX = 0;
-    _relY = 0;
-    _ref = React.createRef();
-    
-    _onMouseDown = (event) => {
-        if (event.button !== 0) {
-            return;
-        }
-        const {scrollLeft, scrollTop, clientLeft, clientTop} = document.body;
-        // Try to avoid calling `getBoundingClientRect` if you know the size
-        // of the moving element from the beginning. It forces reflow and is
-        // the laggiest part of the code right now. Luckily it's called only
-        // once per click.
-        const {left, top} = this._ref.current.getBoundingClientRect();
-
-        this._relX = event.pageX - (left + scrollLeft - clientLeft);
-        this._relY = event.pageY - (top + scrollTop - clientTop);
-        console.log(left);
-        console.log(top);
-        console.log(event.pageX);
-        console.log(event.pageY);
-        console.log(this._relX);
-        console.log(this._relY);
+import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 
-        document.addEventListener('mousemove', this._onMouseMove);
-        document.addEventListener('mouseup', this._onMouseUp);
-        event.preventDefault();
-    };
-    
-    _onMouseUp = (event) => {
-        document.removeEventListener('mousemove', this._onMouseMove);
-        document.removeEventListener('mouseup', this._onMouseUp);
-        event.preventDefault();
-    };
-    
-    _onMouseMove = (event) => {
-    	console.log(event.pageX - this._relX);
-    	console.log(event.pageY - this._relY);
-        this.props.onMove(
-            event.pageX - this._relX,
-            event.pageY - this._relY,
-        );
-        event.preventDefault();
-    };
-    
-    _update = throttle(() => {
-        const {x, y} = this.props;
-        this._ref.current.style.transform = `translate(${x}px, ${y}px)`;
-    });
-    
-    componentDidMount() {
-        this._ref.current.addEventListener('mousedown', this._onMouseDown);
-        this._update();
+class Draggable extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            relX: 0,
+            relY: 0,
+            x: props.x,
+            y: props.y
+        };
+        this.gridX = props.gridX || 1;
+        this.gridY = props.gridY || 1;
+        this.onMouseDown = this.onMouseDown.bind(this);
+        this.onMouseMove = this.onMouseMove.bind(this);
+        this.onMouseUp = this.onMouseUp.bind(this);
+        this.onTouchStart = this.onTouchStart.bind(this);
+        this.onTouchMove = this.onTouchMove.bind(this);
+        this.onTouchEnd = this.onTouchEnd.bind(this);
     }
-    
-    componentDidUpdate() {
-        this._update();
+
+    static propTypes = {
+        onMove: PropTypes.func,
+        onStop: PropTypes.func,
+        x: PropTypes.number.isRequired,
+        y: PropTypes.number.isRequired,
+        gridX: PropTypes.number,
+        gridY: PropTypes.number
+    }; 
+
+    onStart(e) {
+        const ref = ReactDOM.findDOMNode(this.handle);
+        const body = document.body;
+        const box = ref.getBoundingClientRect();
+        
+        this.setState({
+            relX: e.pageX - (box.left + body.scrollLeft - body.clientLeft),
+            relY: e.pageY - (box.top + body.scrollTop - body.clientTop)
+        });
     }
-    
-    componentWillUnmount() {
-        this._ref.current.removeEventListener('mousedown', this._onMouseDown);
-        this._update.cancel();
+
+    onMove(e) {
+        const x = Math.trunc((e.pageX - this.state.relX) / this.gridX) * this.gridX;
+        const y = Math.trunc((e.pageY - this.state.relY) / this.gridY) * this.gridY;
+        if (x !== this.state.x || y !== this.state.y) {
+            this.setState({
+                x,
+                y
+            });
+            this.props.onMove && this.props.onMove(this.state.x, this.state.y);
+        }        
     }
-    
+
+    onMouseDown(e) {
+        if (e.button !== 0) return;
+        const ref = ReactDOM.findDOMNode(this.handle);
+        const body = document.body;
+        const box = ref.getBoundingClientRect();
+        if (e.pageY - (box.top + body.scrollTop - body.clientTop) > 450) return;
+        this.onStart(e);
+        document.addEventListener('mousemove', this.onMouseMove);
+        document.addEventListener('mouseup', this.onMouseUp);
+        e.preventDefault();
+    }
+
+    onMouseUp(e) {
+        document.removeEventListener('mousemove', this.onMouseMove);
+        document.removeEventListener('mouseup', this.onMouseUp);
+        this.props.onStop && this.props.onStop(this.state.x, this.state.y);
+        e.preventDefault();
+    }
+
+    onMouseMove(e) {
+        this.onMove(e);
+        e.preventDefault();
+    }
+
+    onTouchStart(e) {
+        this.onStart(e.touches[0]);
+        document.addEventListener('touchmove', this.onTouchMove, {passive: false});
+        document.addEventListener('touchend', this.onTouchEnd, {passive: false});
+        e.preventDefault();
+    }
+
+    onTouchMove(e) {
+        this.onMove(e.touches[0]);
+        e.preventDefault();
+    }
+
+    onTouchEnd(e) {
+        document.removeEventListener('touchmove', this.onTouchMove);
+        document.removeEventListener('touchend', this.onTouchEnd);
+        this.props.onStop && this.props.onStop(this.state.x, this.state.y);
+        e.preventDefault();
+    }
+
     render() {
-        return (
-            <div className="draggable" ref={this._ref}>
-                {this.props.children}
-            </div>
-        );
+        return <div
+            onMouseDown={this.onMouseDown}
+            onTouchStart={this.onTouchStart}
+            style={{
+                position: 'absolute',
+                left: this.state.x,
+                top: this.state.y,
+                touchAction: 'none'
+            }}
+            className="draggable"
+            ref={(div) => { this.handle = div; }}
+        >
+            {this.props.children}
+        </div>;
     }
 }
 
