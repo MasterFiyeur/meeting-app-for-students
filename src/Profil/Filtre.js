@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import {URL_API} from '../App';
+import Cookies from 'js-cookie';
 
 class Filtre extends Component{
     constructor(props) {
@@ -143,14 +145,45 @@ this.handleClickOutAnimaux = this.handleClickOutAnimaux.bind(this);
 /* Fonction pour filtre Actif */
 this.handleChangeActif = this.handleChangeActif.bind(this);
 }
-     /**
-     * Reset le tableau de la page principale
-     * @param {event} event Action du form par le bouton Submit
+
+    /**
+     * Envoie du filtre a la bdd
      */
-    sendPref(event) {
+     loadTableauPersonne(event){
       event.preventDefault();
-      const axios = require('axios').default;  //Requêtes HTTP
-      console.log(this.state);
+      let formData = new FormData();
+      if(this.state.Actif!==""){
+        formData.append('filtre',this.state.Actif);
+        let TabRenvoi=this.state.TabEtudes;
+        if(this.state.Actif==="Etudes"){TabRenvoi=this.state.TabEtudes;}
+        else if(this.state.Actif==="Activités Physique"){TabRenvoi=this.state.TabSport;}
+        else if(this.state.Actif==="Yeux"){TabRenvoi=this.state.TabYeux;}
+        else if(this.state.Actif==="Cheveux"){TabRenvoi=this.state.TabCheveux;}
+        else if(this.state.Actif==="Alcool"){TabRenvoi=this.state.TabAlcool;}
+        else if(this.state.Actif==="Tabac"){TabRenvoi=this.state.TabTabac;}
+        else if(this.state.Actif==="Religion"){TabRenvoi=this.state.TabReligion;}
+        else if(this.state.Actif==="Astrologie"){TabRenvoi=this.state.TabAstrologie;}
+        else if(this.state.Actif==="Animaux"){TabRenvoi=this.state.TabAnimaux;}
+        formData.append('tableau',JSON.stringify(TabRenvoi));
+        formData.append('certificate',this.state.checkedA);
+        const url = URL_API+'getTabPersonne.php';
+        const axios = require('axios').default;  //Requêtes HTTP
+        let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        axios.post(url,formData,config)
+        .then(res => {
+            if(res.data.connected){ //Mise à jour de connected si réponse négative
+                console.log(res.data);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
+      }
     }
 
     inputChange(event) {
@@ -311,7 +344,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
       return(
         <div>
           {/* Formulaire des Filtres de la personne' */}
-          <form onSubmit={event => this.sendPref(event)}>
+          <form onSubmit={event => this.loadTableauPersonne(event)}>
             <br/>
             <br/>
             <br/>
@@ -570,10 +603,10 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                                checked={this.state.TabCheveux[5].value===1?true:false}
                                onChange={this.handleChangeCheveux}
                         />  
-                        <label htmlFor="Blond">Blond</label>
+                        <label htmlFor="Blanc">Blanc</label>
                         <input type="checkbox"
-                               id="Blond" 
-                               name="Blond"
+                               id="Blanc" 
+                               name="Blanc"
                                value="6"
                                checked={this.state.TabCheveux[6].value===1?true:false}
                                onChange={this.handleChangeCheveux}
@@ -644,7 +677,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                         <input type="checkbox"
                                id="Fréquemment" 
                                name="Fréquemment"
-                               value="1"
+                               value="0"
                                checked={this.state.TabTabac[0].value===1?true:false}
                                onChange={this.handleChangeTabac}
 
@@ -654,7 +687,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                         <input type="checkbox"
                                id="A l'occasion" 
                                name="A l'occasion"
-                               value="2"
+                               value="1"
                                checked={this.state.TabTabac[1].value===1?true:false}
                                onChange={this.handleChangeTabac}
                         />
@@ -664,7 +697,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                         <input type="checkbox"
                                id="Jamais" 
                                name="Jamais"
-                               value="3"
+                               value="2"
                                checked={this.state.TabTabac[2].value===1?true:false}
                                onChange={this.handleChangeTabac}
                         />
