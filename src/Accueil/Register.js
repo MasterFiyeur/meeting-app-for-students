@@ -321,7 +321,7 @@ class Register extends Component{
                     {/* Input nom */}
                     <label htmlFor="nom">Nom :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="nom"
                       name="nom"
                       type="text"
@@ -334,7 +334,7 @@ class Register extends Component{
                     {/* Input prenom */}
                     <label htmlFor="prenom">Prénom :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="prenom"
                       name="prenom"
                       type="text"
@@ -368,7 +368,7 @@ class Register extends Component{
 
                   </div>
                   <div className="col-lg">
-                    <input className="input"
+                    <input className="input align-input"
                       id="ville"
                       name="ville"
                       type="text"
@@ -388,7 +388,7 @@ class Register extends Component{
                     {/* Input dateBirth */}
                     <label htmlFor="dateBirth">Date de naissance :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="dateBirth"
                       name="dateBirth"
                       type="date"
@@ -404,7 +404,7 @@ class Register extends Component{
                     {/* Input email */}
                     <label htmlFor="email">E-mail :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="email"
                       name="email"
                       type="text"
@@ -420,7 +420,7 @@ class Register extends Component{
                     {/* Input password */}
                     <label htmlFor="password">Mot de passe :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="password"
                       name="password"
                       type="password"
@@ -429,7 +429,7 @@ class Register extends Component{
                       onChange={event => this.inputChangePassword(event)} 
                     />
                     <br/>
-                    <div style={{display:"flex",marginLeft:"25%",marginTop:"5px"}}>
+                    <div className=" align-powermp" style={{display:"flex"}}>
                       <div style={{width:"40px",height:"10px",borderTopLeftRadius:"30px",borderBottomLeftRadius:"30px",background:"linear-gradient(to right,#FF3737, #FFAD37)"}}></div>
                       <div style={{width:"40px",height:"10px",background:(this.state.comptStrenghMdp>1?"linear-gradient(to right,#FFAD37, #54FF48)":"#C7C3BD")}}></div>
                       <div style={{width:"40px",height:"10px",background:(this.state.comptStrenghMdp>2?"linear-gradient(to right,#54FF48,#48BCFF)":"#C7C3BD")}}></div>
@@ -440,7 +440,7 @@ class Register extends Component{
                     {/* Input verifPassword */}
                     <label htmlFor="verifPassword">Vérifie ton mot de passe :</label>
                     <br/>
-                    <input className="input"
+                    <input className="input align-input"
                       id="verifPassword"
                       name="verifPassword"
                       type="password"
@@ -465,15 +465,15 @@ class Register extends Component{
               et ne doit pas dépasser 2Mo.</p>
               {/* Input StudentCard */}
               <label htmlFor="Student_Card">Carte étudiante :</label>
-              <input className="input" 
-              type="file" 
-              name="StudentCard" 
-              id="Student_Card"
-              onChange={event => this.inputChangeStudentCard(event)} 
-              />
+                <div className="input-group">
+                  <div className="custom-file">
+                    <input type="file" className="custom-file-input" onChange={event => this.inputChangeStudentCard(event)} />
+                    <label className="custom_file_label" for="Student_Card1">Choisir une photo</label>
+                  </div>
+                </div>
               <br/>
               {/* Bouton Submit 2 */}
-              <button type="submit">Upload</button>
+              <button className="btn-simple" type="submit">Upload</button>
             </form>
           }
           {this.state.etape===2 && //Etape carte étudiante terminée

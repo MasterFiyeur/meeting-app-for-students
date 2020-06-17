@@ -3,7 +3,7 @@ import '../About.css';
 import WilliamAbout from '../images/WilliamAbout.jpg';
 import TheoAbout from '../images/TheoAbout.jpg';
 import FlorentAbout from '../images/FlorentAbout.png';
-//import JulienAbout from '../images/JulienAbout.jpg';
+import JulienAbout from '../images/JulienAbout.jpg';
 
 class About extends Component{
     constructor(props) {
@@ -73,10 +73,10 @@ class About extends Component{
           {/* Pour Julien */}
           <div className="card-About">
             <div className="imgBx-About">
-              <img src="" alt="Julien About"/>
+              <img src={JulienAbout} alt="Julien About"/>
             </div>
             <div className="details-About">
-              <h2>Julien Richard
+              <h2><i className="fas fa-hand-middle-finger"></i>Julien Richard
                 <br />
                 <span>Designer</span>
                 <span className="description">L'adopté du groupe, le vilan
