@@ -4,7 +4,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
-import Filtre from './Profil/Filtre';
 import Position from './Position/Position';
 import Pageprincipale from './Pageprincipale/Pageprincipale';
 import About from './About/About'

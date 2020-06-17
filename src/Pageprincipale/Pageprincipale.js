@@ -146,7 +146,7 @@ class Pageprincipale extends Component {
                     currentIndex:0,
                     loaded:true
                 });
-                console.log(res.data);
+                //console.log(res.data);
             }
         })
         .catch(err => {
@@ -174,7 +174,7 @@ class Pageprincipale extends Component {
         }
         axios.get(url,config)
         .then(res => {
-            console.log("Connecté ? "+res.data.connect); //Réponse dans la console
+            console.log("Connecté : "+res.data.connect); //Réponse dans la console
             if(!res.data.connect){ //Mise à jour de connected si réponse négative
                 this.setState({
                     connected:false,

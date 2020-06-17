@@ -231,11 +231,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeEtude(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabEtudes[num].value===1){this.state.TabEtudes[num].value=0;}
-       else if (this.state.TabEtudes[num].value===0){this.state.TabEtudes[num].value=1;}
-       console.log(this.state.TabEtudes)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabEtudes;
+      tabTemp[num].value=this.state.TabEtudes[num].value===1?0:1;
+      this.setState({
+        TabEtudes:tabTemp
+      });
+    }
    /* Fonction pour filtre SPORT */
     handleClickInSport(event) {
       this.setState({showFiltreSport: true});
@@ -246,11 +248,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeSport(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabSport[num].value===1){this.state.TabSport[num].value=0;}
-       else if (this.state.TabSport[num].value===0){this.state.TabSport[num].value=1;}
-       console.log(this.state.TabSport)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabSport;
+      tabTemp[num].value=this.state.TabSport[num].value===1?0:1;
+      this.setState({
+        TabSport:tabTemp
+      });
+    }
    /* Fonction pour filtre Yeux */
     handleClickInYeux(event) {
       this.setState({showFiltreYeux: true});
@@ -261,11 +265,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeYeux(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabYeux[num].value===1){this.state.TabYeux[num].value=0;}
-       else if (this.state.TabYeux[num].value===0){this.state.TabYeux[num].value=1;}
-       console.log(this.state.TabYeux)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabYeux;
+      tabTemp[num].value=this.state.TabYeux[num].value===1?0:1;
+      this.setState({
+        TabEtudes:tabTemp
+      });
+    }
    /* Fonction pour filtre Cheveux */
     handleClickInCheveux(event) {
       this.setState({showFiltreCheveux: true});
@@ -276,11 +282,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeCheveux(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabCheveux[num].value===1){this.state.TabCheveux[num].value=0;}
-       else if (this.state.TabCheveux[num].value===0){this.state.TabCheveux[num].value=1;}
-       console.log(this.state.TabCheveux)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabCheveux;
+      tabTemp[num].value=this.state.TabCheveux[num].value===1?0:1;
+      this.setState({
+        TabCheveux:tabTemp
+      });
+    }
    /* Fonction pour filtre Alcool */
     handleClickInAlcool(event) {
       this.setState({showFiltreAlcool: true});
@@ -291,11 +299,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeAlcool(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabAlcool[num].value===1){this.state.TabAlcool[num].value=0;}
-       else if (this.state.TabAlcool[num].value===0){this.state.TabAlcool[num].value=1;}
-       console.log(this.state.TabAlcool)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabAlcool;
+      tabTemp[num].value=this.state.TabAlcool[num].value===1?0:1;
+      this.setState({
+        TabAlcool:tabTemp
+      });
+    }
    /* Fonction pour filtre Tabac */
     handleClickInTabac(event) {
       this.setState({showFiltreTabac: true});
@@ -306,11 +316,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeTabac(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabTabac[num].value===1){this.state.TabTabac[num].value=0;}
-       else if (this.state.TabTabac[num].value===0){this.state.TabTabac[num].value=1;}
-       console.log(this.state.TabTabac)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabTabac;
+      tabTemp[num].value=this.state.TabTabac[num].value===1?0:1;
+      this.setState({
+        TabTabac:tabTemp
+      });
+    }
    /* Fonction pour filtre Religion */
     handleClickInReligion(event) {
       this.setState({showFiltreReligion: true});
@@ -321,11 +333,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeReligion(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabReligion[num].value===1){this.state.TabReligion[num].value=0;}
-       else if (this.state.TabReligion[num].value===0){this.state.TabReligion[num].value=1;}
-       console.log(this.state.TabReligion)
-       }
+      const num = event.target.value;
+      let tabTemp = this.state.TabReligion;
+      tabTemp[num].value=this.state.TabReligion[num].value===1?0:1;
+      this.setState({
+        TabReligion:tabTemp
+      });
+    }
    /* Fonction pour filtre Astrologie */
     handleClickInAstrologie(event) {
       this.setState({showFiltreAstrologie: true});
@@ -336,10 +350,12 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeAstrologie(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabAstrologie[num].value===1){this.state.TabAstrologie[num].value=0;}
-       else if (this.state.TabAstrologie[num].value===0){this.state.TabAstrologie[num].value=1;}
-       console.log(this.state.TabAstrologie)
+      const num = event.target.value;
+      let tabTemp = this.state.TabAstrologie;
+      tabTemp[num].value=this.state.TabAstrologie[num].value===1?0:1;
+      this.setState({
+        TabAstrologie:tabTemp
+      });
        }  
    /* Fonction pour filtre Animaux */
     handleClickInAnimaux(event) {
@@ -351,11 +367,13 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
     handleChangeAnimaux(event) {
       this.setState({isChecked: !this.state.isChecked});
-      const num = event.target.value
-       if (this.state.TabAnimaux[num].value===1){this.state.TabAnimaux[num].value=0;}
-       else if (this.state.TabAnimaux[num].value===0){this.state.TabAnimaux[num].value=1;}
-       console.log(this.state.TabAnimaux)
-       }  
+      const num = event.target.value;
+      let tabTemp = this.state.TabAnimaux;
+      tabTemp[num].value=this.state.TabAnimaux[num].value===1?0:1;
+      this.setState({
+        TabAnimaux:tabTemp
+      });
+      }  
    /* Fonction pour filtre Actif */
       handleChangeActif(event) {
         this.setState({
