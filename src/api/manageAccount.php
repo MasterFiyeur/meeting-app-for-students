@@ -104,8 +104,8 @@ if($ObjIdKey->connected && isset($_POST['id'])){
         $req -> closeCursor();
 
         foreach ($ObjIdKey->match as &$value) {
-            $req = $cnx -> prepare('DROP TABLE ?');
-            $req -> execute(array($value));
+            $req = $cnx -> prepare("DROP TABLE `".$value."`");
+            $req -> execute();
         }
         $req -> closeCursor();
     }elseif (isset($_POST["operation"]) && $_POST["operation"]==="certif") {
