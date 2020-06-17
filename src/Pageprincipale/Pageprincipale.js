@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
-import ListMatch from '../messagerie/listeMatch';
+//import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
 import {Card} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
@@ -228,8 +228,8 @@ class Pageprincipale extends Component {
                 <div className="col-lg">
                     <button 
                     className="btn-accueil" 
-                    onClick={() => this.deconnect()}
-                    >Déconnexion
+                    onClick={() => this.deconnect()}>
+                        Déconnexion
                     </button>
                 </div>
                 <div style={{border:"thin solid black",borderRadius:"15px",height:"50px",cursor:"pointer"}} onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>
@@ -242,10 +242,10 @@ class Pageprincipale extends Component {
                 <button 
                     className="btn-accueil" 
                     onClick={() => this.setState({panel:true})}>
-                    Panel administrateur
+                        Panel administrateur
                 </button>
                 }
-                 <div className="col-lg">
+                <div className="col-lg">
                     <div>
                         <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
                     </div>

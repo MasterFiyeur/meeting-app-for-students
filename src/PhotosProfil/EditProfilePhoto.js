@@ -85,13 +85,13 @@ class EditProfilePhoto extends Component{
 
     render(){
       return(
-        <div className="">
+        <div>
           <div className="row ">
             {!(this.state.tabImage[0] || this.state.tabImage[1] || this.state.tabImage[2] || this.state.tabImage[3] || this.state.tabImage[4]) &&
               <div className="align-center" >Vous n'avez pas d'image de profile</div>
             }
             {(this.state.tabImage[0]) &&
-            <div className="col-md"> 
+            <div className="col-lg"> 
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-1.png"} alt="Profile 1" />
                 <br/>
                 <button className="btn-simple" onClick={() => this.supprImage(1)}>Supprimer 
@@ -99,7 +99,7 @@ class EditProfilePhoto extends Component{
                 </button>
             </div>
             }{(this.state.tabImage[1]) &&
-            <div className="col-md">
+            <div className="col-lg">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-2.png"} alt="Profile 2" />
                 <br/>
                 <button className="btn-simple" onClick={() => this.supprImage(2)}>Supprimer
@@ -107,7 +107,7 @@ class EditProfilePhoto extends Component{
                 </button>
             </div >
             }{(this.state.tabImage[2]) &&
-            <div className="col-md">
+            <div className="col-lg">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-3.png"} alt="Profile 3" />
                 <br/>
                 <button className="btn-simple" onClick={() => this.supprImage(3)}>Supprimer
@@ -115,7 +115,7 @@ class EditProfilePhoto extends Component{
                 </button>
             </div>
             }{(this.state.tabImage[3]) &&
-            <div className="col-md">
+            <div className="col-lg">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-4.png"} alt="Profile 4" />
                 <br/>
                 <button className="btn-simple" onClick={() => this.supprImage(4)}>Supprimer
@@ -123,7 +123,7 @@ class EditProfilePhoto extends Component{
                 </button>
             </div>
             }{(this.state.tabImage[4]) &&
-            <div className="col-md">
+            <div className="col-lg">
                 <img width="200px" src={"https://projetsiteeisti.yj.fr/imageProfil/"+Cookies.get('ID')+"-5.png"} alt="Profile 5" />
                 <br/>
                 <button className="btn-simple" onClick={() => this.supprImage(5)}>Supprimer

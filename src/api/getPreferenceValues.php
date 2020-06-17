@@ -62,11 +62,12 @@ if($ObjIdKey->connect){
     $req -> closeCursor();
     if(isset($_GET["img"])){
         $cnx = connexionPDO();
-        $req = $cnx -> prepare('SELECT carte FROM user WHERE id = ?');
+        $req = $cnx -> prepare('SELECT carte,mail FROM user WHERE id = ?');
         $req -> execute(array($id));
         if ($ligne = $req -> fetch()) {
             if ($ligne != NULL) {
                 $ObjIdKey->certif=$ligne['carte'];
+                $ObjIdKey->mail=$ligne['mail'];
             }
         }
         $req -> closeCursor();
