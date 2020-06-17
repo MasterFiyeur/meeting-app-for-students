@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 
 header('Access-Control-Max-Age: 1000');
 
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
 
 
@@ -63,28 +63,29 @@ include "connexionBDD.php";
 if(isset($_FILES['file'])){
 
     // Connexion/Requête BDD - SELECT
-
-    $cnx = connexionPDO();
-
-    $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ?');
-
-    $req -> execute((array($_POST["email"])));
-
-    if ($ligne = $req -> fetch()) {
-
-        if ($ligne != NULL) {
-
-            $id= $ligne['id'];
-
-        } else {
-
-            $id = NULL;
-
+    if(isset($_POST["email"])){
+        $cnx = connexionPDO();
+        $req = $cnx -> prepare('SELECT id FROM user WHERE mail = ?');
+        $req -> execute((array($_POST["email"])));
+        if ($ligne = $req -> fetch()) {
+            if ($ligne != NULL) {
+                $id= $ligne['id'];
+            } else {
+                $id = NULL;
+            }
         }
-
+        $req -> closeCursor();
+    }else{
+        $id = $_SERVER['HTTP_LOGGINID'];
+        $key = $_SERVER['HTTP_LOGGINKEY'];
+        $connect=isLogged($id,$key);
+        if($connect){
+            $id=$_SERVER['HTTP_LOGGINID'];
+        }else{
+            $id=-1;
+        }
     }
 
-    $req -> closeCursor();
 
     $allowed_ext = array("jpg","png","jpeg","JPG","PNG","JPEG");//Extension d'image acceptée
 
@@ -104,9 +105,9 @@ if(isset($_FILES['file'])){
 
                 $cnx = connexionPDO();
 
-                $req = $cnx -> prepare('UPDATE user SET carte = ? WHERE mail = ?;');
+                $req = $cnx -> prepare('UPDATE user SET carte = ? WHERE id = ?;');
 
-                $req -> execute((array($ext,$_POST["email"])));
+                $req -> execute((array($ext,$id)));
 
                 $req -> closeCursor();
 

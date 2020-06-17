@@ -34,7 +34,9 @@ class Preference extends Component{
           Religion: "",//Croyance
           Astro: "",// Signe Astrologique
           init:0,
-          connect:true
+          certif:"",
+          connect:true,
+          StudentCard:null,alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
         };
       this.handleChangeLookingFor = this.handleChangeLookingFor.bind(this);
       this.handleChangeSexe = this.handleChangeSexe.bind(this);
@@ -85,6 +87,101 @@ class Preference extends Component{
             console.log(err);
           });
       }
+
+      /**
+       * Change la valeur de l'état StudentCard en fonction du fichier sélectionné
+       * @param {event} event Fichier sélectionné
+       */
+      inputChangeStudentCard(event){
+        let files = event.target.files;
+        let reader = new FileReader();
+        if(files[0]!=null){
+          reader.readAsDataURL(files[0]);
+          reader.onload=(e)=>{
+            this.setState({
+              StudentCard:files[0]
+            })
+          }
+        }else{
+          this.setState({
+            StudentCard:null
+          })
+        }
+      }
+
+      /**
+       * Envoie de la valeur du champ file au serveur pour faire vérifier
+       * la carte étudiante par les modérateurs
+       * @param {event} event Action du 2nd form par le bouton Submit
+       */
+      sendCard(event){
+        event.preventDefault();
+        const axios = require('axios');  //Requêtes HTTP
+        
+        let formData = new FormData();
+        formData.append('file',this.state.StudentCard);
+        let config = {
+          headers: {
+          logginid: Cookies.get("ID"),
+          logginkey: Cookies.get("KEY")
+          }
+      }
+        const url = URL_API+'setCarteEtudiante.php';
+          axios.post(url,formData,config)
+          .then(res => {
+            console.log("Réponse setCarteEtudiante: "+res.data);
+            if(res.data>=0){
+              switch(res.data){
+                case 0:
+                  this.setState({
+                    alertMessage: "Aucune carte étudiante n'a été envoyée.",
+                    alertClass:"alert-secondary",
+                    alertShow: true
+                  });
+                  break;
+                case 1:
+                  this.setState({
+                    alertClass:"alert-primary",
+                    alertMessage: "Carte étudiante envoyée avec succès !",
+                    certif:"jpg"
+                  });
+                  break;
+                case 2:
+                  this.setState({
+                    alertClass:"alert-danger",
+                    alertMessage: "Votre image dépasse 2Mo !",
+                    alertShow: true
+                  });
+                  break;
+                case 3:
+                  this.setState({
+                    alertClass:"alert-danger",
+                    alertMessage: "L'extension de votre image n'est pas acceptée !",
+                    alertShow: true
+                  });
+                  break;
+                default:
+                  this.setState({alertMessage: "La réponse de l'API n'est pas celle attendue.",alertShow: true});
+              }
+              this.setState({alertShow: true});
+            }else{
+              this.setState({
+              alertClass:"alert-warning",
+              alertMessage: "L'image a rencontré un problème durant l'upload.",
+              alertShow: true
+              });
+              console.error('Problème dans le retour de l\'API/setCarteEtudiante.');
+            }
+          })
+          .catch(err => {
+            console.log(err);
+            this.setState({
+              alertClass:"alert-warning",
+              alertMessage: "La requête/le serveur a rencontré un problème.",
+              alertShow: true
+            });
+          });
+        }
 
       /**
        * Envoie les données du 1er formulaire avec les coordonnées de la ville
@@ -229,7 +326,30 @@ class Preference extends Component{
                     {this.state.certif==="1"?
                       <div>T'es certifié !</div>
                       :this.state.certif==="0"?
-                        <div>Veuillez envoyer votre carte étudiante.</div>
+                        <div>Veuillez envoyer votre carte étudiante.
+                          {this.state.alertShow &&
+                            <div className={"alert alert-dismissible fade show " + this.state.alertClass} >
+                              {this.state.alertMessage}
+                            </div>
+                          }
+                          <div style={{border:"thin solid black",padding:"5px",borderRadius:"10px"}}>
+                          {/* 2nd Formulaire pour upload la carte étudiante */}
+                            <h4>Envoi de la carte étudiante</h4>
+                            <p color="grey">Votre carte étudiante dois être au format .png/.jpg/.jpeg 
+                            et ne doit pas dépasser 2Mo.</p>
+                            {/* Input StudentCard */}
+                            <label htmlFor="Student_Card">Carte étudiante :</label>
+                            <input className="input" 
+                            type="file" 
+                            name="StudentCard" 
+                            id="Student_Card"
+                            onChange={event => this.inputChangeStudentCard(event)} 
+                            />
+                            <br/>
+                            {/* Bouton Submit 2 */}
+                            <button onClick={(event) => this.sendCard(event)}>Upload</button>
+                          </div>
+                        </div>
                         :<div>Votre carte étudiante est en attente de validation...</div>
                     }
                   </div>
