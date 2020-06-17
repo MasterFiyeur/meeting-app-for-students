@@ -23,7 +23,7 @@ class Contact extends Component{
               <div className="col">
                 <img className="rounded-circle" src={TheoContact} alt="Theo" width="140" height="140" align="left" />
                 <div className="description-Contact">
-                  <span className="titre-Contact">Théo Julien <i className="fas fa-brain"></i> étudiant de seconde année de cycle préparatoire</span><br />
+                  <span className="titre-Contact">Théo Julien étudiant de seconde année de cycle préparatoire</span><br />
                   Developpeur Chef <br />
                   <b><a href="mailto:theo.julien@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
                 </div>
