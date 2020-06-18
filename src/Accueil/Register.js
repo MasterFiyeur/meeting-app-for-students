@@ -465,15 +465,15 @@ class Register extends Component{
               et ne doit pas dépasser 2Mo.</p>
               {/* Input StudentCard */}
               <label htmlFor="Student_Card">Carte étudiante :</label>
-                <div className="input-group">
-                  <div className="custom-file">
-                    <input type="file" className="custom-file-input" onChange={event => this.inputChangeStudentCard(event)} />
-                    <label className="custom_file_label" for="Student_Card1">Choisir une photo</label>
-                  </div>
+              <div className="input-group">
+                <div className="custom-file">
+                  <input type="file" className="custom-file-input" name="StudentCard" id="Student_Card" onChange={event => this.inputChangeStudentCard(event)} />
+                  <label className="custom_file_label" for="Student_Card">Choisir une photo</label>
                 </div>
+              </div>
               <br/>
               {/* Bouton Submit 2 */}
-              <button className="btn-simple" type="submit">Upload</button>
+              <button className="btn-simple">Upload</button>
             </form>
           }
           {this.state.etape===2 && //Etape carte étudiante terminée

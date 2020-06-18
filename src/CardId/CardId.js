@@ -108,7 +108,7 @@ class CardId extends Component{//this.props.hisId
       return(
         <div>
             {/* width obligatoire pour réguler la taille des images */}
-          <Card style={{width: "350px",borderRadius:"15px"}}>
+          <Card style={{borderRadius:"15px"}}>
           <Carousel key={this.props.hisId}>
                 {(!this.state.tabImage[0] && 
                 !this.state.tabImage[1] && 

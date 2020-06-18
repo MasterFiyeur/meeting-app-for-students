@@ -382,7 +382,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
       }                          
     render(){
       return(
-        <div>
+        <div className="col-lg">
           {/* Formulaire des Filtres de la personne' */}
           <form onSubmit={event=> this.loadTableauPersonne(event)}>
             <br />

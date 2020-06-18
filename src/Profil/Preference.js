@@ -435,22 +435,22 @@ class Preference extends Component{
                               {this.state.alertMessage}
                             </div>
                           }
-                          <div style={{border:"thin solid black",padding:"5px",borderRadius:"10px"}}>
+                          <div className="carte">
                           {/* 2nd Formulaire pour upload la carte étudiante */}
                             <h4>Envoi de la carte étudiante</h4>
                             <p color="grey">Votre carte étudiante dois être au format .png/.jpg/.jpeg 
                             et ne doit pas dépasser 2Mo.</p>
                             {/* Input StudentCard */}
                             <label htmlFor="Student_Card">Carte étudiante :</label>
-                            <input className="input" 
-                            type="file" 
-                            name="StudentCard" 
-                            id="Student_Card"
-                            onChange={event => this.inputChangeStudentCard(event)} 
-                            />
+                            <div className="input-group">
+                              <div className="custom-file">
+                                <input type="file" className="custom-file-input" name="StudentCard" id="Student_Card" onChange={event => this.inputChangeStudentCard(event)} />
+                                <label className="custom_file_label" for="Student_Card">Choisir une photo</label>
+                              </div>
+                            </div>
                             <br/>
                             {/* Bouton Submit 2 */}
-                            <button onClick={(event) => this.sendCard(event)}>Upload</button>
+                            <button className="btn-simple" onClick={(event) => this.sendCard(event)}>Upload</button>
                           </div>
                         </div>
                         :<div>Votre carte étudiante est en attente de validation...</div>

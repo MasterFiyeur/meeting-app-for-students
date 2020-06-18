@@ -103,10 +103,6 @@
   color: rgb(185,000,255);
 }
 
-.aligncenter{
-  align-items: center;
-}
-
 .input_groupe {
   position: relative;
   display: flex;
@@ -236,9 +232,49 @@
 }
 
 .align-center{
-  width: 33%;
-  margin-left: 33%;
-  margin-right: 33%;
+  width: 80%;
+  margin-left: 10%;
+  margin-right: 10%;
+  vertical-align: middle;
+}
+
+.filtressvg{
+  background-color: rgba(187, 0, 255, 0.5);
+  color: #fff;
+  width: 30%;
+  margin-left: 35%;
+  margin-right: 35%;
+  vertical-align: middle;
+  border-radius:15px;
+  height:50px;
+  cursor:pointer;
+}
+
+.filtressvg:hover{
+  background-color: rgb(185, 000, 255);
+  border-radius: 5px;
+  border-color: rgb(185, 000, 255);
+  color: rgb(255,255,255);
+}
+
+
+
+.align-card{
+  width: 40%;
+  margin-left: 30%;
+  margin-right: 30%;
+  vertical-align: middle;
+  border-radius: 15px;
+}
+.border-card{
+  border-radius: 15px;
+}
+
+
+.dislike-center{
+  vertical-align: middle;
+}
+.like-center{
   vertical-align: middle;
 }
 
@@ -318,6 +354,81 @@
   color: rgb(255,255,255);
 }
 
+.btn-principale{
+  background-color: rgba(185, 000, 255, 0.5);
+  border-radius: 10px;
+  padding: 10%;
+  border-color: rgba(185, 000, 255, );
+  color: rgb(255,255,255 );
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border:2px ;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, border-radius.15s ease-in-out;
+}
+
+.btn-principale:hover{
+  background-color: rgb(185, 000, 255);
+  border-radius: 5px;
+  border-color: rgb(185, 000, 255);
+  color: rgb(255,255,255);
+}
+
+.btn-dislike{
+  background-color: rgba(255, 000, 000, 0.5);
+  border-radius: 45px;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  padding-left: 10%;
+  padding-right: 10%;
+  border-color: rgb(255, 000, 000);
+  color: rgb(255,255,255);
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border:1px ;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, border-radius.15s ease-in-out;
+}
+.btn-dislike:hover{
+  background-color: rgb(255, 000, 000);
+  border-radius: 100px;
+  border-color: rgb(255, 000, 000);
+  color: rgb(255,255,255);
+}
+
+.btn-like{
+  background-color: rgba(20, 148, 20, 0.5);
+  border-radius: 45px;
+  padding-top: 12%;
+  padding-bottom: 12%;
+  padding-left: 12%;
+  padding-right: 12%;;
+  border-color: rgb(20, 148, 20);
+  color: rgb(255,255,255);
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border:1px ;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, border-radius.15s ease-in-out;
+}
+.btn-like:hover{
+  background-color: rgb(20, 148, 20);
+  border-radius: 100px;
+  border-color: rgb(20, 148, 20);
+  color: rgb(255,255,255);
+}
 
 .width100{
   width: 100%;
@@ -345,4 +456,22 @@
   text-align: left;
   height: 500px;
   width: 300px;
+}
+
+.carte{
+  background-color: rgba(185,000,255, 0.1);
+  color: rgb(0,0,0);
+  border:thin solid black;
+  padding:5px;
+  border-radius:10px;
+}
+
+.match{
+  text-decoration: none;
+  color: #fff;
+}
+
+.match:hover{
+  text-decoration: none;
+  color: #fff;
 }

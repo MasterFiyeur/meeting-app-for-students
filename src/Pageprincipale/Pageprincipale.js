@@ -226,90 +226,143 @@ class Pageprincipale extends Component {
         <div className="container-fluid margetop18">
             <div className="row">
                 <div className="col-lg">
+                    <div className="filtressvg" onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>
+                        <svg style={{padding:"3px"}} className="bi bi-toggles" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M11.5 1h-7a2.5 2.5 0 0 0 0 5h7a2.5 2.5 0 0 0 0-5zm-7-1a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm0 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                            <path fillRule="evenodd" d="M8 3.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM4.5 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div className="col-lg">
+                    <button className="btn-principale" ><Link className="match" to="/mesmatch">mes match</Link></button>
+                </div>
+                <div className="col-lg">
                     <button 
-                    className="btn-accueil" 
+                        className="btn-principale" 
+                        onClick={() => this.setState({pref:true})}>
+                            Preferences
+                    </button>
+                </div>
+                <div className="col-lg">
+                    {this.state.grade ==="administrateur" &&
+                    <button 
+                        className="btn-principale" 
+                        onClick={() => this.setState({panel:true})}>
+                            Panel administrateur
+                    </button>
+                    }
+                </div>
+                <div className="col-lg">
+                    <button 
+                    className="btn-principale" 
                     onClick={() => this.deconnect()}>
                         Déconnexion
                     </button>
                 </div>
-                <div style={{border:"thin solid black",borderRadius:"15px",height:"50px",cursor:"pointer"}} onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>
-                    <svg style={{padding:"3px"}} className="bi bi-toggles" width="3em" height="3em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M11.5 1h-7a2.5 2.5 0 0 0 0 5h7a2.5 2.5 0 0 0 0-5zm-7-1a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm0 9a3.5 3.5 0 1 0 0 7h7a3.5 3.5 0 1 0 0-7h-7zm7 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                        <path fillRule="evenodd" d="M8 3.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0zM4.5 6a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
-                    </svg>
-                </div>
-                {this.state.grade ==="administrateur" &&
-                <button 
-                    className="btn-accueil" 
-                    onClick={() => this.setState({panel:true})}>
-                        Panel administrateur
-                </button>
-                }
-                <div className="col-lg">
-                    <div>
-                        <button className="btn btn-danger" ><Link to="/mesmatch">mes match</Link></button>
-                    </div>
-                </div>
-                {(this.state.tabPersonne!==null && this.state.tabPersonne.length > this.state.currentIndex) && 
-                    <>
-                    <button 
-                        className="btn-accueil" 
-                        style={{backgroundColor:"#48FF5B",height:"50%"}}
-                        onClick={() => this.like()}>
-                            Like
-                    </button>
-                    {(this.state.currentIndex!==null && this.state.loaded) &&
-                        <>
-                        <CardId hisId={this.state.tabPersonne[this.state.currentIndex]}/>
-                        </>
-                    }
-                    <button 
-                        className="btn-accueil" 
-                        style={{backgroundColor:"#FF5B48",height:"50%"}}
-                        onClick={() => this.dislike()}>
-                            Dislike
-                    </button>
-                    </>
-                }
-                {(this.state.tabPersonne!==null && this.state.tabPersonne.length <= this.state.currentIndex) && 
-                    <>
-                    <button 
-                        className="btn-accueil" 
-                        style={{backgroundColor:"#48FF5B",height:"50%"}}
-                        disabled>
-                            Like
-                    </button>
-                    <Card>
-                        <Card.Title>Wow quelle énergie !</Card.Title>
-                        <Card.Text>Vous avez épuisé tout notre stock de partenaire</Card.Text>
-                        <Card.Text>Revenez plus tard </Card.Text>
-                        <Card.Text>
-                            <svg className="bi bi-emoji-smile-upside-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fillRule="evenodd" d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0-1a8 8 0 1 1 0 16A8 8 0 0 1 8 0z"/>
-                                <path fillRule="evenodd" d="M4.285 6.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 4.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 3.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683z"/>
-                                <path d="M7 9.5C7 8.672 6.552 8 6 8s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5z"/>
-                            </svg>
-                        </Card.Text>
-                    </Card>
-                    <button 
-                        className="btn-accueil" 
-                        style={{backgroundColor:"#FF5B48",height:"50%"}}
-                        disabled>
-                            Dislike
-                    </button>
-                    </>
-                }
-                <button 
-                    className="btn-accueil" 
-                    onClick={() => this.setState({pref:true})}>
-                        Preferences
-                </button>
-                {(this.state.grade !=="nouveau" && this.state.grade !=="" && this.state.showFiltre)&& 
-                    <div width="20%">
-                        <Filtre onChangeTabPersonne={this.onChangeTabPersonne}/>
-                    </div>
-                }
+                
             </div>
+            <div className="row">
+                    {(this.state.grade !=="nouveau" && this.state.grade !=="" && this.state.showFiltre)&& 
+                            <Filtre onChangeTabPersonne={this.onChangeTabPersonne}/>
+                    }
+                    
+            </div>
+            <div className="row">
+                <br/>
+                <div className="col-lg margetop5">
+                {(this.state.tabPersonne!==null && this.state.tabPersonne.length > this.state.currentIndex) && 
+                        <div className="row">
+                            <div className="col-lg">
+                                <div className="row">
+                                    <div className="col-lg align-card">
+                                        {(this.state.currentIndex!==null && this.state.loaded) &&
+                                            <>
+                                            <CardId  hisId={this.state.tabPersonne[this.state.currentIndex]}/>
+                                            </>
+                                        }
+                                    </div>
+                                </div>
+                                    
+                                
+                                
+                                <div className="row">
+                                    <div className="col-lg ">
+                                        <div className="dislike-center">
+                                            <button 
+                                                className="btn-dislike" 
+                                                onClick={() => this.dislike()}>
+                                                    Dislike
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div className="col-lg">
+                                        <div className="like-center">
+                                            <button 
+                                                className="btn-like" 
+                                                onClick={() => this.like()}>
+                                                    Like
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            </div>                          
+
+                        </div>
+                    }
+                    {(this.state.tabPersonne!==null && this.state.tabPersonne.length <= this.state.currentIndex) && 
+                        <div className="row">
+                                <div className="col-lg">
+                                    <Card>
+                                        <Card.Title>Wow quelle énergie !</Card.Title>
+                                        <Card.Text>Vous avez épuisé tout notre stock de partenaire</Card.Text>
+                                        <Card.Text>Revenez plus tard </Card.Text>
+                                        <Card.Text>
+                                            <svg className="bi bi-emoji-smile-upside-down" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                <path fillRule="evenodd" d="M8 1a7 7 0 1 1 0 14A7 7 0 0 1 8 1zm0-1a8 8 0 1 1 0 16A8 8 0 0 1 8 0z"/>
+                                                <path fillRule="evenodd" d="M4.285 6.433a.5.5 0 0 0 .683-.183A3.498 3.498 0 0 1 8 4.5c1.295 0 2.426.703 3.032 1.75a.5.5 0 0 0 .866-.5A4.498 4.498 0 0 0 8 3.5a4.5 4.5 0 0 0-3.898 2.25.5.5 0 0 0 .183.683z"/>
+                                                <path d="M7 9.5C7 8.672 6.552 8 6 8s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5zm4 0c0-.828-.448-1.5-1-1.5s-1 .672-1 1.5.448 1.5 1 1.5 1-.672 1-1.5z"/>
+                                            </svg>
+                                        </Card.Text>
+                                    </Card> 
+                                </div>
+
+
+                            <div className="row">
+                                <div className="col-lg">
+                                    <div className="dislike-center">
+                                        <button 
+                                            className="btn-dislike" 
+                                            disabled>
+                                                Dislike
+                                        </button>
+                                    </div>
+                                    
+                                </div>
+                                <div className="col-lg">
+                                    <div className="like-center">
+                                        <button 
+                                            className="btn-like" 
+                                            disabled>
+                                                Like
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                
+                            
+                                
+                            </div>
+                       
+                            
+                        </div>
+                    }
+                </div>
+                
+
+            </div>
+
+
         </div>
       );
     }
@@ -318,3 +371,4 @@ class Pageprincipale extends Component {
 
 export default Pageprincipale;
 
+                    
