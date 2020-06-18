@@ -398,7 +398,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
             </div>
 
             {/* Filtre Etude */}
-            {this.state.showFiltreEtude===false && <div><label htmlFor="Etude">Etudes</label> <button onClick={()=>
+            {this.state.showFiltreEtude===false && <div><label htmlFor="Etude"><i className="fas fa-user-graduate"></i>Etudes</label> <button onClick={()=>
                 this.handleClickInEtude()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreEtude===true && <div>
               <label htmlFor="Etude">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -434,7 +434,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutEtude()}>Fermer</button>
             </div>}
             {/* Filtre Sport */}
-            {this.state.showFiltreSport===false && <div><label htmlFor="Sport">Activités Physique</label> <button
+            {this.state.showFiltreSport===false && <div><label htmlFor="Sport"><i className="fas fa-dumbbell"></i>Activités Physique</label> <button
                 onClick={()=> this.handleClickInSport()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreSport===true && <div>
               <label htmlFor="Sport">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -463,7 +463,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutSport()}>Fermer</button>
             </div>}
             {/* Filtre Yeux */}
-            {this.state.showFiltreYeux===false && <div><label htmlFor="Yeux">Couleur des Yeux</label> <button
+            {this.state.showFiltreYeux===false && <div><label htmlFor="Yeux"><i className="far fa-eye"></i>Couleur des Yeux</label> <button
                 onClick={()=> this.handleClickInYeux()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreYeux===true && <div>
               <label htmlFor="Yeux">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -494,7 +494,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutYeux()}>Fermer</button>
             </div>}
             {/* Filtre Cheveux */}
-            {this.state.showFiltreCheveux===false && <div><label htmlFor="Cheveux">Couleur des Cheveux</label> <button
+            {this.state.showFiltreCheveux===false && <div><label htmlFor="Cheveux"><i className="fas fa-cut"></i>Couleur des Cheveux</label> <button
                 onClick={()=> this.handleClickInCheveux()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreCheveux===true && <div>
               <label htmlFor="Cheveux">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -531,7 +531,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutCheveux()}>Fermer</button>
             </div>}
             {/* Filtre Alcool */}
-            {this.state.showFiltreAlcool===false && <div><label htmlFor="Alcool">Alcool</label> <button onClick={()=>
+            {this.state.showFiltreAlcool===false && <div><label htmlFor="Alcool"><i className="fas fa-cocktail"></i>Alcool</label> <button onClick={()=>
                 this.handleClickInAlcool()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreAlcool===true && <div>
               <label htmlFor="Alcool">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -557,7 +557,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutAlcool()}>Fermer</button>
             </div>}
             {/* Filtre Tabac */}
-            {this.state.showFiltreTabac===false && <div><label htmlFor="Tabac">Tabac</label> <button onClick={()=>
+            {this.state.showFiltreTabac===false && <div><label htmlFor="Tabac"><i className="fas fa-smoking"></i>Tabac</label> <button onClick={()=>
                 this.handleClickInTabac()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreTabac===true && <div>
               <label htmlFor="Tabac">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -579,7 +579,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutTabac()}>Fermer</button>
             </div>}
             {/* Filtre Religion */}
-            {this.state.showFiltreReligion===false && <div><label htmlFor="Religion">Religion</label> <button
+            {this.state.showFiltreReligion===false && <div><label htmlFor="Religion"><i className="fas fa-church"></i>Religion</label> <button
                 onClick={()=> this.handleClickInReligion()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreReligion===true && <div>
               <label htmlFor="Religion">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -630,7 +630,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutReligion()}>Fermer</button>
             </div>}
             {/* Filtre Astrologie */}
-            {this.state.showFiltreAstrologie===false && <div><label htmlFor="Astrologie">Astrologie</label> <button
+            {this.state.showFiltreAstrologie===false && <div><label htmlFor="Astrologie"><i className="far fa-star"></i>Astrologie</label> <button
                 onClick={()=> this.handleClickInAstrologie()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreAstrologie===true && <div>
               <label htmlFor="Astrologie">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -681,7 +681,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <button onClick={()=> this.handleClickOutAstrologie()}>Fermer</button>
             </div>}
             {/* Filtre Animaux */}
-            {this.state.showFiltreAnimaux===false && <div><label htmlFor="Animaux">Animaux</label> <button onClick={()=>
+            {this.state.showFiltreAnimaux===false && <div><label htmlFor="Animaux"><i className="fas fa-paw"></i>Animaux</label> <button onClick={()=>
                 this.handleClickInAnimaux()}>Ajouter ce filtre</button></div>}
             {this.state.showFiltreAnimaux===true && <div>
               <label htmlFor="Animaux">Vous ne verrez plus les profils ayant les préférences décochés</label>
@@ -719,48 +719,48 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                 <label className="input-group-text" htmlFor="Filtre Actif">Filtre Actif :</label>
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="EtudesActif">Etudes</label>
+                <label className="form-check-label" htmlFor="EtudesActif"><i className="fas fa-user-graduate"></i>Etudes</label>
                 <input className="form-check-input" type="radio" name="EtudesActif" id="EtudesActif" value="Etudes"
                   checked={this.state.Actif==='Etudes' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="SportActif">Activités Physique</label>
+                <label className="form-check-label" htmlFor="SportActif"><i className="fas fa-dumbbell"></i>Activités Physique</label>
                 <input className="form-check-input" type="radio" name="SportActif" id="SportActif"
                   value="Activités Physique" checked={this.state.Actif==='Activités Physique' }
                   onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="YeuxActif">Yeux</label>
+                <label className="form-check-label" htmlFor="YeuxActif"><i className="far fa-eye"></i>Yeux</label>
                 <input className="form-check-input" type="radio" name="YeuxActif" id="YeuxActif" value="Yeux"
                   checked={this.state.Actif==='Yeux' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="CheveuxActif">Cheveux</label>
+                <label className="form-check-label" htmlFor="CheveuxActif"><i className="fas fa-cut"></i>Cheveux</label>
                 <input className="form-check-input" type="radio" name="CheveuxActif" id="CheveuxActif" value="Cheveux"
                   checked={this.state.Actif==='Cheveux' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="AlcoolActif">Alcool</label>
+                <label className="form-check-label" htmlFor="AlcoolActif"><i className="fas fa-cocktail"></i>Alcool</label>
                 <input className="form-check-input" type="radio" name="AlcoolActif" id="AlcoolActif" value="Alcool"
                   checked={this.state.Actif==='Alcool' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="TabacActif">Tabac</label>
+                <label className="form-check-label" htmlFor="TabacActif"><i className="fas fa-smoking"></i>Tabac</label>
                 <input className="form-check-input" type="radio" name="TabacActif" id="TabacActif" value="Tabac"
                   checked={this.state.Actif==='Tabac' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="ReligionActif">Religion</label>
+                <label className="form-check-label" htmlFor="ReligionActif"><i className="fas fa-church"></i>Religion</label>
                 <input className="form-check-input" type="radio" name="ReligionActif" id="ReligionActif"
                   value="Religion" checked={this.state.Actif==='Religion' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="AstrologieActif">Astrologie</label>
+                <label className="form-check-label" htmlFor="AstrologieActif"><i className="far fa-star"></i>Astrologie</label>
                 <input className="form-check-input" type="radio" name="AstrologieActif" id="AstrologieActif"
                   value="Astrologie" checked={this.state.Actif==='Astrologie' } onChange={this.handleChangeActif} />
               </div>
               <div className="form-check form-check-inline">
-                <label className="form-check-label" htmlFor="AnimauxActif">Animaux</label>
+                <label className="form-check-label" htmlFor="AnimauxActif"><i className="fas fa-paw"></i>Animaux</label>
                 <input className="form-check-input" type="radio" name="AnimauxActif" id="AnimauxActif" value="Animaux"
                   checked={this.state.Actif==='Animaux' } onChange={this.handleChangeActif} />
               </div>

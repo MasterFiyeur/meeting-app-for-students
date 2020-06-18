@@ -11,8 +11,10 @@ class ListMessages extends Component {
         	list : "",
         	message : "",
         	messages :"",
-        	x: 0,
-        	y: 0,
+        	prenom1 : "",
+        	prenom2 : "",
+        	x: 100,
+        	y: 100,
         }
         this.handleChange = this.handleChange.bind(this);
     	this.sendMessage = this.sendMessage.bind(this);
@@ -39,31 +41,17 @@ class ListMessages extends Component {
 	}
 
 
-	affMessage(){
-		let ret = "";
-		let messages = this.state.list;
-		messages = messages.slice(0,-1);
-		let lmessages = messages.split(';');
-		ret = lmessages.map(el => <tr >
-									<td><strong>from {el.split('-')[0]} : </strong></td>
-									<td>{el.split('-')[1]}</td>
-								  </tr>);
-		this.setState({messages : ret})
-	}
 
-	
-
-	componentDidMount(){
-		  this.interval = setInterval(() => this.getMessage(), 1000);
-	}
 
 	handleChange(event) {
-		console.log(event.target.value)
   	    this.setState({message: event.target.value});
 	}
 
 	componentWillUnmount() {
   		clearInterval(this.interval);
+  		  		clearInterval(this.interval2);
+  		clearInterval(this.interval3);
+
 	}
 	sendMessage(event){
 		event.preventDefault();
@@ -88,22 +76,73 @@ class ListMessages extends Component {
         });
 	}
 
+
+
+	prenom(id,i){
+		const axios = require('axios');  //Requêtes HTTP
+        let formdata = new FormData();
+        formdata.append('id',id);
+		const url = URL_API+'prenom.php';
+        axios.post(url,formdata)
+        .then(res => {
+        	if(i===1){
+        		this.setState({prenom1 : res.data});
+        	} else if (i===2){
+        		this.setState({prenom2 : res.data});
+
+        	}
+        })
+        .catch(err => {
+            console.log(err);
+        });
+	}
+
+	prenom2(id){
+		if (id == this.props.id){return this.state.prenom1}
+		if (id == this.props.id2){return this.state.prenom2}
+	}
+	affMessage(){
+		let ret = "";
+		let messages = this.state.list;
+		messages = messages.slice(0,-1);
+		let lmessages = messages.split(';');
+		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
+									<div className="left-m"><strong>{this.prenom2(el.split('-')[0])}</strong></div>
+									<div className="right-m">{el.split('-')[1]}</div>
+								  </div>);
+		this.setState({messages : ret})
+	}
+
+		componentDidMount(){
+		  this.interval = setInterval(() => this.getMessage(), 1000);
+		  this.interval3 = setInterval(() => this.prenom(this.props.id,1),1000);
+		  this.interval3 = setInterval(() => this.prenom(this.props.id2,2),1000);
+
+	}
+
+
 	render() {
         const {x, y} = this.state;
 
 		return(
 
 		<Draggable x={x} y={y} onMove={this._move}>
-			<table>
-				<tbody>
-					{this.state.messages}	
-				</tbody>
-			</table>	
-			<form onSubmit={event => this.sendMessage(event)}>
-					<input type="text" value={this.state.message} name="message" onChange={this.handleChange} />
-					<input type="submit" />
-			</form>
+			<div className="message_header">
+			salut
 
+			</div>
+			<div className="messages">
+				
+
+				
+						{this.state.messages}
+			</div>
+			<div className="message_footer">
+				<form onSubmit={event => this.sendMessage(event)}>
+						<input type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
+						<input type="submit" />
+				</form>
+			</div>
 		</Draggable>
 
 

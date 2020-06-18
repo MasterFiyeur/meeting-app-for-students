@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import {URL_API} from '../App';
 //import ListMatch from '../messagerie/listeMatch';
 import CardId from '../CardId/CardId';
-import {Card} from 'react-bootstrap';
+import {Card,Modal,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Filtre from '../Profil/Filtre';
 
@@ -19,10 +19,18 @@ class Pageprincipale extends Component {
             loaded:false,
             panel:false,
             grade:"",
-            showFiltre:false
+            showFiltre:false,
+            showModal:false
         }
       }
     
+    closeModal(){
+        this.setState({
+            showModal:false
+        });
+    }
+
+
     onChangeTabPersonne = (newTab) => {
         this.setState({
             tabPersonne:newTab,
@@ -120,7 +128,9 @@ class Pageprincipale extends Component {
                             });
                         }
                     }else{
-                        alert("Tu n'as plus de like, abonnez-vous ou revenez demain :)");
+                        this.setState({
+                            showModal:true
+                        });
                     }
                 }
             }
@@ -220,10 +230,26 @@ class Pageprincipale extends Component {
             return (<Redirect to='/preference'/>);//Renvoi à la page des preferences
         }else if(this.state.panel){
             return (<Redirect to='/panel'/>);//Renvoi à la page du panel administrateur
+        }else if(this.state.showFiltre && this.state.grade==="nouveau"){
+            return (<Redirect to='/abonnement'/>);//Renvoi à la page de l'abonnement
         }
       return(
 
         <div className="container-fluid margetop18">
+            <Modal show={this.state.showModal} onHide={() => this.closeModal()}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Nombre de like épuisé</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Tu as utilisé tes 10 likes quotidien ! Deviens un abonné pour bénéficier d'un nombre de like ilimité.</Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={() => this.closeModal()}>
+                        Fermer
+                    </Button>
+                    <Button variant="primary" onClick={() => {this.setState({showFiltre:true});this.closeModal()}}>
+                        S'abonner
+                    </Button>
+                </Modal.Footer>
+            </Modal>
             <div className="row">
                 <div className="col-lg">
                     <div className="filtressvg" onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>

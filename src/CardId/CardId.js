@@ -173,11 +173,7 @@ class CardId extends Component{//this.props.hisId
             <Card.Body style={{overflowY: "scroll",height:"25vh"}}>
                 {/* Ici mettre bio et certaines caractéristiques */}
                 <Card.Title>{this.state.tabInfo[0]+", "+this.state.tabInfo[1]+"ans "}
-                {this.state.certif==="1" &&
-                    <svg className="bi bi-tag-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                    </svg>
-                }
+                {this.state.certif==="1" && <i className="fas fa-check-circle fa-xs blue-text"></i>}
                 </Card.Title>
                 <Card.Subtitle>à {this.state.tabInfo[2]} km</Card.Subtitle>
                 <Card.Text>{this.state.tabInfo[3]}</Card.Text>
