@@ -43,7 +43,6 @@ class ListMessages extends Component {
 
 
 
-
 	handleChange(event) {
   	    this.setState({message: event.target.value});
 	}

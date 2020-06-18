@@ -10,6 +10,7 @@ import About from './About/About'
 import Contact from './Contact/Contact';
 import AdminCarte from './AdminCarte/AdminCarte';
 import ListMatch from './messagerie/listeMatch';
+import Abonnement from './Abonnement/Abonnement';
 
 
 class App extends React.Component {
@@ -27,9 +28,9 @@ class App extends React.Component {
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />
             <Route path="/mesmatch" component={ListMatch} />
+            <Route path="/abonnement" component={Abonnement} />
 
           </Switch>
-          
         </div>
       </HashRouter>
     );

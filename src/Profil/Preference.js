@@ -420,8 +420,6 @@ class Preference extends Component{
             <br/>
             <form onSubmit={event => this.sendPref(event)}>
               <div className="container-fluid">
-                
-                
                 <div className="row">
                   <div className="col-lg">
                   </div>
