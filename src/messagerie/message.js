@@ -11,6 +11,8 @@ class ListMessages extends Component {
         	list : "",
         	message : "",
         	messages :"",
+        	prenom1 : "",
+        	prenom2 : "",
         	x: 100,
         	y: 100,
         }
@@ -39,31 +41,18 @@ class ListMessages extends Component {
 	}
 
 
-	affMessage(){
-		let ret = "";
-		let messages = this.state.list;
-		messages = messages.slice(0,-1);
-		let lmessages = messages.split(';');
-		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
-									<div className="left-m"><strong>{el.split('-')[0]}</strong></div>
-									<div className="right-m">{el.split('-')[1]}</div>
-								  </div>);
-		this.setState({messages : ret})
-	}
 
-	
 
-	componentDidMount(){
-		  this.interval = setInterval(() => this.getMessage(), 1000);
-	}
 
 	handleChange(event) {
-		console.log(event.target.value)
   	    this.setState({message: event.target.value});
 	}
 
 	componentWillUnmount() {
   		clearInterval(this.interval);
+  		  		clearInterval(this.interval2);
+  		clearInterval(this.interval3);
+
 	}
 	sendMessage(event){
 		event.preventDefault();
@@ -87,6 +76,51 @@ class ListMessages extends Component {
             console.log(err);
         });
 	}
+
+
+
+	prenom(id,i){
+		const axios = require('axios');  //Requêtes HTTP
+        let formdata = new FormData();
+        formdata.append('id',id);
+		const url = URL_API+'prenom.php';
+        axios.post(url,formdata)
+        .then(res => {
+        	if(i===1){
+        		this.setState({prenom1 : res.data});
+        	} else if (i===2){
+        		this.setState({prenom2 : res.data});
+
+        	}
+        })
+        .catch(err => {
+            console.log(err);
+        });
+	}
+
+	prenom2(id){
+		if (id == this.props.id){return this.state.prenom1}
+		if (id == this.props.id2){return this.state.prenom2}
+	}
+	affMessage(){
+		let ret = "";
+		let messages = this.state.list;
+		messages = messages.slice(0,-1);
+		let lmessages = messages.split(';');
+		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
+									<div className="left-m"><strong>{this.prenom2(el.split('-')[0])}</strong></div>
+									<div className="right-m">{el.split('-')[1]}</div>
+								  </div>);
+		this.setState({messages : ret})
+	}
+
+		componentDidMount(){
+		  this.interval = setInterval(() => this.getMessage(), 1000);
+		  this.interval3 = setInterval(() => this.prenom(this.props.id,1),1000);
+		  this.interval3 = setInterval(() => this.prenom(this.props.id2,2),1000);
+
+	}
+
 
 	render() {
         const {x, y} = this.state;

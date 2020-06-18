@@ -36,15 +36,13 @@ class ListMatch extends Component {
         });
 	}
 
-	getname(){
-
-	}
-
 	handleClick(id,id2){
 		this.setState({show : 1});
 		this.setState({id : id});
 		this.setState({id2 : id2})
 	}
+
+
 
 	affMatch() {		
 		let ret = "";
