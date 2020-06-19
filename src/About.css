@@ -1,9 +1,9 @@
 
   .title-About{
      font-weight: 700;
-     font-size: 80px;
+     font-size: 70px;
      color: #777;
-     text-shadow: 4px 4px 3px black;
+     text-shadow: 3px 3px 2px black;
      text-transform: uppercase;
   }
   .box-About{

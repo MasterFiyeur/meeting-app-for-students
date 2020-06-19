@@ -58,7 +58,7 @@ class Contact extends Component{
                 <img className="rounded-circle" src={JulienContact} alt="Julien" width="140" height="140"
                   align="left" />
                 <div className="description-Contact">
-                  <span className="titre-Contact"><i className="fas fa-hand-middle-finger"></i>Julien Richard étudiant de seconde année de cycle préparatoire</span>
+                  <span className="titre-Contact">Julien Richard étudiant de seconde année de cycle préparatoire</span>
                   <br />
                   Designer 
                   <br />
