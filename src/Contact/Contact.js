@@ -10,6 +10,9 @@ class Contact extends Component{
         super(props);
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div className="Contact">
@@ -19,6 +22,7 @@ class Contact extends Component{
           <br />
           <span className="title-Contact">Nous contacter</span>
           <div className="container">
+            {/* Théo */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={TheoContact} alt="Theo" width="140" height="140" align="left" />
@@ -30,6 +34,7 @@ class Contact extends Component{
               </div>
             </div>
 
+            {/* William */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={WilliamContact} alt="William" width="140" height="140" align="left" />
@@ -42,6 +47,7 @@ class Contact extends Component{
               </div>
             </div>
 
+            {/* Florent*/}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={FlorentContact} alt="Florent" width="140" height="140" align="left" />
@@ -53,12 +59,14 @@ class Contact extends Component{
                 </div>
               </div>
             </div>
+            
+            {/* Julien */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={JulienContact} alt="Julien" width="140" height="140"
                   align="left" />
                 <div className="description-Contact">
-                  <span className="titre-Contact"><i className="fas fa-hand-middle-finger"></i>Julien Richard étudiant de seconde année de cycle préparatoire</span>
+                  <span className="titre-Contact">Julien Richard étudiant de seconde année de cycle préparatoire</span>
                   <br />
                   Designer 
                   <br />

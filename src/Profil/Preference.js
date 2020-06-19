@@ -329,11 +329,13 @@ class Preference extends Component{
           [name]: value
         })
       }
+
       handleChangeLookingFor(event) {
         this.setState({
           JeCherche: event.target.value
         });
       }
+      
       handleChangeSexe(event) {
         this.setState({
           JeSuis: event.target.value

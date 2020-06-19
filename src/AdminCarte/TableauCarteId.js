@@ -12,6 +12,11 @@ class TableauCarteId extends Component{
       };
     }
 
+    /**
+     * Met à jour le tableau du component parent
+     * Utilisé lorsqu'on certifie/decline la carte 
+     * d'un utilisateur
+     */
     reset(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getTabCarteEtudiante.php';
@@ -33,10 +38,16 @@ class TableauCarteId extends Component{
         });
     }
 
+    /**
+     * Ouvre la carte étudiante d'un utilisateur dans un nouvel onglet
+     */
     openCarte(){
         window.open("https://projetsiteeisti.yj.fr/imageCarteEtudiante/"+this.state.Actuel.Id+"."+this.state.Actuel.Extension);
     }
 
+    /**
+     * Certifie l'utilisateur sélectionné
+     */
     certificate(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'setCertif.php?id='+this.state.Actuel.Id+"&img="+this.state.Actuel.Extension;
@@ -61,6 +72,10 @@ class TableauCarteId extends Component{
         });
     }
 
+    /**
+     * Supprime la carte étudiante d'un utilisateur dans le but qu'il puisse 
+     * en renvoyer une qui soit conforme
+     */
     deleteCarte(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'delCarteEtudiante.php?id='+this.state.Actuel.Id+"&img="+this.state.Actuel.Extension;
@@ -85,6 +100,11 @@ class TableauCarteId extends Component{
         });
     }
 
+    /**
+     * Fonction qui actualise l'utilisateur courant sélectionné
+     * @param {Object} el objet contenant le prenom, le nom, 
+     * l'id et l'extension de la carte étudiante d'un utilisateur
+     */
     alertId(el){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getExtensionCarte.php?id='+el.Id;
@@ -113,6 +133,9 @@ class TableauCarteId extends Component{
         });
     }
 
+    /**
+     * Transformation du tableau d'objet en un tableau html avec le nom, prenom et ID de l'utilisateur
+     */
     PropsToTabHTML(){
     let res;
     if(this.props.Tableau!=null && this.props.Tableau.length>0){
@@ -124,6 +147,9 @@ class TableauCarteId extends Component{
     }
 
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div style={{marginTop:"20px"}}>

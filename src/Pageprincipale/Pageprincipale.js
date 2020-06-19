@@ -24,6 +24,9 @@ class Pageprincipale extends Component {
         }
       }
     
+      /**
+       * Ferme le modal
+       */
     closeModal(){
         this.setState({
             showModal:false
@@ -31,6 +34,11 @@ class Pageprincipale extends Component {
     }
 
 
+    /**
+     * 
+     * @param {Tab of integer} newTab Tableau comprenant les id des personnes 
+     * correspondant à la recherche de l'utilisateur 
+     */
     onChangeTabPersonne = (newTab) => {
         this.setState({
             tabPersonne:newTab,
@@ -47,6 +55,10 @@ class Pageprincipale extends Component {
         this.verifConnexion();
     }
 
+    /**
+     * Creer un match entre deux utilisateur pour qu'il puisse parler ultérieurement
+     * @param {integer} idAutre ID de la personne avec qui l'utilisateur a match
+     */
     createMatch(idAutre){
 		const axios = require('axios');  //Requêtes HTTP
 		let formdata = new FormData();
@@ -81,6 +93,10 @@ class Pageprincipale extends Component {
         });
 	}
 
+    /**
+     * Indique à la base de donnée que l'utilisateur a dislike un autre
+     * utilisateur
+     */
     dislike(){
         const url = URL_API+'addDislike.php?id='+this.state.tabPersonne[this.state.currentIndex];
         const axios = require('axios').default;  //Requêtes HTTP
@@ -105,6 +121,9 @@ class Pageprincipale extends Component {
         });
     }
 
+    /**
+     * Indique à la base de donnée que l'utilisateur a like un autre utilisateur
+     */
     like(){
         const url = URL_API+'addLike.php?id='+this.state.tabPersonne[this.state.currentIndex];
         const axios = require('axios').default;  //Requêtes HTTP
@@ -141,6 +160,9 @@ class Pageprincipale extends Component {
         });
     }
 
+    /**
+     * Charge le tableau des personnes qui seront proposés
+     */
     loadTableauPersonne(){
         const url = URL_API+'getTabPersonne.php';
         const axios = require('axios').default;  //Requêtes HTTP
@@ -219,7 +241,7 @@ class Pageprincipale extends Component {
     }
 
     /**
-     * Rendu
+     * Rendu du component
      */
     render(){
         /* Utilisateur redirigé si non connecté */
@@ -292,13 +314,11 @@ class Pageprincipale extends Component {
                         Déconnexion
                     </button>
                 </div>
-                
             </div>
             <div className="row">
                     {(this.state.grade !=="nouveau" && this.state.grade !=="" && this.state.showFiltre)&& 
                             <Filtre onChangeTabPersonne={this.onChangeTabPersonne}/>
                     }
-                    
             </div>
             <div className="row">
                 <br/>
@@ -315,9 +335,6 @@ class Pageprincipale extends Component {
                                         }
                                     </div>
                                 </div>
-                                    
-                                
-                                
                                 <div className="row">
                                     <div className="col-lg ">
                                         <div className="dislike-center">
@@ -338,9 +355,7 @@ class Pageprincipale extends Component {
                                         </div>
                                     </div>
                                 </div>
-                            
-                            </div>                          
-
+                            </div>  
                         </div>
                     }
                     {(this.state.tabPersonne!==null && this.state.tabPersonne.length <= this.state.currentIndex) && 
@@ -359,8 +374,6 @@ class Pageprincipale extends Component {
                                         </Card.Text>
                                     </Card> 
                                 </div>
-
-
                             <div className="row">
                                 <div className="col-lg">
                                     <div className="dislike-center">
@@ -370,7 +383,6 @@ class Pageprincipale extends Component {
                                                 Dislike
                                         </button>
                                     </div>
-                                    
                                 </div>
                                 <div className="col-lg">
                                     <div className="like-center">
@@ -381,21 +393,11 @@ class Pageprincipale extends Component {
                                         </button>
                                     </div>
                                 </div>
-                                
-                                
-                            
-                                
                             </div>
-                       
-                            
                         </div>
                     }
                 </div>
-                
-
             </div>
-
-
         </div>
       );
     }

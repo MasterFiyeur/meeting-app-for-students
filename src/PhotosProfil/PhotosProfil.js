@@ -23,8 +23,17 @@ class PhotosProfil extends Component{
         };
     }
     
+    /**
+     * Met à jour un état
+     * @param {editor} editor Reference pour la bibliothèque AvatarEditor 
+     */
     setEditorRef = editor => this.setState({ editor })
     
+    /**
+     * Transforme une image(base 64) en image sous forme de fichier
+     * @param {string (base64)} dataurl Image en base 64
+     * @param {string} filename Nom d'un fichier
+     */
     DataURLtoFile = (dataurl, filename) => {
         let arr = dataurl.split(','),
         mime = arr[0].match(/:(.*?);/)[1],
@@ -37,6 +46,10 @@ class PhotosProfil extends Component{
         return new File([u8arr], filename, { type: mime });
     };
 
+    /**
+     * Met à jour l'état selectedImage en fonction de l'image choisie par l'utilisateur
+     * @param {event} fileChangeEvent Evènement de changement du fichier image 
+     */
     profileImageChange = (fileChangeEvent) => {
         if(fileChangeEvent.target.files[0]!==undefined){
             const file = fileChangeEvent.target.files[0];
@@ -47,6 +60,9 @@ class PhotosProfil extends Component{
         }
     }
 
+    /**
+     * Lorsque l'image est rognée, on passe de base64 à fichier png
+     */
     onCrop = () => {
         const {editor} = this.state;
         if(editor !=null){
@@ -55,6 +71,12 @@ class PhotosProfil extends Component{
         }
     }
 
+    /**
+     * Envoi la photo au back end pour qu'elle soit mise à jour sur le profil de la personne
+     * Le changement peut mettre un peu de temps
+     * @param {event} event Envoi d'un formulaire
+     * Peut être effacer le cache ?
+     */
     sendCard(event){
         event.preventDefault();
         const axios = require('axios');  //Requêtes HTTP
@@ -92,11 +114,18 @@ class PhotosProfil extends Component{
           });
         }
 
+    /**
+     * Change l'état en fonction du grossissement que l'utilisateur choisi
+     * @param {event} scaleValueEvent Changement de la valeur de grossissement
+     */
     onScaleChange = (scaleValueEvent) => {
         const scaleValue = parseFloat(scaleValueEvent.target.value);
         this.setState({ scaleValue });
     }
 
+    /**
+     * Rendu du component
+     */
     render(){
       if(!this.state.connected){
         Cookies.remove("ID");
