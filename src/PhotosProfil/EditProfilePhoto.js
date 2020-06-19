@@ -20,10 +20,16 @@ class EditProfilePhoto extends Component{
         };
       }
 
+    /**
+     * Lorsque le component a fini de charger
+     */
     componentDidMount(){
       this.initTabImage();
     }
 
+    /**
+     * Icône de poubelle
+     */
     trashIcon = () => {
       return(
       <svg className="bi bi-trash" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -33,6 +39,9 @@ class EditProfilePhoto extends Component{
       );
     }
 
+    /**
+     * Met à jour l'état en fonction des photos que l'utilisateur a sur son profil
+     */
     initTabImage(){
       const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getPreferenceCard.php?id='+Cookies.get('ID');
@@ -54,6 +63,10 @@ class EditProfilePhoto extends Component{
           });
     }
 
+    /**
+     * Met à jour un état
+     * @param {boolean} cropp Vrai ou faux selon si l'utilisateur rogne une photo ou non 
+     */
     isCropping = (cropp) => {
       this.setState({
         crop:false
@@ -61,6 +74,10 @@ class EditProfilePhoto extends Component{
       this.initTabImage();
     }
 
+    /**
+     * Supprimer une photo du profil de l'utilisateur
+     * @param {integer} num Numéro de la place de la photo de l'utilisateur
+     */
     supprImage(num){
       const axios = require('axios');  //Requêtes HTTP
       let config = {
@@ -83,6 +100,9 @@ class EditProfilePhoto extends Component{
         });
     }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div>

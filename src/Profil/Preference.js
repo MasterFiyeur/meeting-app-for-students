@@ -332,6 +332,7 @@ class Preference extends Component{
           [name]: value
         })
       }
+
       /**
        * Met à jour la valeur du radio input dans lequel l'utilisateur rentre le sexe des profils qui souhaite rencontrer
        * @param {event} event Changement de la valeur du state Jecherche par la valeur selecrtionner par l'utilisateur
@@ -341,10 +342,12 @@ class Preference extends Component{
           JeCherche: event.target.value
         });
       }
+
       /**
        * Met à jour la valeur du radio input dans lequel l'utilisateur rentre son sexe 
        * @param {event} event Changement de la valeur du state JeSuis par la valeur selecrtionner par l'utilisateur
        */
+
       handleChangeSexe(event) {
         this.setState({
           JeSuis: event.target.value

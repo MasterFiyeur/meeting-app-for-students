@@ -1,6 +1,9 @@
 import React from 'react';
 import AvatarEditor from 'react-avatar-editor';
 
+/**
+ * Composant qui permet le rognage d'une photo en photo carrée
+ */
 const ImageCrop = ({ imageSrc, onCrop, setEditorRef, scaleValue, onScaleChange}) => (
     <div >
         <AvatarEditor image={imageSrc} border={20} scale={scaleValue} ref={setEditorRef} />

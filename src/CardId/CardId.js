@@ -36,16 +36,27 @@ class CardId extends Component{//this.props.hisId
         };
       }
 
+    /**
+     * Lorsque le component a fini de chargé
+     */
     componentDidMount(){
-        this.initTabsState();
+        this.initTabsState();//chargement du tableau
     }
 
+    /**
+     * Met à jour l'utilisateur courant en fonction de la propriété
+     * envoyée par le component parent
+     * @param {integer} props 
+     */
     componentDidUpdate(props){
         if(this.state.oldId!==this.props.hisId){//Si l'id a changé
         this.initTabsState();
         }
     }
 
+    /**
+     * Met à jour l'état avec toutes les informations relative à l'ID
+     */
     initTabsState(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getPreferenceCard.php?id='+this.props.hisId+'&info=yes&certif=yes&myId='+Cookies.get('ID');
@@ -84,6 +95,11 @@ class CardId extends Component{//this.props.hisId
           });
     }
 
+    /**
+     * Calcule la distance en mètre entre deux point géographique
+     * @param {string} coor1 Coordonnées GPS du point 1 (séparé par un ';')
+     * @param {string} coor2 Coordonnées GPS du point 2 (séparé par un ';')
+     */
     calculDistance(coor1,coor2){
         if(coor1!==undefined && coor2!==0){
             const tabCoor1 = coor1.split(';');
@@ -95,6 +111,11 @@ class CardId extends Component{//this.props.hisId
         }
     }
 
+    /**
+     * Calcul l'age d'une personne en fonction de sa date d'anniversaire
+     * et de la date actuelle
+     * @param {Date} birthday Date d'anniversaire d'un utilisateur 
+     */
     ageCalcul(birthday){
         let dateActu = new Date();
         let dateBirth = new Date(birthday);
@@ -104,6 +125,9 @@ class CardId extends Component{//this.props.hisId
         return(age);
     }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div>

@@ -13,11 +13,19 @@ class NavBar extends Component {
       collapsed: true,
     };
   }
+
+  /**
+   * Menu hamburger pour les téléphones
+   */
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   }
+
+  /**
+   * Rendu de la navbar
+   */
   render() {
     const collapsed = this.state.collapsed;
     const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';
