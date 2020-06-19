@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../Contact.css';
+import './Contact.css';
 import WilliamContact from '../images/WilliamContact.jpg';
 import TheoContact from '../images/TheoContact.jpg';
 import FlorentContact from '../images/FlorentContact.png';

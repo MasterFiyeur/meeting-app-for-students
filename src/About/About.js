@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../About.css';
+import './About.css';
 import WilliamAbout from '../images/WilliamAbout.jpg';
 import TheoAbout from '../images/TheoAbout.jpg';
 import FlorentAbout from '../images/FlorentAbout.png';
