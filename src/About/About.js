@@ -22,8 +22,9 @@ class About extends Component{
         <br />
         <br />
         <br />
-        <br />
         <span className="title-About">A propos de nous</span>
+        <br />
+        <br />
         <br />
 
         <div className="box-About">
@@ -60,6 +61,13 @@ class About extends Component{
               </h2>
             </div>
           </div>
+        </div>
+
+        <br />
+        <br />
+
+        <div className="box-About">
+
           {/* Pour Florent */}
           <div className="card-About">
             <div className="imgBx-About">
@@ -82,7 +90,7 @@ class About extends Component{
               <img src={JulienAbout} alt="Julien About"/>
             </div>
             <div className="details-About">
-              <h2><i className="fas fa-hand-middle-finger"></i>Julien Richard
+              <h2>Julien Richard
                 <br />
                 <span>Designer</span>
                 <span className="description">L'adopté du groupe, le vilain
