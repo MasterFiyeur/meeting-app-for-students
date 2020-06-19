@@ -10,6 +10,9 @@ class About extends Component{
         super(props);
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
       <div className="About">

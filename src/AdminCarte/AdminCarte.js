@@ -17,10 +17,18 @@ class AdminCarte extends Component{
       };
     }
 
+    /**
+     * Component initialisé
+     */
     componentDidMount(){
       this.setPropsTableau();
     }
 
+    /**
+     * Fonction qui met à jour le tableau proposé
+     * Cette fonction sera passé en Props pour permettre aux components enfant d'acceder au this.state.array
+     * @param {Tab of Objects} newArray Tableau renvoyé par l'API contenant les informations des comptes 
+     */
     updateTab = (newArray) => {
       this.setState({
         array: newArray

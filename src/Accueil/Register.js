@@ -26,6 +26,14 @@ class Register extends Component{
         return (curr.toISOString().substr(0,10));
       }
 
+      /**
+       * Calcul de la force du mot de passe en fonction de :
+       * - Majuscule
+       * - Miniscule
+       * - Caractère spécial
+       * - Chiffre
+       * @param {string} mdp Mot de passe du champs mot de passe 
+       */
       verifStrength(mdp){
         const LETTRE_MIN="abcdefghijklmnopqrstuvwxyz";
         const LETTRE_MAJ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -304,6 +312,9 @@ class Register extends Component{
         })
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div className="text-black">

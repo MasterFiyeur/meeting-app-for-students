@@ -9,12 +9,16 @@ class Abonnement extends Component{
         super(props);
 
         this.state={
-            numero:"",
-            pin:"",
-            message:""
+            numero:"", //Numéro de carte
+            pin:"", //Code pin de carte
+            message:"" //Message lors de l'achat
         }
       }
 
+    /**
+     * Envoi des codes à l'API pour savoir si 
+     * le grade de premium peut être attribué
+     */
     sendCodes(){
         if(this.state.pin==="" || this.state.numero===""){
             this.setState({message:"Veuillez remplir les champs"});
@@ -45,7 +49,7 @@ class Abonnement extends Component{
 
     /**
        * Met à jour la valeur du form dans lequel l'utilisateur écrit
-       * @param {event} event Appuie sur une touche
+       * @param {event} event Changement de la valeur d'un champ texte
        */
     inputChange(event) {
         event.preventDefault();
@@ -56,7 +60,9 @@ class Abonnement extends Component{
         })
     }
     
-
+    /**
+     * Rendu du component
+     */
     render(){
       return(
       <div style={{marginTop:"80px"}}>
