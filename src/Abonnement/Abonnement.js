@@ -4,6 +4,9 @@ import PhotoCarteAbonnement from './AbonnementCard.jpg';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+/**
+ * Class qui s'occupe de la page abonnement
+ */
 class Abonnement extends Component{
     constructor(props) {
         super(props);

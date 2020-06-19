@@ -5,6 +5,10 @@ import Switch from '@material-ui/core/Switch';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+/**
+ * Class qui permet d'appliquer un filtre lors 
+ * des propositions de partenaires dans la page principale
+ */
 class Filtre extends Component{
     constructor(props) {
         super(props);

@@ -3,7 +3,12 @@ import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 import PhotosProfil from '../PhotosProfil/PhotosProfil';
 
-
+/**
+ * Class qui affiche les photos de profil et 
+ * qui permet d'en ajouter une si l'utilisateur 
+ * en possède moins de 5 
+ * Dans les preferences
+ */
 class EditProfilePhoto extends Component{
     constructor(props) {
         super(props);

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import {URL_API} from '../App';
 
+/**
+ * Class pour le formulaire d'inscription dans la page de connexion
+ */
 class Register extends Component{
     constructor(props) {
         super(props);

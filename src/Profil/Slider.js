@@ -2,6 +2,10 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Slider from '@material-ui/core/Slider';
 
+/**
+ * Class qui permet l'affichage/input de 
+ * la tranche d'age recherchée dans les preferences
+ */
 class RangeSlider extends React.Component {
   constructor(props) {
     super(props);

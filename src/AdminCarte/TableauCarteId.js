@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+
+/**
+ * Class qui s'occupe de la gestion des carte étudiantes dans la page panel administrateur
+ */
 class TableauCarteId extends Component{
     constructor(props) {
       super(props);

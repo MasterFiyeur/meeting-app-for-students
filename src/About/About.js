@@ -5,6 +5,9 @@ import TheoAbout from '../images/TheoAbout.jpg';
 import FlorentAbout from '../images/FlorentAbout.png';
 import JulienAbout from '../images/JulienAbout.jpg';
 
+/**
+ * Class qui s'occupe de la page About
+ */
 class About extends Component{
     constructor(props) {
         super(props);
@@ -33,10 +36,10 @@ class About extends Component{
             <div className="details-About">
               <h2>Théo Julien
                 <br />
-                <span>Developpeur Chef</span>
+                <span>Développeur Chef</span>
                 <span className="description">Un vrai crack ce petit fou
                   va coder jusqu'à 5h du matin s'il le faut. La légende raconte qu'il travaille déjà pour google et que
-                  l'EISTI n'est qu'une couverture pour ne pas payer d'impot sur son salaire à 9 chiffres.
+                  l'EISTI n'est qu'une couverture pour ne pas payer d'impôt sur son salaire à 9 chiffres.
                 </span>
               </h2>
             </div>
@@ -49,9 +52,9 @@ class About extends Component{
             <div className="details-About">
               <h2>William Kaczmarek
                 <br />
-                <span>Developpeur profil</span>
+                <span>Développeur profil</span>
                 <span className="description">Jeune disciple et
-                  coach sportif du déveloper chef, ce petit BG est très éfficace quand il n'est pas alcoolisé ou en
+                  coach sportif du développeur chef, ce petit BG est très efficace quand il n'est pas alcoolisé ou en
                   peine de coeur.
                 </span>
               </h2>
@@ -65,10 +68,10 @@ class About extends Component{
             <div className="details-About">
               <h2>Florent Bednarek
                 <br />
-                <span>Developpeur messagerie</span>
+                <span>Développeur messagerie</span>
                 <span className="description">Un jeune loup
-                    solitaire, on ne sait pas trop quand il travaille mais des dinguerie apparaissent de temps en temps.
-                    Cet enfant pourrai même égaler les plus grands s'il ne se couchait pas à 20h30.
+                    solitaire, on ne sait pas trop quand il travaille mais des dingueries apparaissent de temps en temps.
+                    Cet enfant pourrait même égaler les plus grands s'il ne se couchait pas à 20h30.
                 </span>
               </h2>
             </div>
@@ -82,7 +85,7 @@ class About extends Component{
               <h2><i className="fas fa-hand-middle-finger"></i>Julien Richard
                 <br />
                 <span>Designer</span>
-                <span className="description">L'adopté du groupe, le vilan
+                <span className="description">L'adopté du groupe, le vilain
                   petit canrd, la cinquième roue du carrosse. Après des multiples tentatives de la part du disciple de
                   l'enfermer au goulag ce jeune Twittos arrive toujours à s'échapper. 
                 </span>

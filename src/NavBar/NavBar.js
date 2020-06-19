@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import logo from './images/logo.png';
 
-
-
-
+/**
+ * Class qui s'occupe de la bar de navigation en haut du site
+ */
 class NavBar extends Component {
   constructor(props) {
     super(props);

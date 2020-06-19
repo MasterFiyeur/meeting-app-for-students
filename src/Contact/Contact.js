@@ -5,6 +5,10 @@ import TheoContact from '../images/TheoContact.jpg';
 import FlorentContact from '../images/FlorentContact.png';
 import JulienContact from '../images/JulienContact.jpg';
 
+
+/**
+ * Class qui s'occupe de la page Contact
+ */
 class Contact extends Component{
     constructor(props) {
         super(props);

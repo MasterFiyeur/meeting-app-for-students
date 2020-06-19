@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+
+/**
+ * Class qui s'occupe de la gestion des comptes dans la page du panel administrateur
+ */
 class TableauManage extends Component{
     constructor(props) {
       super(props);

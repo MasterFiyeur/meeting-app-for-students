@@ -1,28 +1,23 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
-
-
 
 include "connexionBDD.php";
 
-      
-
 /**
-
- * - Vérification de la correspondance entre id et key
+ * - Met à jour le profil de l'utilisateur
  * - Entrée :
  *  Headers : 
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
+ *  POST :
+ *      Toutes les information relatives à un profil
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      status => état de l'opération
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];
@@ -31,6 +26,7 @@ $ObjIdKey->status = "failure";
 $ObjIdKey->connect=isLogged($id,$key);
 if($ObjIdKey->connect && isset($_POST)){
     $cnx = connexionPDO();
+    //Mise à jour des nouvelles valeurs du profil de l'utilisateur
     $req = $cnx -> prepare('UPDATE preference SET 
     jeSuis = ?,
     ville = ?,

@@ -6,6 +6,9 @@ import { Redirect } from "react-router-dom";
 
 import {URL_API} from '../App';
 
+/**
+ * Class pour le formulaire de connexion dans la page de connexion
+ */
 class Login extends Component{
     constructor(props) {
         super(props);

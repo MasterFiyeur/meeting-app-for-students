@@ -17,7 +17,7 @@ include "connexionBDD.php";
  *  GET :
  *      id => ID de la personne liké
  * - Sortie : Object :
- *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      connected => Vrai ou faux selon l'authenticité du couple (id,token)
  *      dislikes => Tout les ID disliké 
  */
 

@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import TableauManage from './TableauManage';
 import { Redirect } from "react-router-dom";
 
+/**
+ * Class qui s'occupe de la page du panel administrateur
+ */
 class AdminCarte extends Component{
     constructor(props) {
       super(props);

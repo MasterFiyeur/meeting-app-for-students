@@ -8,6 +8,12 @@ import {Card,Modal,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Filtre from '../Profil/Filtre';
 
+
+/**
+ * Class qui s'occupe de la page principale où l'utilisateur 
+ * peut acceder à toutes les pages qui lui sont disponible et 
+ * où l'on like/dislike des partenaires
+ */
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -298,15 +304,15 @@ class Pageprincipale extends Component {
                             Mon profil
                     </button>
                 </div>
-                <div className="col-lg">
                     {this.state.grade ==="administrateur" &&
-                    <button 
-                        className="btn-principale" 
-                        onClick={() => this.setState({panel:true})}>
-                            Panel administrateur
-                    </button>
+                    <div className="col-lg">
+                        <button 
+                            className="btn-principale" 
+                            onClick={() => this.setState({panel:true})}>
+                                Panel administrateur
+                        </button>
+                    </div>
                     }
-                </div>
                 <div className="col-lg">
                     <button 
                     className="btn-principale" 

@@ -6,7 +6,10 @@ import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {Modal,Button} from 'react-bootstrap';
 
-
+/**
+ * Class qui permet de gerer les informations
+ * relative au compte de l'utilisateur
+ */
 class Preference extends Component{
     constructor(props) {
         super(props);
@@ -350,8 +353,6 @@ class Preference extends Component{
           return (<Redirect to='/'/>); //Renvoi à la page de connexion
       }
       return(
-
-
         <div className="margetop18 padbot5" >
           <Modal show={this.state.showModal} onHide={()=> this.closeModal()}>
             <Modal.Header closeButton>

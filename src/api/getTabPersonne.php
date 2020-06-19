@@ -5,7 +5,6 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
-
 include "connexionBDD.php";
 
 /**
@@ -26,8 +25,13 @@ function age($date) {
  *  Headers : 
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
+ *  POST 
+ *      filtre => Indique le filtre à appliquer
+ *      certification => indique si l'on souhaite uniquement des personnes certifiée ou non
+ *      tableau => Tableau contenant les critère que l'utilisateur recherche (sous forme booléenne)
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      tab => Tableau de l'id des prétendants correpondant à la recherche
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];
@@ -39,6 +43,7 @@ $myTrancheMin="17";
 $myTrancheMax="37";
 $ObjIdKey->connected=isLogged($id,$key);
 if($ObjIdKey->connected){
+    //Récupération de ce que cherche et de l'age de ceux que l'utilisateur veut rencontrer
     $cnx = connexionPDO();
     $req = $cnx -> prepare('SELECT jeCherche,trancheAge FROM preference WHERE prefId=?');
     $req -> execute(array($id));
@@ -57,7 +62,7 @@ if($ObjIdKey->connected){
     }
     $req -> closeCursor();
 
-    
+    //Récupération des likes/dislikes précédents de l'utilisateur
     $req = $cnx -> prepare('SELECT likes,dislikes FROM user WHERE id=?');
     $req -> execute(array($id));
     if ($ligne = $req -> fetch()) {
@@ -68,7 +73,8 @@ if($ObjIdKey->connected){
     }
     $req -> closeCursor();
 
-    
+    //Récupération de tout les utilisateur sauf celui dont le client envoi la requête
+    //Tri selon si on a déjà like/dislike un utilisateur
     $req = $cnx -> prepare('SELECT * FROM user WHERE id!= ? ORDER BY user.id ASC');
     $req -> execute(array($id));
     $ObjIdKey->tab= array();
@@ -78,9 +84,6 @@ if($ObjIdKey->connected){
         }
     }
     $req -> closeCursor();
-    
-    //Ici faut recuperer le tableau et appliquer les filtres
-    //Peut etre ce serait intelligent de récuperer
 
     //Traitement de l'age
     $arrTemp=array();
@@ -119,7 +122,12 @@ if($ObjIdKey->connected){
     $ObjIdKey->tab=$arrTemp;
     unset($arrTemp);
 
-    //Session filtre
+    /* On récupère les informations que l'utilisateur veut et ensuite on tri 
+        les prétendants en fonctions de s'il rentre dans les critères ou non
+        Méthode : mise des critères que l'utilisateur recherche dans un tableau
+        puis on regarde pour chaque prétendant si son critère appartient au tableau
+     */
+    //Filtre de la certification
     if(isset($_POST["filtre"])){
         if(isset($_POST["certificate"]) && $_POST["certificate"]==="true"){
             $arrTemp=array();
@@ -137,6 +145,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
         }
+        //Filtre des animaux
         if($_POST["filtre"]==="Animaux"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayAnimaux=array();
@@ -161,6 +170,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre des études
         }elseif($_POST["filtre"]==="Etudes"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayEtudes=array();
@@ -185,6 +195,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre du sport
         }elseif($_POST["filtre"]==="Activités Physique"){
             $Filtre=json_decode($_POST["tableau"]);
             $arraySport=array();
@@ -209,6 +220,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre des yeux
         }elseif($_POST["filtre"]==="Yeux"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayYeux=array();
@@ -233,6 +245,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre des cheveux
         }elseif($_POST["filtre"]==="Cheveux"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayCheveux=array();
@@ -257,6 +270,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre de l'alcool
         }elseif($_POST["filtre"]==="Alcool"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayAlcool=array();
@@ -281,6 +295,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre du tabac
         }elseif($_POST["filtre"]==="Tabac"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayTabac=array();
@@ -305,6 +320,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre de la religion
         }elseif($_POST["filtre"]==="Religion"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayReligion=array();
@@ -329,6 +345,7 @@ if($ObjIdKey->connected){
             $ObjIdKey->tab=$arrTemp;
             unset($arrTemp);
             unset($Filtre);
+        //Filtre du signe astrologique
         }elseif($_POST["filtre"]==="Astrologie"){
             $Filtre=json_decode($_POST["tableau"]);
             $arrayAstrologie=array();

@@ -5,7 +5,7 @@ import {URL_API} from '../App';
 import { getDistance } from 'geolib';
 
 /**
- * Composant qui affiche un.e prétendant.e
+ * Class qui affiche un.e prétendant.e
  * en fonction de this.props.hisId et Cookies.get('ID')
  */
 
