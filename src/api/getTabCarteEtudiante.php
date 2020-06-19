@@ -36,7 +36,7 @@ if($ObjIdKey->connected){
     $ObjIdKey->tab= array();
     foreach ($req as $row) {
         if(isset($_GET["account"])){
-            $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"],'Mail' => $row["mail"],'DateNaissance' => $row["birthDate"],'Grade' => $row["grade"]];
+            $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"],'Mail' => $row["mail"],'DateNaissance' => $row["birthDate"],'Grade' => $row["grade"],'DateCrea' => $row["dateCrea"]];
         }else{
             $ObjIdKey->tab[] = (object) ['Prenom' => $row["prenom"],'Nom' => $row["nom"],'Id' => $row["id"]];
         }

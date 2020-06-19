@@ -4,7 +4,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import NavBar from './NavBar/NavBar';
 import Accueil from './Accueil/Acceuil';
 import Preference from './Profil/Preference';
-import Position from './Position/Position';
 import Pageprincipale from './Pageprincipale/Pageprincipale';
 import About from './About/About'
 import Contact from './Contact/Contact';
@@ -23,7 +22,6 @@ class App extends React.Component {
             <Route path="/" exact component={Accueil} />
             <Route path="/preference" exact component={Preference} />
             <Route path="/panel" exact component={AdminCarte} />
-            <Route path="/position" exact component={Position} />
             <Route path="/principale" exact component={Pageprincipale} />
             <Route path="/about" component={About} />
             <Route path="/contact" component={Contact} />

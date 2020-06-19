@@ -9,7 +9,7 @@ class TableauManage extends Component{
       this.state = {
           tabID: this.props.Tableau,
           Actuel:{Prenom:"",Nom:"",Id:""},
-          ActuelPerso:{Mail:"",DateNaissance:"",Grade:""}
+          ActuelPerso:{Mail:"",DateNaissance:"",Grade:"",DateCrea:""}
       };
     }
 
@@ -44,7 +44,8 @@ class TableauManage extends Component{
             ActuelPerso:{
                 Mail:el.Mail,
                 DateNaissance:el.DateNaissance,
-                Grade:el.Grade
+                Grade:el.Grade,
+                DateCrea:el.DateCrea
             }
         });
     }
@@ -177,9 +178,10 @@ class TableauManage extends Component{
                 {this.state.Actuel.Prenom!=="" &&
                 <div style={{margin:"50px"}}>
                 <ul>
-                    <li>{this.state.ActuelPerso.Mail}</li>
-                    <li>{this.state.ActuelPerso.DateNaissance}</li>
-                    <li>{this.state.ActuelPerso.Grade}</li>
+                    <li>{"Adresse email : "+this.state.ActuelPerso.Mail}</li>
+                    <li>{"Date de naissance : "+this.state.ActuelPerso.DateNaissance}</li>
+                    <li>{"Grade : " + this.state.ActuelPerso.Grade}</li>
+                    <li>{"Date de création : " + this.state.ActuelPerso.DateCrea}</li>
                 </ul>
                 {this.state.ActuelPerso.Grade==="nouveau" &&
                     <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.rank("promote")}>Promouvoir</button>

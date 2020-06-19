@@ -4,6 +4,7 @@ import EditProfilesPhoto from '../PhotosProfil/EditProfilePhoto';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
+import {Modal,Button} from 'react-bootstrap';
 
 
 class Preference extends Component{
@@ -39,6 +40,7 @@ class Preference extends Component{
           errorPass:"",OldMDP:"",NewMDP:"",NewMDPVerif:"",
           connect:true,
           StudentCard:null,alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
+          showModal:false, modalBody:""
         };
       this.handleChangeLookingFor = this.handleChangeLookingFor.bind(this);
       this.handleChangeSexe = this.handleChangeSexe.bind(this);
@@ -88,6 +90,12 @@ class Preference extends Component{
           .catch(err => {
             console.log(err);
           });
+      }
+
+      closeModal(){
+        this.setState({
+            showModal:false
+        });
       }
 
       changePassword(){
@@ -258,9 +266,15 @@ class Preference extends Component{
             this.setState({
               connect : res.data.connect
             });
-            console.log(res.data);
+            this.setState({
+              showModal:true,
+              modalBody:"Ton profil a été sauvegardé avec succès !"
+            });
           }else{
-            console.log("Une erreur s'est produite");
+            this.setState({
+              showModal:true,
+              modalBody:"Une erreur s'est produite lors de la sauvegarde de ton profil."
+            });
           }
         })
         .catch(err => {
@@ -337,6 +351,19 @@ class Preference extends Component{
 
 
         <div className="margetop18 padbot5" >
+          <Modal show={this.state.showModal} onHide={()=> this.closeModal()}>
+            <Modal.Header closeButton>
+              <Modal.Title>Sauvegarde de ton profil</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {this.state.modalBody}
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" onClick={()=> this.closeModal()}>
+                Fermer
+              </Button>
+            </Modal.Footer>
+          </Modal>
           {/* Formulaire du profil de la personne' */}
           {this.state.init===1?
           <div>

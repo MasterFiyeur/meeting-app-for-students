@@ -20,7 +20,7 @@ class Pageprincipale extends Component {
             panel:false,
             grade:"",
             showFiltre:false,
-            showModal:false
+            showModal:false, modalTitle:"", modalBody:""
         }
       }
     
@@ -62,12 +62,11 @@ class Pageprincipale extends Component {
         .then(res => {
             console.log("Réponse newMatch: "+res.data);
             if(res.data===1){
-              /**Faire une animation de MATTTTCHH IIICIII 
-               * kiss kiss Juliente (avec accent espagnol pour le Juliente)
-               */
-                alert("Match");
                 this.setState({
-                    currentIndex:this.state.currentIndex+1
+                    currentIndex:this.state.currentIndex+1,
+                    showModal:true,
+                    modalTitle:"Match !",
+                    modalBody:"Tu as un nouveau match ! Va vite lui parler via le chat. "
                 });
               this.setState({alertShow: true});
             }else if(res.data === 2){
@@ -129,7 +128,9 @@ class Pageprincipale extends Component {
                         }
                     }else{
                         this.setState({
-                            showModal:true
+                            showModal:true,
+                            modalTitle:"Nombre de like épuisé",
+                            modalBody:"Tu as utilisé tes 10 likes quotidien ! Deviens un abonné pour bénéficier d'un nombre de like ilimité."
                         });
                     }
                 }
@@ -238,16 +239,22 @@ class Pageprincipale extends Component {
         <div className="container-fluid margetop18">
             <Modal show={this.state.showModal} onHide={() => this.closeModal()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Nombre de like épuisé</Modal.Title>
+                    <Modal.Title>{this.state.modalTitle}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Tu as utilisé tes 10 likes quotidien ! Deviens un abonné pour bénéficier d'un nombre de like ilimité.</Modal.Body>
+                <Modal.Body>{this.state.modalBody}
+                {this.state.modalTitle==="Match !" &&
+                    <i className="far fa-kiss-wink-heart"></i>
+                }
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={() => this.closeModal()}>
                         Fermer
                     </Button>
-                    <Button variant="primary" onClick={() => {this.setState({showFiltre:true});this.closeModal()}}>
-                        S'abonner
-                    </Button>
+                    {this.state.modalTitle==="Nombre de like épuisé" && 
+                        <Button variant="primary" onClick={() => {this.setState({showFiltre:true});this.closeModal()}}>
+                            S'abonner
+                        </Button>
+                    }
                 </Modal.Footer>
             </Modal>
             <div className="row">
@@ -266,7 +273,7 @@ class Pageprincipale extends Component {
                     <button 
                         className="btn-principale" 
                         onClick={() => this.setState({pref:true})}>
-                            Preferences
+                            Mon profil
                     </button>
                 </div>
                 <div className="col-lg">
