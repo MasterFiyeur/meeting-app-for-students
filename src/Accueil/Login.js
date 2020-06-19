@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
