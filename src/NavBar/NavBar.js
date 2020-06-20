@@ -47,6 +47,10 @@ class NavBar extends Component {
             </li>
             
             <li className="nav-item active">
+              <Link className="nav-link" to="/abonnement">Abonnement </Link>
+            </li>
+
+            <li className="nav-item active">
               <Link className="nav-link" to="/about">About </Link>
             </li>
             

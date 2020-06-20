@@ -43,7 +43,8 @@ class Preference extends Component{
           errorPass:"",OldMDP:"",NewMDP:"",NewMDPVerif:"",
           connect:true,
           StudentCard:null,alertShow:false, alertMessage:"", alertClass:"alert-danger", //Affichage, type et définition du message de l'alert
-          showModal:false, modalBody:""
+          showModal:false, modalBody:"",//Messages et affichage du le modal
+          redirectPage:false
         };
       this.handleChangeLookingFor = this.handleChangeLookingFor.bind(this);
       this.handleChangeSexe = this.handleChangeSexe.bind(this);
@@ -98,6 +99,12 @@ class Preference extends Component{
       closeModal(){
         this.setState({
             showModal:false
+        });
+      }
+
+      closeModalRedirect(){
+        this.setState({
+          redirectPage:true
         });
       }
 
@@ -366,6 +373,8 @@ class Preference extends Component{
           Cookies.remove("ID");//Supression du cookie
           Cookies.remove("KEY");//Suppression du cookie
           return (<Redirect to='/'/>); //Renvoi à la page de connexion
+      }else if(this.state.redirectPage){
+        return (<Redirect to='/principale'/>);
       }
       return(
         <div className="margetop18 padbot5" >
@@ -377,8 +386,8 @@ class Preference extends Component{
               {this.state.modalBody}
             </Modal.Body>
             <Modal.Footer>
-              <Button variant="secondary" onClick={()=> this.closeModal()}>
-                Fermer
+              <Button variant="secondary" onClick={()=> this.closeModalRedirect()}>
+                Page principale
               </Button>
             </Modal.Footer>
           </Modal>

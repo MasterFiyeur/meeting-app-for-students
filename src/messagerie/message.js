@@ -3,11 +3,14 @@ import Cookies from 'js-cookie';
 import {URL_API} from '../App';
 
 import Draggable from './draggableMessagerie'
+import CardId from '../CardId/CardId';
+
 
 class ListMessages extends Component {
 	constructor(props) {
         super(props);
         this.state = {
+        	showP : 0,
         	list : "",
         	message : "",
         	messages :"",
@@ -15,11 +18,19 @@ class ListMessages extends Component {
         	prenom2 : "",
         	x: 100,
         	y: 100,
+        	unmount : 0,
         }
         this.handleChange = this.handleChange.bind(this);
     	this.sendMessage = this.sendMessage.bind(this);
+    	this.dismiss = this.dismiss.bind(this)
     }
+	dismiss() {
+  		this.setState({unmount:1});
 
+  		Cookies.remove('m_id1');
+  		Cookies.remove('m_id2');
+       setTimeout(() => this.props.unmountMe(),1000);
+    } 
     _move = (x, y) => this.setState({x, y});
 
 	getMessage(){
@@ -49,12 +60,16 @@ class ListMessages extends Component {
 
 	componentWillUnmount() {
   		clearInterval(this.interval);
-  		  		clearInterval(this.interval2);
+  		clearInterval(this.interval2);
   		clearInterval(this.interval3);
-
+  		if (this.state.unmount == 0) {
+  			Cookies.set('m_id1',this.props.id);
+  			Cookies.set('m_id2',this.props.id2);
+  		}
 	}
 	sendMessage(event){
 		event.preventDefault();
+		if (this.state.message == ""){return}
 		const axios = require('axios');  //Requêtes HTTP
 		let config = {
             headers: {
@@ -78,16 +93,16 @@ class ListMessages extends Component {
 
 
 
-	prenom(id,i){
+	prenom(id){
 		const axios = require('axios');  //Requêtes HTTP
         let formdata = new FormData();
         formdata.append('id',id);
 		const url = URL_API+'prenom.php';
         axios.post(url,formdata)
         .then(res => {
-        	if(i===1){
+        	if(id == Cookies.get('ID')){
         		this.setState({prenom1 : res.data});
-        	} else if (i===2){
+        	} else {
         		this.setState({prenom2 : res.data});
 
         	}
@@ -98,8 +113,8 @@ class ListMessages extends Component {
 	}
 
 	prenom2(id){
-		if (id == this.props.id){return this.state.prenom1}
-		if (id == this.props.id2){return this.state.prenom2}
+		if (id == Cookies.get("ID")){return this.state.prenom1}
+		else {return this.state.prenom2}
 	}
 	affMessage(){
 		let ret = "";
@@ -115,34 +130,40 @@ class ListMessages extends Component {
 
 		componentDidMount(){
 		  this.interval = setInterval(() => this.getMessage(), 1000);
-		  this.interval3 = setInterval(() => this.prenom(this.props.id,1),1000);
-		  this.interval3 = setInterval(() => this.prenom(this.props.id2,2),1000);
+		  this.interval2 = setInterval(() => this.prenom(this.props.id),1000);
+		  this.interval3 = setInterval(() => this.prenom(this.props.id2),1000);
 
 	}
 
 
 	render() {
         const {x, y} = this.state;
-
+        let id;
+        if (this.props.id == Cookies.get('ID')){id = this.props.id2} else {id = this.props.id}
 		return(
 
-		<Draggable x={x} y={y} onMove={this._move}>
+		<Draggable className="draggable" x={x} y={y} onMove={this._move}>
 			<div className="message_header">
-			salut
-
+				<div className="prenom" ><strong>{this.state.prenom2}</strong></div>
+				<div className="showprofile" onClick={() => this.setState({showP : 1 - this.state.showP})}>Profile</div>
+				<div className="Quit fa fa-times" onClick={this.dismiss}></div>
 			</div>
-			<div className="messages">
-				
-
-				
-						{this.state.messages}
-			</div>
-			<div className="message_footer">
-				<form onSubmit={event => this.sendMessage(event)}>
-						<input type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
-						<input type="submit" />
-				</form>
-			</div>
+			{ this.state.showP == 1 ? 
+				<div className="profilMessage">
+				<CardId hisId={id} />
+				</div>
+				:
+				<div><div className="messages">				
+					{this.state.list == "" ? <div>aucun message envoyé</div> : this.state.messages}
+				</div>
+			
+				<div className="message_footer">
+					<form onSubmit={event => this.sendMessage(event)}>
+							<input className="input" type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
+							<input className="btn-simple envoyer" type="submit" />
+					</form>
+				</div></div>
+			}
 		</Draggable>
 
 

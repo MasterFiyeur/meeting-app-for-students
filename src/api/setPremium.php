@@ -20,6 +20,7 @@ include "connexionBDD.php";
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
  *      Message => Message à renvoyer à l'utilisateur
+ *      oldDate => Ancienne date de la BDD
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];
@@ -33,7 +34,42 @@ if($ObjIdKey->connected){
         $req = $cnx -> prepare('UPDATE user SET grade="premium" WHERE id = ?');
         $req -> execute(array($id));
         $req -> closeCursor();
+        $req = $cnx -> prepare('SELECT premiumEnd FROM user WHERE id = ?');
+        $req -> execute(array($id));
+        if ($ligne = $req -> fetch()) {
+            if ($ligne != NULL) {
+                $ObjIdKey->oldDate=$ligne["premiumEnd"];
+            } else {
+                $ObjIdKey->oldDate="echec";
+            }
+        }
+        $req -> closeCursor();
         $ObjIdKey->Message="Vous êtes désormais premium";
+        /* Definition de la durée à rajouter puis calcul au niveau des dates
+            pour savoir si l'abonnement s'additionne à l'ancien ou commence à partir d'aujourd'hui
+            puis ajouter la durée demandée*/
+        if($ObjIdKey->oldDate!=="echec"){
+            if($_POST["time"]==="6"){
+                $intervalText="P180D";
+            }elseif ($_POST["time"]==="3") {
+                $intervalText="P90D";
+            }else{
+                $intervalText="P30D";
+            }
+            $datetime1 = new DateTime($ObjIdKey->oldDate);
+            $datetime2 = new DateTime(date("Ymd"));
+            $interval = $datetime1->diff($datetime2);
+            if($interval->invert===1){
+                $dateBegin=new DateTime($ObjIdKey->oldDate);
+            }else{
+                $dateBegin= new DateTime(date("Ymd"));
+            }
+            $dateBegin->add(new DateInterval($intervalText));
+            $req = $cnx -> prepare('UPDATE user SET premiumEnd=? WHERE id = ?');
+            $req -> execute(array($dateBegin->format('Ymd'),$id));
+            $req -> closeCursor();
+            $ObjIdKey->Message="Vous êtes désormais premium jusqu'au ".$dateBegin->format('d/m/Y');
+        }
     }else{
         //Mauvais code
         $ObjIdKey->Message="Mauvaise combinaison numéro-PIN";
