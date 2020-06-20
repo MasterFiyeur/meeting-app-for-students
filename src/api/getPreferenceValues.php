@@ -1,28 +1,25 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
-
-
 
 include "connexionBDD.php";
 
-      
-
 /**
 
- * - Vérification de la correspondance entre id et key
+ * - Récupère les informations pour les pré-afficher dans l'onglet preference de l'utilisateur
  * - Entrée :
  *  Headers : 
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      tabPref => Preferences de l'utilisateur
+ *      readPref => Vrai ou faux selon si l'on a réussi à récuperer les informations
+ *      certif => Certification de l'utilisateur (pour proposer ou non l'envoi de la carte étudiante)
+ *      mail => mail de l'utilisateur
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];

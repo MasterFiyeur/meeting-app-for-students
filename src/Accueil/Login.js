@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 
 import {URL_API} from '../App';
 
+/**
+ * Class pour le formulaire de connexion dans la page de connexion
+ */
 class Login extends Component{
     constructor(props) {
         super(props);
@@ -52,7 +54,7 @@ class Login extends Component{
      
       /**
        * Met à jour la valeur du form dans lequel l'utilisateur écrit
-       * @param {event} event Appuie sur une touche
+       * @param {event} event Changement de la valeur d'un input
        */
       inputChange(event) {
         event.preventDefault();
@@ -63,6 +65,9 @@ class Login extends Component{
         })
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
         /* Utilisateur redirigé si connecté */
         if(this.state.connected){
@@ -112,8 +117,6 @@ class Login extends Component{
             </form>
             <br/>
           </div>
-          {/* Mot de passe oublié, redirection à définir, accueil pour l'instant */}
-          <NavLink className="text-black" to="/" >Mot de passe oublié ?</NavLink>
         </div>
       );
     }

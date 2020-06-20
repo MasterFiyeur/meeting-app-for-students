@@ -15,7 +15,10 @@ include "connexionBDD.php";
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
  * - Sortie : Object :
- *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      connected => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      acceptedLike => Vrai ou faux selon le nombre quotidien de like
+ *      match => Vrai ou faux selon s'il y a un match ou non
+ *      likes => string qui liste les likes de l'utilisateur 
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];

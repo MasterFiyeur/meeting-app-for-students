@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+
+/**
+ * Class qui s'occupe de la gestion des comptes dans la page du panel administrateur
+ */
 class TableauManage extends Component{
     constructor(props) {
       super(props);
@@ -13,6 +17,10 @@ class TableauManage extends Component{
       };
     }
 
+    /**
+     * Ré-actualise le tableau contenant les différents comptes
+     * Utilisé lorsqu'on supprime un compte
+     */
     reset(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'getTabCarteEtudiante.php?account=yes';
@@ -34,6 +42,11 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Fonction qui actualise l'utilisateur courant sélectionné
+     * @param {Object} el objet contenant prenom, nom, ID, email, date de naissance,
+     * grade et date de création de compte d'un utilisateur
+     */
     alertId(el){
         this.setState({
             Actuel:{
@@ -50,6 +63,9 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Transformation du tableau d'objet en un tableau html avec le nom, prenom et ID de l'utilisateur
+     */
     PropsToTabHTML(){
     let res;
     if(this.props.Tableau!=null && this.props.Tableau.length>0){
@@ -60,6 +76,10 @@ class TableauManage extends Component{
     }
     }
 
+    /**
+     * Supprime le compte de l'utilisateur sélectionné,
+     * ainsi que ses photos, carte étudiante et ses matchs
+     */
     deleteAccount(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'manageAccount.php';
@@ -85,6 +105,10 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Certifie l'utilisateur en supprimant sa carte étudiante si 
+     * il en avait une
+     */
     certificate(){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'manageAccount.php';
@@ -109,6 +133,11 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Fonction qui met à jour le grade d'un utilisateur, 
+     * rétrogradation ou promotion
+     * @param {action} action 
+     */
     rank(action){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'manageAccount.php';
@@ -133,6 +162,10 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Fonction genéral de gestion d'un compte mais pour l'instant c'est
+     * pour réinitialiser le nombre de like quotidien d'un compte
+     */
     management(action){
         const axios = require('axios');  //Requêtes HTTP
         const url = URL_API+'manageAccount.php';
@@ -156,6 +189,9 @@ class TableauManage extends Component{
         });
     }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div style={{marginTop:"20px"}}>

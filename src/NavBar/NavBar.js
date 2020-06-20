@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import logo from './images/logo.png';
 
-
-
-
+/**
+ * Class qui s'occupe de la bar de navigation en haut du site
+ */
 class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -13,11 +13,19 @@ class NavBar extends Component {
       collapsed: true,
     };
   }
+
+  /**
+   * Menu hamburger pour les téléphones
+   */
   toggleNavbar() {
     this.setState({
       collapsed: !this.state.collapsed,
     });
   }
+
+  /**
+   * Rendu de la navbar
+   */
   render() {
     const collapsed = this.state.collapsed;
     const classOne = collapsed ? 'collapse navbar-collapse' : 'collapse navbar-collapse show';

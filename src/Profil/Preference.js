@@ -6,7 +6,10 @@ import Cookies from 'js-cookie';
 import { Redirect } from "react-router-dom";
 import {Modal,Button} from 'react-bootstrap';
 
-
+/**
+ * Class qui permet de gerer les informations
+ * relative au compte de l'utilisateur
+ */
 class Preference extends Component{
     constructor(props) {
         super(props);
@@ -320,7 +323,10 @@ class Preference extends Component{
           });
         }
       }
-   
+    /**
+       * Met à jour la valeur du form dans lequel l'utilisateur écrit
+       * @param {event} event Changement de la valeur d'un champ texte
+       */   
       inputChange(event) {
         event.preventDefault();
         /* Mise à jour des valeurs des inputs */
@@ -329,17 +335,30 @@ class Preference extends Component{
           [name]: value
         })
       }
+
+      /**
+       * Met à jour la valeur du radio input dans lequel l'utilisateur rentre le sexe des profils qui souhaite rencontrer
+       * @param {event} event Changement de la valeur du state Jecherche par la valeur selecrtionner par l'utilisateur
+       */
       handleChangeLookingFor(event) {
         this.setState({
           JeCherche: event.target.value
         });
       }
+
+      /**
+       * Met à jour la valeur du radio input dans lequel l'utilisateur rentre son sexe 
+       * @param {event} event Changement de la valeur du state JeSuis par la valeur selecrtionner par l'utilisateur
+       */
+
       handleChangeSexe(event) {
         this.setState({
           JeSuis: event.target.value
         });
       }
-
+ /**
+     * Rendu du component
+     */
     render(){
       /* Utilisateur redirigé si non connecté */
       if(!this.state.connect){
@@ -348,8 +367,6 @@ class Preference extends Component{
           return (<Redirect to='/'/>); //Renvoi à la page de connexion
       }
       return(
-
-
         <div className="margetop18 padbot5" >
           <Modal show={this.state.showModal} onHide={()=> this.closeModal()}>
             <Modal.Header closeButton>

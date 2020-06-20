@@ -5,6 +5,9 @@ import Cookies from 'js-cookie';
 import TableauManage from './TableauManage';
 import { Redirect } from "react-router-dom";
 
+/**
+ * Class qui s'occupe de la page du panel administrateur
+ */
 class AdminCarte extends Component{
     constructor(props) {
       super(props);
@@ -17,16 +20,28 @@ class AdminCarte extends Component{
       };
     }
 
+    /**
+     * Component initialisé
+     */
     componentDidMount(){
       this.setPropsTableau();
     }
 
+    /**
+     * Fonction qui met à jour le tableau proposé
+     * Cette fonction sera passé en Props pour permettre aux components enfant d'acceder au this.state.array
+     * @param {Tab of Objects} newArray Tableau renvoyé par l'API contenant les informations des comptes 
+     */
     updateTab = (newArray) => {
       this.setState({
         array: newArray
       });
     }
 
+    /**
+     * Met à jour un état qui renverra l'utilisateur à une autre pas si il n'est pas connecté
+     * ou s'il n'a pas le grade administrateur
+     */
     verifPermission(){
       const axios = require('axios');  //Requêtes HTTP
       const url = URL_API+'isConnected.php';
@@ -47,6 +62,10 @@ class AdminCarte extends Component{
       });
     }
 
+    /**
+     * Initialise le tableau des comptes proposés
+     * Initialisation pour la gestion des cartes
+     */
     setPropsTableau(){
       const axios = require('axios');  //Requêtes HTTP
       const url = URL_API+'getTabCarteEtudiante.php';
@@ -72,6 +91,9 @@ class AdminCarte extends Component{
       });
     }
 
+    /**
+     * Met à jour le tableau pour la gestion des comptes
+     */
     setComtpeTableau(){
       const axios = require('axios');  //Requêtes HTTP
       const url = URL_API+'getTabCarteEtudiante.php?account=yes';
@@ -95,6 +117,10 @@ class AdminCarte extends Component{
       });
     }
 
+    /**
+     * Mise à jour des tableaux selon si l'on veut gérer les cartes étudiantes 
+     * ou s'il on veut gérer les comptes 
+     */
     buttonSwap(){
       if(this.state.buttonLabel==="Gérer les comptes"){
         this.setState({
@@ -109,15 +135,18 @@ class AdminCarte extends Component{
       }
     }
 
+    /**
+     * Rendu du component
+     */
     render(){
       if(!this.state.allowed){
-        return(<Redirect to='/principale'/>);
+        return(<Redirect to='/principale'/>);//si l'utilisateur n'as pas la permission il est renvoyé à la page principale
       }
       return(
         <div style={{marginTop:"20px"}}>
           <h1>Panel administrateur</h1>
           <button onClick={() => this.buttonSwap()} style={{height:"70px",width:"200px"}}>{this.state.buttonLabel}</button>
-          {(this.state.loaded && this.state.buttonLabel==="Gérer les comptes") && 
+          {(this.state.loaded && this.state.buttonLabel==="Gérer les comptes") &&
           <TableauCarteId Tableau={this.state.array} updateTab={this.updateTab}/>
           }
           {(this.state.loaded && this.state.buttonLabel==="Gérer les certifications") && 

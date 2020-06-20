@@ -1,25 +1,24 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
-
 
 include "connexionBDD.php";
 
 /**
 
- * - Vérification de la correspondance entre id et key
+ * - Certifie un utilisateur et supprime sa carte étudiante
  * - Entrée :
  *  Headers : 
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
+ *  GET :
+ *      id => Id de la personne à certifier
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      imageSuppr => Indique l'état de la suppression de la carte étudiante
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];

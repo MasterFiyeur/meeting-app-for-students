@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 
 import {URL_API} from '../App';
 
+/**
+ * Class pour le formulaire d'inscription dans la page de connexion
+ */
 class Register extends Component{
     constructor(props) {
         super(props);
@@ -26,6 +29,14 @@ class Register extends Component{
         return (curr.toISOString().substr(0,10));
       }
 
+      /**
+       * Calcul de la force du mot de passe en fonction de :
+       * - Majuscule
+       * - Miniscule
+       * - Caractère spécial
+       * - Chiffre
+       * @param {string} mdp Mot de passe du champs mot de passe 
+       */
       verifStrength(mdp){
         const LETTRE_MIN="abcdefghijklmnopqrstuvwxyz";
         const LETTRE_MAJ="ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -304,6 +315,9 @@ class Register extends Component{
         })
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div className="text-black">

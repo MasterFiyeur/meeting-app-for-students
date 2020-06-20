@@ -4,17 +4,24 @@ import PhotoCarteAbonnement from './AbonnementCard.jpg';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+/**
+ * Class qui s'occupe de la page abonnement
+ */
 class Abonnement extends Component{
     constructor(props) {
         super(props);
 
         this.state={
-            numero:"",
-            pin:"",
-            message:""
+            numero:"", //Numéro de carte
+            pin:"", //Code pin de carte
+            message:"" //Message lors de l'achat
         }
       }
 
+    /**
+     * Envoi des codes à l'API pour savoir si 
+     * le grade de premium peut être attribué
+     */
     sendCodes(){
         if(this.state.pin==="" || this.state.numero===""){
             this.setState({message:"Veuillez remplir les champs"});
@@ -45,7 +52,7 @@ class Abonnement extends Component{
 
     /**
        * Met à jour la valeur du form dans lequel l'utilisateur écrit
-       * @param {event} event Appuie sur une touche
+       * @param {event} event Changement de la valeur d'un champ texte
        */
     inputChange(event) {
         event.preventDefault();
@@ -56,7 +63,9 @@ class Abonnement extends Component{
         })
     }
     
-
+    /**
+     * Rendu du component
+     */
     render(){
       return(
       <div style={{marginTop:"80px"}}>
@@ -80,7 +89,7 @@ class Abonnement extends Component{
                             <svg className="bi bi-star-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.283.95l-3.523 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                             </svg>
-                            <p>Trouvez le partenaire selon <strong>VOS</strong> goûts de la personne idéale !</p>
+                            <p>Trouvez votre partenaire selon <strong>VOS</strong> goûts de la personne idéale !</p>
                         </div>
                     </div>
                 </div>

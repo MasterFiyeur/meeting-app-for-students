@@ -8,6 +8,12 @@ import {Card,Modal,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Filtre from '../Profil/Filtre';
 
+
+/**
+ * Class qui s'occupe de la page principale où l'utilisateur 
+ * peut acceder à toutes les pages qui lui sont disponible et 
+ * où l'on like/dislike des partenaires
+ */
 class Pageprincipale extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +30,9 @@ class Pageprincipale extends Component {
         }
       }
     
+      /**
+       * Ferme le modal
+       */
     closeModal(){
         this.setState({
             showModal:false
@@ -31,6 +40,11 @@ class Pageprincipale extends Component {
     }
 
 
+    /**
+     * 
+     * @param {Tab of integer} newTab Tableau comprenant les id des personnes 
+     * correspondant à la recherche de l'utilisateur 
+     */
     onChangeTabPersonne = (newTab) => {
         this.setState({
             tabPersonne:newTab,
@@ -47,6 +61,10 @@ class Pageprincipale extends Component {
         this.verifConnexion();
     }
 
+    /**
+     * Creer un match entre deux utilisateur pour qu'il puisse parler ultérieurement
+     * @param {integer} idAutre ID de la personne avec qui l'utilisateur a match
+     */
     createMatch(idAutre){
 		const axios = require('axios');  //Requêtes HTTP
 		let formdata = new FormData();
@@ -81,6 +99,10 @@ class Pageprincipale extends Component {
         });
 	}
 
+    /**
+     * Indique à la base de donnée que l'utilisateur a dislike un autre
+     * utilisateur
+     */
     dislike(){
         const url = URL_API+'addDislike.php?id='+this.state.tabPersonne[this.state.currentIndex];
         const axios = require('axios').default;  //Requêtes HTTP
@@ -105,6 +127,9 @@ class Pageprincipale extends Component {
         });
     }
 
+    /**
+     * Indique à la base de donnée que l'utilisateur a like un autre utilisateur
+     */
     like(){
         const url = URL_API+'addLike.php?id='+this.state.tabPersonne[this.state.currentIndex];
         const axios = require('axios').default;  //Requêtes HTTP
@@ -141,6 +166,9 @@ class Pageprincipale extends Component {
         });
     }
 
+    /**
+     * Charge le tableau des personnes qui seront proposés
+     */
     loadTableauPersonne(){
         const url = URL_API+'getTabPersonne.php';
         const axios = require('axios').default;  //Requêtes HTTP
@@ -219,7 +247,7 @@ class Pageprincipale extends Component {
     }
 
     /**
-     * Rendu
+     * Rendu du component
      */
     render(){
         /* Utilisateur redirigé si non connecté */

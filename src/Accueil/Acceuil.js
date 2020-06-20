@@ -6,6 +6,10 @@ import {URL_API} from '../App';
 
 import Login from './Login'
 import Register from './Register'
+
+/**
+ * Class qui s'occupe de la page de connexion
+ */
 class Accueil extends Component{
     constructor(props) {
         super(props);

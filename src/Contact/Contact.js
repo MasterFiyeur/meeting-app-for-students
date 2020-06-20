@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import '../Contact.css';
+import './Contact.css';
 import WilliamContact from '../images/WilliamContact.jpg';
 import TheoContact from '../images/TheoContact.jpg';
 import FlorentContact from '../images/FlorentContact.png';
 import JulienContact from '../images/JulienContact.jpg';
 
+
+/**
+ * Class qui s'occupe de la page Contact
+ */
 class Contact extends Component{
     constructor(props) {
         super(props);
       }
 
+    /**
+     * Rendu du component
+     */
     render(){
       return(
         <div className="Contact">
@@ -19,6 +26,7 @@ class Contact extends Component{
           <br />
           <span className="title-Contact">Nous contacter</span>
           <div className="container">
+            {/* Théo */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={TheoContact} alt="Theo" width="140" height="140" align="left" />
@@ -30,6 +38,7 @@ class Contact extends Component{
               </div>
             </div>
 
+            {/* William */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={WilliamContact} alt="William" width="140" height="140" align="left" />
@@ -42,6 +51,7 @@ class Contact extends Component{
               </div>
             </div>
 
+            {/* Florent*/}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={FlorentContact} alt="Florent" width="140" height="140" align="left" />
@@ -53,6 +63,8 @@ class Contact extends Component{
                 </div>
               </div>
             </div>
+            
+            {/* Julien */}
             <div className="row presentation">
               <div className="col">
                 <img className="rounded-circle" src={JulienContact} alt="Julien" width="140" height="140"

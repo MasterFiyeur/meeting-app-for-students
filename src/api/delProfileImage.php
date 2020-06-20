@@ -1,17 +1,27 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
 
-
-
 include "connexionBDD.php";
- 
+
+/**
+
+ * - Supression d'une image de profil
+ * - Entrée :
+ *  Headers : 
+ *      id => Valeur du cookie ID
+ *      key => Valeur du cookie KEY
+ *  POST :
+ *      number => numéro de l'image à supprimer
+ * - Sortie : Object :
+ *      connected => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      numImage => numéro de l'image qui sera supprimée
+ *      deletion => Message pour le client
+ *      isDel => Vrai ou faux selon la réussite de la suppression de l'image
+ */
 
 $id = $_SERVER['HTTP_LOGGINID'];
 $key = $_SERVER['HTTP_LOGGINKEY'];

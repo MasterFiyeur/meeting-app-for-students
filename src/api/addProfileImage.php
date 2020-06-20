@@ -1,20 +1,27 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
-
-
 
 include "connexionBDD.php";
 
+/**
+ * - Upload d'une image compressée au serveur
+ * - Entrée :
+ *  Headers : 
+ *      id => Valeur du cookie ID
+ *      key => Valeur du cookie KEY
+ * - Sortie : Object :
+ *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      MsgCompress => Message renvoyé à l'utilisateur
+ *      uploadPath => Path où l'image a été upload
+ */
+
+
 /* 
- * Custom function to compress image size and 
- * upload to the server using PHP 
+ * Fonction de compression d'une image pour qu'elle pèse moins lourd
  */ 
 function compressImage($source, $destination, $quality) { 
     // Get image info 
@@ -34,8 +41,7 @@ function compressImage($source, $destination, $quality) {
             break; 
         default: 
             $image = imagecreatefromjpeg($source); 
-    } 
-     
+    }
     // Save image 
     imagejpeg($image, $destination, $quality); 
      

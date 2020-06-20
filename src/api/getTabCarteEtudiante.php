@@ -1,13 +1,9 @@
 <?php
 
 header('Access-Control-Allow-Origin: *');
-
 header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-
 header('Access-Control-Max-Age: 1000');
-
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
-
 
 include "connexionBDD.php";
 
@@ -18,8 +14,11 @@ include "connexionBDD.php";
  *  Headers : 
  *      id => Valeur du cookie ID
  *      key => Valeur du cookie KEY
+ *  GET :
+ *      account => Permet de connaître les informations à renvoyer
  * - Sortie : Object :
  *      connect => Vrai ou faux selon l'authenticité du couple (id,token)
+ *      tab => Tableau des informations demandées
  */
 
 $id = $_SERVER['HTTP_LOGGINID'];

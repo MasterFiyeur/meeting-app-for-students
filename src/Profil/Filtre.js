@@ -5,6 +5,10 @@ import Switch from '@material-ui/core/Switch';
 import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 
+/**
+ * Class qui permet d'appliquer un filtre lors 
+ * des propositions de partenaires dans la page principale
+ */
 class Filtre extends Component{
     constructor(props) {
         super(props);
@@ -106,49 +110,52 @@ class Filtre extends Component{
             init:0,
             connect:true
         };
-/* Fonction pour filtre ETUDE */
+/* Bind(this) pour les fonctions dédiés aux filtres ETUDE */
 this.handleChangeEtude = this.handleChangeEtude.bind(this);
 this.handleClickInEtude = this.handleClickInEtude.bind(this);
 this.handleClickOutEtude = this.handleClickOutEtude.bind(this);
-/* Fonction pour filtre Sport */
+/* Bind(this) pour les fonctions dédiés aux filtres Sport */
 this.handleChangeSport = this.handleChangeSport.bind(this);
 this.handleClickInSport = this.handleClickInSport.bind(this);
 this.handleClickOutSport = this.handleClickOutSport.bind(this);
-/* Fonction pour filtre Yeux */
+/* Bind(this) pour les fonctions dédiés aux filtres Yeux */
 this.handleChangeYeux = this.handleChangeYeux.bind(this);
 this.handleClickInYeux = this.handleClickInYeux.bind(this);
 this.handleClickOutYeux = this.handleClickOutYeux.bind(this);
-/* Fonction pour filtre Cheveux */
+/* Bind(this) pour les fonctions dédiés aux filtres Cheveux */
 this.handleChangeCheveux = this.handleChangeCheveux.bind(this);
 this.handleClickInCheveux = this.handleClickInCheveux.bind(this);
 this.handleClickOutCheveux = this.handleClickOutCheveux.bind(this);
-/* Fonction pour filtre Alcool */
+/* Bind(this) pour les fonctions dédiés aux filtres Alcool */
 this.handleChangeAlcool = this.handleChangeAlcool.bind(this);
 this.handleClickInAlcool = this.handleClickInAlcool.bind(this);
 this.handleClickOutAlcool = this.handleClickOutAlcool.bind(this);
-/* Fonction pour filtre Tabac */
+/* Bind(this) pour les fonctions dédiés aux filtres Tabac */
 this.handleChangeTabac = this.handleChangeTabac.bind(this);
 this.handleClickInTabac = this.handleClickInTabac.bind(this);
 this.handleClickOutTabac = this.handleClickOutTabac.bind(this);
-/* Fonction pour filtre Religion */
+/* Bind(this) pour les fonctions dédiés aux filtres Religion */
 this.handleChangeReligion = this.handleChangeReligion.bind(this);
 this.handleClickInReligion = this.handleClickInReligion.bind(this);
 this.handleClickOutReligion = this.handleClickOutReligion.bind(this);
-/* Fonction pour filtre Astrologie */
+/* Bind(this) pour les fonctions dédiés aux filtres Astrologie */
 this.handleChangeAstrologie = this.handleChangeAstrologie.bind(this);
 this.handleClickInAstrologie = this.handleClickInAstrologie.bind(this);
 this.handleClickOutAstrologie = this.handleClickOutAstrologie.bind(this);
-/* Fonction pour filtre Animaux */
+/* Bind(this) pour les fonctions dédiés aux filtres Animaux */
 this.handleChangeAnimaux = this.handleChangeAnimaux.bind(this);
 this.handleClickInAnimaux = this.handleClickInAnimaux.bind(this);
 this.handleClickOutAnimaux = this.handleClickOutAnimaux.bind(this);
-/* Fonction pour filtre Actif */
+/* Bind(this) pour les fonctions dédiés aux filtres Actif */
 this.handleChangeActif = this.handleChangeActif.bind(this);
 }
 
-    /**
-     * Envoie du filtre a la bdd
-     */
+
+      /**
+       * Envoie de tous les states tableaux des filtres à la BDD
+       * Actualise les filtres dans la BDD
+       * @param {event} event Action du form par le bouton Submit
+       */
      loadTableauPersonne(event){
       event.preventDefault();
       let formData = new FormData();
@@ -188,6 +195,10 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     }
 
 
+      /**
+       * réinitialise la table des filtres dans la BDD de l'utilisateur
+       * Quand le bouton "annuler les filtres est préssé"
+       */
     resetTab(){
       const url = URL_API+'getTabPersonne.php';
         const axios = require('axios').default;  //Requêtes HTTP
@@ -207,28 +218,37 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
             console.log(err);
         });
     }
-
-    inputChange(event) {
-        event.preventDefault();
-        /* Mise à jour des valeurs des inputs */
-        const { name, value } = event.target;
-        this.setState({
-          [name]: value
-        })
-      }
-    handleChange(event){
+    /**
+       * Met à jour le state Checked A pour le bouton switch pour afficher ou non que les profils premium
+       *Bouton switch 
+       * @param {event} event Changement de la valeur du state CheckedA
+       */  
+    handleChangeCheck(event){
       this.setState({
         [event.target.name]: event.target.checked 
      })
     }
-   /* Fonction pour filtre ETUDE */
+    /**
+       * Met à jour le state showFiltre etude en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreEtude
+       */ 
     handleClickInEtude(event) {
       this.setState({showFiltreEtude: true});
     }
-
+    /**
+       * Met à jour le state showFiltre etude en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreEtude
+       */
     handleClickOutEtude(event) {
       this.setState({showFiltreEtude: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabEtudes
+       */
     handleChangeEtude(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -238,14 +258,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabEtudes:tabTemp
       });
     }
-   /* Fonction pour filtre SPORT */
+    /**
+       * Met à jour le state showFiltre sport en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreSport
+       */     
     handleClickInSport(event) {
       this.setState({showFiltreSport: true});
     }
-
+    /**
+       * Met à jour le state showFiltreSport en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreSport
+       */
     handleClickOutSport(event) {
       this.setState({showFiltreSport: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabSport
+       */
     handleChangeSport(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -255,31 +288,57 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabSport:tabTemp
       });
     }
-   /* Fonction pour filtre Yeux */
+    /**
+       * Met à jour le state showFiltreYeux en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreYeux
+       */ 
     handleClickInYeux(event) {
       this.setState({showFiltreYeux: true});
     }
-
+    /**
+       * Met à jour le state showFiltreYeux en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreYeux      
+       */
     handleClickOutYeux(event) {
       this.setState({showFiltreYeux: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabYeux
+       */
     handleChangeYeux(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
       let tabTemp = this.state.TabYeux;
       tabTemp[num].value=this.state.TabYeux[num].value===1?0:1;
       this.setState({
-        TabEtudes:tabTemp
+        TabYeux:tabTemp
       });
     }
-   /* Fonction pour filtre Cheveux */
+    /**
+       * Met à jour le state showFiltreCheveux en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreCheveux
+       */ 
     handleClickInCheveux(event) {
       this.setState({showFiltreCheveux: true});
     }
-
+    /**
+       * Met à jour le state showFiltreCheveux en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreCheveux      
+       */
     handleClickOutCheveux(event) {
       this.setState({showFiltreCheveux: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabCheveux
+       */
     handleChangeCheveux(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -289,14 +348,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabCheveux:tabTemp
       });
     }
-   /* Fonction pour filtre Alcool */
+    /**
+       * Met à jour le state showFiltreAlcool en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreAlcool
+       */ 
     handleClickInAlcool(event) {
       this.setState({showFiltreAlcool: true});
     }
-
+    /**
+       * Met à jour le state showFiltreAlcool en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreAlcool     
+       */
     handleClickOutAlcool(event) {
       this.setState({showFiltreAlcool: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabAlcool
+       */
     handleChangeAlcool(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -306,14 +378,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabAlcool:tabTemp
       });
     }
-   /* Fonction pour filtre Tabac */
-    handleClickInTabac(event) {
+    /**
+       * Met à jour le state showFiltreTabac en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreTabac
+       */ 
+   handleClickInTabac(event) {
       this.setState({showFiltreTabac: true});
     }
-
+    /**
+       * Met à jour le state showFiltreTabac en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreTabac     
+       */
     handleClickOutTabac(event) {
       this.setState({showFiltreTabac: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabTabac
+       */
     handleChangeTabac(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -323,14 +408,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabTabac:tabTemp
       });
     }
-   /* Fonction pour filtre Religion */
+    /**
+       * Met à jour le state showFiltreReligion en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreReligion
+       */ 
     handleClickInReligion(event) {
       this.setState({showFiltreReligion: true});
     }
-
+    /**
+       * Met à jour le state showFiltreReligion en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreReligion    
+       */
     handleClickOutReligion(event) {
       this.setState({showFiltreReligion: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabReligion
+       */
     handleChangeReligion(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -340,14 +438,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabReligion:tabTemp
       });
     }
-   /* Fonction pour filtre Astrologie */
+    /**
+       * Met à jour le state showFiltreAstrologie en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreAstrologie
+       */ 
     handleClickInAstrologie(event) {
       this.setState({showFiltreAstrologie: true});
     }
-
+    /**
+       * Met à jour le state showFiltreAstrologie en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltrAstrologie    
+       */
     handleClickOutAstrologie(event) {
       this.setState({showFiltreAstrologie: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabAstrologie
+       */
     handleChangeAstrologie(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -357,14 +468,27 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabAstrologie:tabTemp
       });
        }  
-   /* Fonction pour filtre Animaux */
+    /**
+       * Met à jour le state showFiltreAnimaux en true pour afficher les différentes options
+       *Affiche les options du filtre
+       * @param {event} event Changement de la valeur du state showFiltreAnimaux
+       */ 
     handleClickInAnimaux(event) {
       this.setState({showFiltreAnimaux: true});
     }
-
+    /**
+       * Met à jour le state showFiltreAnimaux en False pour cacher les différentes options
+       *Cache les options du filtres
+       * @param {event} event Changement de la valeur du state showFiltreAnimaux    
+       */
     handleClickOutAnimaux(event) {
       this.setState({showFiltreAnimaux: false});
     }
+    /**
+       * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
+       *Check ou non la checkbox et change le state du tabl
+       * @param {event} event Changement de la valeur du state TabAnimaux
+       */
     handleChangeAnimaux(event) {
       this.setState({isChecked: !this.state.isChecked});
       const num = event.target.value;
@@ -374,12 +498,20 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         TabAnimaux:tabTemp
       });
       }  
-   /* Fonction pour filtre Actif */
+    /**
+       * Met à jour le state Actif en la valeur de l'option selectionné par l'utilisateur
+       *Applique le filtre selectionné
+       * @param {event} event Changement de la valeur du state Actif
+       */ 
       handleChangeActif(event) {
         this.setState({
           Actif: event.target.value
         });
-      }                          
+      }   
+
+  /**
+     * Rendu du component
+     */                       
     render(){
       return(
         <div className="row margetop10px">
