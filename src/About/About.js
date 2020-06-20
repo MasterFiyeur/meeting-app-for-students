@@ -55,7 +55,7 @@ class About extends Component{
                 <br />
                 <span>Developpeur profil</span>
                 <span className="description">Toujours au garde à vous, il est le jeune disciple et
-                  coach sportif du déveloper chef. Il est "très éfficace" quand il n'est pas alcoolisé ou en
+                  coach sportif du déveloper chef. Il est très éfficace quand il n'est pas alcoolisé ou en
                   peine de coeur.
                 </span>
               </h2>
