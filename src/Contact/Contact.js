@@ -44,8 +44,8 @@ class Contact extends Component{
                 <img className="rounded-circle" src={WilliamContact} alt="William" width="140" height="140" align="left" />
                 <div className="description-Contact">
                   <span className="titre-Contact">William Kaczmarek étudiant de seconde année de cycle
-                    préparatoire</span><br />
-                  Developpeur Profil <br />
+                    préparatoire<i className="fas fa-hand-middle-finger"></i></span><br />
+                  Developpeur Profil et indentateur médiocre<br />
                   <b><a href="mailto:william.kaczmarek@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
                 </div>
               </div>

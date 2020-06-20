@@ -345,7 +345,7 @@ class Preference extends Component{
 
       /**
        * Met à jour la valeur du radio input dans lequel l'utilisateur rentre le sexe des profils qui souhaite rencontrer
-       * @param {event} event Changement de la valeur du state Jecherche par la valeur selecrtionner par l'utilisateur
+       * @param {event} event clique sur un radio bouton
        */
       handleChangeLookingFor(event) {
         this.setState({
@@ -355,7 +355,8 @@ class Preference extends Component{
 
       /**
        * Met à jour la valeur du radio input dans lequel l'utilisateur rentre son sexe 
-       * @param {event} event Changement de la valeur du state JeSuis par la valeur selecrtionner par l'utilisateur
+       * @param {event} event clique sur un radio bouton
+
        */
 
       handleChangeSexe(event) {

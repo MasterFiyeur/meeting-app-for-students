@@ -71,12 +71,6 @@
   padding-left: 15px;
   padding-right: 15px;
   padding-bottom: 10px;
-
-  
-
-
-
-
 }
 
 .text-blue{
@@ -212,8 +206,21 @@
   margin-top: 5%;
 }
 
+.margetop10px{
+  margin-top: 10px;
+}
+
 .margetop10{
   margin-top: 10%;
+}
+
+.margetop20px{
+  margin-top: 20px;
+}
+
+
+.margetop10vh{
+  margin-top: 10vh;
 }
 
 .padtop18{
@@ -238,12 +245,19 @@
   vertical-align: middle;
 }
 
+.align-filtre_profils-verif{
+  width: 30%;
+  margin-left: 35%;
+  vertical-align: middle;
+}
+
+
 .filtressvg{
   background-color: rgba(187, 0, 255, 0.5);
   color: #fff;
-  width: 30%;
-  margin-left: 35%;
-  margin-right: 35%;
+  width: 20%;
+  margin-block-start: 5%;
+  margin-inline-start: 40%;
   vertical-align: middle;
   border-radius:15px;
   height:50px;
@@ -257,25 +271,35 @@
   color: rgb(255,255,255);
 }
 
-
-
 .align-card{
-  width: 40%;
-  margin-left: 30%;
-  margin-right: 30%;
-  vertical-align: middle;
-  border-radius: 15px;
+  margin-inline-start: 37.5%;
 }
+
+.align-card-tel{
+  margin-inline-start: 5%;
+}
+
 .border-card{
   border-radius: 15px;
 }
 
 
-.dislike-center{
-  vertical-align: middle;
+.align-dislike{
+  margin-block-start: 25px;
 }
-.like-center{
-  vertical-align: middle;
+
+.align-like{
+  margin-block-end: 25px;
+}
+
+.align-dislike-tel{
+  width: 150px;
+  margin-inline-start: 5px;
+}
+
+.align-like-tel{
+  width: 150px;
+  margin-inline-end: 5px;
 }
 
 .btn-accueil{
@@ -378,13 +402,30 @@
   color: rgb(255,255,255);
 }
 
-.btn-dislike{
+.width-btn-dislike{
+  position: relative;
+  width: 50%;
+}
+
+.width-btn-like{
+  position: relative;
+  width: 50%;
+}
+
+.row-likes{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn-dislike{  
+  margin-block-start: 35%;
+  margin-left: 30%;
   background-color: rgba(255, 000, 000, 0.5);
-  border-radius: 45px;
-  padding-top: 12%;
-  padding-bottom: 12%;
-  padding-left: 10%;
-  padding-right: 10%;
+  border-radius: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
   border-color: rgb(255, 000, 000);
   color: rgb(255,255,255);
   display: inline-block;
@@ -405,12 +446,14 @@
 }
 
 .btn-like{
+  margin-block-start: 35%;
+  margin-right: 33%;
   background-color: rgba(20, 148, 20, 0.5);
-  border-radius: 45px;
-  padding-top: 12%;
-  padding-bottom: 12%;
-  padding-left: 12%;
-  padding-right: 12%;;
+  border-radius: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  padding-left: 50px;
+  padding-right: 50px;
   border-color: rgb(20, 148, 20);
   color: rgb(255,255,255);
   display: inline-block;
@@ -430,6 +473,67 @@
   color: rgb(255,255,255);
 }
 
+.btn-dislike-tel{
+  background-color: rgba(255, 000, 000, 0.5);
+  border-radius: 20px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 8px;
+  padding-right: 8px;
+  border-color: rgb(255, 000, 000);
+  color: rgb(255,255,255);
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border:1px ;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, border-radius.15s ease-in-out;
+}
+.btn-dislike-tel:hover{
+  background-color: rgb(255, 000, 000);
+  border-radius: 50px;
+  border-color: rgb(255, 000, 000);
+  color: rgb(255,255,255);
+}
+
+.btn-like-tel{
+  background-color: rgba(20, 148, 20, 0.5);
+  border-radius: 20px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+  padding-left: 17px;
+  padding-right: 17px;
+  border-color: rgb(20, 148, 20);
+  color: rgb(255,255,255);
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  vertical-align: middle;
+  user-select: none;
+  border:1px ;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out, border-radius.15s ease-in-out;
+}
+
+.btn-like-tel:hover{
+  background-color: rgb(20, 148, 20);
+  border-radius: 50px;
+  border-color: rgb(20, 148, 20);
+  color: rgb(255,255,255);
+}
+
+.width25{
+  width: 25%;
+}
+
+.width90{
+  width: 90%;
+}
+
 .width100{
   width: 100%;
 }
@@ -443,14 +547,6 @@
 .listeMatch {
   margin-top : 70px;
 }
-
-
-
-
-
-
-
-
 
 .messages {
   background-color: #eee;
@@ -526,8 +622,6 @@
   border-radius: 5px;
   padding: 5px;
   background-color: #ccc;
-
-
 }
 
 .carte{
