@@ -44,11 +44,11 @@ class About extends Component{
               <img src={WilliamAbout} alt="William About" />
             </div>
             <div className="details-About">
-              <h2>William Kaczmarek
+              <h2><i className="fas fa-hand-middle-finger"></i><i className="fas fa-hand-middle-finger"></i>William Kaczmarek<i className="fas fa-hand-middle-finger"></i><i className="fas fa-hand-middle-finger"></i>
                 <br />
                 <span>Developpeur profil</span>
-                <span className="description">Jeune disciple et
-                  coach sportif du déveloper chef, ce petit BG est très éfficace quand il n'est pas alcoolisé ou en
+                <span className="description">Toujours au garde à vous, il est le jeune disciple et
+                  coach sportif du déveloper chef. Il est "très éfficace" quand il n'est pas alcoolisé ou en
                   peine de coeur.
                 </span>
               </h2>
@@ -76,12 +76,11 @@ class About extends Component{
               <img src={JulienAbout} alt="Julien About"/>
             </div>
             <div className="details-About">
-              <h2><i className="fas fa-hand-middle-finger"></i>Julien Richard
+              <h2>Julien Richard
                 <br />
                 <span>Designer</span>
-                <span className="description">L'adopté du groupe, le vilan
-                  petit canrd, la cinquième roue du carrosse. Après des multiples tentatives de la part du disciple de
-                  l'enfermer au goulag ce jeune Twittos arrive toujours à s'échapper. 
+                <span className="description">Le plus bruillant du groupe. Ce jeune Twittos se couche à des horaires improbables. 
+                Il est aussi la cible préférée du petit soldat, même si ce dernier sait qu'il ne fait pas le poids.
                 </span>
               </h2>
             </div>
