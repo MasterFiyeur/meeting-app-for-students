@@ -14,8 +14,11 @@ class Abonnement extends Component{
         this.state={
             numero:"", //Numéro de carte
             pin:"", //Code pin de carte
-            message:"" //Message lors de l'achat
+            message:"", //Message lors de l'achat
+            duree:1 //Durée de l'abonnement
         }
+        
+      this.handleChangeDuree = this.handleChangeDuree.bind(this);
       }
 
     /**
@@ -36,6 +39,7 @@ class Abonnement extends Component{
             let formData = new FormData();
             formData.append('num',this.state.numero);
             formData.append('pin',this.state.pin);
+            formData.append('time',this.state.duree);
             const url = URL_API+'setPremium.php';
             axios.post(url,formData,config)
             .then(res => {
@@ -49,6 +53,15 @@ class Abonnement extends Component{
         }
     }
 
+    /**
+       * Met à jour la valeur du radio input dans lequel l'utilisateur rentre la durée de l'abonnement
+       * @param {event} event Clique sur un radio bouton
+       */
+      handleChangeDuree(event) {
+        this.setState({
+          duree: event.target.value
+        });
+      }
 
     /**
        * Met à jour la valeur du form dans lequel l'utilisateur écrit
@@ -94,12 +107,13 @@ class Abonnement extends Component{
                     </div>
                 </div>
                 <div className="input_container_Abonnement col-lg">
-                    <div className="text-size_Abonnement">
-                        39,99€
+                    <div className="text-color_Abonnement">
+                        <div className="text-size20_Abonnement">1 mois : 13,99€</div>
+                        <div className="text-size30_Abonnement">3 mois : 31,99€</div>
+                        <div className="text-size40_Abonnement">6 mois : 49,99€</div>
                     </div>
                     <br/>
-                    <br/>
-                    <br/>
+                    {Cookies.get("ID")!==undefined? 
                     <div>
                         <div>
                             <label htmlFor="numCarteBancaire">Numéro de carte </label>
@@ -107,13 +121,44 @@ class Abonnement extends Component{
                         </div>
                         <div>
                             <label>Code PIN</label>
-                            <input type="text" placeholder="Numero" name="pin" value={this.state.pin} onChange={event => this.inputChange(event)}/>
+                            <input type="password" placeholder="Numero" name="pin" value={this.state.pin} onChange={event => this.inputChange(event)}/>
+                        </div>
+                        <div className="col-lg">
+                            {/*--------------------------Durée--------------------------*/}
+                            <div className="input_group">
+                                <div className="input_group_prepend">
+                                    <label className="input_group_text_Abonnement" htmlFor="duree">Durée de l'abonnement :<br/>1 mois = 30 jours</label>
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <label className="form-check-label" htmlFor="1mois">1 mois</label>
+                                    <input className="form-check-input" type="radio" name="duree" id="1mois"
+                                        value={1} checked={this.state.duree==="1"}
+                                        onChange={this.handleChangeDuree} />
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <label className="form-check-label" htmlFor="3mois">3 mois</label>
+                                    <input className="form-check-input" type="radio" name="duree" id="3mois"
+                                        value={3} checked={this.state.duree==="3"}
+                                        onChange={this.handleChangeDuree} />
+                                </div>
+                                <div className="form-check form-check-inline">
+                                    <label className="form-check-label" htmlFor="6mois">6 mois</label>
+                                    <input className="form-check-input" type="radio" name="duree" id="6mois"
+                                        value={6} checked={this.state.duree==="6"}
+                                        onChange={this.handleChangeDuree} />
+                                </div>
+                            </div>
+                            <br />
                         </div>
                         <br/>
                         <p>{this.state.message}</p>
                         <br/>
                         <button className="btn-abonnement-acheter" onClick={() => this.sendCodes()}>Acheter</button>
                     </div>
+                    :
+                    <div className="text-color_Abonnement text-size40_Abonnement">Veuillez vous connecter</div>
+                
+                    }
                 </div>
             </div>
       </div>

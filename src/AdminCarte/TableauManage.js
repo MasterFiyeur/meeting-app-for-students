@@ -225,7 +225,7 @@ class TableauManage extends Component{
                 {this.state.ActuelPerso.Grade==="premium" &&
                     <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.rank("demote")}>Rétrograder</button>
                 }
-                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.management("resetLike")}>Réinitialiser les likes</button>
+                <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.management("resetLike")}>Réinitialiser les likes quotidien</button>
                 <button style={{backgroundColor:"#48FF5B"}} onClick={() => this.certificate()}>Certifier</button>
                 <button style={{backgroundColor:"#FF5B48"}} onClick={() => this.deleteAccount()}>Supprimer le compte</button>
                 </div>

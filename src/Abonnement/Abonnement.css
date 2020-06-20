@@ -72,10 +72,19 @@
     margin-bottom: 70px;
 }
 
-.text-size_Abonnement{
-    font-size: 100px;
+.text-color_Abonnement{
     color: goldenrod;
-    transform: rotate(-30deg);
+}
+
+.text-size20_Abonnement{
+    font-size: 20px;
+}
+
+.text-size30_Abonnement{
+    font-size: 30px;
+}
+.text-size40_Abonnement{
+    font-size: 40px;
 }
 
 .btn-abonnement-acheter{
@@ -101,4 +110,18 @@
     background-color: rgb(255, 203, 27);
     border-radius: 5px;
     color: rgb(255,255,255);
+  }
+
+  .input_group_text_Abonnement{
+    background-color: rgba(255, 203, 27,0.4);
+    color: rgb(0,0,0,);
+    border: 1px solid;
+    border-color: rgb(255, 203, 27);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: .375rem .75rem;
+    margin-bottom: 0;
+    font-size: 1rem;
+    line-height: 1.5;
+  
   }
