@@ -130,7 +130,7 @@ class CardId extends Component{//this.props.hisId
      */
     render(){
       return(
-        <div  >
+        <div >
             {/* width obligatoire pour réguler la taille des images */}
           <Card style={{borderRadius:"15px"}}>
           <Carousel key={this.props.hisId}>

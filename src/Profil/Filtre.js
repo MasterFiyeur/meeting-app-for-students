@@ -522,7 +522,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               <div className="align-filtre_profils-verif ">
                 <FormGroup row>
                   <FormControlLabel labelPlacement='start' label="Voir seulement des profils vérifié :" control={<Switch
-                    checked={this.state.checkedA} onChange={event=> this.handleChange(event)} name="checkedA" />}
+                    checked={this.state.checkedA} onChange={event=> this.handleChangeCheck(event)} name="checkedA" />}
                     />
                 </FormGroup>
               </div>
@@ -532,7 +532,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   this.handleClickInEtude()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreEtude===true && <div>
                 <label htmlFor="Etude">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="truc">
                   <label  htmlFor="lycée">Lycée</label>
                   <input type="checkbox" id="lycée" name="lycée" value="0"
                     checked={this.state.TabEtudes[0].value===1?true:false} onChange={this.handleChangeEtude} />

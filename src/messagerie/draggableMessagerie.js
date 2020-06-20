@@ -61,7 +61,7 @@ class Draggable extends React.Component {
         const ref = ReactDOM.findDOMNode(this.handle);
         const body = document.body;
         const box = ref.getBoundingClientRect();
-        if (e.pageY - (box.top + body.scrollTop - body.clientTop) > 450) return;
+        if (e.pageY - (box.top + body.scrollTop - body.clientTop) > 50 || (e.pageY - (box.top + body.scrollTop - body.clientTop) <50 && e.pageX - (box.left + body.scrollLeft - body.clientLeft) > 300) ) return;
         this.onStart(e);
         document.addEventListener('mousemove', this.onMouseMove);
         document.addEventListener('mouseup', this.onMouseUp);

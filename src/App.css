@@ -544,8 +544,43 @@
 }
 
 
+
+
 .listeMatch {
   margin-top : 70px;
+  overflow: hidden;
+}
+
+
+
+.lmatch {
+  color : black;
+  background-color: #ccc;
+  border: solid #ccc 1px;
+  border-radius: 7px;
+  margin: 10px; 
+}
+
+.lmatch > div {
+  display: inline-block;
+
+}
+
+.profilMessage {
+  position: absolute;
+  top : 10%;
+   min-width: 396px;
+
+}
+
+.mesmatch {
+  margin-top: 100px;
+  margin-left: 20px;
+}
+
+
+.mesmatch > h2 {
+  text-align: left
 }
 
 .messages {
@@ -562,12 +597,35 @@
 
 .message_header {
   position: absolute;
-  height: 10%;
-  width: 100%;
-  top: 0;
+  height: calc(10% - 10px);
+  width: calc(100% - 20px);
   padding: 0;
   margin:0;
+  margin-left:10px;
+  margin-top:10px;
   border-bottom: solid #ccc 2px;
+}
+
+.message_header > div {
+    display: inline-block;
+
+}
+
+.prenom{
+  font-size : 22px;
+}
+
+.showprofile {
+  position: absolute;
+  margin:0;
+  margin-top: 6px;
+  margin-left: 20px;
+  color : rgb(150,0,255,0.7);
+  font-weight: 900;
+}
+
+.showprofile:hover {
+  opacity: 0.5
 }
 
 .message_footer {
@@ -590,7 +648,7 @@
   /* avoid selecting text while dragging */
   user-select: none;
   text-align: left;
-  height: 500px;
+  height:   500px;
   width: 400px;
 }
 
@@ -644,3 +702,29 @@
 .message-me > .right-m {
     background-color: rgba(185, 000, 255, 0.5);
 }
+
+.Quit {
+  float:right;
+  font-size: 25px;
+}
+
+.Quit:hover{
+  opacity: 0.5;
+}
+
+.draggable {
+    z-index: 2;
+
+}
+
+
+.message_footer {
+  padding: 10px;
+}
+
+.envoyer {
+  font-size: 19px;
+  margin-top: -5px;
+  margin-left: 5px;
+}
+

@@ -7,6 +7,7 @@ import CardId from '../CardId/CardId';
 import {Card,Modal,Button} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 import Filtre from '../Profil/Filtre';
+import ListMessages from '../messagerie/message'
 
 
 /**
@@ -26,10 +27,15 @@ class Pageprincipale extends Component {
             panel:false,
             grade:"",
             showFiltre:false,
-            showModal:false, modalTitle:"", modalBody:""
+            showModal:false, modalTitle:"", modalBody:"",
+            showMessage : 0
         }
+        this.handleChildUnmount = this.handleChildUnmount.bind(this);
+
       }
-    
+    handleChildUnmount(){
+        this.setState({showMessage: 0});
+    }
       /**
        * Ferme le modal
        */
@@ -59,6 +65,7 @@ class Pageprincipale extends Component {
         /* Vérif des cookies ID et KEY */
         this.loadTableauPersonne();
         this.verifConnexion();
+        if(Cookies.get('m_id1') !== undefined){this.setState({showMessage:1})}
     }
 
     /**
@@ -285,7 +292,7 @@ class Pageprincipale extends Component {
                     }
                 </Modal.Footer>
             </Modal>
-
+            {this.state.showMessage == 1 && <ListMessages id={Cookies.get('m_id1')} id2={Cookies.get('m_id2')} unmountMe={this.handleChildUnmount} />}
             <div className="row">
                 <div className="col-md">
                     <div className="filtressvg margetop10px" onClick={() => {this.setState({showFiltre:!this.state.showFiltre})}}>
@@ -296,7 +303,7 @@ class Pageprincipale extends Component {
                     </div>                     
                 </div>
                 <div className="col-md">
-                    <button className="btn-principale  margetop10px" ><Link className="match" to="/mesmatch">mes match</Link></button>
+                    <Link className="match" to="/mesmatch"><button className="btn-principale  margetop10px" >mes match</button></Link>
                 </div>
                 <div className="col-md ">
                     <button 
