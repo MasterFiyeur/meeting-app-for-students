@@ -44,23 +44,36 @@ function str_rand(){
 
 /**
  * - Fonction de vérification du couple id/connecttoken dans la BDD
+ *   et met à jour le grade si le premium est arrivé à expiration
  * - Paramètre : id et clé
  * - Sortie : booléen
  */
 
 function isLogged($id, $key){
     $logged = false;
+    $grade="";
     $cnx = connexionPDO();
-    $req = $cnx -> prepare('SELECT connecttoken FROM user WHERE id = ?');
+    $req = $cnx -> prepare('SELECT connecttoken,grade,premiumEnd FROM user WHERE id = ?');
     $req -> execute(array($id));
     if ($ligne = $req -> fetch()) {
         if ($ligne != NULL) {
             if($ligne['connecttoken']===$key){
                 $logged = true;
             }
+            $grade=$ligne['grade'];
         }
     }
     $req -> closeCursor();
+    if($grade==="premium"){
+        $datetime1 = new DateTime($ligne['premiumEnd']);
+        $datetime2 = new DateTime(date("Ymd"));
+        $interval = $datetime1->diff($datetime2);
+        if($interval->invert===0){
+            $req = $cnx -> prepare('UPDATE user SET grade="nouveau" WHERE id = ?');
+            $req -> execute(array($id));
+            $req -> closeCursor();
+        }
+    }
     return $logged;
 }
 

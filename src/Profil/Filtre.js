@@ -221,7 +221,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state Checked A pour le bouton switch pour afficher ou non que les profils premium
        *Bouton switch 
-       * @param {event} event Changement de la valeur du state CheckedA
+       * @param {event} event clique sur un bouton
        */  
     handleChangeCheck(event){
       this.setState({
@@ -231,7 +231,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltre etude en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreEtude
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInEtude(event) {
       this.setState({showFiltreEtude: true});
@@ -239,7 +239,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltre etude en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreEtude
+       * @param {event} event clique sur un bouton
        */
     handleClickOutEtude(event) {
       this.setState({showFiltreEtude: false});
@@ -247,7 +247,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabEtudes
+       * @param {event} event clique sur une checkbox
        */
     handleChangeEtude(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -261,7 +261,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltre sport en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreSport
+       * @param {event} event clique sur un bouton
        */     
     handleClickInSport(event) {
       this.setState({showFiltreSport: true});
@@ -269,7 +269,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreSport en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreSport
+       * @param {event} event clique sur un bouton
        */
     handleClickOutSport(event) {
       this.setState({showFiltreSport: false});
@@ -277,7 +277,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabSport
+       * @param {event} event clique sur une checkbox
        */
     handleChangeSport(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -291,7 +291,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreYeux en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreYeux
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInYeux(event) {
       this.setState({showFiltreYeux: true});
@@ -299,7 +299,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreYeux en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreYeux      
+       * @param {event} event clique sur un bouton     
        */
     handleClickOutYeux(event) {
       this.setState({showFiltreYeux: false});
@@ -307,7 +307,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabYeux
+       * @param {event} event clique sur une checkbox
        */
     handleChangeYeux(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -321,7 +321,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreCheveux en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreCheveux
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInCheveux(event) {
       this.setState({showFiltreCheveux: true});
@@ -329,7 +329,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreCheveux en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreCheveux      
+       * @param {event} event clique sur un bouton      
        */
     handleClickOutCheveux(event) {
       this.setState({showFiltreCheveux: false});
@@ -337,7 +337,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabCheveux
+       * @param {event} event clique sur une checkbox
        */
     handleChangeCheveux(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -351,7 +351,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAlcool en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreAlcool
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInAlcool(event) {
       this.setState({showFiltreAlcool: true});
@@ -359,7 +359,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAlcool en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreAlcool     
+       * @param {event} event clique sur un bouton    
        */
     handleClickOutAlcool(event) {
       this.setState({showFiltreAlcool: false});
@@ -367,7 +367,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabAlcool
+       * @param {event} event clique sur une checkbox
        */
     handleChangeAlcool(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -381,7 +381,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreTabac en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreTabac
+       * @param {event} event clique sur un bouton
        */ 
    handleClickInTabac(event) {
       this.setState({showFiltreTabac: true});
@@ -389,7 +389,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreTabac en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreTabac     
+       * @param {event} event clique sur un bouton    
        */
     handleClickOutTabac(event) {
       this.setState({showFiltreTabac: false});
@@ -397,7 +397,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabTabac
+       * @param {event} event clique sur une checkbox
        */
     handleChangeTabac(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -411,7 +411,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreReligion en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreReligion
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInReligion(event) {
       this.setState({showFiltreReligion: true});
@@ -419,7 +419,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreReligion en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreReligion    
+       * @param {event} event clique sur un bouton    
        */
     handleClickOutReligion(event) {
       this.setState({showFiltreReligion: false});
@@ -427,7 +427,8 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabReligion
+       * @param {event} event clique sur une checkbox
+
        */
     handleChangeReligion(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -441,7 +442,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAstrologie en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreAstrologie
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInAstrologie(event) {
       this.setState({showFiltreAstrologie: true});
@@ -449,7 +450,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAstrologie en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltrAstrologie    
+       * @param {event} event clique sur un bouton 
        */
     handleClickOutAstrologie(event) {
       this.setState({showFiltreAstrologie: false});
@@ -457,7 +458,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabAstrologie
+       * @param {event} event clique sur une checkbox
        */
     handleChangeAstrologie(event) {
       this.setState({isChecked: !this.state.isChecked});
@@ -471,7 +472,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAnimaux en true pour afficher les différentes options
        *Affiche les options du filtre
-       * @param {event} event Changement de la valeur du state showFiltreAnimaux
+       * @param {event} event clique sur un bouton
        */ 
     handleClickInAnimaux(event) {
       this.setState({showFiltreAnimaux: true});
@@ -479,7 +480,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour le state showFiltreAnimaux en False pour cacher les différentes options
        *Cache les options du filtres
-       * @param {event} event Changement de la valeur du state showFiltreAnimaux    
+       * @param {event} event clique sur un bouton
        */
     handleClickOutAnimaux(event) {
       this.setState({showFiltreAnimaux: false});
@@ -487,7 +488,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
     /**
        * Met à jour state de l'attibut Checked de l'input selectionné, ainsi que le state de la valeur du tableau selon son index
        *Check ou non la checkbox et change le state du tabl
-       * @param {event} event Changement de la valeur du state TabAnimaux
+       * @param {event} event clique sur une checkbox
        */
     handleChangeAnimaux(event) {
       this.setState({isChecked: !this.state.isChecked});

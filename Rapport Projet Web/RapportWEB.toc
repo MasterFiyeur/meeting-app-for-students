@@ -1,0 +1,9 @@
+\babel@toc {french}{}
+\contentsline {section}{\numberline {I}Introduction}{2}{section.0.1}
+\contentsline {section}{\numberline {II}Notre projet/site}{3}{section.0.2}
+\contentsline {subsection}{\numberline {II.1}Inscription}{3}{subsection.0.2.1}
+\contentsline {subsection}{\numberline {II.2}Connexion}{3}{subsection.0.2.2}
+\contentsline {subsection}{\numberline {II.3}Acceuil}{4}{subsection.0.2.3}
+\contentsline {subsection}{\numberline {II.4}NavBar}{5}{subsection.0.2.4}
+\contentsline {section}{\numberline {III}Nos objectifs et les perspectives d'avenir}{6}{section.0.3}
+\contentsline {section}{\numberline {IV}Conclusion de ce projet}{6}{section.0.4}
