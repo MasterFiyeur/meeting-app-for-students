@@ -85,7 +85,6 @@ class Pageprincipale extends Component {
         const url = URL_API+'newDisc.php';
         axios.post(url,formdata,config)
         .then(res => {
-            console.log("Réponse newMatch: "+res.data);
             if(res.data===1){
                 this.setState({
                     currentIndex:this.state.currentIndex+1,
@@ -193,7 +192,6 @@ class Pageprincipale extends Component {
                     currentIndex:0,
                     loaded:true
                 });
-                //console.log(res.data);
             }
         })
         .catch(err => {
@@ -221,7 +219,6 @@ class Pageprincipale extends Component {
         }
         axios.get(url,config)
         .then(res => {
-            console.log("Connecté : "+res.data.connect); //Réponse dans la console
             if(!res.data.connect){ //Mise à jour de connected si réponse négative
                 this.setState({
                     connected:false,
