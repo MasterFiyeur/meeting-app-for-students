@@ -15,7 +15,7 @@ class Abonnement extends Component{
             numero:"", //Numéro de carte
             pin:"", //Code pin de carte
             message:"", //Message lors de l'achat
-            duree:1 //Durée de l'abonnement
+            duree:"1" //Durée de l'abonnement
         }
         
       this.handleChangeDuree = this.handleChangeDuree.bind(this);

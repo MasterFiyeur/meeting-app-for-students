@@ -97,7 +97,6 @@ class EditProfilePhoto extends Component{
       const url = URL_API+'delProfileImage.php?id='+Cookies.get('ID');
       axios.post(url,formData,config)
         .then(res => {
-          console.log(res.data.deletion);
           this.initTabImage();
         })
         .catch(err => {

@@ -183,7 +183,6 @@ class Preference extends Component{
         const url = URL_API+'setCarteEtudiante.php';
           axios.post(url,formData,config)
           .then(res => {
-            console.log("Réponse setCarteEtudiante: "+res.data);
             if(res.data>=0){
               switch(res.data){
                 case 0:
