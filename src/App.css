@@ -711,6 +711,7 @@
 .Quit {
   float:right;
   font-size: 25px;
+  cursor: 'pointer';
 }
 
 .Quit:hover{
@@ -731,11 +732,12 @@
   font-size: 19px;
   margin-top: -5px;
   margin-left: 5px;
+  cursor: 'pointer';
 }
 
 .space-label > label{
  margin-left: 5%;
-}
+} 
 
 .space-input > input{
   margin-left: 5px;
