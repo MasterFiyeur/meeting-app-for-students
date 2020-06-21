@@ -95,8 +95,8 @@ class ListMatch extends Component {
 		let match = this.state.list;
 		match = match.slice(0,-1);
 		let lmatch = match.split(';');
-		ret = lmatch.map(el => 	<div>
-									<div className="lmatch" onClick={ () => {this.handleClick(el.split('-')[0],el.split('-')[1])}}>
+		ret = lmatch.map(el => 	<div className="lmatch">
+									<div  className="nomMatch" onClick={ () => {this.handleClick(el.split('-')[0],el.split('-')[1])}}>
 										<strong>{this.index(el.split('-')[0],el.split('-')[1])}</strong>
 									</div>
 									<div className="deleteMatch" onClick={() => {this.delete(el.split('-')[0],el.split('-')[1])}}>

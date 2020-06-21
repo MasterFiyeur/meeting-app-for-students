@@ -564,18 +564,34 @@
   border: solid #ccc 1px;
   border-radius: 7px;
   margin: 10px; 
+  width: 70%;
+  height: 50px;
+  text-align: left;
+}
+.deleteMatch {
+  float: right;
+  color : rgb(150,0,255);
+}
+
+.deleteMatch:hover {
+  opacity: 0.5
 }
 
 .lmatch > div {
   display: inline-block;
+  margin:10px;
+}
+
+
+.nomMatch {
+  width: 50%;
 
 }
 
 .profilMessage {
   position: absolute;
   top : 10%;
-   min-width: 396px;
-
+  max-width: 100vw;
 }
 
 .mesmatch {
@@ -655,6 +671,9 @@
   text-align: left;
   height:   500px;
   width: 400px;
+  max-width: 100vw;
+  z-index: 2;
+
 }
 
 .line {
@@ -718,10 +737,6 @@
   opacity: 0.5;
 }
 
-.draggable {
-    z-index: 2;
-
-}
 
 
 .message_footer {
@@ -731,8 +746,13 @@
 .envoyer {
   font-size: 19px;
   margin-top: -5px;
-  margin-left: 5px;
+  margin-left: 15px;
   cursor: 'pointer';
+  width: 40%
+}
+
+.input {
+  width: 55%
 }
 
 .space-label > label{
@@ -742,3 +762,25 @@
 .space-input > input{
   margin-left: 5px;
  }
+
+
+ 
+@media (max-width: 730px) {
+  .lmatch {
+    width: 90%;
+  }
+  .message-me {
+    margin-left: 45px;
+  }
+}
+@media (max-width: 560px) {
+  .lmatch {
+    height: 80px;
+  }
+  .deleteMatch {
+    float: none;
+  }
+  .lmatch > div {
+    display: block;
+  }
+}

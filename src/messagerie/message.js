@@ -24,6 +24,11 @@ class ListMessages extends Component {
     	this.sendMessage = this.sendMessage.bind(this);
     	this.dismiss = this.dismiss.bind(this)
     }
+	
+    /*
+		envoie l'information au component parent qu'il faut fermer celui ci
+		retire les cookies messages
+    */
 	dismiss() {
   		this.setState({unmount:1});
 
@@ -33,6 +38,9 @@ class ListMessages extends Component {
     } 
     _move = (x, y) => this.setState({x, y});
 
+    /*
+		recupere les messages d'une discussion donnée et les stock dans une chaine de caractere
+    */
 	getMessage(){
 		const axios = require('axios');  //Requêtes HTTP
         let formdata = new FormData();
@@ -54,10 +62,17 @@ class ListMessages extends Component {
 
 
 
+    /*
+		gere l'entrée de texte dans le champ message
+    */
 	handleChange(event) {
   	    this.setState({message: event.target.value});
 	}
 
+
+    /*
+		lors de la fermeture detruit les intervale et crée des cookie si l'utilisateur n'a pas appuyé sur la croix
+    */
 	componentWillUnmount() {
   		clearInterval(this.interval);
   		clearInterval(this.interval2);
@@ -67,6 +82,11 @@ class ListMessages extends Component {
   			Cookies.set('m_id2',this.props.id2);
   		}
 	}
+
+
+    /*
+		envoie le message en entré dans la discussion
+    */
 	sendMessage(event){
 		event.preventDefault();
 		if (this.state.message == ""){return}
@@ -93,6 +113,9 @@ class ListMessages extends Component {
 
 
 
+    /*
+		recupere le prenom associé a une id donné
+    */
 	prenom(id){
 		const axios = require('axios');  //Requêtes HTTP
         let formdata = new FormData();
@@ -116,6 +139,11 @@ class ListMessages extends Component {
 		if (id == Cookies.get("ID")){return this.state.prenom1}
 		else {return this.state.prenom2}
 	}
+
+	
+    /*
+		prepare le JSX pour afficher tout les messages
+    */
 	affMessage(){
 		let ret = "";
 		let messages = this.state.list;
@@ -128,7 +156,11 @@ class ListMessages extends Component {
 		this.setState({messages : ret})
 	}
 
-		componentDidMount(){
+
+    /*
+		setup des intervales pour actualiser les messages toute les secondes
+    */
+	componentDidMount(){
 		  this.interval = setInterval(() => this.getMessage(), 1000);
 		  this.interval2 = setInterval(() => this.prenom(this.props.id),1000);
 		  this.interval3 = setInterval(() => this.prenom(this.props.id2),1000);
@@ -159,7 +191,7 @@ class ListMessages extends Component {
 			
 				<div className="message_footer">
 					<form onSubmit={event => this.sendMessage(event)}>
-							<input className="input" type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
+							<input className="input minput" type="text" autoComplete="off" value={this.state.message} name="message" onChange={this.handleChange} />
 							<input className="btn-simple envoyer" type="submit" />
 					</form>
 				</div></div>
