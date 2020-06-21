@@ -1,4 +1,10 @@
 
+  
+  .align-about{
+    width:50%;
+    margin-inline-start: 25%;
+  }
+  
   .title-About{
      font-weight: 700;
      font-size: 70px;
@@ -11,14 +17,13 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     grid-gap: 15px;
-    margin: 0 auto;
+    margin-inline-start: 35%;
   }
   .card-About{
     position: relative;
-    width: 300px;
+    width: 30%;
     height: 350px;
     background: #fff;
-    margin: 0 auto;
     border-radius: 4px;
     box-shadow:0 2px 10px rgba(0,0,0,.2);
   }
