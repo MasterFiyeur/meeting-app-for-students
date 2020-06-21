@@ -76,13 +76,32 @@ class ListMatch extends Component {
 		return li.map(el => {if(id == el.split('-')[0] || id2 == el.split('-')[0]){ return el.split('-')[1] }});
 	}
 
+	delete(id,id2){
+		const axios	= require('axios');
+		let formdata = new FormData();
+		formdata.append('id',id);
+		formdata.append('id2',id2);
+		const url = URL_API + 'DeleteMatch.php';
+		axios.post(url,formdata)
+		.then(res => {
+		})
+		.catch(err => {
+			console.log(err);
+		})
+	}
+
 	affMatch() {		
 		let ret = "";
 		let match = this.state.list;
 		match = match.slice(0,-1);
 		let lmatch = match.split(';');
-		ret = lmatch.map(el => <div className="lmatch" onClick={ () => {this.handleClick(el.split('-')[0],el.split('-')[1])}}>
-									<strong>{this.index(el.split('-')[0],el.split('-')[1])}</strong>
+		ret = lmatch.map(el => 	<div>
+									<div className="lmatch" onClick={ () => {this.handleClick(el.split('-')[0],el.split('-')[1])}}>
+										<strong>{this.index(el.split('-')[0],el.split('-')[1])}</strong>
+									</div>
+									<div className="deleteMatch" onClick={() => {this.delete(el.split('-')[0],el.split('-')[1])}}>
+										Supprimer/Bloquer ce match
+									</div>
 								</div>);
 		this.setState({match:ret});
 	}
