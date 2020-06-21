@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6800 64-bit)  (format=lualatex 2018.10.25)  21 JUN 2020 19:46
+This is LuaTeX, Version 1.07.0 (MiKTeX 2.9.6800 64-bit)  (format=lualatex 2018.10.25)  21 JUN 2020 19:50
  restricted system commands enabled.
 **RapportWEB.tex
 (./RapportWEB.tex
@@ -33,7 +33,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 0.801 seconds
+luaotfload | main : initialization completed in 0.794 seconds
 ("C:/Users/theo5/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/report.cls"
 Document Class: report 2014/09/29 v1.4h Standard LaTeX document class
 ("C:/Users/theo5/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/size12.clo"
@@ -1107,10 +1107,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 197.
 Here is how much of LuaTeX's memory you used:
  21629 strings out of 494412
  125007,662416 words of node,token memory allocated
- 87734 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 28 glue, 1 kern, 1 penalty, 12027 glyph, 1243 attri
+ 87650 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 28 glue, 1 kern, 1 penalty, 12015 glyph, 1243 attri
 bute, 54 glue_spec, 208 attribute_list, 2 write nodes
-   avail lists: 2:434,3:67,4:32,5:195,6:23,7:1893,8:25,9:90,10:19,11:226
+   avail lists: 2:434,3:67,4:32,5:195,6:23,7:1905,8:25,9:90,10:19,11:226
  25244 multiletter control sequences out of 65536+200000
  65 fonts using 9145287 bytes
  54i,10n,67p,1148b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1122,7 +1122,7 @@ programs/miktex 2.9/fonts/opentype/public/lm/lmromancaps10-regular.otf><c:/users
 /theo5/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmroman12-regu
 lar.otf><c:/users/theo5/appdata/local/programs/miktex 2.9/fonts/opentype/public/
 lm/lmroman17-regular.otf>
-Output written on RapportWEB.pdf (13 pages, 684413 bytes).
+Output written on RapportWEB.pdf (13 pages, 684409 bytes).
 
 PDF statistics: 220 PDF objects out of 1000 (max. 8388607)
  41 named destinations out of 1000 (max. 131072)
