@@ -15,7 +15,7 @@
 \usepackage{enumitem}
 %Page de garde
 \title{Rapport Projet informatique 2020 :\\Site de rencontre}
-\author{Nicolas \textsc{Bednarek} \and Théo \textsc{Julien} \and Julien \textsc{Richard}\and William \textsc{Kaczmarek}}
+\author{Florent \textsc{Bednarek} \and Théo \textsc{Julien} \and Julien \textsc{Richard}\and William \textsc{Kaczmarek}}
 \date{20  avril au 21 juin 2020}
 %Constantes pour tout le document
 \usepackage[a4paper, left=1cm, right=1cm, top=2.5cm, bottom=2.5cm]{geometry}
@@ -78,7 +78,7 @@ Si l'on upload notre carte la création du compte est terminée , dans le cas o�
 	\begin{center}
 		\includegraphics[scale=0.5]{principal.jpg}
 	\end{center}
-		\caption{Capture d'écran de notre site une fois connecté}
+		\caption{Capture d'écran de notre site une fois connecté (sur un profil non administrateur}
 \end{figure}
 Nous voila enfin sur la page principal on peut y voir les profils des autres utilisateurs selon les paramètres défini, l'on peut les likes ou les dislikes.\\
  Pour modifier ses paramètres, il suffit de cliquer sur le bouton "Mon profil", on accèdera alors à la page permettant de gérer son profil, ou l'on peut ajouter nos photos, une description ainsi que ajouter pleins d'informations nous concernant tel que la couleur de nos yeux, si l'on possède des animaux de compagnie ou encore si nous sommes fumeur.\\
@@ -104,10 +104,59 @@ Enfin le bouton Contact, tout comme About est accessible qu'on soit connecté ou
 		\caption{Capture d'écran de notre page About (Pensez à passer votre souris sur nos tête)}
 \end{figure}
 \clearpage
+\subsection{Module Administrateur}
+Pour un profil classique, les modules de gestion administrateur sont invisibles, à moins qu'un administrateur donne ce grade au profil.\\
+En effet pour différencier un profil administrateur d'un autre nous avons créer dans la base de données, plus particulièrement dans la table "user" un paramètre "grade" qui prend soit nouveau si le profil est classique, soit administrateur.\\
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=1.2]{fragBDD.jpg}
+	\end{center}
+		\caption{Capture d'écran d'un fragment de notre table user}
+\end{figure}\\
+Cette petite simple variable change grandement les droits et pouvoirs d'un profil sur notre site, en effet en possédant le grade administrateur, un nouveau bouton est visible sur la page principal, le "pannel administrateur".
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.8]{boutonpanel.jpg}
+	\end{center}
+		\caption{Capture d'écran d'un fragment de notre table user}
+\end{figure}
+\clearpage
+En cliquant sur ce bouton on arrive sur une première page, qui permet la gestion de certification des profils. Quand un utilisateur, s'inscrit et rentre sa carte étudiante, elle doit être vérifié manuellement par un administrateur avant de certifier le profil. Cela permet de donner un vrai sens à la certification sur notre site.\\
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.7]{gestioncarte.jpg}
+	\end{center}
+		\caption{Capture d'écran du panel administrateur }
+\end{figure}\\
+On y trouve aussi un bouton "Gérer les comptes", en cliquant sur ce bouton on y trouve la liste complète de tous les inscrits, en cliquant sur l Id du profil, l'administrateur peut voir toute les informations stocké dans la table "user". Il peut aussi promouvoir le grade du compte, réinitialiser les likes quotidien, en effet chaque jour un profil normal à 10 likes, mais un administrateur peut réinitialiser ce compteur manuellement. Il peut aussi certifier un profil manuellement sans passer par la gestion de certification vu précédemment, par exemple pour un étudiant en année sabbatique imaginons. Enfin évidemment il peut supprimer le profil d'utilisateur, si celui-ci est Fake, malveillant.
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.6]{gestioncompte.jpg}
+	\end{center}
+		\caption{Capture d'écran du panel administrateur après avoir clique sur gestion de compte}
+\end{figure}\\
+\clearpage
+\subsection{Base de données}
+	Comme souvent mentionner au dessus, notre site stock les données utilisateurs dans une table nommé "user" mais ce n'est pas la seul table. Nous avons : \\
+\begin{itemize}
+	\item La table user : Qui stock le nom, prénom, date de naissance, l Id du profil, les Id des profils liké, de même pour les dislikes, son grade, la date de création du compte, son mail, son nombre de like, la date à laquelle se termine son abonnement s'il en possède un et enfin évidemment le mot de passe du compte qui a été haché.
+	\item la table préférence : qui stock toutes les préférences d'un profil. Elle est composée de l'Id du profil et ensuite de chaque option possible cheveux, yeux, tranche d'âges etc
+	\item la table listeMatch : qui stock les Id des profils qui on matché ensemble, par exemple on peut voir ci-dessous que le profil 38 et 41 on matché.
+	\item Toute les autres tables dont le nom est d"id"\_"id", est la discussion entre les profils qui on match, ci-dessous la table "d38\_41" est la discussion entre le match 38 et 41. 
+\end{itemize}
+\begin{figure}[h!]
+	\begin{center}
+		\includegraphics[scale=0.9]{bdd.jpg}
+	\end{center}
+		\caption{Capture d'écran des tables de notre BDD}
+\end{figure}
+\clearpage
 \section{Réalisation de ce projet et notre organisation}
 	Nous avions tous les mêmes compétences en HTML, CSS, Javascript et BDD au début de ce projet grâce au différents TP réalisés pendant le confinement. Toutefois Florent à durant la réalisation de son porte-folio a entendu parlé, de React. React est une librairie/Framework en JavaScript qui permet de créer des interfaces utilisateurs interactives. On peut aussi créer des composants autonomes qui maintiennent leur propre état, puis les assembler pour créer des interfaces utilisateurs complexes. La modernité et les nouvelles possibilités que propose React nous on beaucoup attiré. Nous avons donc décidé de travailler ce projet en React, mais nous ne connaissions rien de cette librairie qui est certes puissante mais possède ses propres règles syntaxique, sa propre structure. Ce fut étrange de devoir réapprendre le développement web d'une certaine manière. Après quelques semaines à ce familiariser avec l'environnement notre groupe était parti est tout c'est bien passé, on pas pu exploiter les fonctionnalités de React comme nous le souhaitions. \\
 	Pour bien s'organiser durant les conditions un peu particulière du COVID, nous avons mis en place un GIT pour pouvoir chacun travailler de son coter facilement et qu'on puisse regrouper notre travail facilement sans conflit.
-	Pour la répartition du travail on a chacun travailler de notre côté et chacun donnait son avis/ses conseils sur le travails d autrui. L'avantage d'avoir utilisé React c'est que chacun pouvait développer sur son composant, et on ajoute une fois fini le composant.
+	Pour la répartition du travail on a chacun travailler de notre côté et chacun donnait son avis/ses conseils sur le travails d autrui. L'avantage d'avoir utilisé React, c'est que chacun pouvait développer sur ses composant, et une fois fini ensemble nous construisons notre site avec les composant de chacun.
+\section{Déploiement de notre projet}
+
 \section{Conclusion de ce projet}
 
 			\begin{thebibliography}{10}

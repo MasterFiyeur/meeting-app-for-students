@@ -5,5 +5,8 @@
 \contentsline {subsection}{\numberline {II.2}Connexion}{3}{subsection.0.2.2}
 \contentsline {subsection}{\numberline {II.3}Acceuil}{4}{subsection.0.2.3}
 \contentsline {subsection}{\numberline {II.4}NavBar}{5}{subsection.0.2.4}
-\contentsline {section}{\numberline {III}Nos objectifs et les perspectives d'avenir}{6}{section.0.3}
-\contentsline {section}{\numberline {IV}Conclusion de ce projet}{6}{section.0.4}
+\contentsline {subsection}{\numberline {II.5}Module Administrateur}{6}{subsection.0.2.5}
+\contentsline {subsection}{\numberline {II.6}Base de données}{8}{subsection.0.2.6}
+\contentsline {section}{\numberline {III}Réalisation de ce projet et notre organisation}{9}{section.0.3}
+\contentsline {section}{\numberline {IV}Déploiement de notre projet}{9}{section.0.4}
+\contentsline {section}{\numberline {V}Conclusion de ce projet}{9}{section.0.5}
