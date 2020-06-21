@@ -123,6 +123,7 @@
   margin-bottom: 0;
   font-size: 1rem;
   line-height: 1.5;
+  vertical-align: middle;
 
 }
 
@@ -255,13 +256,14 @@
 .filtressvg{
   background-color: rgba(187, 0, 255, 0.5);
   color: #fff;
-  width: 20%;
-  margin-block-start: 5%;
-  margin-inline-start: 40%;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  width: 75px;
   vertical-align: middle;
   border-radius:15px;
-  height:50px;
+  margin-inline-start: 38%;
   cursor:pointer;
+  margin-block-start: 4%;
 }
 
 .filtressvg:hover{
@@ -283,6 +285,9 @@
   border-radius: 15px;
 }
 
+.vertical-align{
+  vertical-align: middle;
+}
 
 .align-dislike{
   margin-block-start: 25px;
@@ -728,3 +733,10 @@
   margin-left: 5px;
 }
 
+.space-label > label{
+ margin-left: 5%;
+}
+
+.space-input > input{
+  margin-left: 5px;
+ }

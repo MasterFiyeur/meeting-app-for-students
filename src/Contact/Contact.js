@@ -25,59 +25,66 @@ class Contact extends Component{
           <br />
           <br />
           <span className="title-Contact">Nous contacter</span>
-          <div className="container">
+          <div className="container-fluid">
             {/* Théo */}
             <div className="row presentation">
-              <div className="col">
-                <img className="rounded-circle" src={TheoContact} alt="Theo" width="140" height="140" align="left" />
-                <div className="description-Contact">
-                  <span className="titre-Contact">Théo Julien étudiant de seconde année de cycle préparatoire</span><br />
+              <div className="col-lg-2">
+                <img className="align-img rounded-circle" src={TheoContact} alt="Theo" width="140" height="140"/>
+              </div>
+              <div className="description-Contact col-lg">
+                  <span className="titre-Contact">THEO JULIEN</span><br />
+                  <span className="titre-Contact">étudiant de seconde année de cycle
+                  préparatoire</span><br />
                   Developpeur Chef <br />
                   <b><a href="mailto:theo.julien@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
-                </div>
               </div>
+              
             </div>
 
             {/* William */}
             <div className="row presentation">
-              <div className="col">
-                <img className="rounded-circle" src={WilliamContact} alt="William" width="140" height="140" align="left" />
-                <div className="description-Contact">
-                  <span className="titre-Contact">William Kaczmarek étudiant de seconde année de cycle
-                    préparatoire<i className="fas fa-hand-middle-finger"></i></span><br />
-                  Developpeur Profil et indentateur médiocre<br />
-                  <b><a href="mailto:william.kaczmarek@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
-                </div>
+              <div className="col-lg-2">
+                <img className="align-img rounded-circle" src={WilliamContact} alt="William" width="140" height="140"/>
               </div>
+              <div className="description-Contact col-lg">
+                <span className="titre-Contact">WILLIAM KACZMAREK</span><br />
+                  <span className="titre-Contact">étudiant de seconde année de cycle
+                  préparatoire</span><br />
+                Developpeur Profil<br />
+                <b><a href="mailto:william.kaczmarek@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
+              </div>
+              
             </div>
 
             {/* Florent*/}
             <div className="row presentation">
-              <div className="col">
-                <img className="rounded-circle" src={FlorentContact} alt="Florent" width="140" height="140" align="left" />
-                <div className="description-Contact">
-                  <span className="titre-Contact">Florent Bednarek étudiant de seconde année de cycle
-                    préparatoire</span><br />
-                  Developpeur Messagerie <br />
-                  <b><a href="mailto:florent.bednarek@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
-                </div>
+              <div className="col-lg-2">
+                <img className="align-img rounded-circle" src={FlorentContact} alt="Florent" width="140" height="140"/>
+              </div>
+              <div className="description-Contact  col-lg">
+                <span className="titre-Contact">FLORENT BEDNAREK</span><br />
+                <span className="titre-Contact">étudiant de seconde année de cycle
+                  préparatoire</span><br />
+                Developpeur Messagerie <br />
+                <b><a href="mailto:florent.bednarek@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
               </div>
             </div>
             
             {/* Julien */}
             <div className="row presentation">
-              <div className="col">
-                <img className="rounded-circle" src={JulienContact} alt="Julien" width="140" height="140"
-                  align="left" />
-                <div className="description-Contact">
-                  <span className="titre-Contact">Julien Richard étudiant de seconde année de cycle préparatoire</span>
-                  <br />
-                  Designer 
-                  <br />
-                  <b><a href="mailto:richardjul@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
-                </div>
+              <div className="col-lg-2">
+                <img className="align-img rounded-circle" src={JulienContact} alt="Julien" width="140" height="140"/>
               </div>
-            </div>
+              <div className="description-Contact col-lg">
+                <span className="titre-Contact">JULIEN RICHARD</span>
+                <br />
+                <span className="titre-Contact">étudiant de seconde année de cycle
+                  préparatoire</span><br />
+                Designer 
+                <br />
+                <b><a href="mailto:richardjul@eisti.fr"><i className="fas fa-address-card"></i>  Email</a></b>
+              </div>
+          </div>
           </div>
         </div>
       );

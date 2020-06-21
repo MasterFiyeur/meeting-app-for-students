@@ -533,7 +533,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   this.handleClickInEtude()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreEtude===true && <div>
                 <label htmlFor="Etude">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div className="truc">
+                <div className="space-label space-input">
                   <label  htmlFor="lycée">Lycée</label>
                   <input type="checkbox" id="lycée" name="lycée" value="0"
                     checked={this.state.TabEtudes[0].value===1?true:false} onChange={this.handleChangeEtude} />
@@ -569,7 +569,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   onClick={()=> this.handleClickInSport()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreSport===true && <div>
                 <label htmlFor="Sport">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Passionée">Passionée</label>
                   <input type="checkbox" id="Passionée" name="Passionée" value="0"
                     checked={this.state.TabSport[0].value===1?true:false} onChange={this.handleChangeSport} />
@@ -598,7 +598,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   onClick={()=> this.handleClickInYeux()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreYeux===true && <div>
                 <label htmlFor="Yeux">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Noir">Noir</label>
                   <input type="checkbox" id="Noir" name="Noir" value="0"
                     checked={this.state.TabYeux[0].value===1?true:false} onChange={this.handleChangeYeux} />
@@ -629,7 +629,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   onClick={()=> this.handleClickInCheveux()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreCheveux===true && <div>
                 <label htmlFor="Cheveux">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Noir">Noir</label>
                   <input type="checkbox" id="Noir" name="Noir" value="0"
                     checked={this.state.TabCheveux[0].value===1?true:false} onChange={this.handleChangeCheveux} />
@@ -666,7 +666,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   this.handleClickInAlcool()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreAlcool===true && <div>
                 <label htmlFor="Alcool">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Tous les jours">Tous les jours</label>
                   <input type="checkbox" id="Tous les jours" name="Tous les jours" value="0"
                     checked={this.state.TabAlcool[0].value===1?true:false} onChange={this.handleChangeAlcool} />
@@ -692,7 +692,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   this.handleClickInTabac()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreTabac===true && <div>
                 <label htmlFor="Tabac">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Fréquemment">Fréquemment</label>
                   <input type="checkbox" id="Fréquemment" name="Fréquemment" value="0"
                     checked={this.state.TabTabac[0].value===1?true:false} onChange={this.handleChangeTabac} />
@@ -714,7 +714,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   onClick={()=> this.handleClickInReligion()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreReligion===true && <div>
                 <label htmlFor="Religion">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Agnosticisme">Agnosticisme</label>
                   <input type="checkbox" id="Agnosticisme" name="Agnosticisme" value="0"
                     checked={this.state.TabReligion[0].value===1?true:false} onChange={this.handleChangeReligion} />
@@ -765,7 +765,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   onClick={()=> this.handleClickInAstrologie()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreAstrologie===true && <div>
                 <label htmlFor="Astrologie">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Verseau">Verseau</label>
                   <input type="checkbox" id="Verseau" name="Verseau" value="0"
                     checked={this.state.TabAstrologie[0].value===1?true:false} onChange={this.handleChangeAstrologie} />
@@ -816,7 +816,7 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
                   this.handleClickInAnimaux()}>Ajouter ce filtre</button></div>}
               {this.state.showFiltreAnimaux===true && <div>
                 <label htmlFor="Animaux">Vous ne verrez plus les profils ayant les préférences décochés</label>
-                <div>
+                <div className="space-label space-input">
                   <label htmlFor="Chiens">Chiens</label>
                   <input type="checkbox" id="Chiens" name="Chiens" value="0"
                     checked={this.state.TabAnimaux[0].value===1?true:false} onChange={this.handleChangeAnimaux} />
@@ -845,11 +845,11 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
               </div>}
 
               {/*--------------------------Radio button-------------------------- */}
-              <div className="width90 align-card-tel input-group">
-                <div className="input-group-prepend">
-                  <label className="input_group_text" htmlFor="Filtre Actif">Filtre Actif :</label>
+              <div className="width90 align-card-tel input-group input_group_text">
+                <div className="input-group-prepend vertical-align">
+                  <label className="input_group_text " htmlFor="Filtre Actif">Filtre Actif :</label>
                 </div>
-                <div className="col-lg form-check form-check-inline">
+                <div className="col-lg form-check form-check-inline space-label space-input">
                   <label className="form-check-label" htmlFor="EtudesActif"><i className="fas fa-user-graduate"></i>Etudes</label>
                   <input className="form-check-input" type="radio" name="EtudesActif" id="EtudesActif" value="Etudes"
                     checked={this.state.Actif==='Etudes' } onChange={this.handleChangeActif} />

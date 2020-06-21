@@ -32,5 +32,8 @@
    font-weight: 650;
    font-size: 24px;
    color: #777;
-   text-transform: uppercase;
+}
+
+.align-img{
+  margin-left: 10px;
 }
