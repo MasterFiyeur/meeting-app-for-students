@@ -94,13 +94,11 @@ class PhotosProfil extends Component{
           }
         }
         let formData = new FormData();
-        console.log(this.state.userProfilePic);
         formData.append('file',this.state.userProfilePic);
 
         const url = URL_API+'addProfileImage.php';
           axios.post(url,formData,config)
           .then(res => {
-            console.log(res.data);
             if(!res.data.connect){
               this.setState({connected:false});
             }else{

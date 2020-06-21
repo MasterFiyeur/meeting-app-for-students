@@ -53,7 +53,6 @@ class Register extends Component{
             spe=1;
           }
         }
-        console.log(maj+min+chi+spe);
         this.setState({
           comptStrenghMdp:maj+min+chi+spe
         });
@@ -127,7 +126,6 @@ class Register extends Component{
           const url = URL_API+'newUser.php';
           axios.post(url,formData)
           .then(res => {
-            console.log("Réponse newUser: "+res.data);
             if(res.data>=0){
               switch(res.data){
                 case 0:
@@ -173,7 +171,6 @@ class Register extends Component{
         const url = URL_API+'setCarteEtudiante.php';
           axios.post(url,formData)
           .then(res => {
-            console.log("Réponse setCarteEtudiante: "+res.data);
             if(res.data>=0){
               switch(res.data){
                 case 0:
@@ -238,7 +235,6 @@ class Register extends Component{
             this.setState({
               StudentCard:files[0]
             })
-            console.log(this.state.StudentCard);
           }
         }else{
           this.setState({

@@ -184,7 +184,6 @@ this.handleChangeActif = this.handleChangeActif.bind(this);
         axios.post(url,formData,config)
         .then(res => {
             if(res.data.connected){ //Mise à jour de connected si réponse négative
-                console.log(res.data);
                 this.props.onChangeTabPersonne(res.data.tab);
             }
         })

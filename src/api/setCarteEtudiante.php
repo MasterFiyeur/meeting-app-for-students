@@ -65,6 +65,7 @@ if(isset($_FILES['file'])){
             {
                 // Connexion/Requête BDD - UPDATE
                 $cnx = connexionPDO();
+                if($ext===NULL || $ext===""){$ext=0;}
                 $req = $cnx -> prepare('UPDATE user SET carte = ? WHERE id = ?;');
                 $req -> execute((array($ext,$id)));
                 $req -> closeCursor();

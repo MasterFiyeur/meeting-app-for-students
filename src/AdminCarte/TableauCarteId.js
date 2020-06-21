@@ -33,7 +33,6 @@ class TableauCarteId extends Component{
         axios.get(url,config)
         .then(res => {
             if(res.data.connected){ //Mise à jour de connected si réponse positive 
-                console.log(res.data.tab);
                 this.props.updateTab(res.data.tab);
             }
         })

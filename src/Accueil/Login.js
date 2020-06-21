@@ -35,13 +35,11 @@ class Login extends Component{
             //Se connecter
             Cookies.set("ID",res.data.id);
             Cookies.set("KEY",res.data.key);
-            console.log("Vous êtes connecté, redirection vers la page principale !");
             this.setState({
               connected:true
             });
           }else{
             //Affichage en rouge du message de mdp incorrect
-            console.log(res);
             this.setState({alertShow:true,alertMessage:"Adresse mail ou mot de passe incorrect.",alertVariant:"danger"});
           }
         })
