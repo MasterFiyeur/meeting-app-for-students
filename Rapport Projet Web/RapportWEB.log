@@ -1,4 +1,4 @@
-This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6880 64-bit)  (format=lualatex 2018.11.24)  21 JUN 2020 17:51
+This is LuaTeX, Version 1.09.0 (MiKTeX 2.9.6880 64-bit)  (format=lualatex 2018.11.24)  21 JUN 2020 18:09
  restricted system commands enabled.
 **RapportWEB.tex
 (./RapportWEB.tex
@@ -48,7 +48,7 @@ Inserting `luaotfload.aux.set_capheight' at position 3 in `luaotfload.patch_font
 '.
 Inserting `luaotfload.rewrite_fontname' at position 4 in `luaotfload.patch_font'
 .
-luaotfload | main : initialization completed in 1.410 seconds
+luaotfload | main : initialization completed in 1.449 seconds
 
 ("C:/Users/Kaczmarek William/AppData/Local/Programs/MiKTeX 2.9/tex/latex/base/r
 eport.cls"
@@ -1090,31 +1090,48 @@ Package luatex.def Info: bdd.jpg  used on input line 149.
 (luatex.def)             Requested size: 171.27829pt x 405.43094pt.
 [8
 
-<./bdd.jpg>] [9
+<./bdd.jpg>]
+<discord.jpg, id=135, 167.4255pt x 278.84175pt>
+File: discord.jpg Graphic file (type jpg)
+<use discord.jpg>
+Package luatex.def Info: discord.jpg  used on input line 162.
+(luatex.def)             Requested size: 83.71254pt x 139.42052pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--166
+
+ []
+
+[9
+
+<./discord.jpg>] [10
 
 ] 
 AED: lastpage setting LastPage
-[10
+[11
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 177.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 177.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 189.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 189.
  (./RapportWEB.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 177.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 177.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 189.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 189.
 Package rerunfilecheck Info: File `RapportWEB.out' has not changed.
 (rerunfilecheck)             Checksum: 94DCC3A0B663A53A81A7CA8E247E1B37;713.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 177.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 189.
 )
 
 Here is how much of LuaTeX's memory you used:
- 21635 strings out of 494324
- 100000,662416 words of node,token memory allocated
- 76310 words of node memory still in use:
-   7 hlist, 2 vlist, 2 rule, 26 glue, 4 kern, 1 penalty, 10440 glyph, 1106 attri
-bute, 54 glue_spec, 186 attribute_list, 2 write nodes
-   avail lists: 2:329,3:64,4:24,5:173,6:23,7:2391,8:13,9:100,10:15,11:197
- 25291 multiletter control sequences out of 65536+200000
+ 21647 strings out of 494324
+ 125007,662416 words of node,token memory allocated
+ 79061 words of node memory still in use:
+   7 hlist, 2 vlist, 2 rule, 27 glue, 4 kern, 1 penalty, 10808 glyph, 1178 attri
+bute, 54 glue_spec, 198 attribute_list, 2 write nodes
+   avail lists: 2:434,3:64,4:26,5:182,6:23,7:2501,8:13,9:100,10:18,11:212
+ 25296 multiletter control sequences out of 65536+200000
  65 fonts using 9146791 bytes
  54i,10n,67p,1130b,443s stack positions out of 5000i,500n,10000p,200000b,50000s
 <c:/users/kaczmarek william/appdata/local/programs/miktex 2.9/fonts/opentype/pub
@@ -1126,9 +1143,9 @@ pe/public/lm/lmromancaps10-regular.otf><c:/users/kaczmarek william/appdata/local
 /programs/miktex 2.9/fonts/opentype/public/lm/lmroman12-regular.otf><c:/users/ka
 czmarek william/appdata/local/programs/miktex 2.9/fonts/opentype/public/lm/lmrom
 an17-regular.otf>
-Output written on RapportWEB.pdf (11 pages, 662243 bytes).
+Output written on RapportWEB.pdf (12 pages, 683657 bytes).
 
-PDF statistics: 200 PDF objects out of 1000 (max. 8388607)
- 36 named destinations out of 1000 (max. 131072)
+PDF statistics: 211 PDF objects out of 1000 (max. 8388607)
+ 39 named destinations out of 1000 (max. 131072)
  89 words of extra memory for PDF output out of 10000 (max. 100000000)
 
