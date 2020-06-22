@@ -18,7 +18,7 @@ class ListMessages extends Component {
         	prenom1 : "",
         	prenom2 : "",
         	x: 0,
-        	y: 100,
+        	y: 70,
         	unmount : 0,
         }
         this.handleChange = this.handleChange.bind(this);
@@ -26,6 +26,10 @@ class ListMessages extends Component {
     	this.dismiss = this.dismiss.bind(this)
     }
 	
+
+    isMobileDevice() {
+    return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
+    };
     /*
 		envoie l'information au component parent qu'il faut fermer celui ci
 		retire les cookies messages
@@ -102,7 +106,8 @@ class ListMessages extends Component {
   		clearInterval(this.interval);
   		clearInterval(this.interval2);
   		clearInterval(this.interval3);
-  		if (this.state.unmount == 0) {
+        if (this.isMobileDevice()){return;}
+  		if (this.state.unmount == 0 ) {
   			Cookies.set('m_id1',this.props.id);
   			Cookies.set('m_id2',this.props.id2);
   		}
