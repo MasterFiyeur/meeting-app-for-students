@@ -21,7 +21,7 @@ class TableauSignal extends Component{
     PropsToTabHTML(){
     let res;
     if(this.props.Tableau!=null && this.props.Tableau.length>0){
-        res = this.props.Tableau.map(el => <tr key={el.Id}><td>{el.Prenom}</td><td>{el.Nom}</td><td><button onClick={() => this.alertId(el)}>{el.Id}</button></td></tr>);
+        res = this.props.Tableau.map((el,index) => <tr key={index}><td>{el.id}</td><td>{el.message}</td></tr>);
         return res;
     }else{
         return(<tr><td colSpan="3">Aucun message signalé</td></tr>);
