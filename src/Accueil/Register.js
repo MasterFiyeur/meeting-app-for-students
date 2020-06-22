@@ -21,12 +21,27 @@ class Register extends Component{
       }
 
       /**
-       * Renvoi la date actuelle à laquelle on a retiré 15*365 jours
+       * Renvoi la date actuelle à laquelle on a retiré 17 ans
        */
-      fifteenYearsAgo(){
-        let curr = new Date();
-        curr.setDate(curr.getDate()-365*15);
-        return (curr.toISOString().substr(0,10));
+      seventeenYearsAgo(){
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var day = d.getDate();
+        var c = new Date(year - 17, month, day);
+        return(c.toISOString().substr(0,10));
+      }
+
+      /**
+       * Renvoi la date actuelle à laquelle on a retiré 37 ans
+       */
+      thirtyYearsAgo(){
+        var d = new Date();
+        var year = d.getFullYear();
+        var month = d.getMonth();
+        var day = d.getDate();
+        var c = new Date(year - 37, month, day);
+        return(c.toISOString().substr(0,10));
       }
 
       /**
@@ -404,8 +419,8 @@ class Register extends Component{
                       type="date"
                       maxLength="10"
                       placeholder="jj/mm/aaaa"
-                      min="1960-01-01"
-                      max={this.fifteenYearsAgo()}
+                      min={this.thirtyYearsAgo()}
+                      max={this.seventeenYearsAgo()}
                       value={this.state.dateBirth}
                       onChange={event => this.inputChange(event)} 
                     />
