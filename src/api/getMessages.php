@@ -6,7 +6,7 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 
 header('Access-Control-Max-Age: 1000');
 
-header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With, logginid, logginkey');
+header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
 
 include "connexionBDD.php";
@@ -21,11 +21,17 @@ try {
 	$match = "d".$id."_".$id2;
 	$sql = "SELECT * FROM `".$match."`";
     $messages = $cnx-> prepare($sql);
-    $messages -> execute();
+	$messages -> execute();
+	$ObjIdKey->message="";
+	$idTemp = array();
     foreach ($messages as $row) {
-        	print $row["id"] . "-" . $row["message"].";";
-    }
+		$ObjIdKey->message .= $row["id"] . "-" . $row["message"].";";
+		$idTemp[] = $row["num"];
+	}
+	$ObjIdKey->idTab=$idTemp;
 	$messages -> closeCursor();
+    echo (json_encode($ObjIdKey));
+
 }
 catch (PDOException $e){
 	print "Erreur !".$e -> getMessage();

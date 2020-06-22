@@ -11,7 +11,8 @@ class ListMessages extends Component {
         super(props);
         this.state = {
         	showP : 0,
-        	list : "",
+			list : "",
+			tabIdMess:null,
         	message : "",
         	messages :"",
         	prenom1 : "",
@@ -49,7 +50,7 @@ class ListMessages extends Component {
 		const url = URL_API+'getMessages.php';
         axios.post(url,formdata)
         .then(res => {
-        	this.setState({list : res.data});
+        	this.setState({list : res.data.message,tabIdMess:res.data.idTab});
         })
         
         .catch(err => {
@@ -59,7 +60,31 @@ class ListMessages extends Component {
 
 	}
 
-
+	/*
+		Signalement d'un message
+    */
+   	signal(index) {
+		const axios = require('axios');  //Requêtes HTTP
+		let config = {
+            headers: {
+            logginid: Cookies.get("ID"),
+            logginkey: Cookies.get("KEY")
+            }
+        }
+        let formdata = new FormData();
+        formdata.append('id',this.props.id);
+		formdata.append('id2',this.props.id2);
+		formdata.append('num',index);
+		const url = URL_API+'addSignalement.php';
+        axios.post(url,formdata,config)
+        .then(res => {
+			console.log(res.data);
+			alert("Message signalé !");
+        })
+        .catch(err => {
+            console.log(err);
+        });
+	}
 
 
     /*
@@ -149,8 +174,15 @@ class ListMessages extends Component {
 		let messages = this.state.list;
 		messages = messages.slice(0,-1);
 		let lmessages = messages.split(';');
-		ret = lmessages.map(el => <div className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
-									<div className="left-m"><strong>{this.prenom2(el.split('-')[0])}</strong></div>
+		ret = lmessages.map((el,index) => <div key={index} className={el.split('-')[0] == Cookies.get("ID") ? "message-me" : "message"}>
+									<div className="left-m">
+										<strong>{this.prenom2(el.split('-')[0])}</strong>
+										{el.split('-')[0] !== Cookies.get("ID") && 
+										<svg onClick={() => this.signal(this.state.tabIdMess[index])} className="bi bi-exclamation" width="25px" height="25px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+  											<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+										</svg>
+										}
+									</div>
 									<div className="right-m">{el.split('-')[1]}</div>
 								  </div>);
 		this.setState({messages : ret})
