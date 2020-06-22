@@ -19,9 +19,9 @@ class Draggable extends React.Component {
         this.onMouseDown = this.onMouseDown.bind(this);
         this.onMouseMove = this.onMouseMove.bind(this);
         this.onMouseUp = this.onMouseUp.bind(this);
-        this.onTouchStart = this.onTouchStart.bind(this);
+        /*this.onTouchStart = this.onTouchStart.bind(this);
         this.onTouchMove = this.onTouchMove.bind(this);
-        this.onTouchEnd = this.onTouchEnd.bind(this);
+        this.onTouchEnd = this.onTouchEnd.bind(this);*/
     }
 
     static propTypes = {
@@ -61,7 +61,7 @@ class Draggable extends React.Component {
         const ref = ReactDOM.findDOMNode(this.handle);
         const body = document.body;
         const box = ref.getBoundingClientRect();
-        if (e.pageY - (box.top + body.scrollTop - body.clientTop) > 50 || (e.pageY - (box.top + body.scrollTop - body.clientTop) <50 && e.pageX - (box.left + body.scrollLeft - body.clientLeft) > 300) ) return;
+        if (e.pageY - (box.top + body.scrollTop - body.clientTop) > 50 || (e.pageY - (box.top + body.scrollTop - body.clientTop) <50 && e.pageX - (box.left + body.scrollLeft - body.clientLeft) > 300) ) {return};
         this.onStart(e);
         document.addEventListener('mousemove', this.onMouseMove);
         document.addEventListener('mouseup', this.onMouseUp);
@@ -80,7 +80,8 @@ class Draggable extends React.Component {
         e.preventDefault();
     }
 
-    onTouchStart(e) {
+    /*onTouchStart(e) {
+
         this.onStart(e.touches[0]);
         document.addEventListener('touchmove', this.onTouchMove, {passive: false});
         document.addEventListener('touchend', this.onTouchEnd, {passive: false});
@@ -97,7 +98,7 @@ class Draggable extends React.Component {
         document.removeEventListener('touchend', this.onTouchEnd);
         this.props.onStop && this.props.onStop(this.state.x, this.state.y);
         e.preventDefault();
-    }
+    }*/
 
     render() {
         return <div

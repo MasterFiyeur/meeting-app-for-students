@@ -16,7 +16,7 @@ class ListMessages extends Component {
         	messages :"",
         	prenom1 : "",
         	prenom2 : "",
-        	x: 100,
+        	x: 0,
         	y: 100,
         	unmount : 0,
         }
