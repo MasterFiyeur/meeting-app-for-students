@@ -24,7 +24,7 @@ class TableauSignal extends Component{
         res = this.props.Tableau.map((el,index) => <tr key={index}><td>{el.id}</td><td>{el.message}</td></tr>);
         return res;
     }else{
-        return(<tr><td colSpan="3">Aucun message signalé</td></tr>);
+        return(<tr><td colSpan="2">Aucun message signalé</td></tr>);
     }
     }
 

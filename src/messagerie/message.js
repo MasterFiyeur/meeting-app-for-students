@@ -78,7 +78,6 @@ class ListMessages extends Component {
 		const url = URL_API+'addSignalement.php';
         axios.post(url,formdata,config)
         .then(res => {
-			console.log(res.data);
 			alert("Message signalé !");
         })
         .catch(err => {
