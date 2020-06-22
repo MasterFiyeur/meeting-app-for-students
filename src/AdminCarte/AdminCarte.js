@@ -4,6 +4,7 @@ import {URL_API} from '../App';
 import Cookies from 'js-cookie';
 import TableauManage from './TableauManage';
 import { Redirect } from "react-router-dom";
+import TableauSignal from './TableauSignal';
 
 /**
  * Class qui s'occupe de la page du panel administrateur
@@ -117,20 +118,50 @@ class AdminCarte extends Component{
     }
 
     /**
+     * Met à jour le tableau pour le signalement des messages
+     */
+    setSignalementTableau(){
+      const axios = require('axios');  //Requêtes HTTP
+      const url = URL_API+'getSignal.php';
+      let config = {
+          headers: {
+          logginid: Cookies.get("ID"),
+          logginkey: Cookies.get("KEY")
+          }
+      }
+      axios.get(url,config)
+      .then(res => {
+          if(res.data.connected){ //Mise à jour de connected si réponse positive 
+            this.setState({
+              array:res.data.tab,
+              loaded:true
+            });
+          }
+      })
+      .catch(err => {
+          console.log(err);
+      });
+    }
+
+    /**
      * Mise à jour des tableaux selon si l'on veut gérer les cartes étudiantes 
      * ou s'il on veut gérer les comptes 
      */
     buttonSwap(){
       if(this.state.buttonLabel==="Gérer les comptes"){
         this.setState({
-          buttonLabel: "Gérer les certifications"
+          buttonLabel: "Signalement des messages"
         });
         this.setComtpeTableau();
-      }else{
+      }else if(this.state.buttonLabel==="Gérer les certifications"){
         this.setState({
           buttonLabel: "Gérer les comptes"
         });
         this.setPropsTableau();
+      }else{
+        this.setState({
+          buttonLabel: "Gérer les certifications"
+        });
       }
     }
 
@@ -148,8 +179,11 @@ class AdminCarte extends Component{
           {(this.state.loaded && this.state.buttonLabel==="Gérer les comptes") &&
           <TableauCarteId Tableau={this.state.array} updateTab={this.updateTab}/>
           }
-          {(this.state.loaded && this.state.buttonLabel==="Gérer les certifications") && 
+          {(this.state.loaded && this.state.buttonLabel==="Signalement des messages") && 
           <TableauManage Tableau={this.state.array} updateTab={this.updateTab}/>
+          }
+          {(this.state.loaded && this.state.buttonLabel==="Gérer les certifications") && 
+          <TableauSignal Tableau={this.state.array} />
           }
         </div>
       );
