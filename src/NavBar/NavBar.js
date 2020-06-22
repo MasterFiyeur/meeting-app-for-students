@@ -43,7 +43,7 @@ class NavBar extends Component {
           <ul className="navbar-nav ml-auto">
             
             <li className="nav-item active">
-              <Link className="collapsed nav-link" to="/">Home </Link>
+              <Link className="collapsed nav-link" to="/">Accueil </Link>
             </li>
             
             <li className="nav-item active">
@@ -51,7 +51,7 @@ class NavBar extends Component {
             </li>
 
             <li className="nav-item active">
-              <Link className="nav-link" to="/about">About </Link>
+              <Link className="nav-link" to="/about">A propos </Link>
             </li>
             
             <li className="nav-item active">
