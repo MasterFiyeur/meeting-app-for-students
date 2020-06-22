@@ -56,7 +56,6 @@ class ListMatch extends Component {
 			match = match.slice(0,-1);
 			let lmatch = match.split(';');
 			lmatch.forEach(el => {if(el.split('-')[0] == Cookies.get('ID')){ this.prenom(el.split('-')[1]) } else { this.prenom(el.split('-')[0])}});
-			this.affMatch();
 		})
         
         .catch(err => {
@@ -113,7 +112,7 @@ class ListMatch extends Component {
 
 	componentDidMount() {
 		this.loadMyMatch();
-		//setTimeout(() => this.affMatch(),1000);
+		setTimeout(() => this.affMatch(),2000);
 	}  	
 
 
