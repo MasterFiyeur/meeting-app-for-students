@@ -162,6 +162,7 @@ class AdminCarte extends Component{
         this.setState({
           buttonLabel: "Gérer les certifications"
         });
+        this.setSignalementTableau();
       }
     }
 
