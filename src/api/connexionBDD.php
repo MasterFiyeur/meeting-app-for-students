@@ -12,9 +12,9 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
  */
 
 function connexionPDO(){
-    $login = "projavrp_root";
-    $mdp = "Les 4 BG !$";
-    $bd = "projavrp_projetsiterencontre";
+    $login = "root";
+    $mdp = "mdp";
+    $bd = "db_name";
     $serveur = "localhost";
     try{
         $conn = new PDO("mysql:host=$serveur;dbname=$bd;charset=utf8", $login, $mdp);
