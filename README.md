@@ -1,25 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Lancer le projet avec WAMP
+## Visit our web site
 
-Dans package.json, ajouter la ligne : "homepage":"http://localhost/"+sous dossiers de www <br />
-Exemple : "homepage":"http://localhost/ProjetInfo" <br />
-Executer 'npm run build' <br />
-Déplacer le contenu du dossier 'build' créé dans wamp64/www/ProjetInfo <br />
-Lancer WAMP <br />
-Dans le navigateur, aller à l'URL : http://localhost/ProjetInfo/
+Go to : https://florentbednarek.github.io/projetwebEISTI/#/
 
-## Utilisation de la base de donnée
-
-Se munir des fichiers <strong>api.php</strong> et <strong>connexion.php</strong> dans le dossier <em>projet-web/projet-web_bdd</em>.<br/>
-Bien les placer dans un sous-dossier de <em>www</em> de wamp<br/>
-Changer la base de l'url des requêtes dans les fichiers par `http://localhost/"votre chemin à partir de www"/api.php`<br/>
-Vérifier que l'on a bien:<br/>
-- Une base de donnée : projetsiterencontre.
-- Une table : user.
-- Les bons identifiants de la BDD dans connexion.php 
-
-Lancer wamp et tout devrait fonctionner sinon -> Théo
 
 ## npm install
 
