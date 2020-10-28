@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Visit our web site
 
-Go to : https://florentbednarek.github.io/projetwebEISTI/#/
+Go to : https://florentbednarek.github.io/projetwebEISTI/#/ <br />
 Database currently offline (it was free during the project period).
 
 ## npm install
